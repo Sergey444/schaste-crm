@@ -1,0 +1,366 @@
+html,
+body {
+    height: 100%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+body {
+    background-color: #f5f5f5;
+    /* background-image: url('../images/newspaper.jpg'); */
+    /* background-size: cover; */
+    /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Roboto", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;*/
+}
+
+
+table caption {
+    padding-top: 0;
+}
+
+.breadcrumb {
+    background-color: #fff;
+}
+
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th,
+.grid-view td:last-child {
+    white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+    padding: 15px;
+    border: none;
+}
+
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
+
+/*-- --*/
+
+.bg-white {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    padding-top: 15px;
+}
+
+
+.d-flex {
+    display: flex;
+    align-items: flex-start;
+}
+
+.d-block {
+    display: block;
+    width: 100%;
+}
+
+.d-inline-block {
+    display: inline-block!important;
+}
+
+.mg-top {
+    margin-top: 20px;
+}
+.mg-bottom {
+    margin-bottom: 20px;
+}
+.mg-left {
+    margin-left: 20px;
+}
+.mg-right {
+    margin-right: 20px;
+}
+
+.form-control {
+    line-height: 1.40857143;
+}
+
+.t-right {
+    text-align: right;
+}
+
+/*-- --*/
+
+
+
+.av-block {
+    display: inline-block;
+}
+.av-preview {
+    position: relative;
+    min-width: 200px;
+    min-height: 200px;
+}
+.av-preview img {
+    height: 200px;
+    width: 200px;
+}
+
+.u-info-block {
+    width: 100%;
+}
+
+.u-info-block table td:first-child {
+    max-width: 50px;
+}
+
+.u-controll {
+    margin: 10px 0;
+    text-align: right;
+}
+
+.u-update-btn {
+    text-decoration: underline;
+    color: #777777
+}
+
+.u-update-btn:hover,
+.u-update-btn:active {
+    color: #000;
+}
+
+.edit-photo-block {
+    /* position: absolute; */
+    background-color: #fff;
+    /* bottom: 30px; */
+    /* right: 0; */
+    /* text-align: center; */
+    /* padding-top: 2px; */
+}
+
+.edit-photo-block .help-block {
+    position: absolute;
+    top: 0;
+    background-color: #fff;
+}
+
+.edit-photo-block .help-block,
+.edit-photo-block .form-group {
+    margin: 0;
+}
+
+html .add-photo-input {
+   display: none;
+}
+
+.rs-layout {
+    display: flex;
+    padding: 70px 15px 20px; 
+}
+.rs-sidebar {
+    min-width: 240px;
+    width: 240px;
+}
+
+.rs-content {
+    flex-grow: 1;
+}
+
+.rs-pencil {
+    width: 30px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    background-color: #fff;
+    text-align: center;
+    color: #5cb85c;
+}
+
+.rs-pencil::before {
+    color: #5cb85c;
+}
+
+.rs-pencil span {
+    line-height: normal;
+    width: 100%;
+}
+
+.table-payment-in td {
+    background-color: #e7ffe3;
+}
+.table-payment-out td {
+    background-color: rgba(255, 214, 214, 0.45);
+}
+.payments-description {
+    float: right; 
+    opacity: 0.8;
+}
+
+.rs-time-nav li {
+    display: inline-block;
+}
+
+.rs-time-nav li.active a {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.rs-add-to-order {
+    margin-bottom: 0;
+
+    position: absolute;
+    background-color: #fff;
+    z-index: 1;
+    top: 58px;
+
+    border: 1px solid #66afe9;
+}
+
+.has-success .rs-add-to-order {
+    border-color: #2b542c;
+}
+
+.rs-order__contact .form-group{
+    position: relative;
+}
+
+.table.rs-add-to-order td {
+    padding: 0px 13px;
+    border-top: none;
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    /* .grid-view tr th:not(:nth-child(2)):not(:nth-child(3)):not(:last-child), 
+    .grid-view tr td:not(:nth-child(2)):not(:nth-child(3)):not(:last-child) {
+        display: none;
+    } */
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    .rs-time-nav li {
+        display: block;
+    }
+    
+    .rs-btn__time {
+        display: block;
+        margin-bottom: 20px;
+    }
+    .d-flex {
+        -webkit-flex-wrap: wrap; 
+        flex-wrap: wrap;
+    }
+    .u-info-block table td:first-child {
+        max-width: 100%;
+    }
+    .grid-view table {
+        display: block;
+        overflow: auto;
+    }
+    .u-info-block {
+        order: 2;
+    }
+    .av-block {
+        order: 1;
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+    
+}
