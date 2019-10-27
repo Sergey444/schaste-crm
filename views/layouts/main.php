@@ -29,6 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
+        'innerContainerOptions' => ['class' => 'container-fluid'],
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
@@ -39,23 +40,22 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels' => false,
         'items' => [
-            ['label' => '<i class="fas fa-child"></i> ' . Yii::t('app', 'Club customers') , 'url' => ['/customer/index'], 'visible' => !Yii::$app->user->isGuest],
+            [
+                'label' => '<i class="fas fa-child"></i> ' . Yii::t('app', 'Club customers'), 
+                'url' => ['/customer/index'], 'visible' => !Yii::$app->user->isGuest,
+                'options' => ['class'=>'visible-xs']
+            ],
+
             ['label' => '<i class="far fa-address-card"></i> ' . Yii::t('app', 'Profile'), 'url' => ['/profile/index'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => '<i class="fas fa-users-cog"></i> ' . Yii::t('app', 'Personals'), 'url' => ['/profile/users'], 'visible' => Yii::$app->user->can('admin')],
-            // ['label' => '<i class="fas fa-address-card"></i> ' .Yii::t('app', 'NAV_SUBSCRIPTIONS'), 'url' => ['/subscriptions/index'], 'linkOptions' => ['class' => 'rs-menu__link']],
-            // ['label' => '<i class="fas fa-users"></i> ' . Yii::t('app', 'NAV_GROUPS'), 'url' => ['/groups/index'], 'linkOptions' => ['class' => 'rs-menu__link']],
-            // ['label' => '<i class="fas fa-user-graduate"></i> ' . Yii::t('app', 'TEACHERS') , 'url' => ['/teachers/index'], 'linkOptions' => ['class' => 'rs-menu__link']],
-            // ['label' => '<i class="fas fa-book"></i> ' . Yii::t('app', 'NAV_REGISTR') , 'url' => ['/journal/index'], 'linkOptions' => ['class' => 'rs-menu__link']],
-            // ['label' =>  '<i class="fas fa-tasks"></i> ' . Yii::t('app', 'NAV_PROGRAMS') , 'url' => ['/programs/index'], 'linkOptions' => ['class' => 'rs-menu__link']],
-            // ['label' =>  '<i class="fas fa-tasks"></i> ' . Yii::t('app', 'NAV_MESSAGE') , 'url' => ['/message-from-site/index'], 'linkOptions' => ['class' => 'rs-menu__link']],
-            // ['label' => '<i class="far fa-address-card"></i> ' . Yii::t('app', 'HOME') , 'url' => ['/user/index'], 'linkOptions' => ['class' => 'rs-menu__link']],
+
             Yii::$app->user->isGuest ? (
                 ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    Yii::t('app', 'Logout') .' (' . Yii::$app->user->identity->username . ')',
+                    '<i class="fas fa-door-open"></i> (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -65,13 +65,40 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
+    
+    <div class="" style="padding-top: 70px; ">
+        <div class="container-fluid rs-content">
+            <div class="rs-left-menu">
+                <?
+                     echo Nav::widget([
+                        'options' => ['class' => 'rs-navbar-left'],
+                        'encodeLabels' => false,
+                        'items' => [
+                            
+                            ['label' => '<i class="fas fa-briefcase"></i> <span>' . Yii::t('app', 'Orders') . '</span>', 'url' => ['/order/index'], 'visible' => !Yii::$app->user->isGuest],
+                            ['label' => '<i class="fas fa-child"></i> <span>' . Yii::t('app', 'Club customers') . '</span>', 'url' => ['/customer/index'], 'visible' => !Yii::$app->user->isGuest],
+                            ['label' => '<i class="far fa-address-card"></i> <span>' . Yii::t('app', 'Profile') . '</span>', 'url' => ['/profile/index'], 'visible' => !Yii::$app->user->isGuest],
+                            ['label' => '<i class="fas fa-users-cog"></i> <span>' . Yii::t('app', 'Personals') . '</span>', 'url' => ['/profile/users'], 'visible' => Yii::$app->user->can('admin')],
+                
+                            
+                        ],
+                    ]);
+                ?>
+            </div>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+            <div class="" style="flex-grow: 1;">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= Alert::widget() ?>
+                <?= $content ?>
+            </div>
+        </div>
+
+
+       
+
+
     </div>
 </div>
 

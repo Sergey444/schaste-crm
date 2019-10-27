@@ -311,7 +311,7 @@ html .add-photo-input {
     border-color: #2b542c;
 }
 
-.rs-order__contact .form-group{
+.rs-order__customer .form-group{
     position: relative;
 }
 
@@ -319,6 +319,29 @@ html .add-photo-input {
     padding: 0px 13px;
     border-top: none;
     cursor: pointer;
+}
+
+
+@media (max-width: 991px) {
+    .rs-left-menu {
+        display: none;
+    }
+    .rs-content {
+        display: block;
+        min-width: 0;
+    }
+}
+@media (max-width: 1500px) {
+    .rs-left-menu {
+        width: 80px;
+        font-size: 25px;
+    }
+    .rs-navbar-left span {
+        display: none;
+    }
+    .rs-navbar-left li {
+        text-align: center;
+    }
 }
 
 @media (max-width: 767px) {
@@ -364,3 +387,83 @@ html .add-photo-input {
     }
     
 }
+
+
+
+/*menu left*/
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus,
+.navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus,
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus,
+.rs-navbar-left li a:hover, .rs-navbar-left li.active a {
+    color: #fe17bf;
+}
+.navbar-inverse .navbar-nav > .active > a, 
+.navbar-inverse .navbar-nav > .active > a:hover, 
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #fe17bf;
+    border: 1px dashed #fe17bf;
+    border-top: none;
+    border-bottom: none;
+    background-color: transparent;
+}
+.navbar-inverse .navbar-toggle,
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #fe17bf;
+    background-color: transparent;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #fe17bf;
+}
+.navbar-inverse .navbar-toggle:hover ,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #fe17bf;
+ }
+.navbar-inverse .navbar-toggle:hover .icon-bar,
+.navbar-inverse .navbar-toggle:focus .icon-bar {
+    background-color: #fff;
+} 
+
+.navbar-inverse {
+    background-color: rgb(255, 255, 255);
+    border-color: #fe17bf;
+}
+
+
+.rs-navbar-left {
+    position: fixed;
+}
+.rs-left-menu {
+    font-size: 15px;
+    width: 300px;
+}
+.rs-content {
+    display: flex;
+    min-width: 1200px;
+}
+
+.rs-navbar-left li a {
+    color: #9d9d9d;
+}
+
+@media (max-width: 991px) {
+    .rs-left-menu {
+        display: none;
+    }
+    .rs-content {
+        display: block;
+        min-width: 0;
+    }
+}
+@media (max-width: 1500px) {
+    .rs-left-menu {
+        width: 80px;
+        font-size: 25px;
+    }
+    .rs-navbar-left span {
+        display: none;
+    }
+    .rs-navbar-left li {
+        text-align: center;
+    }
+}
+/*/menu left*/
