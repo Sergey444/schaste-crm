@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
+use app\models\Program;
 use app\models\Customer;
 // use app\models\PaymentsIn;
 
@@ -28,12 +29,29 @@ use yii\validators\Validator;
  */
 class Order extends \yii\db\ActiveRecord
 {
-
+    /**
+     * @var string 
+     */
     public $type_customer = 'new';
+    /**
+     * @var string
+     */
     public $customer_new_name;
+    /**
+     * @var string
+     */
     public $parents_new_name;
+    /**
+     * @var string
+     */
     public $customer_name;
+    /**
+     * @var string
+     */
     public $customer_phone;
+    /**
+     * @var string
+     */
     public $checkbox_payment;
 
     /**
@@ -149,5 +167,25 @@ class Order extends \yii\db\ActiveRecord
     public function getCustomer() 
     {
         return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProgram() 
+    {
+        return $this->hasOne(Program::className(), ['id' => 'program_id']);
+    }
+
+
+    /**
+     * Return data about order whith link to detail
+     * @return string
+     */
+    public function getFullData() 
+    {
+        return '<a href="/order/view/'. $this->id .'">'. $this->name .'</a> '.
+            $this->sum .'р '. $this->program->name .' <b>'. 
+            Yii::$app->formatter->asDate($this->date_start, 'php:d.m.Y') .'</b> - <b>'. Yii::$app->formatter->asDate($this->date_end, 'php:d.m.Y') .'</b>';
     }
 }

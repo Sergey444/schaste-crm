@@ -40,6 +40,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
         </div>
 
         <div class="col-md-3">
+            <? $model->date_start = Yii::$app->formatter->asDate($model->date_start, 'php:d.m.Y'); ?>
             <?= $form->field($model, 'date_start')->widget(DatePicker::className(), [
                                                                         'options' => [
                                                                             'class' => 'form-control',
@@ -52,9 +53,10 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                                                         'dateFormat' => 'php:d.m.Y',
                                                                 ])->widget(MaskedInput::className(), [
                                                                     'mask' => '99.99.9999'
-                                                                ])->textInput(['value' => date('d.m.Y')]); ?>
+                                                                ])->textInput(); ?>
         </div>
         <div class="col-md-3">
+            <? $model->date_end = Yii::$app->formatter->asDate($model->date_end, 'php:d.m.Y'); ?>
             <?= $form->field($model, 'date_end')->widget(DatePicker::className(), [
                                                                         'options' => [
                                                                             'class' => 'form-control',
@@ -73,10 +75,8 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
 
     <div class="row">
         <div class="col-md-6">
-            <?$programs = \yii\helpers\ArrayHelper::map(\app\models\Program::find()->all(), 'id', 'name');?>
-            <?= $form->field($model, 'program_id')->dropDownList($programs, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
+            <?= $form->field($model, 'program_id')->textInput() ?>
         </div>
-
         <div class="col-md-6">
             <?= $form->field($model, 'status')->dropDownList(  [
                                                                     1 => 'Создан заказ',

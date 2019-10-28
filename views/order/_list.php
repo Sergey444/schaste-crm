@@ -14,15 +14,12 @@ use yii\helpers\Html;
         <tbody>
             <tr>
                 <td><?= Yii::t('app', 'Program') ?></td>
-                <td><?= $model->program_id ?></td>
+                <td><?= $model->program->name ? Html::a($model->program->name, ['program/view', 'id' => $model->program->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>' ?></td>
             </tr>
 
             <tr>
                 <td><?= Yii::t('app', 'Customer') ?></td>
-                <td><?= $model->customer->child_name ? 
-                        Html::a($model->customer->child_name, ['customer/view', 'id' => $model->customer->id], ['data-pjax' => 0]) 
-                        : $model->customer_name ?? '<span class="not-set">(не задано)</span>' ?>
-                </td>
+                <td><?= $model->customer->child_name ? Html::a($model->customer->child_name, ['customer/view', 'id' => $model->customer->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
             </tr>
 
             <tr>

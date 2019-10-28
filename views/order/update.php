@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <div class="bg-white">
     <h3>Страница редактирования заказа</h3><hr />
-        <?= $this->render('_form', [
+        <?= $this->render('_update', [
             'model' => $model,
         ]) ?>
     </div>

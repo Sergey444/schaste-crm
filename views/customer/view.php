@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Contacts */
@@ -11,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Contacts'), 'url' =>
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="contacts-view">
+<div class="customer-view">
 
     <div class="bg-white mg-bottom">
     <p>
@@ -26,19 +27,30 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     </div>
 
-    <div class="bg-white">
+    <div class="bg-white u-info-block">
         <?= DetailView::widget([
             'model' => $model,
+            'options' => [
+                'class' => 'table table-bordered'
+            ], 
             'attributes' => [
                 'child_name',
+                'parents_name',
                 [
                     'attribute' => 'phone',
-                    'value' => function($model) {
-                         return Yii::$app->formatter->asPhone($model->phone);
-                    },
+                    'format' => 'raw',
+                    'value' => Html::a(
+                        Yii::$app->formatter->asPhone($model->phone),
+                        'tel:+'.$model->phone
+                    ),
                 ],
                 'email:email',
                 'comment:ntext',
+                [
+                    'attribute' => 'Orders',
+                    'format' => 'raw',
+                    'value' => Html::ol( ArrayHelper::map($model->orders, 'id', 'fullData'), ['encode' => false]),
+                ],
                 ['attribute' => 'birthday', 'format' => ['date', 'php:d.m.Y']],
                 ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
                 ['attribute' => 'updated_at', 'format' => ['date', 'php:d.m.Y H:i:s']],

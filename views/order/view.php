@@ -26,10 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     </div>
 
-    <div class="bg-white">
+    <div class="bg-white u-info-block">
 
     <?= DetailView::widget([
         'model' => $model,
+        'options' => ['class' => 'table table-bordered'],
         'attributes' => [
             'id',
             'name',
@@ -40,7 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_start',
             'date_end',
             'program_id',
-            'customer_id',
+            [
+                'attribute' => 'customer.child_name',
+                'format' => 'raw',
+                'value' => Html::a($model->customer->child_name, ['customer/view', 'id' => $model->customer->id]),
+            ],
             ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
             ['attribute' => 'updated_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
         ],

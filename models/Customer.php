@@ -23,6 +23,11 @@ class Customer extends \yii\db\ActiveRecord
 {
 
     /**
+     * @var 
+     */
+    public $term;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -74,5 +79,13 @@ class Customer extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrders()
+    {  
+       return $this->hasMany(Order::className(), ['customer_id' => 'id']);
     }
 }

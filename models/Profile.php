@@ -24,7 +24,9 @@ use yii\imagine\Image;
  */
 class Profile extends \yii\db\ActiveRecord
 {
-
+    /**
+     * @var 
+     */
     public $img;
 
     /**

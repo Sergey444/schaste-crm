@@ -69,7 +69,6 @@ return [
 
     'Are you sure you want to delete this item?' => 'Вы уверены что хотите удалить эту запись?',
 
-
     'Payments' => 'Оплаты',
     'Set payment in' => 'Внести оплату',
     'Set payment out' => 'Внести затраты',
@@ -80,6 +79,7 @@ return [
     'Sum' => 'Сумма',
 
     'Orders' => 'Заказы',
+    'Order' => 'Заказ',
     'Create Order' => 'Создать заказ',
     'Bill Number' => 'Номер счёта',
     'Service' => 'Услуга',
@@ -110,5 +110,14 @@ return [
     'Child name' => 'Ф.И.О. ребёнка',
     'Parent name' => 'Ф.И.О родителя ребёнка',
 
+    'Programs' => 'Программы',
+    'Program' => 'Программа',
+    'Program name' => 'Название программы',
+    'Create Program' => 'Создать программу',
+
     'Club customers' => 'Клиенты клуба',
+    'Club programs' => 'Программы клуба',
+
+    'Choose program ...' => 'Выберите программу ...',
+    'Choose teacher ...' => 'Выберите преподавателя ...',
 ];
