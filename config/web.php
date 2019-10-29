@@ -72,6 +72,7 @@ $config = [
                 'program' => 'program/index',
                 'program/view/<id:\d+>' => 'program/view',
                 'program/update/<id:\d+>' => 'program/update',
+                'payment' => 'payment/index',
             ],
         ],
         'i18n' => [

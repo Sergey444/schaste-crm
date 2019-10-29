@@ -286,7 +286,7 @@ html .add-photo-input {
 .table-payment-out td {
     background-color: rgba(255, 214, 214, 0.45);
 }
-.payments-description {
+.payment-description {
     float: right; 
     opacity: 0.8;
 }
@@ -325,6 +325,10 @@ html .add-photo-input {
     cursor: pointer;
 }
 
+.rs-left-menu .link-bottom {
+    position: fixed;
+    bottom: 83px;
+}
 
 @media (max-width: 991px) {
     .rs-left-menu {
@@ -346,6 +350,10 @@ html .add-photo-input {
     .rs-navbar-left li {
         text-align: center;
     }
+    .rs-left-menu .link-bottom {
+        bottom: 73px;
+    }
+    
 }
 
 @media (max-width: 767px) {

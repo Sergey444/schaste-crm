@@ -7,7 +7,7 @@ use yii\behaviors\TimestampBehavior;
 
 use app\models\Program;
 use app\models\Customer;
-// use app\models\PaymentsIn;
+use app\models\PaymentIn;
 
 use yii\validators\Validator;
 /**
@@ -143,23 +143,24 @@ class Order extends \yii\db\ActiveRecord
         return false;
     }
 
-    // /**
-    //  * Save paymentsIn after save model if checkbox_payment is true
-    //  * @param boolean - $insert
-    //  * @param array - $changedAttributes
-    //  * @return void
-    //  */
-    // public function afterSave($insert, $changedAttributes)
-    // {
-    //     if ($this->id && $this->checkbox_payment) {
-    //         $paymentsIn = new PaymentsIn();
-    //         $paymentsIn->name = Yii::t('app', 'Pay for order') .' «'. $this->name .'»';
-    //         $paymentsIn->order_id = $this->id;
-    //         $paymentsIn->sum = $this->sum;
-    //         $paymentsIn->date_of_payment = date('d.m.Y', $this->date_start);
-    //         $paymentsIn->save();
-    //     }
-    // }
+    /**
+     * Save paymentIn after save model if checkbox_payment is true
+     * @param boolean - $insert
+     * @param array - $changedAttributes
+     * @return void
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($this->id && $this->checkbox_payment) {
+            $paymentIn = new PaymentIn();
+            $paymentIn->name = Yii::t('app', 'Pay for order') .' «'. $this->name .'»';
+            $paymentIn->order_id = $this->id;
+            $paymentIn->customer_id = $this->customer_id;
+            $paymentIn->sum = $this->sum;
+            $paymentIn->date_of_payment = date('d.m.Y', $this->date_start);
+            $paymentIn->save();
+        }
+    }
 
      /**
      * @return \yii\db\ActiveQuery

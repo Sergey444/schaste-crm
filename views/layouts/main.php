@@ -76,8 +76,16 @@ AppAsset::register($this);
                         'items' => [
                             
                             ['label' => '<i class="fas fa-briefcase"></i> <span>' . Yii::t('app', 'Orders') . '</span>', 'url' => ['/order/index'], 'visible' => !Yii::$app->user->isGuest],
+                            ['label' => '<i class="fas fa-ruble-sign"></i> <span>' . Yii::t('app', 'Payments') . '</span>', 'url' => ['/payment/index'], 'visible' => !Yii::$app->user->isGuest],
                             ['label' => '<i class="fas fa-child"></i> <span>' . Yii::t('app', 'Club customers') . '</span>', 'url' => ['/customer/index'], 'visible' => !Yii::$app->user->isGuest],
                             ['label' => '<i class="fas fa-book"></i> <span>' . Yii::t('app', 'Club programs') . '</span>', 'url' => ['/program/index'], 'visible' => !Yii::$app->user->isGuest],
+                            [
+                                'label' => '<i class="fab fa-wikipedia-w"></i> <span>' . Yii::t('app', 'Documents') . '</span>', 
+                                'url' => 'https://wiki.schaste-club.ru', 
+                                'visible' => !Yii::$app->user->isGuest, 
+                                'options'=>['class'=>'link-bottom'],
+                                'linkOptions' => ['target' => '_blank']
+                            ],
                             
                         ],
                     ]);
@@ -92,11 +100,6 @@ AppAsset::register($this);
                 <?= $content ?>
             </div>
         </div>
-
-
-       
-
-
     </div>
 </div>
 
