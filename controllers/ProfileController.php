@@ -8,7 +8,6 @@ use app\models\User;
 
 use app\models\Profile;
 use app\models\ProfileSearch;
-// use backend\models\Company;
 use app\models\SignupForm;
 use app\models\UpdateUserForm;
 
@@ -144,9 +143,8 @@ class ProfileController extends Controller
     {
         $model = $this->findModel($id);
         $user = new UpdateUserForm($model->user_id);
-        //$company = Company::findOne($user->company_id);
 
-        if ($this->update($id, $model, $user, $company)) {
+        if ($this->update($id, $model, $user)) {
             Yii::$app->session->setFlash('success', 'User updated successfully');
             return $this->redirect(['update-user', 'id' => $model->id]);
         };
@@ -154,7 +152,6 @@ class ProfileController extends Controller
         return $this->render('update', [
             'model' => $model,
             'user' => $user,
-            'company' => $company
         ]);
     }
 
@@ -169,7 +166,6 @@ class ProfileController extends Controller
         $id = Yii::$app->user->id;
         $model = Profile::find()->where(['user_id' => $id])->one();
         $user = new UpdateUserForm($id);
-        //$company = Company::findOne($user->company_id);
 
         if ($this->update($id, $model, $user, $company)) {
             Yii::$app->session->setFlash('success', 'User updated successfully');
@@ -179,7 +175,6 @@ class ProfileController extends Controller
         return $this->render('update', [
             'model' => $model,
             'user' => $user,
-            'company' => $company
         ]);
     }
 
@@ -191,7 +186,7 @@ class ProfileController extends Controller
      * @param Object - $user
      * @return Boolean
      */
-    private function update($id, $model, $user, $company)
+    private function update($id, $model, $user)
     {
         if ($model->load(Yii::$app->request->post())) {
             $photo = UploadedFile::getInstance($model, 'img');
@@ -200,21 +195,12 @@ class ProfileController extends Controller
             }
             if ( $model->save() ) {
                 return true;
-                // Yii::$app->session->setFlash('success', 'Profile updated successfully');
-                // return $this->redirect(['update']);
             }
         }
 
         if ($user->load(Yii::$app->request->post()) && $user->update($id)) {
             return true;
-            // Yii::$app->session->setFlash('success', 'User updated successfully');
-            // return $this->redirect(['update']);
         }
-
-        // if ($company->load(Yii::$app->request->post()) && $company->save()) {
-        //     return true;
-        // }
-
         return false;
     }
 
@@ -227,13 +213,10 @@ class ProfileController extends Controller
      */
     public function actionDelete($id)
     {
-        $Profile = $this->findModel($id);
-        if (($user = User::findOne($Profile->user_id)) !== null) {
-            if ( ($company = Company::findOne($user->company_id)) !== null) {
-                $company->delete();
-            }
-            file_exists( $Profile->photo) && unlink( $Profile->photo);
-            $Profile->delete();
+        $profile = $this->findModel($id);
+        if (($user = User::findOne($profile->user_id)) !== null) {
+            file_exists( $profile->photo) && unlink( $profile->photo);
+            $profile->delete();
             $user->delete();
         }
         return $this->redirect(['users']);

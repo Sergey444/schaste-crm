@@ -54,9 +54,6 @@ class UpdateUserForm extends Model
         $this->username = $this->user->username;
         $this->email = $this->user->email;
         $this->status = $this->user->status;
-        // $this->availability = $this->user->availability;
-        // $this->company_id =$this->user->company_id;
-        
     }
 
     /**
@@ -66,17 +63,11 @@ class UpdateUserForm extends Model
      */
     public function update($user) 
     {
-        // $this->user->username = $this->username;
         $this->user->email = $this->email;
 
         if ($this->password) {
             $this->user->setPassword($this->password);
         }
-        
-        // if (Yii::$app->user->can('admin')) {
-        //     $this->user->status = $this->status;
-        //     $this->user->availability = $this->availability ? strtotime($this->availability) : null;
-        // }
 
         return $this->user->save();
     }
