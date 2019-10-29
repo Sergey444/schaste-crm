@@ -11,6 +11,9 @@ return [
     'Logout' => 'Выход',
     'Find' => 'Поиск',
 
+    'Active' => 'Активен',
+    'Deactivated' => 'Не активен',
+
     'Date Start' => 'Дата начала',
     'Date End' => 'Дата конца',
 
@@ -38,7 +41,7 @@ return [
     'City' => 'Город',
     'Status' => 'Статус',
     'Comment' => 'Комментарий',
-
+    'Address' => 'Адрес',
     'Password' => 'Пароль',
     'Password repeat' => 'Повтор пароля',
 

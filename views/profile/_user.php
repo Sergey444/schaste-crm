@@ -28,7 +28,10 @@ use yii\jui\DatePicker;
     <p>Раздел администратора, пользователи его не видят.</p>
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($user, 'status')->textInput(['maxlength' => true])->label(Yii::t('app', 'Status')) ?>
+            <?= $form->field($user, 'status')->dropDownList([
+                    '10' => Yii::t('app', 'Active'),
+                    '9' => Yii::t('app', 'Deactivated'),
+                ])->label(Yii::t('app', 'Status')) ?>
         </div>
         <div class="col-md-6">
             <?// $user->availability = Yii::$app->formatter->asDate($user->availability , 'php:d.m.Y'); ?>

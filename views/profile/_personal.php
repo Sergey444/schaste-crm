@@ -35,7 +35,7 @@ use yii\helpers\Url;
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <? $model->date_of_birthday = Yii::$app->formatter->asDate($model->date_of_birthday, 'php:d.m.Y'); ?>
                     <?=
                         $form->field($model, 'date_of_birthday')->widget(MaskedInput::className(), [
@@ -45,7 +45,7 @@ use yii\helpers\Url;
                     ?>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <?=
                         $form->field($model, 'phone')->widget(MaskedInput::className(), [
                             'mask' => '+9 (999) 999-99-99',
@@ -54,6 +54,10 @@ use yii\helpers\Url;
                             ]
                         ])->label(Yii::t('app', 'Phone'));
                     ?>
+                </div>
+
+                <div class="col-md-4">
+                    <?= $form->field($model, 'address')->textInput(['maxlength' => true])->label(Yii::t('app', 'Address')) ?>
                 </div>
             </div>
 

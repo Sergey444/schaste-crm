@@ -19,10 +19,6 @@ $this->registerJsFile('@web/js/personal.js', ['depends' => [\yii\web\JqueryAsset
         'model' => $model,
     ]) ?>
 
-    <?/*= $this->render('_company', [
-        'company' => $company,
-    ]) */?>
-
     <?= $this->render('_user', [
         'user' => $user,
     ]) ?>

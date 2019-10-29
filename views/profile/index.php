@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 
@@ -51,8 +52,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
                         <td><?= $model->user->email ?></td>
                     </tr>
                     <tr>
-                        <td><?= Yii::t('app', 'City') ?>:</td>
-                        <td><?//= $model->city ?></td>
+                        <td><?= Yii::t('app', 'Address') ?>:</td>
+                        <td><?= $model->address ?></td>
                     </tr>
                     <tr>
                         <!-- <td><?//= Yii::t('app', 'Email') ?></td>
@@ -71,6 +72,10 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
                     <tr>
                         <td><?= Yii::t('app', 'Status')?>:</td>
                         <td><?= Yii::t('app', $model->user->status ) ?></td>
+                    </tr>
+                    <tr>
+                        <td><?= Yii::t('app', 'Status')?>:</td>
+                        <td><?   Yii::$app->authManager->getRolesByUser($model->user->id); ?></td>
                     </tr>
                     <tr>
                         <td><?= Yii::t('app', 'Date of registration')?>:</td>

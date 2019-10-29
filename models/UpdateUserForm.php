@@ -64,6 +64,7 @@ class UpdateUserForm extends Model
     public function update($user) 
     {
         $this->user->email = $this->email;
+        $this->user->status = $this->status;
 
         if ($this->password) {
             $this->user->setPassword($this->password);

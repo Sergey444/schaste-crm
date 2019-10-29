@@ -52,7 +52,7 @@ use yii\widgets\MaskedInput;
         <div class="col-md-4">
         <?=
             $form->field($model, 'phone')->widget(MaskedInput::className(), [
-                'mask' => '+7 (999) 999-99-99',
+                'mask' => '+9 (999) 999-99-99',
                 'clientOptions' => [
                     'removeMaskOnSubmit' => true,
                 ]
