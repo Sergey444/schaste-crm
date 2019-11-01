@@ -98,8 +98,8 @@ return [
 
     'Sale' => 'Скидка',
 
-    'Enter name...' => 'Введите имя...',
-    'Enter order name...' => 'Введите название заказа...',
+    'Enter name ...' => 'Введите имя...',
+    'Enter order name ...' => 'Введите название заказа...',
     'If there was a prepayment, enter it...' => 'Если была предоплата, введите её',
     'Calculated automatically...' => 'Считается автоматически...',
 
@@ -111,7 +111,7 @@ return [
     'Pay for order' => 'Оплата заказа',
 
     'Child name' => 'Ф.И.О. ребёнка',
-    'Parent name' => 'Ф.И.О родителя ребёнка',
+    'Parent name' => 'Ф.И.О родителя',
 
     'Programs' => 'Программы',
     'Program' => 'Программа',
@@ -125,4 +125,12 @@ return [
     'Choose teacher ...' => 'Выберите преподавателя ...',
 
     'Documents' => 'Документы',
+    'Integer ...' => 'Целое число ...',
+    'Not necessary ...' => 'Не обязательно ...',
+
+    'Don\'t attach customer' => 'Клиент не выбран',
+    'Add new customer' => 'Создать нового клиента',
+    'Choose from customer list' => 'Выбрать клиента из списка',
+
+    'Create payment' => 'Создать платёж',
 ];

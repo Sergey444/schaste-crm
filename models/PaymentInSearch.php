@@ -54,7 +54,7 @@ class PaymentInSearch extends PaymentIn
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> [
-                'attributes' => ['date_of_payment'],
+                // 'attributes' => ['date_of_payment'],
                 'defaultOrder' => ['date_of_payment' => SORT_DESC]
             ],
             'pagination' => [

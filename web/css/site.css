@@ -310,7 +310,14 @@ html .add-photo-input {
 
     border: 1px solid #66afe9;
 }
-
+.rs-find-block {
+    overflow-y: scroll;
+    max-height: 230px;
+    display: block;
+}
+.rs-find-block td {
+    display: block;
+}
 .has-success .rs-add-to-order {
     border-color: #2b542c;
 }
@@ -451,6 +458,17 @@ html .add-photo-input {
 .rs-content {
     display: flex;
     min-width: 1200px;
+}
+
+input[aria-required="true"] + .help-block::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f621";
+    color: #a94442;
+    position: absolute;
+    right: 23px;
+    top: 29px;
+    font-size: 10px;
 }
 
 .rs-navbar-left li a {

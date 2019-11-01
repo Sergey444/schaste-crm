@@ -58,7 +58,7 @@ class Profile extends \yii\db\ActiveRecord
             [['user_id', 'created_at', 'updated_at'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],
             [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxSize' => 1024 * 1024 * 2],
-            [['photo'], 'string'],
+            [['photo', 'address'], 'string'],
             [['date_of_birthday'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_of_birthday'],
         ];
     }
@@ -78,6 +78,7 @@ class Profile extends \yii\db\ActiveRecord
             'date_of_birthday' => Yii::t('app', 'Date of birthday'),
             'photo' => Yii::t('app', 'Photo'),
             'phone' => Yii::t('app', 'Phone'),
+            'address' => Yii::t('app', 'Address'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

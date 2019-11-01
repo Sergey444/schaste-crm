@@ -19,11 +19,11 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Enter order name...')]) ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Enter order name ...')]) ?>
         </div>
 
         <div class="col-md-3">
-            <?= $form->field($model, 'sum')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Calculated automatically...')]) ?>
+            <?= $form->field($model, 'sum')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Integer ...')]) ?>
         </div>
         
         <div class="col-md-3">
@@ -33,10 +33,10 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
 
     <div class="row">
         <div class="col-md-3">
-            <?= $form->field($model, 'unit_price')->textInput(['type' => 'number']) ?>
+            <?= $form->field($model, 'unit_price')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Integer ...')]) ?>
         </div>
         <div class="col-md-3">
-            <?= $form->field($model, 'sale')->textInput(['type' => 'number']) // Скидка ?>
+            <?= $form->field($model, 'sale')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Integer ...')]) // Скидка ?>
         </div>
 
         <div class="col-md-3">
@@ -67,7 +67,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                                                         'dateFormat' => 'php:d.m.Y',
                                                                 ])->widget(MaskedInput::className(), [
                                                                     'mask' => '99.99.9999'
-                                                                ])->textInput(['placeholder' => Yii::t('app', 'Not necessary...')]); ?>
+                                                                ])->textInput(['placeholder' => Yii::t('app', 'Not necessary ...')]); ?>
         </div>
     </div>
 
@@ -117,7 +117,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
 
                                            ]);
                     }]
-                  ); ?>
+                  )->label(false); ?>
 
             </div>
         </div>
@@ -130,10 +130,10 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                     <div class="rs-order__new-customer tab-pane fade in active" id="new">
                         
                         <div class="col-md-4">
-                            <?= $form->field($model, 'customer_new_name')->textInput(['placeholder' => Yii::t('app', 'Write a name...')]) ?>
+                            <?= $form->field($model, 'customer_new_name')->textInput(['placeholder' => Yii::t('app', 'Child name')])->label(Yii::t('app', 'Child name')) ?>
                         </div>
                         <div class="col-md-4">
-                            <?= $form->field($model, 'parents_new_name')->textInput(['placeholder' => Yii::t('app', 'Write a name...')]) ?>
+                            <?= $form->field($model, 'parents_new_name')->textInput(['placeholder' => Yii::t('app', 'Parent name')])->label(Yii::t('app', 'Parent name')) ?>
                         </div>
                         <div class="col-md-4">
                             <?= $form->field($model, 'customer_phone')->widget(MaskedInput::className(), [
@@ -141,7 +141,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                                                                 'clientOptions' => [
                                                                                     'removeMaskOnSubmit' => true,
                                                                                 ]
-                                                                            ])->textInput(['placeholder' => Yii::t('app', 'Write a phone...')])->label(Yii::t('app', 'Phone'));?>
+                                                                            ])->textInput(['placeholder' => Yii::t('app', 'Phone')])->label(Yii::t('app', 'Phone'));?>
                         </div>
                     </div>
                     
@@ -149,9 +149,9 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                         <?= $form->field($model, 'customer_name', [
                             'template' => '{label}{input}{error}
                                             <table class="table table-hover rs-add-to-order">
-                                                <tbody id="rs-find-block"></tbody>
+                                                <tbody id="rs-find-block" class="rs-find-block"></tbody>
                                             </table>'
-                        ])->textInput(['placeholder' => Yii::t('app', 'Start typing a name...')]) ?>
+                        ])->textInput(['placeholder' => Yii::t('app', 'Start typing a name...')])->label(Yii::t('app', 'Child name')) ?>
 
                         <?= $form->field($model, 'customer_id')->hiddenInput()->label(false) ?>
                     </div>

@@ -57,7 +57,7 @@ use yii\helpers\Url;
                 </div>
 
                 <div class="col-md-4">
-                    <?= $form->field($model, 'address')->textInput(['maxlength' => true])->label(Yii::t('app', 'Address')) ?>
+                    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
                 </div>
             </div>
 

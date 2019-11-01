@@ -49,7 +49,7 @@ class OrderSearch extends Order
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> [
-                'attributes' => ['created_at'],
+            //     'attributes' => ['created_at'],
                 'defaultOrder' => ['created_at' => SORT_DESC]
             ],
             'pagination' => [
@@ -69,6 +69,7 @@ class OrderSearch extends Order
         $query->andFilterWhere([
             'id' => $this->id,
             'count' => $this->count,
+            'customer' => $this->customer->child_name,
             'unit_price' => $this->unit_price,
             'sum' => $this->sum,
             'status' => $this->status,
