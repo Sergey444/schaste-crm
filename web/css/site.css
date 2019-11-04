@@ -453,6 +453,7 @@ html .add-photo-input {
 }
 .rs-left-menu {
     font-size: 15px;
+    min-width: 300px;
     width: 300px;
 }
 .rs-content {
@@ -486,6 +487,7 @@ input[aria-required="true"] + .help-block::before {
 }
 @media (max-width: 1500px) {
     .rs-left-menu {
+        min-width: 80px;
         width: 80px;
         font-size: 25px;
     }

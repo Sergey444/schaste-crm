@@ -133,4 +133,5 @@ return [
     'Choose from customer list' => 'Выбрать клиента из списка',
 
     'Create payment' => 'Создать платёж',
+    'Journal' => 'Журнал',
 ];
