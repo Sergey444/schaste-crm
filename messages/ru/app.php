@@ -134,4 +134,11 @@ return [
 
     'Create payment' => 'Создать платёж',
     'Journal' => 'Журнал',
+
+    'Calendar color' => 'Цвет для календаря',
+    'Color' => 'Цвет',
+
+    'Teacher' => 'Преподаватель',
+    'Create Group' => 'Создать группу',
+    'Groups' => 'Группы',
 ];

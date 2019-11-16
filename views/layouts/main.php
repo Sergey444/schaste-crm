@@ -81,6 +81,7 @@ AppAsset::register($this);
                             ['label' => '<i class="fas fa-calendar-alt"></i> <span>' . Yii::t('app', 'Journal') . '</span>', 'url' => ['/journal/index'], 'visible' => !Yii::$app->user->isGuest],
                             ['label' => '<i class="fas fa-child"></i> <span>' . Yii::t('app', 'Club customers') . '</span>', 'url' => ['/customer/index'], 'visible' => !Yii::$app->user->isGuest],
                             ['label' => '<i class="fas fa-book"></i> <span>' . Yii::t('app', 'Club programs') . '</span>', 'url' => ['/program/index'], 'visible' => !Yii::$app->user->isGuest],
+                            ['label' => '<i class="fas fa-layer-group"></i> <span>' . Yii::t('app', 'Groups') . '</span>', 'url' => ['/group/index'], 'visible' => !Yii::$app->user->isGuest],
                             [
                                 'label' => '<i class="fab fa-wikipedia-w"></i> <span>' . Yii::t('app', 'Documents') . '</span>', 
                                 'url' => 'https://wiki.schaste-club.ru', 

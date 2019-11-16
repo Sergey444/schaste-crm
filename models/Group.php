@@ -1,0 +1,72 @@
+<?php
+
+namespace app\models;
+
+use yii\behaviors\TimestampBehavior;
+use Yii;
+
+/**
+ * This is the model class for table "group".
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $teacher_id
+ * @property int $program_id
+ * @property string $comment
+ * @property int $created_at
+ * @property int $updated_at
+ */
+class Group extends \yii\db\ActiveRecord
+{
+
+    /**
+     * @var 
+     */
+    public $term;
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'group';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['teacher_id', 'program_id', 'created_at', 'updated_at'], 'integer'],
+            [['comment'], 'string'],
+            [['name'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'teacher_id' => Yii::t('app', 'Teacher'),
+            'program_id' => Yii::t('app', 'Program'),
+            'comment' => Yii::t('app', 'Comment'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+        ];
+    }
+}

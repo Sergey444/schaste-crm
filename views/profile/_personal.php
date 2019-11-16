@@ -62,14 +62,18 @@ use yii\helpers\Url;
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <?//= $form->field($model, 'city')->textInput(['maxlength' => true])->label(Yii::t('app', 'City')) ?>
+               
+                <div class="col-md-4">
+            <?if ($model->teacher):?>
+                    <?= $form->field($model, 'color')->textInput(['type' => 'color'])->label(Yii::t('app', 'Calendar color')) ?>
+                </div>
+                <div class="col-md-4" style="margin-top: 25px;">
+            <?endif?>
+                    <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
                 </div>
             </div>
 
-            <div class="form-group">
-                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
-            </div>
+            
         </div>
 
         <div class="bg-white av-block mg-left">

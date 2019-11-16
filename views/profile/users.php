@@ -60,6 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 ['attribute' => 'date_of_birthday', 'format' => ['date', 'php:d.m.Y']],
                 'phone',
+                [
+                    'attribute'=>'teacher',
+                    'format'=>'raw',
+                    'value' => function ($data) { 
+                                $check = $data->teacher ? 'checked' : '';
+                                return '<input type="checkbox" '.$check.' value="'.$data->id.'">';
+                            }
+                ],
                 ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
                 ['attribute' => 'updated_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
 

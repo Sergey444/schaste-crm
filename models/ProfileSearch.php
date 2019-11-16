@@ -52,7 +52,7 @@ class ProfileSearch extends Profile
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' =>  ['attributes' => ['username', 'name', 'secondname', 'surname', 'date_of_birthday', 'user_id','id','phone','created_at','updated_at',]]
+            'sort' =>  ['attributes' => ['username', 'color', 'teacher', 'name', 'secondname', 'surname', 'date_of_birthday', 'user_id','id','phone','created_at','updated_at']]
         ]);
 
         $this->load($params);
