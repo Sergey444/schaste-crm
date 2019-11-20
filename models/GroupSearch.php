@@ -17,7 +17,7 @@ class GroupSearch extends Group
     public function rules()
     {
         return [
-            [['id', 'teacher_id', 'program_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'teacher_id', 'program_id','created_at', 'updated_at'], 'integer'],
             [['term'], 'trim'],
             [['name', 'comment'], 'safe'],
         ];
@@ -41,12 +41,13 @@ class GroupSearch extends Group
      */
     public function search($params)
     {
-        $query = Group::find();
+        $query = Group::find()->joinWith( ['teacher', 'program', 'customers'] );
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' =>  ['attributes' => ['program.name', 'name', 'profile.surname', 'comment' ]],
         ]);
 
         $this->load($params);

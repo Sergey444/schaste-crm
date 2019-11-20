@@ -70,7 +70,6 @@
         closeSelect();
     }
 
-
     /**
      * Drawing table under input customer name
      * 

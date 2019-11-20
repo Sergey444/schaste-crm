@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use app\models\Customer;
 use Yii;
 
 /**
@@ -42,4 +42,13 @@ class GroupCustomer extends \yii\db\ActiveRecord
             'customer_id' => Yii::t('app', 'Customer ID'),
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCustomer() 
+    {
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+    }
+
 }

@@ -118,4 +118,11 @@ class Profile extends \yii\db\ActiveRecord
     public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+
+    /**
+     * @return string
+     */
+    public function getFullName() {
+        return $this->surname . ' ' . $this->name .' '. $this->secondname;
+    }
 }

@@ -112,6 +112,7 @@ return [
 
     'Child name' => 'Ф.И.О. ребёнка',
     'Parent name' => 'Ф.И.О родителя',
+    'Teacher name' => 'Ф.И.О преподавателя',
 
     'Programs' => 'Программы',
     'Program' => 'Программа',
@@ -141,4 +142,16 @@ return [
     'Teacher' => 'Преподаватель',
     'Create Group' => 'Создать группу',
     'Groups' => 'Группы',
+
+    'Web site' => 'Веб сайт',
+    'Group name' => 'Название группы',
+    'Enter group name ...' => 'Введите название группы ...',
+    'Your comment' => 'Ваш комментарий',
+    'Enter program name' => 'Введите название программы',
+
+    'Update Group: {name}' => 'Редактировать группу: {name}',
+    'Add to group' => 'Добавить в группу',
+
+    'Nothing found' => 'Ничего не найдено',
+    'Student list' => 'Список учеников',
 ];

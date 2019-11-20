@@ -12,6 +12,8 @@ use app\models\Event;
 use app\models\EventCustomer;
 use app\models\Program;
 use app\models\Customer;
+use app\models\Group;
+use app\models\Profile;
 
 use Yii;
 
@@ -53,7 +55,8 @@ class JournalController extends \yii\web\Controller
     }
 
     /**
-     * @return object
+     * Get programs
+     * @return array json encode
      */
     public function actionGetPrograms() 
     {
@@ -63,6 +66,30 @@ class JournalController extends \yii\web\Controller
     }
 
     /**
+     * Get groups
+     * @return array json encode
+     */
+    public function actionGetGroups() 
+    {
+        header('Access-Control-Allow-Origin: *');
+        //->joinWith('customers.customer')->asArray()
+        $groups = ArrayHelper::toArray( Group::find()->all() );
+        return Json::encode($groups);
+    }
+
+    /**
+     * Get teachers
+     * @return array json encode
+     */
+    public function actionGetTeachers() 
+    {
+        header('Access-Control-Allow-Origin: *');
+        $teachers = ArrayHelper::toArray( Profile::find()->where(['teacher' => 1])->all() );
+        return Json::encode($teachers);
+    }
+
+    /**
+     * 
      * @return object
      */
     public function actionGetCustomers()
@@ -79,7 +106,8 @@ class JournalController extends \yii\web\Controller
     }
 
     /**
-     * @return object
+     * Get Events for view to journal
+     * @return array - jsone encode
      */
     public function actionGetEvents() 
     {
@@ -89,7 +117,8 @@ class JournalController extends \yii\web\Controller
     }
 
     /**
-     * @return integer 
+     * Create or Update Event model if request has id
+     * @return mixed json|integer 
      */
     public function actionSetEvent()
     {
@@ -113,22 +142,7 @@ class JournalController extends \yii\web\Controller
         return 0;
     }
 
-    // /**
-    //  * @return integer 
-    //  */
-    // public function actionUpdateEvent()
-    // {
-    //     header('Access-Control-Allow-Origin: *');
-    //     $event = Yii::$app->request->get();
-
-    //     // return Json::encode($event);
-    //     $id = $event['id'];
-    //     $model = $this->findModel($id);
-    //     if ($model->upload( $event ) && $model->save()) {
-    //         return $model->id;
-    //     }
-    //     return 0;
-    // }
+   
 
      /**
      * Finds the Customer model based on its primary key value.

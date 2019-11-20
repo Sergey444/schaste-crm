@@ -16,11 +16,11 @@ use yii\widgets\ActiveForm;
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Enter program name').' ...']) ?>
                     <?= $form->field($model, 'one_price')->textInput(['type' => 'number', 'maxlength' => true]) ?>
                 </div>
                 <div class="col-md-6">
-                    <?= $form->field($model, 'comment')->textarea(['rows' => 5]) ?>
+                    <?= $form->field($model, 'comment')->textarea(['rows' => 5, 'placeholder' => Yii::t('app', 'Your comment') .' ...']) ?>
                 </div>
             </div>
         </div>

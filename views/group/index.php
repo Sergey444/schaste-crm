@@ -42,8 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 // 'id',
                 'name',
-                'teacher_id',
-                'program_id',
+                [
+                    'attribute'=>'profile.surname',
+                    'label' => Yii::t('app', 'Teacher name'),
+                    'value' => function ($data) {
+                        return $data->teacher->fullName;
+                     }
+                ],
+                'program.name',
                 'comment:ntext',
                 //'created_at',
                 //'updated_at',

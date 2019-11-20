@@ -337,6 +337,9 @@ html .add-photo-input {
     bottom: 83px;
 }
 
+.rs-left-menu .link-bottom--site {
+    bottom: 130px;
+}
 @media (max-width: 991px) {
     .rs-left-menu {
         display: none;
@@ -360,7 +363,13 @@ html .add-photo-input {
     .rs-left-menu .link-bottom {
         bottom: 73px;
     }
+    .rs-left-menu .link-bottom--site {
+        bottom: 130px;
+    }
     
+    .fas {
+        min-width: 31px;
+    }
 }
 
 @media (max-width: 767px) {

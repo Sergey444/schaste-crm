@@ -14,8 +14,8 @@ class m191116_170426_create_group_customer_table extends Migration
     {
         $this->createTable('{{%group_customer}}', [
             'id' => $this->primaryKey(),
-            'group_id' => $this->integer(),
-            'customer_id' => $this->integer()
+            'group_id' => $this->integer()->notNull(),
+            'customer_id' => $this->integer()->notNull()
         ]);
     }
 

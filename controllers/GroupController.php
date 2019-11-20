@@ -5,9 +5,12 @@ namespace app\controllers;
 use Yii;
 use app\models\Group;
 use app\models\GroupSearch;
+use app\models\GroupCustomer;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use yii\helpers\Url;
 
 /**
  * GroupController implements the CRUD actions for Group model.
@@ -91,7 +94,7 @@ class GroupController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = Group::find()->where(['group.id' => $id])->joinWith(['customers.customer'])->one();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -112,8 +115,30 @@ class GroupController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
+    }
+
+    /**
+     * 
+     */
+    public function actionAddChild($id) 
+    {
+        $model = new GroupCustomer();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['update', 'id' => $id]);
+        }
+    }
+
+    /**
+     * 
+     */
+    public function actionDeleteChild($id, $group_id) 
+    {
+        if (GroupCustomer::findOne($id)->delete()) {
+            return $this->redirect(['update', 'id' => $group_id]);
+        }
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
     /**

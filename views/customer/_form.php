@@ -49,7 +49,7 @@ use yii\widgets\MaskedInput;
             </div>
         </div>
         <div class="col-md-6 ">
-            <?= $form->field($model, 'comment')->textArea(['rows' => 5]) ?>
+            <?= $form->field($model, 'comment')->textArea(['rows' => 5, 'placeholder' => Yii::t('app', 'Your comment') .' ...']) ?>
         </div>
     </div>
 

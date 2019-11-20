@@ -2,6 +2,10 @@
 
 namespace app\models;
 
+use app\models\Profile;
+use app\models\Program;
+use app\models\GroupCustomer;
+
 use yii\behaviors\TimestampBehavior;
 use Yii;
 
@@ -50,7 +54,8 @@ class Group extends \yii\db\ActiveRecord
         return [
             [['teacher_id', 'program_id', 'created_at', 'updated_at'], 'integer'],
             [['comment'], 'string'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'teacher_id', 'program_id'], 'required'],
+            [['name'], 'string', 'max' => 255]
         ];
     }
 
@@ -61,12 +66,36 @@ class Group extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Group name'),
             'teacher_id' => Yii::t('app', 'Teacher'),
             'program_id' => Yii::t('app', 'Program'),
             'comment' => Yii::t('app', 'Comment'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeacher() 
+    {
+        return $this->hasOne(Profile::className(), ['id' => 'teacher_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProgram() 
+    {
+        return $this->hasOne(Program::className(), ['id' => 'program_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCustomers()
+    {
+       return $this->hasMany(GroupCustomer::className(), ['group_id' => 'id']);
     }
 }
