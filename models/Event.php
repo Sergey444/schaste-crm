@@ -104,14 +104,29 @@ class Event extends \yii\db\ActiveRecord
         if ($this->id && $this->customers) {
             $EventCustomer = new EventCustomer();
             foreach ($this->customers as $customer) {
-                $arr[] = [$this->id, $customer['id']];
+                $arr[] = [$this->id, $customer['customer_id']];
             }
             $this->saveRelatedData( $arr );
         }
     }
 
+    public function afterDelete()
+    {
+        $this->deleteRelatedData($this->id);
+    }
+
     /**
-     * @param array 
+    * Deletes a several strings from EventCustomer model.
+    * @param array $ids
+    * @return count deleted records
+    */
+    private function deleteRelatedData($ids) 
+    {
+        return Yii::$app->db->createCommand()->delete(EventCustomer::tableName(), ['event_id' => $ids], $params = [])->execute();
+    }
+
+    /**
+     * @param array [[event_id, customer_id], ...]
      * @return count added string
      */
     public function saveRelatedData($arr) 
@@ -125,5 +140,13 @@ class Event extends \yii\db\ActiveRecord
     public function getCustomers()
     {  
        return $this->hasMany(EventCustomer::className(), ['event_id' => 'id']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeacher() 
+    {
+        return $this->hasOne(Profile::className(), ['id' => 'teacher_id']);
     }
 }
