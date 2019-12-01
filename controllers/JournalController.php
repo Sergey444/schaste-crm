@@ -112,7 +112,16 @@ class JournalController extends \yii\web\Controller
     public function actionGetEvents() 
     {
         header('Access-Control-Allow-Origin: *');
+        // $request = Yii::$app->request->get();
+        // $start = strtotime($request['start']);
+        // $end = strtotime($request['end']);->where(['and', ['>', 'start', $start],['<', 'end', $end]])
         $events = ArrayHelper::toArray( Event::find()->joinWith(['customers.customer', 'teacher'])->asArray()->all() );
+        foreach ($events as $key => $event) {
+            $events[$key]['allDay'] = $event['all_day'] === '1';
+            $events[$key]['start'] = $event['start'] * 1000;
+            $events[$key]['end'] = $event['end'] * 1000;
+            $events[$key]['backgroundColor'] = $event['teacher']['color'] ?: '#3788d8';
+        }
         return Json::encode($events);
     }
 
