@@ -32,7 +32,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @var string 
      */
-    public $type_customer = 'new';
+    public $type_customer = 'old';
     /**
      * @var string
      */
@@ -53,6 +53,10 @@ class Order extends \yii\db\ActiveRecord
      * @var string
      */
     public $checkbox_payment;
+    /**
+     * @var 
+     */
+    public $date_payment;
 
     /**
      * {@inheritdoc}
@@ -92,6 +96,21 @@ class Order extends \yii\db\ActiveRecord
             }, 'whenClient' => "function (attribute, value) {
                 return $('[data-name=type_customer]:checked').val() == 'new';
             }"],
+
+            [['customer_name'], 'required', 'when' => function($model) {
+                return $model->type_customer == 'old';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('[data-name=type_customer]:checked').val() == 'old';
+            }"],
+
+            [['date_payment'], 'string'],
+            [['date_payment'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_payment'],
+            [['date_payment'], 'required', 'when' => function($model) {
+                return $model->checkbox_payment == '1';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('[data-name=payment_create]:checked').val() == '1';
+            }"],
+
             [['type_customer', 'checkbox_payment'], 'safe'],
         ];
     }
@@ -110,6 +129,7 @@ class Order extends \yii\db\ActiveRecord
             'sale' => Yii::t('app', 'Sale'),
             'status' => Yii::t('app', 'Status'),
             'date_start' => Yii::t('app', 'Date Start'),
+            'date_payment' => Yii::t('app', 'Date Of Payment'),
             'date_end' => Yii::t('app', 'Date End'),
             'program_id' => Yii::t('app', 'Program'),
             'customer_new_name' => Yii::t('app', 'Name'),
@@ -157,7 +177,7 @@ class Order extends \yii\db\ActiveRecord
             $paymentIn->order_id = $this->id;
             $paymentIn->customer_id = $this->customer_id;
             $paymentIn->sum = $this->sum;
-            $paymentIn->date_of_payment = date('d.m.Y', $this->date_start);
+            $paymentIn->date_of_payment = date('d.m.Y', $this->date_payment);
             $paymentIn->save();
         }
     }

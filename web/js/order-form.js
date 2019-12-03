@@ -133,5 +133,8 @@
     $('[data-name="type_customer"]').on('change', function (evt) {
         $(this).tab('show');
     });
-
+    
+    $('[data-name="payment_create"]').on('change', function (evt) {
+        $('#payment_date').toggle('100');
+    });
 }());

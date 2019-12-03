@@ -75,7 +75,8 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'program_id')->textInput() ?>
+            <?$programs = \yii\helpers\ArrayHelper::map(\app\models\Program::find()->all(), 'id', 'name');?>
+            <?= $form->field($model, 'program_id')->dropDownList($programs, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'status')->dropDownList(  [
@@ -114,7 +115,6 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                                'value' => $value,
                                                'href' => '#'.$value,
                                                'data-name' => 'type_customer'
-
                                            ]);
                     }]
                   ); ?>
@@ -126,8 +126,8 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
             <div class="row">
 
                 <div class="tab-content">
-                    <div class="rs-order__new-customer tab-pane fade in active" id="not"></div>
-                    <div class="rs-order__new-customer tab-pane fade in active" id="new">
+                    <div class="rs-order__new-customer tab-pane fade" id="not"></div>
+                    <div class="rs-order__new-customer tab-pane fade" id="new">
                         
                         <div class="col-md-4">
                             <?= $form->field($model, 'customer_new_name')->textInput(['placeholder' => Yii::t('app', 'Write a name...')]) ?>
@@ -145,13 +145,13 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                         </div>
                     </div>
                     
-                    <div class="col-md-12 rs-order__customer tab-pane fade" id="old">
+                    <div class="col-md-12 rs-order__customer tab-pane fade in active" id="old">
                         <?= $form->field($model, 'customer_name', [
                             'template' => '{label}{input}{error}
                                             <table class="table table-hover rs-add-to-order">
                                                 <tbody id="rs-find-block"></tbody>
                                             </table>'
-                        ])->textInput(['placeholder' => Yii::t('app', 'Start typing a name...')]) ?>
+                        ])->textInput(['value' => $model->customer->child_name, 'placeholder' => Yii::t('app', 'Start typing a name...')]) ?>
 
                         <?= $form->field($model, 'customer_id')->hiddenInput()->label(false) ?>
                     </div>
@@ -162,7 +162,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
     </div>
     <hr />
 
-    <?= $form->field($model, 'checkbox_payment')->checkbox(['label' => Yii::t('app', 'Create payment'), 'checked' => true, 'value' => true]);?>
+    <?//= $form->field($model, 'checkbox_payment')->checkbox(['label' => Yii::t('app', 'Create payment'), 'checked' => true, 'value' => true]);?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

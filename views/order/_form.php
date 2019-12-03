@@ -126,8 +126,8 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
             <div class="row">
 
                 <div class="tab-content">
-                    <div class="rs-order__new-customer tab-pane fade in active" id="not"></div>
-                    <div class="rs-order__new-customer tab-pane fade in active" id="new">
+                    <div class="rs-order__new-customer tab-pane fade" id="not"></div>
+                    <div class="rs-order__new-customer tab-pane fade" id="new">
                         
                         <div class="col-md-4">
                             <?= $form->field($model, 'customer_new_name')->textInput(['placeholder' => Yii::t('app', 'Child name')])->label(Yii::t('app', 'Child name')) ?>
@@ -145,7 +145,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                         </div>
                     </div>
                     
-                    <div class="col-md-12 rs-order__customer tab-pane fade" id="old">
+                    <div class="col-md-12 rs-order__customer tab-pane fade in active" id="old">
                         <?= $form->field($model, 'customer_name', [
                             'template' => '{label}{input}{error}
                                             <table class="table table-hover rs-add-to-order">
@@ -162,7 +162,26 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
     </div>
     <hr />
 
-    <?= $form->field($model, 'checkbox_payment')->checkbox(['label' => Yii::t('app', 'Create payment'), 'checked' => true, 'value' => true]);?>
+    <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'checkbox_payment')->checkbox(['label' => Yii::t('app', 'Create payment'), 'data-name' => 'payment_create', 'checked' => true, 'value' => true]);?>
+        </div>
+        <div class="col-md-8 tab-pane fade in active" id="payment_date">
+            <?= $form->field($model, 'date_payment')->widget(DatePicker::className(), [
+                                                                        'options' => [
+                                                                            'class' => 'form-control',
+                                                                        ],
+                                                                        'clientOptions' => [
+                                                                            'minDate' => '',
+                                                                            'maxDate' => ''
+                                                                        ],
+                                                                        'language' => 'ru',
+                                                                        'dateFormat' => 'php:d.m.Y',
+                                                                ])->widget(MaskedInput::className(), [
+                                                                    'mask' => '99.99.9999'
+                                                                ])->textInput(['value' => date('d.m.Y')]); ?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
