@@ -16,10 +16,10 @@ use yii\widgets\MaskedInput;
 
     <div class="row">
         <div class="col-md-4">
-            <?= $form->field($model, 'child_name', ['enableAjaxValidation' => true])->textInput() ?>
+            <?= $form->field($model, 'child_name', ['enableAjaxValidation' => true])->textInput(['placeholder' => Yii::t('app', 'Child name')]) ?>
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'parents_name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'parents_name')->textInput(['placeholder' => Yii::t('app', 'Parent name'), 'maxlength' => true]) ?>
         </div>
         <div class="col-md-4">
             <?=
@@ -28,7 +28,7 @@ use yii\widgets\MaskedInput;
                     'clientOptions' => [
                         'removeMaskOnSubmit' => true,
                     ]
-                ])->label(Yii::t('app', 'Phone'));
+                ])->textInput(['placeholder' => Yii::t('app', 'Phone')])->label(Yii::t('app', 'Phone'));
             ?>
         </div>
     </div>
@@ -37,14 +37,14 @@ use yii\widgets\MaskedInput;
                         
         <div class="col-md-6">
             <div>
-                <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Email')]) ?>
             </div>
             <div>
                 <? $model->birthday = Yii::$app->formatter->asDate($model->birthday, 'php:d.m.Y'); ?>
                 <?=
                     $form->field($model, 'birthday')->widget(MaskedInput::className(), [
                         'mask' => '99.99.9999',
-                    ])->label(Yii::t('app', 'Date of birthday'));
+                    ])->textInput(['placeholder' => Yii::t('app', 'Date of birthday')])->label(Yii::t('app', 'Date of birthday'));
                 ?>
             </div>
         </div>
