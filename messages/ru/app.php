@@ -154,4 +154,7 @@ return [
 
     'Nothing found' => 'Ничего не найдено',
     'Student list' => 'Список учеников',
+
+    'Message from site' => 'Сообщения с сайта',
+    'Page' => 'Страница',
 ];

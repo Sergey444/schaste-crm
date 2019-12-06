@@ -59,7 +59,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                 ],
                 ['attribute' => 'date_of_birthday', 'format' => ['date', 'php:d.m.Y']],
-                'phone',
+                // 'phone',
+                [
+                    'attribute' => 'phone',
+                    'value' =>  function ($data) {
+                        return Yii::$app->formatter->asPhone($data->phone);
+                    }
+                ],
                 [
                     'attribute'=>'teacher',
                     'format'=>'raw',
