@@ -15,11 +15,9 @@ use app\models\Customer;
 use app\models\Group;
 use app\models\Profile;
 
-use app\models\Sticker;
-
 use Yii;
 
-class JournalController extends \yii\web\Controller
+class JournalDevController extends \yii\web\Controller
 {
 
     /**
@@ -38,17 +36,13 @@ class JournalController extends \yii\web\Controller
             //         ],
             //     ]
             // ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'get-customers' => ['POST'],
-                    'save-class' => ['POST'],
-                    
-                    'set-event' => ['POST'],
-                    'set-teacher' => ['POST'],
-                    'set-program' => ['POST'],
-                ],
-            ],
+            // 'verbs' => [
+            //     'class' => VerbFilter::className(),
+            //     'actions' => [
+            //         'get-customers' => ['POST'],
+            //         // 'get-programs' => ['POST']
+            //     ],
+            // ],
         ];
     }
 
@@ -61,10 +55,10 @@ class JournalController extends \yii\web\Controller
     /**
      * 
      */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+    // public function actionIndex()
+    // {
+    //     return $this->render('index');
+    // }
 
     /**
      * Get programs
@@ -72,6 +66,8 @@ class JournalController extends \yii\web\Controller
      */
     public function actionGetPrograms() 
     {
+
+        header('Access-Control-Allow-Origin: *');
         $programs = ArrayHelper::toArray( Program::find()->all() );
         return Json::encode($programs);
     }
@@ -82,6 +78,8 @@ class JournalController extends \yii\web\Controller
      */
     public function actionGetGroups() 
     {
+        header('Access-Control-Allow-Origin: *');
+        //->joinWith('customers.customer')->asArray()
         $groups = ArrayHelper::toArray( Group::find()->joinWith('customers.customer')->asArray()->all() );
         return Json::encode($groups);
     }
@@ -92,6 +90,7 @@ class JournalController extends \yii\web\Controller
      */
     public function actionGetTeachers() 
     {
+        header('Access-Control-Allow-Origin: *');
         $teachers = ArrayHelper::toArray( Profile::find()->where(['teacher' => 1])->all() );
         return Json::encode($teachers);
     }
@@ -102,9 +101,11 @@ class JournalController extends \yii\web\Controller
      */
     public function actionGetCustomers()
     {
-        $customerName = Yii::$app->request->post('customer_name');
+        header('Access-Control-Allow-Origin: *');
+        $customerName = Yii::$app->request->get('customer_name');
         // Поиск клиентов для добавления в заказ ajax
         if (isset($customerName)) {
+            // return  $customerName;
             $result = htmlspecialchars( $customerName ) == '' ? 'Не найдено' : $customerName;
             $customers = Customer::find()->filterWhere(['like', 'child_name', $result])->limit(50)->all();
             return Json::encode(ArrayHelper::toArray($customers)) ;
@@ -118,6 +119,7 @@ class JournalController extends \yii\web\Controller
      */
     public function actionGetEvents() 
     {
+        header('Access-Control-Allow-Origin: *');
         $request = Yii::$app->request->get();
         $start = strtotime($request['start']);
         $end = strtotime($request['end']);
@@ -137,8 +139,9 @@ class JournalController extends \yii\web\Controller
      */
     public function actionSaveClass()
     {
+        header('Access-Control-Allow-Origin: *');
         $result = array();
-        $class = Json::decode(Yii::$app->request->post('obj'));
+        $class = Json::decode(Yii::$app->request->get()['obj']);
 
         if ($class['delCustomers']) {
             $result['delete'] = $this->deleteEventCustomer($class['delCustomers']);
@@ -175,7 +178,8 @@ class JournalController extends \yii\web\Controller
      */
     public function actionSetTeacher()
     {
-        $event = Yii::$app->request->post();
+        header('Access-Control-Allow-Origin: *');
+        $event = Yii::$app->request->get();
 
         $model = $this->findModel($event['id']);
         $model->teacher_id = $event['teacher_id'];
@@ -192,7 +196,8 @@ class JournalController extends \yii\web\Controller
      */
     public function actionSetProgram()
     {
-        $event = Yii::$app->request->post();
+        header('Access-Control-Allow-Origin: *');
+        $event = Yii::$app->request->get();
 
         $model = $this->findModel($event['id']);
         $model->title = $event['title'];
@@ -212,7 +217,9 @@ class JournalController extends \yii\web\Controller
      */
     public function actionSetEvent()
     {
-        $event = Yii::$app->request->post();
+        header('Access-Control-Allow-Origin: *');
+        $event = Yii::$app->request->get();
+
         if (intVal($event['id']) > 0 ) {
             $model = $this->findModel($event['id']);
         } else {
@@ -225,6 +232,7 @@ class JournalController extends \yii\web\Controller
             return Json::encode(ArrayHelper::toArray( 
                 Event::find()->where(['id' => $model->id])->with(['customers.customer', 'teacher'])->asArray()->one()
             ));
+            
         }
         return 0;
     }
@@ -234,7 +242,8 @@ class JournalController extends \yii\web\Controller
      */
     public function actionDeleteEvent()
     {
-        $id = Yii::$app->request->post('id') ?? false;
+        header('Access-Control-Allow-Origin: *');
+        $id = Yii::$app->request->get()['id'] ?? false;
         if ($id) {
             return Json::encode($this->findModel($id)->delete());
         }
@@ -268,68 +277,5 @@ class JournalController extends \yii\web\Controller
 
     
 
-    /**
-     * 
-     * 
-     * 
-     * STICKERS
-     */
-
-     public function actionGetStickers() 
-     {
-        header('Access-Control-Allow-Origin: *');
-        return Json::encode(ArrayHelper::toArray( 
-            Sticker::find()->asArray()->all()
-        ));
-     }
-
-     public function actionSetSticker()
-     {
-        header('Access-Control-Allow-Origin: *');
-        $sticker = Yii::$app->request->get();
-
-        $model = Sticker::findOne($sticker['id']);
-
-        $model->name = $sticker['name'];
-        $model->left = $sticker['left'];
-        $model->top = $sticker['top'];
-        $model->description = $sticker['description'];
-        $model->wide = $sticker['wide'];
-        $model->ready = $sticker['ready'];
-        $model->color = '#' . $sticker['color'];
-
-        if ($model->update(false)) {
-            return 1;
-        }
-        return 0;
-
-     }
-
-     public function actionCreateSticker()
-     {
-        header('Access-Control-Allow-Origin: *');
-        $sort = Yii::$app->request->get('sort');
-
-        $model = new Sticker();
-        $model->name = 'Новая заметка';
-        $model->color = '#337ab7';
-        $model->sort = $sort;
-        $model->left = 0;
-        $model->top = 0;
-        $id = $model->save();
-
-        return Json::encode( $model );
-     }
-
-    public function actionDeleteSticker()
-    {
-        header('Access-Control-Allow-Origin: *');
-
-        $id = Yii::$app->request->get('id');
-        if (Sticker::findOne($id)->delete()) {
-            return 1;
-        }
-        return 0;
-    }
 
 }

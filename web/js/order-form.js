@@ -41,6 +41,7 @@
 }());
 
 
+
 /**
  * 
  */
@@ -100,7 +101,6 @@
             url: "/order/get-customers",
             data: "customer_name=" + value,
             success: function(msg){
-                // console.log(msg);
                 drawSelect( JSON.parse(msg), value );
             },
             error: function (err, err1) {

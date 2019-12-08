@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-$this->title = Yii::t('app', 'Contacts');
+$this->title = Yii::t('app', 'Journal');
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerJsFile('@web/calendar/js/chunk.js');
