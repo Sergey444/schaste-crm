@@ -54,7 +54,8 @@ class SignupForm extends Model
             ['status', 'integer'],
             ['name', 'required'],
 
-            [['user_id', 'phone'], 'integer'],
+            ['phone', 'safe'],
+            [['user_id'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],
             [['date_of_birthday'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_of_birthday'],
         ];
@@ -110,9 +111,9 @@ class SignupForm extends Model
                 ['user' => $user]
             )
             // ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setFrom(['support@schaste-club.ru' => 'Support application crm'])
+            ->setFrom(['support@schaste-club.ru' => Yii::$app->name])
             ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->setSubject('Email зарегистрирован в приложении клуба' )
             ->send();
     }
 }
