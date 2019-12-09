@@ -45,6 +45,12 @@ class MessageFromSiteController extends Controller
         ];
     }
 
+    public function beforeAction($action)
+    {
+        $this->enableCsrfValidation = false;
+        return parent :: beforeAction($action);
+    }
+
     /**
      * Lists all MessageFromSite models.
      * @return mixed
@@ -82,14 +88,11 @@ class MessageFromSiteController extends Controller
     {
 
         header('Access-Control-Allow-Origin: *');
-
         $request = Yii::$app->request->getBodyParams();
-
         foreach ($request as $key => $value) {
             $request = json_decode($key);
             break;
         }
-
 
         $this->sendEmail($request);
 
@@ -168,16 +171,16 @@ class MessageFromSiteController extends Controller
      * @param integer $lastId
      * @return count added string
      */
-    protected function sendEmail($request) 
+    protected function sendEmail($request)
     {
         $phone = $request->phone ? $request->phone : 'не указан';
         $email = $request->email ? $request->email : 'не указан';
-        $message  =$request->message ? $request->message : 'не заполнено';
+        $message = $request->message ? $request->message : 'не заполнено';
         $html = 'Форма: '. $request->title .'<br>'.
                 'Телефон: '. $phone .'<br>'.
                 'Email: '. $email .'<br>'.
                 'Сообщение: '.$message;
-                
+
 
         return Yii::$app->mailer->compose()
                 ->setFrom(['info@schaste-club.ru' => 'Детский клуб счастье'])
