@@ -10,6 +10,9 @@ return [
     'Login' => 'Вход',
     'Logout' => 'Выход',
     'Find' => 'Поиск',
+    'Signup' => 'Регистрация',
+    'To signup' => 'Зарегистрироваться',
+    'To login' => 'Войти',
 
     'Active' => 'Активен',
     'Deactivated' => 'Не активен',
@@ -158,5 +161,8 @@ return [
     'Message from site' => 'Сообщения с сайта',
     'Page' => 'Страница',
 
-    'Your email has been confirmed!' => 'Ваш email был успешно подтверждён'
+
+    'Your email has been confirmed!' => 'Ваш email был успешно подтверждён',
+    'Please fill out the following fields to signup' => 'Пожалуйста заполните следующие поля для регистрации',
+    'Please fill out the following fields to login' => 'Пожалуйста заполните следующие поля для входа в приложение',
 ];

@@ -55,7 +55,7 @@ class Profile extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['phone'], 'safe'],
-            [['teacher'], 'boolean'],
+            [['teacher'], 'default', 'value'=> 1],
             [['color'], 'default', 'value'=> '#fe17bf'],
             [['user_id', 'created_at', 'updated_at'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],

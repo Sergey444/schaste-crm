@@ -7,33 +7,32 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = Yii::t('app', 'Registration');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to signup:</p>
+    <p><?= Yii::t('app', 'Please fill out the following fields to signup') ?>:</p>
 
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+        <div class="bg-white">
+            <div class="col-lg-5">
+                <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?//= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'email')->textInput()->label(Yii::t('app', 'Email')) ?>
 
-                <?= $form->field($model, 'email') ?>
+                    <?= $form->field($model, 'name')->textInput()->label(Yii::t('app', 'Name')) ?>
 
-                <?= $form->field($model, 'name') ?>
+                    <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
 
-                <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
+                    <?= $form->field($model, 'password_repeat')->passwordInput()->label(Yii::t('app', 'Password repeat')) ?>
 
-                <?= $form->field($model, 'password_repeat')->passwordInput()->label(Yii::t('app', 'Password_repeat')) ?>
+                    <div class="form-group">
+                        <?= Html::submitButton(Yii::t('app', 'To signup'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    </div>
 
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
+            </div>
         </div>
     </div>
 </div>

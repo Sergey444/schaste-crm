@@ -28,22 +28,22 @@ class JournalController extends \yii\web\Controller
     public function behaviors()
     {
         return [
-            // 'access' => [
-            //     'class' => AccessControl::className(),
-            //     'rules' => [
-            //         [
-            //             'actions' => [],
-            //             'allow' => true,
-            //             'roles' => ['@'],
-            //         ],
-            //     ]
-            // ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'get-customers' => ['POST'],
                     'save-class' => ['POST'],
-                    
+
                     'set-event' => ['POST'],
                     'set-teacher' => ['POST'],
                     'set-program' => ['POST'],
@@ -59,7 +59,7 @@ class JournalController extends \yii\web\Controller
     }
 
     /**
-     * 
+     *
      */
     public function actionIndex()
     {
@@ -70,7 +70,7 @@ class JournalController extends \yii\web\Controller
      * Get programs
      * @return array json encode
      */
-    public function actionGetPrograms() 
+    public function actionGetPrograms()
     {
         $programs = ArrayHelper::toArray( Program::find()->all() );
         return Json::encode($programs);
@@ -80,7 +80,7 @@ class JournalController extends \yii\web\Controller
      * Get groups
      * @return array json encode
      */
-    public function actionGetGroups() 
+    public function actionGetGroups()
     {
         $groups = ArrayHelper::toArray( Group::find()->joinWith('customers.customer')->asArray()->all() );
         return Json::encode($groups);
@@ -90,14 +90,14 @@ class JournalController extends \yii\web\Controller
      * Get teachers
      * @return array json encode
      */
-    public function actionGetTeachers() 
+    public function actionGetTeachers()
     {
         $teachers = ArrayHelper::toArray( Profile::find()->where(['teacher' => 1])->all() );
         return Json::encode($teachers);
     }
 
     /**
-     * 
+     *
      * @return object
      */
     public function actionGetCustomers()
@@ -116,7 +116,7 @@ class JournalController extends \yii\web\Controller
      * Get Events for view to journal
      * @return array - jsone encode
      */
-    public function actionGetEvents() 
+    public function actionGetEvents()
     {
         $request = Yii::$app->request->get();
         $start = strtotime($request['start']);
@@ -154,7 +154,7 @@ class JournalController extends \yii\web\Controller
                 $model->update(false);
             }
         }
-        
+
         $model = $this->findModel($class['event_id']);
         if ($class['event_id'] && $class['addCustomers']) {
             foreach($class['addCustomers'] as $customer) {
@@ -165,13 +165,13 @@ class JournalController extends \yii\web\Controller
             }
         }
 
-        return Json::encode(ArrayHelper::toArray( 
+        return Json::encode(ArrayHelper::toArray(
             Event::find()->where(['id' => $model->id])->with(['customers.customer', 'teacher'])->asArray()->one()
         ));
     }
 
     /**
-     * 
+     *
      */
     public function actionSetTeacher()
     {
@@ -180,7 +180,7 @@ class JournalController extends \yii\web\Controller
         $model = $this->findModel($event['id']);
         $model->teacher_id = $event['teacher_id'];
         if ($model->update(false)) {
-            return Json::encode(ArrayHelper::toArray( 
+            return Json::encode(ArrayHelper::toArray(
                 Event::find()->where(['id' => $model->id])->with(['customers.customer', 'teacher'])->asArray()->one()
             ));
         }
@@ -188,7 +188,7 @@ class JournalController extends \yii\web\Controller
     }
 
     /**
-     * 
+     *
      */
     public function actionSetProgram()
     {
@@ -198,17 +198,17 @@ class JournalController extends \yii\web\Controller
         $model->title = $event['title'];
         $model->program_id = $event['program_id'];
         if ($model->update(false)) {
-            return Json::encode(ArrayHelper::toArray( 
+            return Json::encode(ArrayHelper::toArray(
                 Event::find()->where(['id' => $model->id])->with(['customers.customer', 'teacher'])->asArray()->one()
             ));
         }
         return 0;
     }
-    
-    
+
+
     /**
      * Create or Update Event model if request has id
-     * @return mixed json|integer 
+     * @return mixed json|integer
      */
     public function actionSetEvent()
     {
@@ -222,7 +222,7 @@ class JournalController extends \yii\web\Controller
             }
         }
         if ($model->upload( $event ) && $model->save()) {
-            return Json::encode(ArrayHelper::toArray( 
+            return Json::encode(ArrayHelper::toArray(
                 Event::find()->where(['id' => $model->id])->with(['customers.customer', 'teacher'])->asArray()->one()
             ));
         }
@@ -230,7 +230,7 @@ class JournalController extends \yii\web\Controller
     }
 
     /**
-     * 
+     *
      */
     public function actionDeleteEvent()
     {
@@ -260,25 +260,25 @@ class JournalController extends \yii\web\Controller
     * @param array $ids
     * @return count deleted strings
     */
-    private function deleteEventCustomer($ids) 
+    private function deleteEventCustomer($ids)
     {
         return Yii::$app->db->createCommand()->delete(EventCustomer::tableName(), ['id' => $ids], $params = [])->execute();
     }
 
 
-    
+
 
     /**
-     * 
-     * 
-     * 
+     *
+     *
+     *
      * STICKERS
      */
 
-     public function actionGetStickers() 
+     public function actionGetStickers()
      {
         header('Access-Control-Allow-Origin: *');
-        return Json::encode(ArrayHelper::toArray( 
+        return Json::encode(ArrayHelper::toArray(
             Sticker::find()->asArray()->all()
         ));
      }
