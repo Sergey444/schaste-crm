@@ -74,11 +74,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            <?$programs = \yii\helpers\ArrayHelper::map(\app\models\Program::find()->all(), 'id', 'name');?>
-            <?= $form->field($model, 'program_id')->dropDownList($programs, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <?= $form->field($model, 'status')->dropDownList(  [
                                                                     1 => 'Создан заказ',
                                                                     2 => 'Заказ в работе',
@@ -89,6 +85,16 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                                                     'prompt' => 'Не установлен ...'
                                                                 ]
             ); ?>
+        </div>
+
+        <div class="col-md-3">
+            <?$programs = \yii\helpers\ArrayHelper::map(\app\models\Program::find()->all(), 'id', 'name');?>
+            <?= $form->field($model, 'program_id')->dropDownList($programs, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
+        </div>
+
+        <div class="col-md-6">
+            <?$teachers = \yii\helpers\ArrayHelper::map(\app\models\Profile::find()->where(['teacher' => 1])->all(), 'id', 'fullName');?>
+            <?= $form->field($model, 'teacher_id')->dropDownList($teachers, ['prompt' => Yii::t('app', 'Choose teacher ...')]) ?>
         </div>
     </div>
 

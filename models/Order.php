@@ -8,6 +8,7 @@ use yii\behaviors\TimestampBehavior;
 use app\models\Program;
 use app\models\Customer;
 use app\models\PaymentIn;
+use app\models\Profile;
 
 use yii\validators\Validator;
 /**
@@ -132,6 +133,7 @@ class Order extends \yii\db\ActiveRecord
             'date_payment' => Yii::t('app', 'Date Of Payment'),
             'date_end' => Yii::t('app', 'Date End'),
             'program_id' => Yii::t('app', 'Program'),
+            'teacher_id' => Yii::t('app', 'Teacher'),
             'customer_new_name' => Yii::t('app', 'Name'),
             'customer_id' => Yii::t('app', 'Customer'),
             'created_at' => Yii::t('app', 'Created At'),
@@ -197,6 +199,15 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Program::className(), ['id' => 'program_id']);
     }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTeacher() 
+    {
+        return $this->hasOne(Profile::className(), ['id' => 'teacher_id']);
+    }
+
 
 
     /**

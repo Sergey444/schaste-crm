@@ -165,4 +165,6 @@ return [
     'Your email has been confirmed!' => 'Ваш email был успешно подтверждён',
     'Please fill out the following fields to signup' => 'Пожалуйста заполните следующие поля для регистрации',
     'Please fill out the following fields to login' => 'Пожалуйста заполните следующие поля для входа в приложение',
+
+    'Class information' => 'Информация о предстоящих занятиях',
 ];

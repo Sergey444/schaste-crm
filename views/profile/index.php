@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
    
     <div class="bg-white">
         <table class="table table-bordered">
-            <caption><?= Yii::t('app', 'Company information')?></caption>
+            <caption><?= Yii::t('app', 'Class information')?></caption>
             <tbody>
                 <tr>
                     <td><?//= Yii::t('app', 'Company name')?>:</td>
