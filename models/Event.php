@@ -35,7 +35,7 @@ class Event extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Event';
+        return 'event';
     }
 
      /**
@@ -79,10 +79,10 @@ class Event extends \yii\db\ActiveRecord
     }
 
     /**
-     * 
+     *
      * {@inheritdoc}
      */
-    public function upload($event) 
+    public function upload($event)
     {
         $this->title = $event['title'];
         $this->start = intVal($event['start']) / 1000;
@@ -120,7 +120,7 @@ class Event extends \yii\db\ActiveRecord
     * @param array $ids
     * @return count deleted records
     */
-    private function deleteRelatedData($ids) 
+    private function deleteRelatedData($ids)
     {
         return Yii::$app->db->createCommand()->delete(EventCustomer::tableName(), ['event_id' => $ids], $params = [])->execute();
     }
@@ -129,23 +129,23 @@ class Event extends \yii\db\ActiveRecord
      * @param array [[event_id, customer_id], ...]
      * @return count added string
      */
-    public function saveRelatedData($arr) 
+    public function saveRelatedData($arr)
     {
-        return Yii::$app->db->createCommand()->batchInsert('event_customer', ['event_id', 'customer_id'], $arr)->execute(); 
+        return Yii::$app->db->createCommand()->batchInsert('event_customer', ['event_id', 'customer_id'], $arr)->execute();
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getCustomers()
-    {  
+    {
        return $this->hasMany(EventCustomer::className(), ['event_id' => 'id']);
     }
 
      /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTeacher() 
+    public function getTeacher()
     {
         return $this->hasOne(Profile::className(), ['id' => 'teacher_id']);
     }

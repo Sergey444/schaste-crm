@@ -15,7 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $city
  * @property string $comments
  * @property string $birthday
- * 
+ *
  * @property int $created_at
  * @property int $updated_at
  */
@@ -23,7 +23,7 @@ class Customer extends \yii\db\ActiveRecord
 {
 
     /**
-     * @var 
+     * @var
      */
     public $term;
 
@@ -32,7 +32,7 @@ class Customer extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Customer';
+        return 'customer';
     }
 
     /**
@@ -85,7 +85,7 @@ class Customer extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function getOrders()
-    {  
+    {
        return $this->hasMany(Order::className(), ['customer_id' => 'id']);
     }
 }

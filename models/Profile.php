@@ -7,8 +7,8 @@ use yii\behaviors\TimestampBehavior;
 use app\models\User;
 
 use yii\helpers\FileHelper;
-use yii\imagine\Image;  
-// use Imagine\Image\Box;  
+use yii\imagine\Image;
+// use Imagine\Image\Box;
 /**
  * This is the model class for table "Profile".
  *
@@ -25,7 +25,7 @@ use yii\imagine\Image;
 class Profile extends \yii\db\ActiveRecord
 {
     /**
-     * @var 
+     * @var
      */
     public $img;
 
@@ -34,7 +34,7 @@ class Profile extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Profile';
+        return 'profile';
     }
 
     /**
@@ -89,9 +89,9 @@ class Profile extends \yii\db\ActiveRecord
     }
 
     /**
-     * Сохраняем файл 
-     * 
-     * @param Object file 
+     * Сохраняем файл
+     *
+     * @param Object file
      * @return String path || false
      */
     public function upload($photo)
