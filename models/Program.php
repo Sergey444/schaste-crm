@@ -50,8 +50,8 @@ class Program extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['comment'], 'string'],
-            [['created_at', 'updated_at'], 'integer'],
-            [['name', 'one_price'], 'string', 'max' => 255],
+            [['one_price', 'created_at', 'updated_at'], 'integer'],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 
