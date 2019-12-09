@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     '8' => 'Пробный период',
@@ -18,7 +18,7 @@ return [
     'Date End' => 'Дата конца',
 
     'My profile' => 'Мой профиль',
-    
+
     'Update' => 'Редактировать',
     'Update profile' => 'Редактировать профиль',
     'Save' => 'Сохранить',
@@ -67,7 +67,7 @@ return [
     'Company count people' => 'Количество сотрудников',
     'Company open year' => 'Год основания компании',
 
-    'Remember Me' => 'Запомнить меня', 
+    'Remember Me' => 'Запомнить меня',
     'Please fill out the following fields to login:' => 'Пожалуйста, заполните следующие поля для входа:',
 
     'Are you sure you want to delete this item?' => 'Вы уверены что хотите удалить эту запись?',
@@ -86,7 +86,7 @@ return [
     'Create Order' => 'Создать заказ',
     'Bill Number' => 'Номер счёта',
     'Service' => 'Услуга',
-    'Contact' => 'Контакт', 
+    'Contact' => 'Контакт',
     'Unit Price' => 'Цена за единицу',
     'Count' => 'Количество',
     'Prepayment' => 'Предоплата',
@@ -157,4 +157,6 @@ return [
 
     'Message from site' => 'Сообщения с сайта',
     'Page' => 'Страница',
+
+    'Your email has been confirmed!' => 'Ваш email был успешно подтверждён'
 ];

@@ -6,4 +6,11 @@
     <br>
 </p>
 
+## Команды
+```bash
+  composer install #установка пакетов
+  php yii migrate #выполнение миграций
+  yii migrate --migrationPath=@yii/rbac/migrations/ #выполнение миграций RBAC
+  rbac init #инициализация ролей
+```
 

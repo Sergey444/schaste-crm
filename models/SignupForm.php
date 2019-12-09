@@ -28,7 +28,7 @@ class SignupForm extends Model
 
     public $user;
 
-    
+
 
     /**
      * {@inheritdoc}
