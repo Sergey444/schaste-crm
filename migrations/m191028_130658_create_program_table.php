@@ -15,7 +15,7 @@ class m191028_130658_create_program_table extends Migration
         $this->createTable('{{%program}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
-            'one_price' => $this->string(),
+            'one_price' => $this->integer(),
             'comment' => $this->text(),
 
             'created_at' => $this->integer()->notNull(),
