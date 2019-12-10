@@ -19,7 +19,7 @@ use yii\helpers\Html;
 
             <tr>
                 <td><?= Yii::t('app', 'Teacher') ?></td>
-                <td><?= $model->teacher->id ? Html::a($model->teacher->fullName, ['customer/view', 'id' => $model->teacher->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
+                <td><?= $model->teacher->id ? Html::a($model->teacher->fullName, ['profile/view', 'id' => $model->teacher->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
             </tr>
 
             <tr>
