@@ -249,7 +249,7 @@ html .add-photo-input {
 
 .rs-layout {
     display: flex;
-    padding: 70px 15px 20px; 
+    padding: 70px 15px 20px;
 }
 .rs-sidebar {
     min-width: 240px;
@@ -287,7 +287,7 @@ html .add-photo-input {
     background-color: rgba(255, 214, 214, 0.45);
 }
 .payment-description {
-    float: right; 
+    float: right;
     opacity: 0.8;
 }
 
@@ -366,14 +366,14 @@ html .add-photo-input {
     .rs-left-menu .link-bottom--site {
         bottom: 130px;
     }
-    
-    .fas {
+
+    .fas, .far {
         min-width: 31px;
     }
 }
 
 @media (max-width: 767px) {
-    /* .grid-view tr th:not(:nth-child(2)):not(:nth-child(3)):not(:last-child), 
+    /* .grid-view tr th:not(:nth-child(2)):not(:nth-child(3)):not(:last-child),
     .grid-view tr td:not(:nth-child(2)):not(:nth-child(3)):not(:last-child) {
         display: none;
     } */
@@ -389,13 +389,13 @@ html .add-photo-input {
     .rs-time-nav li {
         display: block;
     }
-    
+
     .rs-btn__time {
         display: block;
         margin-bottom: 20px;
     }
     .d-flex {
-        -webkit-flex-wrap: wrap; 
+        -webkit-flex-wrap: wrap;
         flex-wrap: wrap;
     }
     .u-info-block table td:first-child {
@@ -413,7 +413,7 @@ html .add-photo-input {
         margin-left: 0;
         margin-bottom: 20px;
     }
-    
+
 }
 
 
@@ -425,8 +425,8 @@ html .add-photo-input {
 .rs-navbar-left li a:hover, .rs-navbar-left li.active a {
     color: #fe17bf;
 }
-.navbar-inverse .navbar-nav > .active > a, 
-.navbar-inverse .navbar-nav > .active > a:hover, 
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
     color: #fe17bf;
     border: 1px dashed #fe17bf;
@@ -449,7 +449,7 @@ html .add-photo-input {
 .navbar-inverse .navbar-toggle:hover .icon-bar,
 .navbar-inverse .navbar-toggle:focus .icon-bar {
     background-color: #fff;
-} 
+}
 
 .navbar-inverse {
     background-color: rgb(255, 255, 255);
