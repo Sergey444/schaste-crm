@@ -59,7 +59,7 @@ class Profile extends \yii\db\ActiveRecord
             [['color'], 'default', 'value'=> '#fe17bf'],
             [['user_id', 'created_at', 'updated_at'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],
-            [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxSize' => 1024 * 1024 * 2],
+            [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, HEVC, HEIF', 'maxSize' => 1024 * 1024 * 2],
             [['photo', 'address', 'color'], 'string'],
             [['date_of_birthday'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_of_birthday'],
         ];
