@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_start',
             'date_end',
             // 'teacher.name',
-            'teacher_id',
+            'teacher.fullName',
             'program.name',
             [
                 'attribute' => 'customer.child_name',

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 ?>
 
-<div class="bg-white"> 
+<div class="bg-white">
     <table class="table">
         <caption class="row"> <span class="col-xs-7"><?= $model->name ?></span> <span class="col-xs-5" style="text-align: right;"><?= Yii::$app->formatter->asDate($model->created_at, 'php:d.m.Y H:i') ?></span></caption>
         <thead></thead>
@@ -16,7 +16,12 @@ use yii\helpers\Html;
                 <td><?= Yii::t('app', 'Child name') ?></td>
                 <td><?= $model->customer->child_name ? Html::a($model->customer->child_name, ['customer/view', 'id' => $model->customer->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
             </tr>
-            
+
+            <tr>
+                <td><?= Yii::t('app', 'Teacher') ?></td>
+                <td><?= $model->teacher->id ? Html::a($model->teacher->fullName, ['customer/view', 'id' => $model->teacher->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
+            </tr>
+
             <tr>
                 <td><?= Yii::t('app', 'Program') ?></td>
                 <td><?= $model->program->name ? Html::a($model->program->name, ['program/view', 'id' => $model->program->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>' ?></td>
@@ -34,18 +39,18 @@ use yii\helpers\Html;
                 <td><?= Yii::t('app', 'Status') ?></td>
                 <td><?= $model->status ?? '<span class="not-set">(не задано)</span>' ?></td>
             </tr>
-            
+
         </tbody>
     </table>
     <div style="text-align: right;">
         <?= Html::a(
-            '<span class="glyphicon glyphicon-eye-open"></span>', 
+            '<span class="glyphicon glyphicon-eye-open"></span>',
             ['view', 'id' => $model->id],
             ['data-pjax' => 0]
         )?>
 
         <?= Html::a(
-            '<span class="glyphicon glyphicon-pencil"></span>', 
+            '<span class="glyphicon glyphicon-pencil"></span>',
             ['update', 'id' => $model->id],
             ['data-pjax' => 0]
         )?>
