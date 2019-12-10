@@ -286,7 +286,7 @@ class JournalController extends \yii\web\Controller
      public function actionSetSticker()
      {
         header('Access-Control-Allow-Origin: *');
-        $sticker = Yii::$app->request->get();
+        $sticker = Yii::$app->request->post();
 
         $model = Sticker::findOne($sticker['id']);
 
