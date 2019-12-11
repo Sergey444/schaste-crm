@@ -88,7 +88,7 @@ class MessageFromSiteController extends Controller
     {
 
         header('Access-Control-Allow-Origin: *');
-        $request = Yii::$app->request->getBodyParams();
+        $request = Yii::$app->request->post();
         foreach ($request as $key => $value) {
             $request = json_decode($key);
             break;
