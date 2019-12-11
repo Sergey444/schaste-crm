@@ -103,12 +103,18 @@ class Profile extends \yii\db\ActiveRecord
         $url = $path.'/'.$fileName;
         $thumbUrl = $path.'/thumb-40/'.$fileName;
 
+       
+
         if (FileHelper::createDirectory($path)) {
 
                 file_exists($this->photo) && unlink($this->photo);
                 
                 $resImage = Image::autorotate($photo->tempName);
-                            Image::resize($resImage, 200, 200, false, false)->save(Yii::getAlias('@webroot/'.$url));
+            
+                $metadata = $resImage->metadata();
+                $metadata->offsetSet('ifd0.Orientation', 1);
+                $resImage->metadata($metadata);
+                Image::resize($resImage, 200, 200, false, false)->save(Yii::getAlias('@webroot/'.$url));
                             //Image::thumbnail($resImage, 40, 40)->save(Yii::getAlias('@webroot/'.$thumbUrl ));
                          
                 $this->photo = $url;
