@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'name',
                     'format' => 'raw',
                     'value' => function ($data) {
-                        return Html::a( $data->name, ['order/view/', 'id' => $data->order_id], [ 'data-pjax' => 0]);
+                        return $data->order_id ? Html::a( $data->name, ['order/view/', 'id' => $data->order_id], [ 'data-pjax' => 0]) : $data->name;
                     }
                 ],
                 'sum',
