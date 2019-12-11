@@ -25,6 +25,7 @@ class SignupForm extends Model
     public $date_of_birthday;
     public $phone;
     public $user_id;
+    public $teacher;
 
     public $user;
 
@@ -55,7 +56,7 @@ class SignupForm extends Model
             ['name', 'required'],
 
             ['phone', 'safe'],
-            [['user_id'], 'integer'],
+            [['user_id', 'teacher'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],
             [['date_of_birthday'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_of_birthday'],
         ];
@@ -92,6 +93,7 @@ class SignupForm extends Model
         $personal->date_of_birthday = $this->date_of_birthday ? strtotime($this->date_of_birthday) : null;
         $personal->phone = $this->phone ? $this->phone : null;
         $personal->user_id = $user->id;
+        $personal->teacher = $this->teacher;
         $personal->save();
 
         return $this->id = $personal->id;

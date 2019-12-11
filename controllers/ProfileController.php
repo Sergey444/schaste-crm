@@ -85,7 +85,7 @@ class ProfileController extends Controller
         $model = new SignupForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'User created successfully');
+            Yii::$app->session->setFlash('success', Yii::t('app', 'User created successfully'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -121,7 +121,7 @@ class ProfileController extends Controller
         $model = new SignupForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'User created successfully');
+            Yii::$app->session->setFlash('success', Yii::t('app', 'User created successfully'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -144,7 +144,7 @@ class ProfileController extends Controller
         $user = new UpdateUserForm($model->user_id);
 
         if ($this->update($id, $model, $user)) {
-            Yii::$app->session->setFlash('success', 'User updated successfully');
+            Yii::$app->session->setFlash('success', Yii::t('app', 'User updated successfully'));
             return $this->redirect(['update-user', 'id' => $model->id]);
         };
         

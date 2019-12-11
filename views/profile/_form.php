@@ -59,7 +59,10 @@ use yii\widgets\MaskedInput;
             ])->label(Yii::t('app', 'Phone'));
         ?>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-4">
+                <?= $form->field($model, 'teacher')->dropDownList([1 => 'Да'], ['prompt' => Yii::t('app', 'Нет')]) ?>
+            
+        </div>
     </div>
 
     <div class="form-group">

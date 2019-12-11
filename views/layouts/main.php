@@ -126,11 +126,16 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+<footer class="footer ">
+    <div class="container-fluid">
+        <div class="footer__content mg-bottom">
+            <div class="pull-left">&copy; <?=Yii::$app->name .' '. date('Y') ?></div>
+            <div class="pull-right">
+                <div>
+                    <?= Yii::t('app', 'Support email') ?>: <a href="mailto:support@schaste-club.ru">support@schaste-club.ru</a>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
 

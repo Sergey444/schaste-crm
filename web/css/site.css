@@ -508,3 +508,22 @@ input[aria-required="true"] + .help-block::before {
     }
 }
 /*/menu left*/
+
+.footer__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.circle {
+    width: 8px;
+    height: 8px;
+    display: block;
+    background-color: #5cb85c;
+    border-radius: 50%;
+    margin-top: 6px;
+}
+
+.circle--red {
+    background-color: red;
+}

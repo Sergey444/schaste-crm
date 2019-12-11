@@ -62,13 +62,16 @@ use yii\helpers\Url;
             </div>
 
             <div class="row">
-               
+                
+                <?if ($model->teacher):?>
+                    <div class="col-md-4">
+                        <?= $form->field($model, 'color')->textInput(['type' => 'color'])->label(Yii::t('app', 'Calendar color')) ?>
+                    </div>
+                <?endif?>
                 <div class="col-md-4">
-            <?if ($model->teacher):?>
-                    <?= $form->field($model, 'color')->textInput(['type' => 'color'])->label(Yii::t('app', 'Calendar color')) ?>
+                        <?= $form->field($model, 'teacher')->dropDownList([1 => 'Да'], ['prompt' => Yii::t('app', 'Нет')]) ?>
                 </div>
                 <div class="col-md-4" style="margin-top: 25px;">
-            <?endif?>
                     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
                 </div>
             </div>

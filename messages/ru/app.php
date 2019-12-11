@@ -162,10 +162,14 @@ return [
     'Page' => 'Страница',
 
 
+    'User created successfully' => 'Пользователь успешно создан',
     'User updated successfully' => 'Данные пользователя успешно обновлены',
     'Your email has been confirmed!' => 'Ваш email был успешно подтверждён',
     'Please fill out the following fields to signup' => 'Пожалуйста заполните следующие поля для регистрации',
     'Please fill out the following fields to login' => 'Пожалуйста заполните следующие поля для входа в приложение',
 
     'Class information' => 'Информация о предстоящих занятиях',
+
+    'Info email' => 'Дополнительная информация',
+    'Support email' => 'Техническая поддержка',
 ];

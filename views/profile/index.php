@@ -25,20 +25,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
         </div>
         <div class="bg-white u-info-block">
             <table class="table table-bordered">
-                <caption><?= Yii::t('app', 'Main information')?></caption>
+                <caption><?= $model->fullName//= Yii::t('app', 'Main information')?></caption>
                 <tbody>
-                    <tr>
-                        <td><?= Yii::t('app', 'Surname') ?>:</td>
-                        <td><?= $model->surname ?></td>
-                    </tr>
-                    <tr>
-                        <td><?= Yii::t('app', 'Name') ?>:</td>
-                        <td><?= $model->name ?></td>
-                    </tr>
-                    <tr>
-                        <td><?= Yii::t('app', 'Secondname') ?>:</td>
-                        <td><?= $model->secondname ?></td>
-                    </tr>
+                    
                     <tr>
                         <td><?= Yii::t('app', 'Date of birthday') ?>:</td>
                         <td><?= Yii::$app->formatter->asDate($model->date_of_birthday, 'php:d.m.Y') ?></td>
@@ -56,8 +45,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
                         <td><?= $model->address ?></td>
                     </tr>
                     <tr>
-                        <!-- <td><?//= Yii::t('app', 'Email') ?></td>
-                        <td><?//= $model->user ?></td> -->
+                        <td><?= Yii::t('app', 'Teacher') ?></td>
+                        <td><?= $model->teacher ? 'Да' : 'Нет' ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -81,12 +70,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
                         <td><?= Yii::t('app', 'Date of registration')?>:</td>
                         <td><?= Yii::$app->formatter->asDate($model->created_at, 'php:d.m.Y H:i:s')?></td>
                     </tr>
-                    <?/*if ($model->user->availability && $model->user->status === 8):?>
-                        <tr>
-                            <td><?= Yii::t('app', 'Availability')?>:</td>
-                            <td><?= Yii::$app->formatter->asDate($model->user->availability, 'php:d.m.Y') ?></td>
-                        </tr>
-                    <?endif*/?>
+                    
                 </tbody>
             </table>
         </div>
@@ -97,15 +81,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
             <caption><?= Yii::t('app', 'Class information')?></caption>
             <tbody>
                 <tr>
-                    <td><?//= Yii::t('app', 'Company name')?>:</td>
+                    <td><?//= Yii::t('app', 'Company name')?></td>
                     <td><?//= Yii::t('app', $model->user->company->name ) ?></td>
                 </tr>
                 <tr>
-                    <td><?//= Yii::t('app', 'Company count people')?>:</td>
+                    <td><?//= Yii::t('app', 'Company count people')?></td>
                     <td><?//= Yii::t('app', $model->user->company->count_people ) ?></td>
                 </tr>
                 <tr>
-                    <td><?//= Yii::t('app', 'Company open year')?>:</td>
+                    <td><?//= Yii::t('app', 'Company open year')?></td>
                     <td><?//= Yii::t('app', $model->user->company->open_year ) ?></td>
                 </tr>
             </tbody>

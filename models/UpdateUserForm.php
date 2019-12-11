@@ -36,7 +36,7 @@ class UpdateUserForm extends Model
             ['password', 'string', 'min' => 6],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
 
-            ['status', 'integer'],
+            [['status', 'teacher'], 'integer'],
         ];
     }
 

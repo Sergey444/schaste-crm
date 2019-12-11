@@ -48,7 +48,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
+                // ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'attribute' => '#',
+                    'format'=>'raw',
+                    'value' => function ($data) {
+                        return $data->user->status === 10 ? 
+                                '<span class="circle circle--green"></span>' : 
+                                '<span class="circle circle--red"></span>';
+                    }
+                ],
                 'surname',
                 'name',
                 'secondname',
@@ -69,10 +78,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute'=>'teacher',
                     'format'=>'raw',
-                    'value' => function ($data) { 
-                                $check = $data->teacher ? 'checked' : '';
-                                return '<input type="checkbox" '.$check.' value="'.$data->id.'">';
-                            }
+                    'value' => function ($data) {
+                         return $data->teacher ? 'Да' : 'Нет';
+                    }
                 ],
                 ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
                 ['attribute' => 'updated_at', 'format' => ['date', 'php:d.m.Y H:i:s']],

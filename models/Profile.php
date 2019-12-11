@@ -56,9 +56,9 @@ class Profile extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['phone'], 'safe'],
-            [['teacher'], 'default', 'value'=> 1],
+            // [['teacher'], 'default', 'value'=> 1],
             [['color'], 'default', 'value'=> '#fe17bf'],
-            [['user_id', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'teacher', 'created_at', 'updated_at'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],
             [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, HEVC, HEIF', 'maxSize' => 1024 * 1024 * 2],
             [['photo', 'address', 'color'], 'string'],
