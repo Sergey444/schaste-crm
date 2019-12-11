@@ -183,7 +183,7 @@ class MessageFromSiteController extends Controller
 
 
         return Yii::$app->mailer->compose()
-                ->setFrom(['info@schaste-club.ru' => 'Детский клуб счастье'])
+                ->setFrom(['support@schaste-club.ru' => 'Детский клуб счастье'])
                 ->setTo('info@schaste-club.ru')
                 ->setSubject('Детский клуб счастье')
                 // ->setTextBody('Текст для body')
