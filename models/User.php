@@ -7,7 +7,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use app\models\Profile;
+// use app\models\Profile;
  
 /**
  * User model

@@ -17,6 +17,7 @@ use yii\imagine\Image;
  * @property string $surname
  * @property string $name
  * @property string $secondname
+ * @property string $photo
  * @property int $date_of_birthday
  * @property int $phone
  * @property int $created_at
@@ -98,16 +99,20 @@ class Profile extends \yii\db\ActiveRecord
     {
         $path = 'uploads/'.date('Y-m');
         $fileName = Yii::$app->security->generateRandomString(8). '.' . $photo->extension; // $photo->baseName .
+        
         $url = $path.'/'.$fileName;
+        $thumbUrl = $path.'/thumb-40/'.$fileName;
 
         if (FileHelper::createDirectory($path)) {
-            $res = $photo->saveAs($url);
-            // Image::thumbnail('uploads/2/avatar.jpg', 120, 120)->save(Yii::getAlias('uploads/destination/thumb-test-image.jpg'), ['quality' => 50]);
-            if ($res) {
+
                 file_exists($this->photo) && unlink($this->photo);
+                
+                $resImage = Image::autorotate($photo->tempName);
+                            Image::resize($resImage, 200, 200, false, false)->save(Yii::getAlias('@webroot/'.$url));
+                            //Image::thumbnail($resImage, 40, 40)->save(Yii::getAlias('@webroot/'.$thumbUrl ));
+                         
                 $this->photo = $url;
                 return true;
-            }
         }
         return false;
     }

@@ -103,7 +103,6 @@ class ProfileController extends Controller
      * Displays a single Profile model.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
@@ -167,8 +166,8 @@ class ProfileController extends Controller
         $model = Profile::find()->where(['user_id' => $id])->one();
         $user = new UpdateUserForm($id);
 
-        if ($this->update($id, $model, $user, $company)) {
-            Yii::$app->session->setFlash('success', 'User updated successfully');
+        if (Yii::$app->request->post() && $this->update($id, $model, $user)) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'User updated successfully'));
             return $this->redirect(['update']);
         };
         
@@ -190,7 +189,7 @@ class ProfileController extends Controller
     {
         if ($model->load(Yii::$app->request->post())) {
             $photo = UploadedFile::getInstance($model, 'img');
-            if ($photo ) {
+            if ($photo) {
                 $model->upload($photo);
             }
             if ( $model->save() ) {
