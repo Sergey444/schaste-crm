@@ -136,19 +136,19 @@ class OrderController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * @return mixed
-     */
-    public function actionGetCustomers()
-    {
-        $customerName = Yii::$app->request->post('customer_name');
-        // Поиск клиентов для добавления в заказ ajax
-        if (Yii::$app->request->isAjax && isset($customerName)) {
-            $result =  htmlspecialchars( $customerName ) == '' ? 'Не найдено' : $customerName;
-            $customers = Customer::find()->filterWhere(['like', 'child_name', $result])->limit(50)->all();
-            return Json::encode(ArrayHelper::map($customers, 'child_name', 'id')) ;
-        }
-    }
+    // /**
+    //  * @return mixed
+    //  */
+    // public function actionGetCustomers()
+    // {
+    //     $customerName = Yii::$app->request->post('customer_name');
+    //     // Поиск клиентов для добавления в заказ ajax
+    //     if (Yii::$app->request->isAjax && isset($customerName)) {
+    //         $result =  htmlspecialchars( $customerName ) == '' ? 'Не найдено' : $customerName;
+    //         $customers = Customer::find()->filterWhere(['like', 'child_name', $result])->limit(50)->all();
+    //         return Json::encode(ArrayHelper::map($customers, 'child_name', 'id')) ;
+    //     }
+    // }
 
     /**
      * Finds the Order model based on its primary key value.

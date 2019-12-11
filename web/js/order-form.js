@@ -41,9 +41,8 @@
 }());
 
 
-
 /**
- * 
+ * Search customers
  */
 (function () {
 
@@ -80,12 +79,14 @@
     var drawSelect = function (customers, value) {
         clearId();
         closeSelect();
-        for (var key in customers) {
-            if (key === value) { 
-                return $('#order-customer_id').val( customers[key] );
+        // $('.rs-add-to-order').css('display', 'none');
+        $(customers).each(function (index, customer) {
+            if (customer.child_name === value) { 
+                return $('#order-customer_id').val( customer.id );
             }
-            $('#rs-find-block').append('<tr><td onclick="chooseCustomers(this)" class="rs-customer" data-name="customer" data-id="' + customers[key] + '">' + key + '</td></tr>');
-        }
+            // $('.rs-add-to-order').css('display', 'block');
+            $('#rs-find-block').append('<tr><td onclick="chooseCustomers(this)" class="rs-customer" data-name="customer" data-id="' + customer.id + '">' + customer.child_name + '</td></tr>');
+        });
     }
 
     /**
@@ -98,9 +99,10 @@
 
         $.ajax({
             type: "POST",
-            url: "/order/get-customers",
+            url: "/journal/get-customers",
             data: "customer_name=" + value,
             success: function(msg){
+                console.log(msg)
                 drawSelect( JSON.parse(msg), value );
             },
             error: function (err, err1) {

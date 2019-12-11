@@ -160,7 +160,8 @@ return [
 
     'Message from site' => 'Сообщения с сайта',
     'Page' => 'Страница',
-
+    'Income' => 'Поступления',
+    'Expenses' => 'Расходы',
 
     'User created successfully' => 'Пользователь успешно создан',
     'User updated successfully' => 'Данные пользователя успешно обновлены',

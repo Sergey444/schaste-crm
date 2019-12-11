@@ -367,7 +367,7 @@ html .add-photo-input {
         bottom: 130px;
     }
 
-    .fas, .far {
+    .rs-left-menu .fas, .rs-left-menu .far {
         min-width: 31px;
     }
 }

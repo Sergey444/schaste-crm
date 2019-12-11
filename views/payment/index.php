@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
 
     <div class="bg-white mg-bottom">
-        <span class="payment-description">Поступления</span>
+        <span class="payment-description"><?= Yii::t('app', 'Income') ?></span>
         <?= GridView::widget([
             'dataProvider' => $dataProviderPaymentIn,
             'tableOptions' => [
@@ -57,14 +57,21 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'columns' => [
                 // ['class' => 'yii\grid\SerialColumn'],
-                ['class' => 'yii\grid\CheckboxColumn'],
-                'name',
+                // ['class' => 'yii\grid\CheckboxColumn'],
+                [
+                    'attribute' => 'name',
+                    'format' => 'raw',
+                    'value' => function ($data) {
+                        return Html::a( $data->name, ['order/view/', 'id' => $data->order_id], [ 'data-pjax' => 0]);
+                    }
+                ],
                 'sum',
                 'type_of_pay',
                 ['attribute' => 'date_of_payment', 'format' => ['date', 'php:d.m.Y']],
 
                 [
                     'class' => 'yii\grid\ActionColumn',
+                    'template' => '{delete}',
                     'buttons' => [
                         'delete' => function ($url, $model) {
                          
@@ -90,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-md-8"></div>
             <div class="col-md-4" style="text-align: right;">
-                <?= Yii::t('app', 'Total') .': '. $searchModelPaymentIn->total ?>
+                <?= Yii::t('app', 'Total') .': '. number_format($searchModelPaymentIn->total, 0, 0, ' ') .' р.' ?>
             </div>
         </div>
         
@@ -101,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
 
     <div class="bg-white">
-        <span class="payment-description">Расходы</span>
+        <span class="payment-description"><?= Yii::t('app', 'Expenses') ?></span>
         <?= GridView::widget([
             'dataProvider' => $dataProviderPaymentOut,
             'tableOptions' => [
@@ -109,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'columns' => [
                 // ['class' => 'yii\grid\SerialColumn'],
-                ['class' => 'yii\grid\CheckboxColumn'],
+                // ['class' => 'yii\grid\CheckboxColumn'],
                 'name',
                 'sum',
                 'type_of_pay',
@@ -117,7 +124,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'class' => 'yii\grid\ActionColumn',
+                    'template' => '{delete}',
                     'buttons' => [
+
+                        'update' => false,
                         'delete' => function ($url, $model) {
                          
                             return Html::a(
@@ -141,7 +151,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-md-8"></div>
             <div class="col-md-4" style="text-align: right;">
-                <?= Yii::t('app', 'Total') .': '. $searchModelPaymentOut->total ?>
+                <?= Yii::t('app', 'Total') .': '. number_format($searchModelPaymentOut->total, 0, 0, ' ').' р.' ?>
             </div>
         </div>
     </div>

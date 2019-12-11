@@ -23,6 +23,12 @@ use app\models\Order;
  */
 class PaymentIn extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @var string
+     */
+    public $customer_name;
+    
     /**
      * {@inheritdoc}
      */

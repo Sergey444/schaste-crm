@@ -6,6 +6,9 @@ use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
 use yii\jui\DatePicker;
 
+$this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+
+
 /* @var $this yii\web\View */
 /* @var $model app\models\PaymentIn */
 /* @var $form ActiveForm */
@@ -54,11 +57,16 @@ use yii\jui\DatePicker;
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <?= $form->field($model, 'customer_id') ?>
-                </div>
-                <div class="col-md-6">
-                    <?= $form->field($model, 'order_id') ?>
+                <div class="col-md-12 rs-order__customer">
+                    <?= $form->field($model, 'customer_name', [
+                        'template' => '{label}{input}{error}
+                                        <table class="table table-hover rs-add-to-order">
+                                            <tbody id="rs-find-block" class="rs-find-block"></tbody>
+                                        </table>'
+                    ])->textInput(['id' => 'order-customer_name', 'placeholder' => Yii::t('app', 'Start typing a name...')])->label(Yii::t('app', 'Child name')) ?>
+
+                    <?= $form->field($model, 'customer_id')->hiddenInput(['id' => 'order-customer_id'])->label(false) ?>
+                    <?//= $form->field($model, 'customer_id') ?>
                 </div>
             </div>
         </div>
