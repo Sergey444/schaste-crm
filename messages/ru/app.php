@@ -117,6 +117,7 @@ return [
     'Parent name' => 'Ф.И.О родителя',
     'Teacher name' => 'Ф.И.О преподавателя',
 
+
     'Programs' => 'Программы',
     'Program' => 'Программа',
     'Program name' => 'Название программы',

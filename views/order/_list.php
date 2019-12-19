@@ -33,7 +33,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td><?= Yii::t('app', 'Sum') ?></td>
-                <td><?= $model->sum ?></td>
+                <td><?= Yii::$app->formatter->format($model->sum, ['decimal', 0]) ?> р.</td>
             </tr>
             <tr>
                 <td><?= Yii::t('app', 'Status') ?></td>

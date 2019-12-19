@@ -161,9 +161,11 @@ a.desc:after {
 .d-inline-block {
     display: inline-block!important;
 }
-
 .mg-top {
     margin-top: 20px;
+}
+.mg-top-25 {
+    margin-top: 25px;
 }
 .mg-bottom {
     margin-bottom: 20px;

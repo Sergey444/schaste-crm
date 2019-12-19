@@ -123,7 +123,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                                'data-name' => 'type_customer'
                                            ]);
                     }]
-                  ); ?>
+                  )->label(false); ?>
 
             </div>
         </div>
@@ -136,10 +136,10 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                     <div class="rs-order__new-customer tab-pane fade" id="new">
                         
                         <div class="col-md-4">
-                            <?= $form->field($model, 'customer_new_name')->textInput(['placeholder' => Yii::t('app', 'Write a name...')]) ?>
+                            <?= $form->field($model, 'customer_new_name')->textInput(['placeholder' => Yii::t('app', 'Write a name...')])->label(Yii::t('app', 'Child name')) ?>
                         </div>
                         <div class="col-md-4">
-                            <?= $form->field($model, 'parents_new_name')->textInput(['placeholder' => Yii::t('app', 'Write a name...')]) ?>
+                            <?= $form->field($model, 'parents_new_name')->textInput(['placeholder' => Yii::t('app', 'Write a name...')])->label(Yii::t('app', 'Parent name')) ?>
                         </div>
                         <div class="col-md-4">
                             <?= $form->field($model, 'customer_phone')->widget(MaskedInput::className(), [
@@ -157,7 +157,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                             <table class="table table-hover rs-add-to-order">
                                                 <tbody id="rs-find-block"></tbody>
                                             </table>'
-                        ])->textInput(['value' => $model->customer->child_name, 'placeholder' => Yii::t('app', 'Start typing a name...')]) ?>
+                        ])->textInput(['value' => $model->customer->child_name, 'placeholder' => Yii::t('app', 'Start typing a name...')])->label(Yii::t('app', 'Child name')) ?>
 
                         <?= $form->field($model, 'customer_id')->hiddenInput()->label(false) ?>
                     </div>

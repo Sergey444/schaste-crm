@@ -94,6 +94,7 @@ $config = [
         ],
         'formatter' => [
             'class' => '\app\components\FormatterHelper',
+            'thousandSeparator' => ' ',
             // 'locale' => 'en-US',
             // 'dateFormat' => 'yyyy-MM-dd',
             // 'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',

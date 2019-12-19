@@ -84,7 +84,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="bg-white">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
-            // 'filterModel' => $searchModel,
             'summary' => '<div class="summary row">
                             <div class="col-xs-8">Показаны записи <b>{begin}</b>-<b>{end}</b> из <b>{totalCount}</b></div>
                             <div class="col-xs-4 t-right">
@@ -97,16 +96,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'name',
                 'customer.child_name',
                 'unit_price',
-                'sum',
+                [
+                    'attribute' => 'sum',
+                    'format'=>['decimal', 0]
+                ],
                 'count',
                 'status',
                 ['attribute' => 'date_start', 'format' => ['date', 'php:d.m.Y']],
                 ['attribute' => 'date_end', 'format' => ['date', 'php:d.m.Y']],
-                //'service_id',
-                //'payment_id',
-                //'company_id',
-                //'created_at',
-                //'updated_at',
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],

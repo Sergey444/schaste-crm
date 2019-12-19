@@ -40,15 +40,16 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                     ['data-pjax' => 1]); ?>
 
                     <div class="row">
-                        <div class="col-xs-8">
+                        <div class="col-sm-8">
                             <div class="rs-order__customer">
                                 <div class="form-group field-order-customer_name">
                                 <?= 
+                                    Html::label(Yii::t('app', 'Child name'), 'customer_name'), 
                                     Html::input('text', 'customer_name', '', [
                                         'id' => 'order-customer_name', 
                                         'class' => 'form-control', 
                                         'placeholder' => Yii::t('app', 'Start typing a name...')
-                                    ]); 
+                                    ]);
                                 ?>
 
                                 <div class="help-block"></div>
@@ -66,8 +67,8 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-4">
-                            <?= Html::submitButton(Yii::t('app', 'Add to group'), ['class' => 'btn btn-primary d-block']) ?>
+                        <div class="col-sm-4">
+                            <?= Html::submitButton(Yii::t('app', 'Add to group'), ['class' => 'btn btn-primary d-block mg-top-25']) ?>
                         </div>
                     </div>
 

@@ -65,7 +65,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $data->order_id ? Html::a( $data->name, ['order/view/', 'id' => $data->order_id], [ 'data-pjax' => 0]) : $data->name;
                     }
                 ],
-                'sum',
+                [
+                    'attribute' => 'sum',
+                    'format'=>['decimal', 0]
+                ],
                 'type_of_pay',
                 ['attribute' => 'date_of_payment', 'format' => ['date', 'php:d.m.Y']],
 
@@ -97,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-md-8"></div>
             <div class="col-md-4" style="text-align: right;">
-                <?= Yii::t('app', 'Total') .': '. number_format($searchModelPaymentIn->total, 0, 0, ' ') .' р.' ?>
+                <?= Yii::t('app', 'Total') .': '. Yii::$app->formatter->format($searchModelPaymentIn->total, ['decimal', 0]) .' р.' ?>
             </div>
         </div>
         
