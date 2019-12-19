@@ -83,7 +83,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status', 'program_id', 'customer_id', 'created_at', 'updated_at'], 'integer'],
+            [['status', 'program_id', 'customer_id', 'teacher_id', 'created_at', 'updated_at'], 'integer'],
             [['name', 'sum'], 'required'],
             [['count', 'unit_price', 'sale','sum'], 'integer', 'min' => 0],
             [['name'], 'string', 'max' => 255],
