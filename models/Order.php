@@ -141,6 +141,20 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
 
+    /** 
+     * If order has payment in, it will be deleted
+     * @return boolean
+     */
+    public function beforeDelete() 
+    {
+        if (parent::beforeDelete()) {
+            if ($model = PaymentIn::find()->where(['order_id' => $this->id])->one()) {
+                return $model->delete();
+            }
+        }
+        return true;
+    }
+
     /**
      * Save customer if type_customer is new
      * @param boolean - $insert 
@@ -207,8 +221,6 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Profile::className(), ['id' => 'teacher_id']);
     }
-
-
 
     /**
      * Return data about order whith link to detail

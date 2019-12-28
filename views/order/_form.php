@@ -25,16 +25,17 @@ $order = [
 
     <div class="row">
         <div class="col-md-6">
-            <?//= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Enter order name ...')]) ?>
+            <?//= $form->field($model, 'name')->textInput(['maxlength' => true, 'list'=>"order-list", 'placeholder' => Yii::t('app', 'Enter order name ...')]) ?>
             <?= $form->field($model, 'name')->dropDownList($order, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
         </div>
 
         <div class="col-md-3">
-            <?= $form->field($model, 'sum')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Integer ...')]) ?>
+            <?$programs = \yii\helpers\ArrayHelper::map(\app\models\Program::find()->all(), 'id', 'name');?>
+            <?= $form->field($model, 'program_id')->dropDownList($programs, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
         </div>
-        
+
         <div class="col-md-3">
-            <?= $form->field($model, 'count')->textInput(['type' => 'number', 'min' => 1, 'value' => 1]) ?>
+            <?= $form->field($model, 'sum')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Integer ...')]) ?>
         </div>
     </div>
 
@@ -42,10 +43,11 @@ $order = [
         <div class="col-md-3">
             <?= $form->field($model, 'unit_price')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Integer ...')]) ?>
         </div>
-        <div class="col-md-3">
-            <?= $form->field($model, 'sale')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Integer ...')]) // Скидка ?>
-        </div>
 
+        <div class="col-md-3">
+            <?= $form->field($model, 'count')->textInput(['type' => 'number', 'min' => 1, 'value' => 1]) ?>
+        </div>
+       
         <div class="col-md-3">
             <?= $form->field($model, 'date_start')->widget(DatePicker::className(), [
                                                                         'options' => [
@@ -80,6 +82,10 @@ $order = [
 
     <div class="row">
         <div class="col-md-3">
+            <?= $form->field($model, 'sale')->textInput(['type' => 'number', 'placeholder' => Yii::t('app', 'Integer ...')]) // Скидка ?>
+        </div>
+
+        <div class="col-md-3">
             <?= $form->field($model, 'status')->dropDownList(  [
                                                                     1 => 'Создан заказ',
                                                                     2 => 'Заказ в работе',
@@ -90,11 +96,6 @@ $order = [
                                                                     'prompt' => 'Не установлен ...'
                                                                 ]
             ); ?>
-        </div>
-
-        <div class="col-md-3">
-            <?$programs = \yii\helpers\ArrayHelper::map(\app\models\Program::find()->all(), 'id', 'name');?>
-            <?= $form->field($model, 'program_id')->dropDownList($programs, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
         </div>
 
         <div class="col-md-6">
