@@ -82,6 +82,11 @@ $config = [
                 'group/view/<id:\d+>' => 'group/view',
                 'group/update/<id:\d+>' => 'group/update',
 
+                // rest api routing
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+                'api/delete-sticker/<id:\d+>' => 'api/delete-sticker',
+                'api/update-sticker/<id:\d+>' => 'api/update-sticker'
+
             ],
         ],
         'i18n' => [

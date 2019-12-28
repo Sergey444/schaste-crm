@@ -56,7 +56,7 @@ class OrderController extends Controller
     public function actionIndex()
     {
         $model = new Order();
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }

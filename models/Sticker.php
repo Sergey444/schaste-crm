@@ -73,4 +73,38 @@ class Sticker extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
+
+    /**
+     * Update model
+     * @param array
+     * @return boolean
+     */
+    public function upload($sticker)
+    {
+        $this->name = $sticker['name'];
+        $this->left = $sticker['left'];
+        $this->top = $sticker['top'];
+        $this->description = $sticker['description'];
+        $this->wide = $sticker['wide'];
+        $this->ready = $sticker['ready'];
+        $this->sort = $sticker['sort'];
+        $this->color = '#' . $sticker['color'];
+        return $this->update(false);
+    }
+
+    /**
+     * @return object
+     */
+    public function create()
+    {
+        $this->name = 'Новая заметка';
+        $this->color = '#337ab7';
+        $this->sort = Sticker::find()->max('sort');
+        $this->left = 0;
+        $this->top = 0;
+        if ($this->save()) {
+            return $this;
+        }
+
+    }
 }

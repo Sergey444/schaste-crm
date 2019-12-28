@@ -34,7 +34,6 @@ use yii\widgets\MaskedInput;
     </div>
 
     <div class="row">
-                        
         <div class="col-md-6">
             <div>
                 <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Email')]) ?>

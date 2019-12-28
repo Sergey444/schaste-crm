@@ -1,9 +1,54 @@
-version: '2'
+version: '3'
+
 services:
-  php:
-    image: yiisoftware/yii2-php:7.1-apache
-    volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
-    ports:
-      - '8000:80'
+    mysql:
+        build:
+            context: docker/mysql
+        user: "1000:1000"
+        restart: always
+        container_name: mariadb
+        volumes:
+            - "./docker/data/mysql:/var/lib/mysql:cached"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - mysql:db
+        ports:
+            - 8888:80
+        environment:
+             PMA_HOST: mysql
+             MYSQL_ROOT_PASSWORD: root
+        depends_on:
+            - mysql
+    php-fpm:
+        build:
+            context: docker
+            dockerfile: php-fpm/php-7.1.dockerfile
+            args:
+                HOST_USER_ID: 1000
+                HOST_GROUP_ID: 1000
+                WORKDIR_PHP: /var/www
+        container_name: php
+        volumes:
+            - ./:/var/www:cached
+        ports:
+            - '9000:9000'
+        environment:
+            XDEBUG_CONFIG: "remote_host=host.docker.internal remote_enable=1"
+            PHP_IDE_CONFIG: "serverName=Docker"
+    docker.local:
+        build:
+            context: docker/nginx
+            args:
+                HOST_USER_ID: 1000
+                HOST_GROUP_ID: 1000
+        container_name: 'yii2'
+        volumes:
+            - ./:/var/www:cached
+        ports:
+            - 80:80
+            - 443:443
+        depends_on:
+            - php-fpm
