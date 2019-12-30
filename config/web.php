@@ -85,7 +85,8 @@ $config = [
                 // rest api routing
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
                 'api/delete-sticker/<id:\d+>' => 'api/delete-sticker',
-                'api/update-sticker/<id:\d+>' => 'api/update-sticker'
+                'api/update-sticker/<id:\d+>' => 'api/update-sticker',
+                'api/delete-event/<id:\d+>' => 'api/delete-event',
 
             ],
         ],
