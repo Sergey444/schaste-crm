@@ -26,7 +26,7 @@ $order = [
     <div class="row">
         <div class="col-md-6">
             <?//= $form->field($model, 'name')->textInput(['maxlength' => true, 'list'=>"order-list", 'placeholder' => Yii::t('app', 'Enter order name ...')]) ?>
-            <?= $form->field($model, 'name')->dropDownList($order, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
+            <?= $form->field($model, 'name')->dropDownList($order, ['prompt' => Yii::t('app', 'Choose type of class'). ' ...']) ?>
         </div>
 
         <div class="col-md-3">

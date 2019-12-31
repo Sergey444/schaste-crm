@@ -14,14 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
 
-
-    <!-- <p>
-        <?//= Html::a(Yii::t('app', 'Create Order'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p> -->
-
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <div class="bg-white mg-bottom">
         <div class="row">
             <div class="col-md-8"> 
