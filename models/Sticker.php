@@ -18,6 +18,7 @@ use Yii;
  * @property int $sort
  * @property int $wide
  * @property int $ready
+ * @property int $author_id
  * @property int $created_at
  * @property int $updated_at
  */
@@ -48,8 +49,7 @@ class Sticker extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
-            [['left', 'top', 'sort', 'wide', 'ready', 'created_at', 'updated_at'], 'integer'],
-            // [['created_at', 'updated_at'], 'required'],
+            [['left', 'top', 'sort', 'wide', 'ready', 'author_id', 'created_at', 'updated_at'], 'integer'],
             [['name', 'color'], 'string', 'max' => 255],
         ];
     }
@@ -72,6 +72,17 @@ class Sticker extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if(parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->author_id = Yii::$app->user->id;
+            }
+            return true;
+        }
+        return false;
     }
 
     /**

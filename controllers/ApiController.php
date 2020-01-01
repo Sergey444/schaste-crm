@@ -67,12 +67,26 @@ class ApiController extends Controller
         return $behaviors;
     }
 
+
+    /**
+     * Search customers
+     * @return object
+     */
+    public function actionGetCustomers()
+    {
+        $customerName = Yii::$app->request->post('customer_name');
+        if (isset($customerName)) {
+            $result = htmlspecialchars( $customerName ) == '' ? 'Не найдено' : $customerName;
+            return Customer::find()->filterWhere(['like', 'child_name', $result])->limit(50)->all();
+        }
+    }
+
     /**
      * STICKERS API
      */
     public function actionGetStickers()
     {
-        return Sticker::find()->all();
+        return Sticker::find()->where(['author_id' => Yii::$app->user->id])->all();
     }
     public function actionUpdateSticker($id)
     {
@@ -117,25 +131,12 @@ class ApiController extends Controller
     }
 
     /**
-     *
-     * @return object
-     */
-    public function actionGetCustomers()
-    {
-        $customerName = Yii::$app->request->post('customer_name');
-        if (isset($customerName)) {
-            $result = htmlspecialchars( $customerName ) == '' ? 'Не найдено' : $customerName;
-            return Customer::find()->filterWhere(['like', 'child_name', $result])->limit(50)->all();
-        }
-    }
-
-    /**
      * Get groups
      * @return json
      */
     public function actionGetGroups()
     {
-        return Group::find()->joinWith('customers.customer')->all();
+        return Group::find()->joinWith('customers.customer')->asArray()->all();
     }
 
     /**
@@ -208,7 +209,7 @@ class ApiController extends Controller
     }
 
     /**
-     *@return json
+     * @return json
      */
     public function actionSetProgram()
     {

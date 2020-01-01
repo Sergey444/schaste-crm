@@ -99,11 +99,10 @@
 
         $.ajax({
             type: "POST",
-            url: "/journal/get-customers",
+            url: "/api/get-customers",
             data: "customer_name=" + value,
             success: function(msg){
-                console.log(msg)
-                drawSelect( JSON.parse(msg), value );
+                drawSelect( msg, value );
             },
             error: function (err, err1) {
                 console.log('error', err1);
