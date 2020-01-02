@@ -37,7 +37,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td><?= Yii::t('app', 'Payment') ?></td>
-                <td><?= $model->payment_in->name ? Html::a($model->payment_in->name, ['customer/view', 'id' => $model->payment_in->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
+                <td><?= $model->payment_in->name ? Html::a($model->payment_in->name, ['paimentIn/view', 'id' => $model->payment_in->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
             </tr>
             <tr>
                 <td><?= Yii::t('app', 'Date Start') ?></td>

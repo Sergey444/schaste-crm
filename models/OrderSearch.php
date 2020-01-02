@@ -50,7 +50,10 @@ class OrderSearch extends Order
             'query' => $query,
             'sort'=> [
                 'attributes' => ['name', 'customer.child_name', 'payment_in.date_of_payment', 'count', 'unit_price', 'sum', 'status', 'date_start', 'date_end', 'program_id', 'customer_id', 'created_at', 'updated_at'],
-                'defaultOrder' => ['payment_in.date_of_payment' => SORT_DESC]
+                'defaultOrder' =>   [
+                                        'payment_in.date_of_payment' => SORT_DESC,
+                                        'created_at' => SORT_DESC
+                                    ]
             ],
             'pagination' => [
                 'pageSize' => 9,

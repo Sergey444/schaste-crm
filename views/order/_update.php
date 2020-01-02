@@ -167,9 +167,6 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
         
     </div>
     <hr />
-
-    <?//= $form->field($model, 'checkbox_payment')->checkbox(['label' => Yii::t('app', 'Create payment'), 'checked' => true, 'value' => true]);?>
-
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
