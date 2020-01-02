@@ -222,6 +222,11 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasOne(Profile::className(), ['id' => 'teacher_id']);
     }
 
+    public function getPayment()
+    {
+        return $this->hasOne(PaymentIn::className(), ['order_id' => 'id']);
+    }
+
     /**
      * Return data about order whith link to detail
      * @return string

@@ -75,6 +75,7 @@ return [
 
     'Are you sure you want to delete this item?' => 'Вы уверены что хотите удалить эту запись?',
 
+    'Payment' => 'Оплата',
     'Payments' => 'Оплаты',
     'Set payment in' => 'Внести оплату',
     'Set payment out' => 'Внести затраты',

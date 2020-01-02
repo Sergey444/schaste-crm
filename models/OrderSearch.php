@@ -42,7 +42,7 @@ class OrderSearch extends Order
      */
     public function search($params)
     {
-        $query = Order::find()->joinWith( ['customer', 'program', 'teacher'] );
+        $query = Order::find()->joinWith( ['customer', 'program', 'teacher', 'payment'] );
 
         // add conditions that should always apply here
 
