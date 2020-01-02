@@ -95,6 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'count',
                 'status',
+                ['attribute' => 'payment_in.date_of_payment', 'format' => ['date', 'php:d.m.Y']],
                 ['attribute' => 'date_start', 'format' => ['date', 'php:d.m.Y']],
                 ['attribute' => 'date_end', 'format' => ['date', 'php:d.m.Y']],
 

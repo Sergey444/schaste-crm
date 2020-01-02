@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 <div class="bg-white">
     <table class="table">
-        <caption class="row"> <span class="col-xs-7"><?= $model->name ?></span> <span class="col-xs-5" style="text-align: right;">Дата оплаты: <?= Yii::$app->formatter->asDate($model->payment->date_of_payment, 'php:d.m.Y') ?></span></caption>
+        <caption class="row"> <span class="col-xs-7"><?= $model->name ?></span> <span class="col-xs-5" style="text-align: right;">Дата оплаты: <?= Yii::$app->formatter->asDate($model->payment_in->date_of_payment, 'php:d.m.Y') ?></span></caption>
         <thead></thead>
         <tbody>
             <tr>
@@ -37,7 +37,7 @@ use yii\helpers\Html;
             </tr>
             <tr>
                 <td><?= Yii::t('app', 'Payment') ?></td>
-                <td><?= $model->payment->name ? Html::a($model->payment->name, ['customer/view', 'id' => $model->payment->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
+                <td><?= $model->payment_in->name ? Html::a($model->payment_in->name, ['customer/view', 'id' => $model->payment_in->id], ['data-pjax' => 0]) : '<span class="not-set">(не задано)</span>'?></td>
             </tr>
             <tr>
                 <td><?= Yii::t('app', 'Date Start') ?></td>

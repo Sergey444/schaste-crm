@@ -49,6 +49,10 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @var string
      */
+    public $date_of_payment;
+    /**
+     * @var string
+     */
     public $customer_phone;
     /**
      * @var string
@@ -222,7 +226,7 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasOne(Profile::className(), ['id' => 'teacher_id']);
     }
 
-    public function getPayment()
+    public function getPayment_in()
     {
         return $this->hasOne(PaymentIn::className(), ['order_id' => 'id']);
     }

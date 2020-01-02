@@ -42,15 +42,15 @@ class OrderSearch extends Order
      */
     public function search($params)
     {
-        $query = Order::find()->joinWith( ['customer', 'program', 'teacher', 'payment'] );
+        $query = Order::find()->joinWith( ['customer', 'program', 'teacher', 'payment_in'] );
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> [
-                'attributes' => ['name', 'customer.child_name', 'count', 'unit_price', 'sum', 'status', 'date_start', 'date_end', 'program_id', 'customer_id', 'created_at', 'updated_at'],
-                'defaultOrder' => ['created_at' => SORT_DESC]
+                'attributes' => ['name', 'customer.child_name', 'payment_in.date_of_payment', 'count', 'unit_price', 'sum', 'status', 'date_start', 'date_end', 'program_id', 'customer_id', 'created_at', 'updated_at'],
+                'defaultOrder' => ['payment_in.date_of_payment' => SORT_DESC]
             ],
             'pagination' => [
                 'pageSize' => 9,
