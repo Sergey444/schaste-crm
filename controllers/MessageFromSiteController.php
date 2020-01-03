@@ -87,7 +87,7 @@ class MessageFromSiteController extends Controller
     public function actionCreate()
     {
 
-        header('Access-Control-Allow-Origin: http://schaste-club.ru');
+        header('Access-Control-Allow-Origin: https://schaste-club.ru');
         $request = Yii::$app->request->post();
         foreach ($request as $key => $value) {
             $request = json_decode($key);
