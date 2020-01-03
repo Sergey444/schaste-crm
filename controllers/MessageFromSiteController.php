@@ -94,9 +94,10 @@ class MessageFromSiteController extends Controller
             break;
         }
 
-        $this->sendEmail($request);
-
+        
         if ( $request->name && ( $request->phone || $request->email ) ) {
+            $this->sendEmail($request);
+
             $model = new MessageFromSite();
             $model->title = $request->title;
             $model->name = $request->name;
