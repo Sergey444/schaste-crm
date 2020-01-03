@@ -39,7 +39,7 @@ class MessageFromSiteController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
-                    // 'create' => ['POST']
+                    'create' => ['POST']
                 ],
             ],
         ];
@@ -87,7 +87,7 @@ class MessageFromSiteController extends Controller
     public function actionCreate()
     {
 
-        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Origin: http://schaste-club.ru');
         $request = Yii::$app->request->post();
         foreach ($request as $key => $value) {
             $request = json_decode($key);
