@@ -39,7 +39,7 @@ class MessageFromSiteController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
-                    'create' => ['POST']
+                    // 'create' => ['POST']
                 ],
             ],
         ];
@@ -183,7 +183,7 @@ class MessageFromSiteController extends Controller
 
 
         return Yii::$app->mailer->compose()
-                ->setFrom(['support@schaste-club.ru' => 'Детский клуб счастье'])
+                ->setFrom(['info@schaste-club.ru' => 'Детский клуб счастье'])
                 ->setTo('info@schaste-club.ru')
                 ->setSubject('Детский клуб счастье')
                 // ->setTextBody('Текст для body')

@@ -41,8 +41,8 @@ $config = [
             'transport'        => [
                 'class'      => 'Swift_SmtpTransport',
                 'host'       => 'smtp.beget.com',//'smtp.yandex.ru',
-                'username'   => 'support@schaste-club.ru',
-                'password'   => 'Ctht;tymrf2',
+                'username'   => 'info@schaste-club.ru',
+                'password'   => 'Ctht;tymrf1',
                 'port'       => '465',
                 'encryption' => 'ssl',
             ],
