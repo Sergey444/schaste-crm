@@ -1,3 +1,5 @@
+# CRM система для детского центра "Счастье"
+
 <p align="center">
     <a href="https://schaste-club.ru" target="_blank">
         <img src="https://schaste-club.ru/images/logo/6.png" height="100px">
@@ -6,7 +8,7 @@
     <br>
 </p>
 
-## Команды
+## Установка
 ```bash
   composer install #установка пакетов
   php yii migrate #выполнение миграций
