@@ -10,7 +10,7 @@
 ```bash
   composer install #установка пакетов
   php yii migrate #выполнение миграций
-  yii migrate --migrationPath=@yii/rbac/migrations/ #выполнение миграций RBAC
+  php yii migrate --migrationPath=@yii/rbac/migrations/ #выполнение миграций RBAC
   php yii rbac/init #инициализация ролей
 ```
 
