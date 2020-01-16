@@ -6,7 +6,6 @@ use yii\widgets\MaskedInput;
 
 use yii\jui\DatePicker;
 
-use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Personal */
 /* @var $form yii\widgets\ActiveForm */
@@ -16,7 +15,7 @@ use yii\helpers\Url;
 
     <h3>Данные пользователя</h3>
     <p>Задайте данные пользователя, чтобы другие могли его узнать</p><hr />
-    
+
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="d-flex">
@@ -41,7 +40,7 @@ use yii\helpers\Url;
                         $form->field($model, 'date_of_birthday')->widget(MaskedInput::className(), [
                             'mask' => '99.99.9999',
                         ])->label(Yii::t('app', 'Date of birthday'));
-                    
+
                     ?>
                 </div>
 
@@ -62,7 +61,6 @@ use yii\helpers\Url;
             </div>
 
             <div class="row">
-                
                 <?if ($model->teacher):?>
                     <div class="col-md-4">
                         <?= $form->field($model, 'color')->textInput(['type' => 'color'])->label(Yii::t('app', 'Calendar color')) ?>
@@ -75,28 +73,25 @@ use yii\helpers\Url;
                     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
                 </div>
             </div>
-
-            
         </div>
 
         <div class="bg-white av-block mg-left">
             <div class="av-preview">
-                <img src="<?= $model->photo ? Url::to([$model->photo], true) : 'https://via.placeholder.com/200'?>" id="img-preview" alt="">
+                <img src="<?= file_exists($model->photo) ? '/' . $model->photo : 'https://via.placeholder.com/200'?>" id="img-preview" alt="">
                 <div class="edit-photo-block">
                     <div class="rs-pencil">
                     <span class="glyphicon glyphicon-pencil" onclick="$('#add-photo-input').click()"></span>
                     </div>
                     <?= $form->field($model, 'img')->fileInput(['class'=>'add-photo-input', 'id'=>"add-photo-input"])->label(false) ?>
-                    <?///= $form->field($model, 'photo')->hiddenInput()->label(false) ?>
                 </div>
             </div>
         </div>
-    
+
     </div>
 
-    
 
-    
+
+
 
     <?php ActiveForm::end(); ?>
 

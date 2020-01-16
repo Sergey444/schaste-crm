@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -10,14 +9,13 @@ use yii\widgets\DetailView;
 
 $this->title =  Yii::t('app', 'My profile');
 $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
-// \yii\web\YiiAsset::register($this);
 ?>
 <div class="personal-view">
 
     <div class="d-flex mg-bottom">
         <div class="bg-white av-block mg-right mg-bottom" >
             <div class="av-preview">
-                <img src="<?= $model->photo ? Url::to([$model->photo], true) : 'https://via.placeholder.com/200'?>" alt="">
+                <img src="<?= file_exists($model->photo) ? '/' . $model->photo : 'https://via.placeholder.com/200' ?>" alt="">
                 <div class="u-controll">
                     <?= Html::a( Yii::t('app', 'Update profile'), ['update'], ['class' => 'u-update-btn']) ?>
                 </div>
@@ -25,9 +23,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
         </div>
         <div class="bg-white u-info-block">
             <table class="table table-bordered">
-                <caption><?= $model->fullName//= Yii::t('app', 'Main information')?></caption>
+                <caption><?= $model->fullName?></caption>
                 <tbody>
-                    
+
                     <tr>
                         <td><?= Yii::t('app', 'Date of birthday') ?>:</td>
                         <td><?= Yii::$app->formatter->asDate($model->date_of_birthday, 'php:d.m.Y') ?></td>
@@ -70,12 +68,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
                         <td><?= Yii::t('app', 'Date of registration')?>:</td>
                         <td><?= Yii::$app->formatter->asDate($model->created_at, 'php:d.m.Y H:i:s')?></td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </div>
     </div>
-   
+
     <div class="bg-white">
         <table class="table table-bordered">
             <caption><?= Yii::t('app', 'Class information')?></caption>
