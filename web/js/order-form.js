@@ -13,8 +13,8 @@
 
 //     /**
 //      * Count sum handler
-//      * 
-//      * @return {Void} 
+//      *
+//      * @return {Void}
 //      */
 //     var countSumHandler = function () {
 //         var sum = count * unitPrice - sale;
@@ -47,22 +47,23 @@
 (function () {
 
     /**
-     * 
+     *
      */
     var clearId = function () {
         $('#order-customer_id').val('');
     }
 
     /**
-     * 
+     *
      */
     var closeSelect = function () {
+        $('.rs-add-to-order').hide();
         $('#rs-find-block').empty();
     }
 
     /**
-     * 
-     * @param {Object} context 
+     *
+     * @param {Object} context
      */
     window.chooseCustomers = function (context) {
         $('#order-customer_id').val( $(context).data('id') );
@@ -72,7 +73,7 @@
 
     /**
      * Drawing table under input customer name
-     * 
+     *
      * @param {String} value
      * @param {Object} customers
      */
@@ -81,17 +82,18 @@
         closeSelect();
         // $('.rs-add-to-order').css('display', 'none');
         $(customers).each(function (index, customer) {
-            if (customer.child_name === value) { 
+            if (customer.child_name === value) {
                 return $('#order-customer_id').val( customer.id );
             }
             // $('.rs-add-to-order').css('display', 'block');
             $('#rs-find-block').append('<tr><td onclick="chooseCustomers(this)" class="rs-customer" data-name="customer" data-id="' + customer.id + '">' + customer.child_name + '</td></tr>');
+            $('.rs-add-to-order').show();
         });
     }
 
     /**
      * Send ajax to get-customers action
-     * 
+     *
      * @param {String} value
      * @return {Void}
      */
@@ -108,13 +110,13 @@
                 console.log('error', err1);
             }
         });
-    } 
+    }
 
     $('#order-customer_name').on('keydown', function (evt) {
         evt.stopPropagation();
     });
 
-    $('#order-customer_name').on('input', function (evt) {
+    $('#order-customer_name').on('input focus', function (evt) {
         var value = $.trim( $(this).val() );
         if (value.length > 1) {
             return getCustomers(value);
@@ -134,7 +136,7 @@
     $('[data-name="type_customer"]').on('change', function (evt) {
         $(this).tab('show');
     });
-    
+
     $('[data-name="payment_create"]').on('change', function (evt) {
         $('#payment_date').toggle('100');
     });

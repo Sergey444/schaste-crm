@@ -309,13 +309,22 @@ html .add-photo-input {
     background-color: #fff;
     z-index: 1;
     top: 58px;
-
+    display: none;
     border: 1px solid #66afe9;
 }
 .rs-find-block {
     overflow-y: scroll;
     max-height: 230px;
-    display: block;
+    /* display: block; */
+    display: flex;
+    flex-wrap: wrap;
+}
+.rs-find-block tr {
+    width: 100%;
+}
+.rs-find-block td:hover {
+    background-color: #39f;
+    color: #fff;
 }
 .rs-find-block td {
     display: block;
