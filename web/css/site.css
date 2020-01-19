@@ -430,6 +430,10 @@ html .add-photo-input {
 
 
 /*menu left*/
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: transparent;
+}
+
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus,
 .navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus,
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus,
@@ -510,12 +514,20 @@ input[aria-required="true"] + .help-block::before {
         min-width: 80px;
         width: 80px;
         font-size: 25px;
+        z-index: 1;
     }
     .rs-navbar-left span {
         display: none;
+        position: absolute;
+        text-transform: lowercase;
+        font-size: 12px;
+        white-space: nowrap;
     }
     .rs-navbar-left li {
         text-align: center;
+    }
+    .rs-navbar-left li a:hover > span {
+        display: inline;
     }
 }
 /*/menu left*/
