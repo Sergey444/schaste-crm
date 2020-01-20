@@ -38,8 +38,8 @@ class ApiController extends Controller
         $behaviors['corsFilter'] = [
             'class' => Cors::className(),
             'cors' => [
-                'Origin' => ['*', 'https://schaste-club.ru', 'http://schaste-club.ru'],
-                // 'Access-Control-Allow-Credentials' => true,
+                'Origin' => ['https://schaste-club.ru', 'http://schaste-club.ru'],
+                'Access-Control-Allow-Credentials' => true,
                 'Access-Control-Request-Method' => ['GET', 'POST', 'DELETE', 'PUT'],
                 'Access-Control-Request-Headers'=> ['Content-Type'], //'Origin', 'Accept', 'Authorization'
             ]
