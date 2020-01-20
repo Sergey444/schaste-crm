@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\ResendVerificationEmailForm;
 use app\models\VerifyEmailForm;
 
+use app\models\User;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\SignupForm;
@@ -101,7 +102,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        if (!Yii::$app->user->isGuest) {
+        if ( User::find()->exists() || !Yii::$app->user->isGuest ) {
             return $this->goHome();
         }
         $model = new SignupForm();

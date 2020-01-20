@@ -26,17 +26,20 @@ use app\models\Program;
 use app\models\Customer;
 use app\models\Group;
 use app\models\Profile;
+use app\models\MessageFromSite;
 
 
 class ApiController extends Controller
 {
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['corsFilter'] = [
             'class' => Cors::className(),
             'cors' => [
-                'Origin' => ['*'],
+                'Origin' => ['*', 'https://schaste-club.ru', 'http://schaste-club.ru'],
+                // 'Access-Control-Allow-Credentials' => true,
                 'Access-Control-Request-Method' => ['GET', 'POST', 'DELETE', 'PUT'],
                 'Access-Control-Request-Headers'=> ['Content-Type'], //'Origin', 'Accept', 'Authorization'
             ]
@@ -50,6 +53,8 @@ class ApiController extends Controller
                 'update-sticker' => ['PUT'],
 
                 'delete-event' => ['DELETE'],
+
+                'save-message' => ['POST'],
             ],
         ];
 
@@ -61,6 +66,10 @@ class ApiController extends Controller
                     'allow' => true,
                     'roles' => ['@'],
                 ],
+                [
+                    'actions' => ['save-message'],
+                    'allow' => true,
+                ]
             ]
         ];
 
@@ -79,6 +88,20 @@ class ApiController extends Controller
             $result = htmlspecialchars( $customerName ) == '' ? 'Не найдено' : $customerName;
             return Customer::find()->filterWhere(['like', 'child_name', $result])->limit(50)->all();
         }
+    }
+
+    /**
+     * Save message from site schaste-club
+     * @return string
+     */
+    public function actionSaveMessage()
+    {
+        $model = new MessageFromSite();
+        if ($model->load(Yii::$app->request->post(), '') && $model->save()) {
+            $this->sendEmail(Yii::$app->request->post());
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -260,6 +283,30 @@ class ApiController extends Controller
     private function deleteEventCustomer($ids)
     {
         return Yii::$app->db->createCommand()->delete(EventCustomer::tableName(), ['id' => $ids], $params = [])->execute();
+    }
+
+    /**
+     * Отправка email config/web.php
+     * @param integer $lastId
+     * @return count added string
+     */
+    protected function sendEmail($request)
+    {
+        $phone = $request['phone'] ? $request['phone'] : 'не указан';
+        $email = $request['email'] ? $request['email'] : 'не указан';
+        $message = $request['message'] ? $request['message'] : 'не заполнено';
+        $html = 'Форма: '. $request['title'] .'<br>'.
+                'Телефон: '. $phone .'<br>'.
+                'Email: '. $email .'<br>'.
+                'Сообщение: '.$message;
+
+        return Yii::$app->mailer->compose()
+                ->setFrom(['info@schaste-club.ru' => 'Детский клуб счастье'])
+                ->setTo('info@schaste-club.ru')
+                ->setSubject('Детский клуб счастье')
+                // ->setTextBody('Текст для body')
+                ->setHtmlBody($html)
+                ->send();
     }
 
 }

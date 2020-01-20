@@ -45,11 +45,6 @@ class MessageFromSiteController extends Controller
         ];
     }
 
-    public function beforeAction($action)
-    {
-        $this->enableCsrfValidation = false;
-        return parent :: beforeAction($action);
-    }
 
     /**
      * Lists all MessageFromSite models.
@@ -79,43 +74,7 @@ class MessageFromSiteController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new MessageFromSite model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-
-        header('Access-Control-Allow-Origin: https://schaste-club.ru');
-        $request = Yii::$app->request->post();
-        foreach ($request as $key => $value) {
-            $request = json_decode($key);
-            break;
-        }
-
-        
-        if ( $request->name && ( $request->phone || $request->email ) ) {
-            $this->sendEmail($request);
-
-            $model = new MessageFromSite();
-            $model->title = $request->title;
-            $model->name = $request->name;
-            $model->phone = $request->phone ? $request->phone : null;
-            $model->email = $request->email ? $request->email : null;
-            $model->message = $request->message ? $request->message : null;
-            return $model->save();
-        }
-        return 'Форма не сохранена';
-
-        // $model = new MessageFromSite();
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // }
-        // return $this->render('create', [
-        //     'model' => $model,
-        // ]);
-    }
+    
 
     /**
      * Updates an existing MessageFromSite model.
@@ -167,28 +126,4 @@ class MessageFromSiteController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-    /**
-     * Отправка email config/web.php
-     * @param integer $lastId
-     * @return count added string
-     */
-    protected function sendEmail($request)
-    {
-        $phone = $request->phone ? $request->phone : 'не указан';
-        $email = $request->email ? $request->email : 'не указан';
-        $message = $request->message ? $request->message : 'не заполнено';
-        $html = 'Форма: '. $request->title .'<br>'.
-                'Телефон: '. $phone .'<br>'.
-                'Email: '. $email .'<br>'.
-                'Сообщение: '.$message;
-
-
-        return Yii::$app->mailer->compose()
-                ->setFrom(['info@schaste-club.ru' => 'Детский клуб счастье'])
-                ->setTo('info@schaste-club.ru')
-                ->setSubject('Детский клуб счастье')
-                // ->setTextBody('Текст для body')
-                ->setHtmlBody($html)
-                ->send();
-    }
 }
