@@ -91,8 +91,8 @@ class ApiController extends Controller
     }
 
     /**
-     * Save message from site schaste-club
-     * @return string
+     * Save message from site schaste-club.ru
+     * @return boolean
      */
     public function actionSaveMessage()
     {

@@ -62,6 +62,10 @@ class Order extends \yii\db\ActiveRecord
      * @var 
      */
     public $date_payment;
+    /**
+     * @var 
+     */
+    public $type_of_pay;
 
     /**
      * {@inheritdoc}
@@ -108,7 +112,7 @@ class Order extends \yii\db\ActiveRecord
                 return $('[data-name=type_customer]:checked').val() == 'old';
             }"],
 
-            [['date_payment'], 'string'],
+            [['date_payment', 'type_of_pay'], 'string'],
             [['date_payment'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_payment'],
             [['date_payment'], 'required', 'when' => function($model) {
                 return $model->checkbox_payment == '1';
@@ -135,6 +139,7 @@ class Order extends \yii\db\ActiveRecord
             'status' => Yii::t('app', 'Status'),
             'date_start' => Yii::t('app', 'Date Start'),
             'date_payment' => Yii::t('app', 'Date Of Payment'),
+            'type_of_pay' => Yii::t('app', 'Type Of Pay'),
             'date_end' => Yii::t('app', 'Date End'),
             'program_id' => Yii::t('app', 'Program'),
             'teacher_id' => Yii::t('app', 'Teacher'),
@@ -197,6 +202,7 @@ class Order extends \yii\db\ActiveRecord
             $paymentIn->order_id = $this->id;
             $paymentIn->customer_id = $this->customer_id;
             $paymentIn->sum = $this->sum;
+            $paymentIn->type_of_pay = $this->type_of_pay;
             $paymentIn->date_of_payment = date('d.m.Y', $this->date_payment);
             $paymentIn->save();
         }

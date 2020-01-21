@@ -180,20 +180,30 @@ $order = [
         <div class="col-md-4">
             <?= $form->field($model, 'checkbox_payment')->checkbox(['label' => Yii::t('app', 'Create payment'), 'data-name' => 'payment_create', 'checked' => true, 'value' => true]);?>
         </div>
-        <div class="col-md-8 tab-pane fade in active" id="payment_date">
-            <?= $form->field($model, 'date_payment')->widget(DatePicker::className(), [
-                                                                        'options' => [
-                                                                            'class' => 'form-control',
-                                                                        ],
-                                                                        'clientOptions' => [
-                                                                            'minDate' => '',
-                                                                            'maxDate' => ''
-                                                                        ],
-                                                                        'language' => 'ru',
-                                                                        'dateFormat' => 'php:d.m.Y',
-                                                                ])->widget(MaskedInput::className(), [
-                                                                    'mask' => '99.99.9999'
-                                                                ])->textInput(['value' => date('d.m.Y')]); ?>
+        <div class="tab-pane fade in active" id="payment_date">
+            <div class="col-md-4">
+                <?= $form->field($model, 'date_payment')->widget(DatePicker::className(), [
+                                                                            'options' => [
+                                                                                'class' => 'form-control',
+                                                                            ],
+                                                                            'clientOptions' => [
+                                                                                'minDate' => '',
+                                                                                'maxDate' => ''
+                                                                            ],
+                                                                            'language' => 'ru',
+                                                                            'dateFormat' => 'php:d.m.Y',
+                                                                    ])->widget(MaskedInput::className(), [
+                                                                        'mask' => '99.99.9999'
+                                                                    ])->textInput(['value' => date('d.m.Y')]); ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'type_of_pay')->dropDownList(  [
+                                                                            'Наличными' => 'Наличными',
+                                                                            'Безнал на р/счёт' => 'Безнал на р/счёт',
+                                                                            'Перевод на карту' => 'Перевод на карту'
+                                                                        ]
+                ); ?>
+            </div>
         </div>
     </div>
 
