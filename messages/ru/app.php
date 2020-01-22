@@ -177,4 +177,10 @@ return [
     'Support email' => 'Техническая поддержка',
 
     'Choose type of class' => 'Выберите тип занятия',
+
+    'admin' => 'Админ',
+    'administering' => 'Администратор',
+    'author' => 'Автор',
+
+    'User role' => 'Роль пользователя',
 ];

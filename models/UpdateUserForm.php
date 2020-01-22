@@ -18,6 +18,7 @@ class UpdateUserForm extends Model
     public $password;
     public $password_repeat;
     public $status;
+    public $role;
 
     public $user;
 
@@ -36,6 +37,7 @@ class UpdateUserForm extends Model
             ['password', 'string', 'min' => 6],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
 
+            [['role'], 'string'],
             [['status', 'teacher'], 'integer'],
         ];
     }
@@ -54,6 +56,9 @@ class UpdateUserForm extends Model
         $this->username = $this->user->username;
         $this->email = $this->user->email;
         $this->status = $this->user->status;
+
+        $auth = Yii::$app->authManager;
+        $this->role = array_key_first ($auth->getRolesByUser($this->user->id));
     }
 
     /**
@@ -65,6 +70,16 @@ class UpdateUserForm extends Model
     {
         $this->user->email = $this->email;
         $this->user->status = $this->status;
+
+        $auth = Yii::$app->authManager;
+        $roles = $auth->getRolesByUser($this->user->id);
+
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                $auth->revoke($role, $this->user->id);
+            }
+            $auth->assign($auth->getRole($this->role), $this->user->id);
+        }
 
         if ($this->password) {
             $this->user->setPassword($this->password);

@@ -61,8 +61,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
                         <td><?= Yii::t('app', $model->user->status ) ?></td>
                     </tr>
                     <tr>
-                        <td><?= Yii::t('app', 'Status')?>:</td>
-                        <td><?   Yii::$app->authManager->getRolesByUser($model->user->id); ?></td>
+                        <td><?= Yii::t('app', 'User role')?>:</td>
+                        <td><?= Yii::t('app', array_key_first ( Yii::$app->authManager->getRolesByUser($model->user->id) )); ?></td>
                     </tr>
                     <tr>
                         <td><?= Yii::t('app', 'Date of registration')?>:</td>

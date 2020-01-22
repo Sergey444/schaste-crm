@@ -22,12 +22,14 @@ class RbacController extends Controller
 
         // добавляем роль "author" и даём роли разрешение "createPost"
         $author = $auth->createRole('author');
+        $author->description = 'Автор';
         $auth->add($author);
         $auth->addChild($author, $createPost);
 
          // добавляем роль "administering" и даём роли разрешение "updatePost"
         // а также все разрешения роли "author"
         $administering = $auth->createRole('administering');
+        $administering->description = 'Администратор';
         $auth->add($administering);
         $auth->addChild($administering, $updatePost);
         $auth->addChild($administering, $author);
@@ -35,6 +37,7 @@ class RbacController extends Controller
         // добавляем роль "admin" и даём роли разрешение "updatePost"
         // а также все разрешения роли "author"
         $admin = $auth->createRole('admin');
+        $admin->description = 'Админ';
         $auth->add($admin);
         $auth->addChild($admin, $updatePost);
         $auth->addChild($admin, $author);
@@ -43,7 +46,7 @@ class RbacController extends Controller
         // обычно реализуемый в модели User.
         // $auth->assign($administering, 3);
         // $auth->assign($author, 2);
-        // $auth->assign($admin, 1);
+        $auth->assign($admin, 1);
 
         // $auth = Yii::$app->authManager;
 

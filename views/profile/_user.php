@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
+use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
 use yii\jui\DatePicker;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Personal */
 /* @var $form yii\widgets\ActiveForm */
@@ -34,6 +36,11 @@ use yii\jui\DatePicker;
                 ])->label(Yii::t('app', 'Status')) ?>
         </div>
         <div class="col-md-6">
+                <?php
+                    $auth = Yii::$app->authManager;
+                    $roles = ArrayHelper::map($auth->getRoles(), 'name', 'description');
+                ?>
+                <?= $form->field($user, 'role')->dropDownList($roles)->label(Yii::t('app', 'User role')) ?>
             <?// $user->availability = Yii::$app->formatter->asDate($user->availability , 'php:d.m.Y'); ?>
             <?/*= $form->field($user, 'availability')->widget(DatePicker::className(), [
                                                                     'value' => date('d.m.Y'),

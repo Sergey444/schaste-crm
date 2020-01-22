@@ -550,3 +550,11 @@ input[aria-required="true"] + .help-block::before {
 .circle--red {
     background-color: red;
 }
+
+
+/*start Order*/
+.order-item .bg-white {
+    border: 1px solid #ddd;
+}
+
+/*end Order*/

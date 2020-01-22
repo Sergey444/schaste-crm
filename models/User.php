@@ -61,6 +61,23 @@ class User extends ActiveRecord implements IdentityInterface
             [['email'], 'unique', 'targetAttribute' => 'email', 'targetClass' => User::className(), 'message' => 'Такой логин уже зарегистрирован']
         ];
     }
+
+    /**
+     * @return boolean
+     */
+    public function beforeDelete() {
+        parent::beforeDelete();
+        
+        //убираем связь удаленного пользователя с ролью
+        $auth = Yii::$app->authManager;
+        $roles = $auth->getRolesByUser($this->id);
+        if (is_array($roles)) {
+            foreach ($roles as $role) {
+                $auth->revoke($role, $this->id);
+            }
+        }
+        return true;
+    }
  
     /**
      * @inheritdoc
