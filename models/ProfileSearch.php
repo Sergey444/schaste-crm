@@ -64,14 +64,14 @@ class ProfileSearch extends Profile
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'date_of_birthday' => $this->date_of_birthday,
-            'phone' => $this->phone,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'user_id' => $this->user_id,
+        //     'date_of_birthday' => $this->date_of_birthday,
+        //     'phone' => $this->phone,
+        //     'created_at' => $this->created_at,
+        //     'updated_at' => $this->updated_at,
+        // ]);
 
         $query->joinWith( ['user'] );
 

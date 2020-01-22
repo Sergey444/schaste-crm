@@ -58,9 +58,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                 '<span class="circle circle--red"></span>';
                     }
                 ],
-                'surname',
-                'name',
-                'secondname',
+                [
+                    'label' => Yii::t('app', 'Full name'),
+                    'attribute' => 'surname',
+                    'value' => function ($data) {
+                        return $data->fullName;
+                    }
+                ],
+                // 'surname',
+                // 'name',
+                // 'secondname',
                 [
                     'attribute'=>'username',
                     'value' => function ($data) { 
@@ -68,11 +75,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                 ],
                 ['attribute' => 'date_of_birthday', 'format' => ['date', 'php:d.m.Y']],
-                // 'phone',
                 [
                     'attribute' => 'phone',
+                    'format'=>'raw',
                     'value' =>  function ($data) {
-                        return Yii::$app->formatter->asPhone($data->phone);
+                        return '<a href="tel:+'.$model->phone.'">' . 
+                                    Yii::$app->formatter->asPhone($data->phone) .'</a>';
                     }
                 ],
                 [
@@ -82,8 +90,8 @@ $this->params['breadcrumbs'][] = $this->title;
                          return $data->teacher ? 'Да' : 'Нет';
                     }
                 ],
-                ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
-                ['attribute' => 'updated_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
+                // ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
+                // ['attribute' => 'updated_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
 
                 ['class' => 'yii\grid\ActionColumn',
                     'buttons' => [
