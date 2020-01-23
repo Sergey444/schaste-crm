@@ -76,6 +76,24 @@ class Group extends \yii\db\ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function afterDelete()
+    {
+        $this->deleteRelatedData($this->id);
+    }
+
+    /**
+    * Deletes a several strings from GroupCustomer model.
+    * @param array $id
+    * @return count deleted records
+    */
+    private function deleteRelatedData($id)
+    {
+        return Yii::$app->db->createCommand()->delete(GroupCustomer::tableName(), ['group_id' => $id], $params = [])->execute();
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getTeacher() 

@@ -17,7 +17,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
             <div class="av-preview">
                 <img src="<?= file_exists($model->photo) ? '/' . $model->photo : 'https://via.placeholder.com/200' ?>" alt="">
                 <div class="u-controll">
-                    <?= Html::a( Yii::t('app', 'Update profile'), ['update'], ['class' => 'u-update-btn']) ?>
+                    <?php if (Yii::$app->user->id == $model->user_id):?>
+                        <?= Html::a( Yii::t('app', 'Update profile'), ['update'], ['class' => 'u-update-btn']) ?>
+                    <?php else:?>
+                        <?= Html::a( Yii::t('app', 'Update profile'), ['update-user', 'id' => $model->id], ['class' => 'u-update-btn']) ?>
+                    <?php endif?>
                 </div>
             </div>
         </div>

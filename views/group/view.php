@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </tr>
                 </tbody>
             </table>
+            <?= Html::a( Yii::t('app', 'Update group'), ['update', 'id' => $model->id], ['class' => 'u-update-btn']) ?>
         </div>
     </div>
 

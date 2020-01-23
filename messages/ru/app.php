@@ -156,6 +156,7 @@ return [
     'Enter program name' => 'Введите название программы',
 
     'Update Group: {name}' => 'Редактировать группу: {name}',
+    'Update group' => 'Редактировать группу',
     'Add to group' => 'Добавить в группу',
 
     'Nothing found' => 'Ничего не найдено',
