@@ -165,7 +165,7 @@ $order = [
                                             <table class="table table-hover rs-add-to-order">
                                                 <tbody id="rs-find-block" class="rs-find-block"></tbody>
                                             </table>'
-                        ])->textInput(['placeholder' => Yii::t('app', 'Start typing a name...')])->label(Yii::t('app', 'Child name')) ?>
+                        ])->textInput(['autocomplete' => 'off', 'placeholder' => Yii::t('app', 'Start typing a name...')])->label(Yii::t('app', 'Child name')) ?>
 
                         <?= $form->field($model, 'customer_id')->hiddenInput()->label(false) ?>
                     </div>

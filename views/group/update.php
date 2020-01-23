@@ -47,7 +47,8 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                     Html::label(Yii::t('app', 'Child name'), 'customer_name'), 
                                     Html::input('text', 'customer_name', '', [
                                         'id' => 'order-customer_name', 
-                                        'class' => 'form-control', 
+                                        'class' => 'form-control',
+                                        'autocomplete' => 'off',
                                         'placeholder' => Yii::t('app', 'Start typing a name...')
                                     ]);
                                 ?>

@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
 <div class="row">
     <div class="col-xs-8">
-        <?= $form->field($model, 'term')->textInput(['placeholder' => Yii::t('app', 'Search')])->label(false) ?>
+        <?= $form->field($model, 'term')->textInput(['autocomplete' => 'off', 'placeholder' => Yii::t('app', 'Search')])->label(false) ?>
     </div>
     <div class="col-xs-4" >
          <?= Html::submitButton(Yii::t('app', 'Find'), ['class' => 'btn btn-primary d-block']) ?>
