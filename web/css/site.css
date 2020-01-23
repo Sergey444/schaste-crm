@@ -365,9 +365,6 @@ html .add-photo-input {
         width: 80px;
         font-size: 25px;
     }
-    .rs-navbar-left span {
-        display: none;
-    }
     .rs-navbar-left li {
         text-align: center;
     }
@@ -519,9 +516,32 @@ input[aria-required="true"] + .help-block::before {
     .rs-navbar-left span {
         display: none;
         position: absolute;
+        top: 0;
         text-transform: lowercase;
         font-size: 12px;
         white-space: nowrap;
+        
+        padding: 0 20px;
+        text-align: center;
+        background-color: #fff;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        -webkit-box-shadow: 5px 5px 15px rgba(136, 136, 136, 0.61);
+        -moz-box-shadow: 5px 5px 15px rgba(136, 136, 136, 0.61);
+        box-shadow: 5px 5px 15px rgba(136, 136, 136, 0.61);
+    }
+    
+    .rs-navbar-left span::after {
+        content: ' ';
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: 0px;
+        top: 10px;
+        border: 7px solid;
+        transform: rotate(23deg);
+        border-color: #fff transparent transparent #fff;
     }
     .rs-navbar-left li {
         text-align: center;
