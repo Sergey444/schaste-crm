@@ -41,7 +41,7 @@ class GroupSearch extends Group
      */
     public function search($params)
     {
-        $query = Group::find()->joinWith( ['teacher', 'program', 'customers'] );
+        $query = Group::find()->joinWith( ['teacher', 'program'] );
 
         // add conditions that should always apply here
 

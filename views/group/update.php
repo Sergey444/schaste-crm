@@ -81,7 +81,6 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
 
         <div class="col-md-4">
             <div class="bg-white">
-                <!-- <h3>Список учеников</h3><hr/> -->
                 <table class="table table-striped table-bordered">
                     <caption><?= Yii::t('app', 'Student list') ?></caption>
                     <thead>

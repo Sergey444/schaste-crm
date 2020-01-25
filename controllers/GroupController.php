@@ -63,7 +63,7 @@ class GroupController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => Group::find()->where(['group.id' => $id])->joinWith(['customers.customer'])->one()
         ]);
     }
 
