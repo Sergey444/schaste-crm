@@ -33,7 +33,7 @@ use yii\jui\DatePicker;
                                                                      ); ?>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-4">
                 <?= $form->field($model, 'date_of_payment')->widget(DatePicker::className(),[
@@ -48,6 +48,12 @@ use yii\jui\DatePicker;
             </div>
             <div class="col-md-8">
                 <?= $form->field($model, 'comment')->textarea(['rows' => 1, 'placeholder' => 'Ваш комментарий']) ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'salary')->checkbox(['label' => Yii::t('app', 'Salary (set if payment is salary)'), 'value' => true]);?>
             </div>
         </div>
 

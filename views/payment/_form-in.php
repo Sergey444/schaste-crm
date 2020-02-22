@@ -17,32 +17,32 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class="row">
-        <div class="col-md-4">
-            <?= $form->field($model, 'name') ?>
-        </div>
-        <div class="col-md-4">
-            <?= $form->field($model, 'sum')->textInput(['type' => 'number']) ?>
-        </div>
-        <div class="col-md-4">
-            <?= $form->field($model, 'type_of_pay')->dropDownList(  [
-                                                                        'Наличными' => 'Наличными',
-                                                                        'Безнал на р/счёт' => 'Безнал на р/счёт',
-                                                                        'Перевод на карту' => 'Перевод на карту'
-                                                                    ],
-                                                                    [
-                                                                        'prompt' => 'Выберите тип ...'
-                                                                    ]
-            ); ?>
-        </div>
-    </div>
+    
 
     <div class="row">
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model, 'customer_id') ?>
+                    <?= $form->field($model, 'name') ?>
                 </div>
+                <div class="col-md-6">
+                    <?= $form->field($model, 'sum')->textInput(['type' => 'number']) ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $form->field($model, 'type_of_pay')->dropDownList(  [
+                                                                                'Наличными' => 'Наличными',
+                                                                                'Безнал на р/счёт' => 'Безнал на р/счёт',
+                                                                                'Перевод на карту' => 'Перевод на карту'
+                                                                            ],
+                                                                            [
+                                                                                'prompt' => 'Выберите тип ...'
+                                                                            ]
+                    ); ?>
+                </div>
+
                 <div class="col-md-6">
                     <?= $form->field($model, 'date_of_payment')->widget(DatePicker::className(), [
                                                                         'options' => [

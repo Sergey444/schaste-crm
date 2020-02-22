@@ -75,7 +75,7 @@ class PaymentIn extends \yii\db\ActiveRecord
             'type_of_pay' => Yii::t('app', 'Type Of Pay'),
             'date_of_payment' => Yii::t('app', 'Date Of Payment'),
             'order_id' => Yii::t('app', 'Order ID'),
-            'comment' => Yii::t('app', 'Comments'),
+            'comment' => Yii::t('app', 'Comment'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

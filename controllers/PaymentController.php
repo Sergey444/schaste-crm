@@ -87,7 +87,7 @@ class PaymentController extends Controller
      * 
      * @return mixed
      */
-    public function actionPaymentIn()
+    public function actionCreateIn()
     {
         $model = new PaymentIn();
 
@@ -98,7 +98,7 @@ class PaymentController extends Controller
             }
         }
 
-        return $this->render('payment-in', [
+        return $this->render('create-in', [
             'model' => $model,
         ]);
     }
@@ -107,7 +107,7 @@ class PaymentController extends Controller
      * 
      * @return mixed
      */
-    public function actionPaymentOut()
+    public function actionCreateOut()
     {
         $model = new PaymentOut();
 
@@ -118,11 +118,55 @@ class PaymentController extends Controller
             }
         }
 
-        return $this->render('payment-out', [
+        return $this->render('create-out', [
             'model' => $model,
         ]);
     }
 
+    /**
+     * Updates an existing PaymentIn model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateIn($id)
+    {
+        if (!$model = PaymentIn::findOne($id)){
+            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('update-in', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing PaymentOut model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdateOut($id)
+    {
+        if (!$model = PaymentOut::findOne($id)) {
+            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        }
+
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('update-out', [
+            'model' => $model,
+        ]);
+    }
     
     /**
      * Deletes an existing PaymentIn model.

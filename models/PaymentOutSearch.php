@@ -60,7 +60,7 @@ class PaymentOutSearch extends PaymentOut
                 'defaultOrder' => ['date_of_payment' => SORT_DESC]
             ],
             'pagination' => [
-                'pageSize' => 5,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -94,12 +94,12 @@ class PaymentOutSearch extends PaymentOut
      */
     private function getTime($params) {
         switch ($params['time']) {
-            case 'current-month':
-                return ['>=','date_of_payment', mktime(0,0,0, date('m'), 1, date('Y'))];
+            case 'all-time':
+                return [];
             case 'last-month':
                 return ['and', 'date_of_payment>='.mktime(0,0,0, date('m') - 1, 1, date('Y')), 'date_of_payment<='.mktime(0,0,0, date('m'), 1, date('Y'))];
             default:
-                return [];
+                return ['>=','date_of_payment', mktime(0,0,0, date('m'), 1, date('Y'))];
         }
     }
 }

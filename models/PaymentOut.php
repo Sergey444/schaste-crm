@@ -13,6 +13,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $sum
  * @property string $type_of_pay
  * @property int $date_of_payment
+ * @property int $salary
  * @property string $comment
  * @property int $created_at
  * @property int $updated_at
@@ -44,7 +45,7 @@ class PaymentOut extends \yii\db\ActiveRecord
     {
         return [
             [['name','sum'], 'required'],
-            [['sum', 'created_at', 'updated_at'], 'integer'],
+            [['sum', 'salary', 'created_at', 'updated_at'], 'integer'],
             [['comment'], 'string'],
             [['name', 'type_of_pay'], 'string', 'max' => 255],
             [['date_of_payment'], 'string'],
@@ -63,7 +64,8 @@ class PaymentOut extends \yii\db\ActiveRecord
             'sum' => Yii::t('app', 'Sum'),
             'type_of_pay' => Yii::t('app', 'Type Of Pay'),
             'date_of_payment' => Yii::t('app', 'Date Of Payment'),
-            'comment' => Yii::t('app', 'Comments'),
+            'comment' => Yii::t('app', 'Comment'),
+            'salary' => Yii::t('app', 'Salary'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];

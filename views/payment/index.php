@@ -18,9 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'options' => ['class' => 'rs-time-nav col-md-8'],
                 'linkTemplate' => '<a class="btn btn-default rs-btn__time" href="{url}"><span>{label}</span></a>',
                 'items' => [
-                    ['label' => Yii::t('app', 'All time'), 'url' => ['/payment/index'], 'active' => !Yii::$app->request->get('time')],
+                    ['label' => Yii::t('app', 'Current month'), 'url' => ['/payment/index'], 'active' => !Yii::$app->request->get('time')],
                     ['label' => Yii::t('app', 'Last month'), 'url' => ['/payment/index', 'time' => 'last-month']],
-                    ['label' => Yii::t('app', 'Current month'), 'url' => ['/payment/index', 'time' => 'current-month']],
+                    ['label' => Yii::t('app', 'All time'), 'url' => ['/payment/index', 'time' => 'all-time']],
                 ],
                 'encodeLabels' => false, 
                 'activateParents' => true ]); ?>
@@ -69,15 +69,29 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'sum',
                     'format'=>['decimal', 0]
                 ],
+                'customer_id',
                 'type_of_pay',
                 ['attribute' => 'date_of_payment', 'format' => ['date', 'php:d.m.Y']],
 
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{delete}',
+                    'template' => '{update} {delete}',
                     'buttons' => [
-                        'delete' => function ($url, $model) {
+                        
+                        'update' =>function ($url, $model) {
                          
+                            return Html::a(
+                                '<span class="glyphicon glyphicon-pencil"></span>', 
+                                ['update-in', 'id' => $model->id],
+                                [
+                                    'title' => Yii::t('app', 'Update'),
+                                    'data-pjax' => 0
+                                ]
+                            );
+                        },
+
+                        'delete' => function ($url, $model) {
+                            
                             return Html::a(
                                 '<span class="glyphicon glyphicon-trash"></span>', 
                                 ['delete-in', 'id' => $model->id],
@@ -123,14 +137,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'name',
                 'sum',
                 'type_of_pay',
+                [
+                    'attribute' => 'salary',
+                    'value' => function ($data) {
+                        return $data->salary ? 'Да' : 'Нет';
+                    }
+                ],
                 ['attribute' => 'date_of_payment', 'format' => ['date', 'php:d.m.Y']],
-
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{delete}',
+                    'template' => '{update} {delete}',
                     'buttons' => [
 
-                        'update' => false,
+                        'update' =>function ($url, $model) {
+                         
+                            return Html::a(
+                                '<span class="glyphicon glyphicon-pencil"></span>', 
+                                ['update-out', 'id' => $model->id],
+                                [
+                                    'title' => Yii::t('app', 'Update'),
+                                    'data-pjax' => 0
+                                ]
+                            );
+                        },
                         'delete' => function ($url, $model) {
                          
                             return Html::a(
