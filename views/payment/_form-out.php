@@ -44,7 +44,7 @@ use yii\jui\DatePicker;
                                                                                                 'dateFormat' => 'php:d.m.Y',
                                                                                             ])->widget(MaskedInput::className(), [
                                                                                                 'mask' => '99.99.9999'
-                                                                                            ])->textInput(['value' => date('d.m.Y')])->label(Yii::t('app', 'Date Of Payment')); ?>
+                                                                                            ])->textInput(['value' => $model->date_of_payment ? date('d.m.Y', $model->date_of_payment) : date('d.m.Y')])->label(Yii::t('app', 'Date Of Payment')); ?>
             </div>
             <div class="col-md-8">
                 <?= $form->field($model, 'comment')->textarea(['rows' => 1, 'placeholder' => 'Ваш комментарий']) ?>

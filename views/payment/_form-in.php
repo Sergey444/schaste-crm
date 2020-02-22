@@ -29,7 +29,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                     <?= $form->field($model, 'sum')->textInput(['type' => 'number']) ?>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <?= $form->field($model, 'type_of_pay')->dropDownList(  [
@@ -52,7 +52,7 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
                                                                         'dateFormat' => 'php:d.m.Y',
                                                                 ])->widget(MaskedInput::className(), [
                                                                     'mask' => '99.99.9999'
-                                                                ])->textInput(['value' => date('d.m.Y')])->label(Yii::t('app', 'Date Of Payment')); ?>
+                                                                ])->textInput(['value' => $model->date_of_payment ? date('d.m.Y', $model->date_of_payment) : date('d.m.Y')])->label(Yii::t('app', 'Date Of Payment')); ?>
                 </div>
             </div>
 
