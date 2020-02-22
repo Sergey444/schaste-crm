@@ -39,7 +39,7 @@ use yii\widgets\MaskedInput;
                 <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'Email')]) ?>
             </div>
             <div>
-                <? $model->birthday = Yii::$app->formatter->asDate($model->birthday, 'php:d.m.Y'); ?>
+                <? $model->birthday && $model->birthday = Yii::$app->formatter->asDate($model->birthday, 'php:d.m.Y'); ?>
                 <?=
                     $form->field($model, 'birthday')->widget(MaskedInput::className(), [
                         'mask' => '99.99.9999',
