@@ -40,8 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         'data-target' => '#createPaymentIn']) ?>
                 </div>
 
-                <?= Html::a( Yii::t('app', 'Set payment in'), ['payment-in'], ['class' => 'btn btn-success mg-bottom visible-xs visible-sm']) ?>
-                <?= Html::a( Yii::t('app', 'Set payment out'), ['payment-out'], ['class' => 'btn btn-danger visible-xs visible-sm']) ?>
+                <?= Html::a( Yii::t('app', 'Set payment in'), ['create-in'], ['class' => 'btn btn-success mg-bottom visible-xs visible-sm']) ?>
+                <?= Html::a( Yii::t('app', 'Set payment out'), ['create-out'], ['class' => 'btn btn-danger visible-xs visible-sm']) ?>
             </div>
         </div>
     </div>
