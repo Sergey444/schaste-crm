@@ -292,6 +292,8 @@ class ApiController extends Controller
      */
     protected function sendEmail($request)
     {
+        return true;
+        
         $phone = $request['phone'] ? $request['phone'] : 'не указан';
         $email = $request['email'] ? $request['email'] : 'не указан';
         $message = $request['message'] ? $request['message'] : 'не заполнено';

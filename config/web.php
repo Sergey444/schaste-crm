@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$mailer = require __DIR__.'/mailer.php';
 
 $config = [
     'id' => 'basic',
@@ -38,14 +39,7 @@ $config = [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => false,
-            'transport'        => [
-                'class'      => 'Swift_SmtpTransport',
-                'host'       => 'smtp.beget.com',//'smtp.yandex.ru',
-                'username'   => 'info@schaste-club.ru',
-                'password'   => 'Ctht;tymrf1',
-                'port'       => '465',
-                'encryption' => 'ssl',
-            ],
+            'transport'        => $mailer,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

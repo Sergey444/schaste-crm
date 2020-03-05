@@ -35,6 +35,7 @@ tests/_support/_generated
 
 # db
 /config/db.php
+/config/mailer.php
 
 #docker
 /docker
