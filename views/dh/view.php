@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'password_ftp',
                 'login_panel',
                 'password_panel',
+                'comment',
                 ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
                 ['attribute' => 'updated_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
             ],

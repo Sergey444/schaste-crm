@@ -189,6 +189,7 @@ return [
 
     'Passwords from sites' => 'Пароли от сайтов',
     'Create record' => 'Создать запись',
+    'Update record' => 'Редактировать запись',
     'Domens and hostings' => 'Домены и хостинги',
     'Domen name' => 'Доменное имя',
     'Host name' => 'Имя хоста',

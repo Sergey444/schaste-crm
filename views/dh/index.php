@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     }
                 ],
-
+                'comment',
                 ['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>
