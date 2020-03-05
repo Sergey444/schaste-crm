@@ -3,20 +3,17 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Group;
-use app\models\GroupSearch;
-use app\models\GroupCustomer;
+use app\models\Dh;
+use app\models\DhSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
-use yii\helpers\Url;
-
 /**
- * GroupController implements the CRUD actions for Group model.
+ * DhController implements the CRUD actions for Dh model.
  */
-class GroupController extends Controller
+class DhController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -45,18 +42,18 @@ class GroupController extends Controller
     }
 
     /**
-     * Lists all Group models.
+     * Lists all Dh models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $model = new Group();
+        $model = new Dh();
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
 
-        $searchModel = new GroupSearch();
+        $searchModel = new DhSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -67,7 +64,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Displays a single Group model.
+     * Displays a single Dh model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -75,18 +72,18 @@ class GroupController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => Group::find()->where(['group.id' => $id])->joinWith(['customers.customer'])->one()
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Group model.
+     * Creates a new Dh model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Group();
+        $model = new Dh();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -98,7 +95,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Updates an existing Group model.
+     * Updates an existing Dh model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -106,7 +103,7 @@ class GroupController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = Group::find()->where(['group.id' => $id])->joinWith(['customers.customer'])->one();
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -118,7 +115,7 @@ class GroupController extends Controller
     }
 
     /**
-     * Deletes an existing Group model.
+     * Deletes an existing Dh model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -127,42 +124,20 @@ class GroupController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * 
-     */
-    public function actionAddChild($id) 
-    {
-        $model = new GroupCustomer();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $id]);
-        }
-    }
-
-    /**
-     * 
-     */
-    public function actionDeleteChild($id, $group_id) 
-    {
-        if (GroupCustomer::findOne($id)->delete()) {
-            return $this->redirect(['update', 'id' => $group_id]);
-        }
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
-    }
-
-    /**
-     * Finds the Group model based on its primary key value.
+     * Finds the Dh model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Group the loaded model
+     * @return Dh the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Group::findOne($id)) !== null) {
+        if (($model = Dh::findOne($id)) !== null) {
             return $model;
         }
 

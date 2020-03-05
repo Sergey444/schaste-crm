@@ -151,7 +151,7 @@ $order = [
                         </div>
                         <div class="col-md-4">
                             <?= $form->field($model, 'customer_phone')->widget(MaskedInput::className(), [
-                                                                                'mask' => '9 (999) 999-99-99',
+                                                                                'mask' => '+9 (999) 999-99-99',
                                                                                 'clientOptions' => [
                                                                                     'removeMaskOnSubmit' => true,
                                                                                 ]

@@ -75,6 +75,8 @@ $config = [
                 'payment/update-out/<id:\d+>' => 'payment/update-out',
                 'journal' => 'journal/index',
                 'group' => 'group/index',
+                'message-from-site' => 'message-from-site/index',
+                'dh' => 'dh/index',
                 'group/view/<id:\d+>' => 'group/view',
                 'group/update/<id:\d+>' => 'group/update',
 

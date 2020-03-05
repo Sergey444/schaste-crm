@@ -186,4 +186,16 @@ return [
 
     'User role' => 'Роль пользователя',
     'Salary' => 'Зарплата',
+
+    'Passwords from sites' => 'Пароли от сайтов',
+    'Create record' => 'Создать запись',
+    'Domens and hostings' => 'Домены и хостинги',
+    'Domen name' => 'Доменное имя',
+    'Host name' => 'Имя хоста',
+    'Port' => 'Порт',
+    'Login FTP' => 'Логин FTP',
+    'Password FTP' => 'Пароль FTP',
+    'Login Panel' => 'Логин админ панели',
+    'Password Panel' => 'Пароль админ панели',
+    'Site on Bitrix' => 'Сайт на битриксе',
 ];
