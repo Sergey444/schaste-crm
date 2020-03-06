@@ -3,12 +3,19 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use \yii\helpers\ArrayHelper;
+
 use yii\widgets\MaskedInput;
 use yii\jui\DatePicker;
 
+use \app\models\Profile;
 /* @var $this yii\web\View */
 /* @var $model app\models\PaymentOut */
 /* @var $form ActiveForm */
+
+$users = ArrayHelper::map(Profile::find()->all(), 'id', 'fullName');
+
+$this->registerJsFile('@web/js/payment-out-form.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 <div class="payment-form-out">
 
@@ -52,8 +59,12 @@ use yii\jui\DatePicker;
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <?= $form->field($model, 'salary')->checkbox(['label' => Yii::t('app', 'Salary (set if payment is salary)'), 'value' => true]);?>
+            <div class="col-md-4">
+                <?= $form->field($model, 'salary')->checkbox(['label' => Yii::t('app', 'Salary (set if payment is salary)'), 'value' => true, 'data-name'=>'salary' ]); ?>
+            </div>
+
+            <div class="col-md-8" <?php if (!$model->salary) :?>style="display: none;"<?endif?> id="salary">
+                <?= $form->field($model, 'profile_id')->dropDownList($users, ['prompt' => Yii::t('app', 'Choose user') . '...']) ?>
             </div>
         </div>
 

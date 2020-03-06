@@ -49,14 +49,14 @@ class PaymentOutSearch extends PaymentOut
     {
         $arFilter = $this->getTime($params);
         
-        $query = PaymentOut::find()->where( $arFilter );
+        $query = PaymentOut::find()->where( $arFilter )->joinWith(['profile']);
         // add conditions that should always apply here
         $this->total = $query->sum('sum') ?? 0;
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> [
-                // 'attributes' => ['date_of_payment'],
+                'attributes' => ['name','sum', 'date_of_payment', 'salary', 'type_of_pay', 'profile.surname'],
                 'defaultOrder' => ['date_of_payment' => SORT_DESC]
             ],
             'pagination' => [

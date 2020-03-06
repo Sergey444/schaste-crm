@@ -136,6 +136,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 // ['class' => 'yii\grid\CheckboxColumn'],
                 'name',
                 'sum',
+                [
+                    'attribute'=>'profile.surname',
+                    'label' => Yii::t('app', 'User name'),
+                    'format' => 'raw',
+                    'value' => function ($data) {
+                        return Html::a($data->profile->fullName, ['/profile/view/', 'id' => $data->profile->id]);
+                     }
+                ],
                 'type_of_pay',
                 [
                     'attribute' => 'salary',

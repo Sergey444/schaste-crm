@@ -45,7 +45,7 @@ class PaymentOut extends \yii\db\ActiveRecord
     {
         return [
             [['name','sum'], 'required'],
-            [['sum', 'salary', 'created_at', 'updated_at'], 'integer'],
+            [['sum', 'salary', 'profile_id', 'created_at', 'updated_at'], 'integer'],
             [['comment'], 'string'],
             [['name', 'type_of_pay'], 'string', 'max' => 255],
             [['date_of_payment'], 'string'],
@@ -65,9 +65,18 @@ class PaymentOut extends \yii\db\ActiveRecord
             'type_of_pay' => Yii::t('app', 'Type Of Pay'),
             'date_of_payment' => Yii::t('app', 'Date Of Payment'),
             'comment' => Yii::t('app', 'Comment'),
+            'profile_id' => Yii::t('app', 'User'),
             'salary' => Yii::t('app', 'Salary'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfile() 
+    {
+        return $this->hasOne(Profile::className(), ['id' => 'profile_id']);
     }
 }

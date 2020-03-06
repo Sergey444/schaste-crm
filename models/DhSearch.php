@@ -47,6 +47,10 @@ class DhSearch extends Dh
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> [
+                'attributes' => ['name'],
+                'defaultOrder' => ['name' => SORT_ASC]
+            ]
         ]);
 
         $this->load($params);
