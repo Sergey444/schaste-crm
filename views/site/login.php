@@ -8,19 +8,26 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = Yii::t('app', 'Authorization');
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-    <p><?= Yii::t('app', 'Please fill out the following fields to login') ?>:</p>
+<style>
+.rs-left-menu {
+    display: none;
+}
+</style>
 
-    <div class="bg-white">
+<div class="site-login">
+    <div class="bg-white" style="margin: 0 auto; max-width: 400px; padding: 40px; margin-top: 50px;">
+    <h1><?= Html::encode($this->title) ?></h1>
+    <p><?//= Yii::t('app', 'Please fill out the following fields to login') ?></p>
+
+    
         <?php $form = ActiveForm::begin([
             'id' => 'login-form',
-            'layout' => 'horizontal',
+            // 'layout' => 'horizontal',
             'fieldConfig' => [
-                'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-                'labelOptions' => ['class' => 'col-lg-1 control-label'],
+                // 'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                // 'labelOptions' => ['class' => 'col-lg-1 control-label'],
             ],
         ]); ?>
 
@@ -29,11 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
 
             <?= $form->field($model, 'rememberMe')->checkbox([
-                'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+                // 'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
             ])->label(Yii::t('app', 'Remember Me')) ?>
 
             <div class="form-group">
-                <div class="col-lg-offset-1 col-lg-11">
+                <div class="">
                     <?= Html::submitButton(Yii::t('app', 'To login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
             </div>
