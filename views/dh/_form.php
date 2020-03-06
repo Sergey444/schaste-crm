@@ -50,8 +50,20 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="row">
+        <div class="col-md-4"><?= $form->field($model, 'host_name')->textInput(['maxlength' => true]);?></div>
+        <div class="col-md-4"><?= $form->field($model, 'host_login')->textInput(['maxlength' => true]);?></div>
+        <div class="col-md-4"><?= $form->field($model, 'host_password')->textInput(['maxlength' => true]);?></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"><?= $form->field($model, 'db_name')->textInput(['maxlength' => true]);?></div>
+        <div class="col-md-4"><?= $form->field($model, 'db_login')->textInput(['maxlength' => true]);?></div>
+        <div class="col-md-4"><?= $form->field($model, 'db_password')->textInput(['maxlength' => true]);?></div>
+    </div>
+
+    <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'is_bitrix')->checkbox();?>
+            <?//= $form->field($model, 'cms_id')->textInput();?>
         </div>
     </div>
     

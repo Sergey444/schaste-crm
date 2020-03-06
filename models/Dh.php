@@ -53,8 +53,8 @@ class Dh extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['comment'], 'string'],
-            [['port', 'is_bitrix', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'host', 'login_ftp', 'password_ftp', 'login_panel', 'password_panel'], 'string', 'max' => 255],
+            [['port', 'cms_id', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'host', 'login_ftp', 'password_ftp', 'login_panel', 'password_panel', 'host_name', 'host_login', 'host_password', 'db_name', 'db_login', 'db_password'], 'string', 'max' => 255],
         ];
     }
 
@@ -66,14 +66,20 @@ class Dh extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Domen name'),
-            'host' => Yii::t('app', 'Host name'),
+            'host' => Yii::t('app', 'Host'),
             'port' => Yii::t('app', 'Port'),
             'login_ftp' => Yii::t('app', 'Login FTP'),
             'password_ftp' => Yii::t('app', 'Password FTP'),
             'login_panel' => Yii::t('app', 'Login Panel'),
             'password_panel' => Yii::t('app', 'Password Panel'),
             'comment' => Yii::t('app', 'Comment'),
-            'is_bitrix' => Yii::t('app', 'Site on Bitrix'),
+            'cms_id' => Yii::t('app', 'CMS'),
+            'host_name' => Yii::t('app', 'Host name'),
+            'host_login' => Yii::t('app', 'Host login'),
+            'host_password' => Yii::t('app', 'Host password'),
+            'db_name' => Yii::t('app', 'Date base name'),
+            'db_login' => Yii::t('app', 'Date base login'),
+            'db_password' => Yii::t('app', 'Date base password'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
