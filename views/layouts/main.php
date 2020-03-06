@@ -58,7 +58,7 @@ AppAsset::register($this);
                 'url' => ['/message-from-site/index'], 'visible' => !Yii::$app->user->isGuest,
                 'options' => ['class'=>'visible-xs']],
 
-            [   'label' => '<i class="fas fa-key"></i> <span>' . Yii::t('app', 'Passwords from sites') . '</span>',
+            [   'label' => '<i class="fas fa-lock"></i> <span>' . Yii::t('app', 'Passwords from sites') . '</span>',
                 'url' => ['/dh/index'], 'visible' => Yii::$app->user->can('admin'),
                 'options' => ['class'=>'visible-xs']],
 
@@ -98,7 +98,7 @@ AppAsset::register($this);
                             ['label' => '<i class="fas fa-book"></i> <span>' . Yii::t('app', 'Club programs') . '</span>', 'url' => ['/program/index'], 'visible' => !Yii::$app->user->isGuest],
                             ['label' => '<i class="fas fa-layer-group"></i> <span>' . Yii::t('app', 'Groups') . '</span>', 'url' => ['/group/index'], 'visible' => !Yii::$app->user->isGuest],
                             ['label' => '<i class="fas fa-comments"></i> <span>' . Yii::t('app', 'Message from site') . '</span>', 'url' => ['/message-from-site/index'], 'visible' => !Yii::$app->user->isGuest],
-                            ['label' => '<i class="fas fa-key"></i> <span>' . Yii::t('app', 'Passwords from sites') . '</span>', 'url' => ['/dh/index'], 'visible' => Yii::$app->user->can('admin')],
+                            ['label' => '<i class="fas fa-lock"></i> <span>' . Yii::t('app', 'Passwords from sites') . '</span>', 'url' => ['/dh/index'], 'visible' => Yii::$app->user->can('admin')],
 
                             [
                                 'label' => '<i class="fas fa-globe-europe"></i> <span>' . Yii::t('app', 'Web site') . '</span>',

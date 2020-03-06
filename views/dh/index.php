@@ -44,41 +44,36 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                     'value' => function ($model) {
                         return Html::a($model->name, $model->name ,['target'=>'_blank', 'data-pjax'=>"0"] );
-                        // return '<a href="'. $model->name .'" target="_blank" >'. $model->name .'</a>';
+                    }
+                ],
+                [
+                    'attribute' => 'Хостинг',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        $host = $model->host ? $model->host : '<span class="not-set">(не задано)</span>';
+                        $port = $model->port ? $model->port : '<span class="not-set">(не задано)</span>';
+                        return '<div><i class="fa fa-server" aria-hidden="true"></i> '. $host .'</div>
+                                <div><i class="fa fa-plug" aria-hidden="true"></i> '. $port .'</div>';
                     }
                 ],
                 [
                     'attribute' => 'FTP / SFTP',
-                    'format' => 'html',
+                    'format' => 'raw',
                     'value' => function($model) {
-                        return '<table class="table table-bordered"><tbody>
-                                <tr><td>Имя хоста:</td><td>' . $model->host . '</td></tr>
-                                <tr><td>Порт:</td><td>'. $model->port .'</td></tr>
-                                <tr><td>Логин:</td><td>'. $model->login_ftp .'</td></tr>
-                                <tr><td>Пароль:</td><td>'. $model->password_ftp .'</td></tr>
-                                </tbody></table>';
+                        $login = $model->login_ftp ? $model->login_ftp : '<span class="not-set">(не задано)</span>';
+                        $passw = $model->password_ftp ? $model->password_ftp : '<span class="not-set">(не задано)</span>';
+                        return '<div><i class="fa fa-user" aria-hidden="true"></i> '. $login . '</div>
+                                <div><i class="fa fa-unlock" aria-hidden="true"></i> '. $passw .'</div>';
                     }
                 ],
                 [
                     'attribute' => 'Админ панель',
                     'format' => 'raw',
                     'value' => function($model) {
-                        $str = '<table class="table table-bordered"><tbody>
-                                <tr><td>Логин:</td><td>' . $model->login_panel . '</td></tr>
-                                <tr><td>Пароль:</td><td>' . $model->password_panel . '</td></tr>
-                                </tbody></table>';
-
-                        // $str .= $model->is_bitrix ? '<form action="'. $model->name .'/bitrix/admin/?login=yes" method="post">
-                        //         <input type="hidden" name="AUTH_FORM" value="Y">
-                        //         <input type="hidden" name="TYPE" value="AUTH">
-                        //         <input type="text" name="captcha_word" class="login-input" tabindex="5" autocomplete="off">
-                        //         <input type="hidden" name="sessid" id="sessid" value="">
-                        //         <input type="hidden" name="USER_LOGIN" value="'.$model->login_panel.'">
-                        //         <input type="hidden" name="USER_PASSWORD" value="'.$model->password_panel.'">
-                        //         <input type="submit" name="Login" value="Авторизоваться"></form>' : '';
-
-                        return $str;
-
+                        $login = $model->login_panel ? $model->login_panel : '<span class="not-set">(не задано)</span>';
+                        $passw = $model->password_panel ? $model->password_panel : '<span class="not-set">(не задано)</span>';
+                        return '<div><i class="fa fa-user" aria-hidden="true"></i> ' . $login . '</div>
+                                <div><i class="fa fa-unlock" aria-hidden="true"></i> ' . $passw . '</div>';
                     }
                 ],
                 'comment',
