@@ -25,7 +25,8 @@ class SignupForm extends Model
     public $date_of_birthday;
     public $phone;
     public $user_id;
-    public $teacher;
+    // public $teacher;
+    public $position_id;
 
     public $user;
 
@@ -56,7 +57,7 @@ class SignupForm extends Model
             ['name', 'required'],
 
             ['phone', 'safe'],
-            [['user_id', 'teacher'], 'integer'],
+            [['user_id', 'position_id'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],
             [['date_of_birthday'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_of_birthday'],
         ];
@@ -80,7 +81,9 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        $this->sendEmail($user) && $user->save();
+
+        // $this->sendEmail($user) &&
+         $user->save();
 
         $auth = Yii::$app->authManager;
         $authorRole = $auth->getRole('author');
@@ -93,7 +96,8 @@ class SignupForm extends Model
         $personal->date_of_birthday = $this->date_of_birthday ? strtotime($this->date_of_birthday) : null;
         $personal->phone = $this->phone ? $this->phone : null;
         $personal->user_id = $user->id;
-        $personal->teacher = $this->teacher;
+        // print_r($this->position_id);
+        $personal->position_id = $this->position_id;
         $personal->save();
 
         return $this->id = $personal->id;

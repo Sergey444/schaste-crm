@@ -4,13 +4,15 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use app\models\User;
-
 use yii\helpers\FileHelper;
 use yii\imagine\Image;
-// use Imagine\Image\Box;
+
+use app\models\User;
+use app\models\Position;
+
 /**
  * This is the model class for table "Profile".
+ * use Imagine\Image\Box;
  *
  * @property int $id
  * @property int $user_id
@@ -20,6 +22,7 @@ use yii\imagine\Image;
  * @property string $photo
  * @property int $date_of_birthday
  * @property int $phone
+ * @property int $position_id
  * @property int $created_at
  * @property int $updated_at
  */
@@ -56,9 +59,8 @@ class Profile extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['phone'], 'safe'],
-            // [['teacher'], 'default', 'value'=> 1],
             [['color'], 'default', 'value'=> '#fe17bf'],
-            [['user_id', 'teacher', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'position', 'created_at', 'updated_at'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],
             [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, HEVC, HEIF', 'maxSize' => 1024 * 1024 * 2],
             [['photo', 'address', 'color'], 'string'],
@@ -82,7 +84,7 @@ class Profile extends \yii\db\ActiveRecord
             'photo' => Yii::t('app', 'Photo'),
             'phone' => Yii::t('app', 'Phone'),
             'color' => Yii::t('app', 'Color'),
-            'teacher' => Yii::t('app', 'Teacher'),
+            'position' => Yii::t('app', 'Position'),
             'address' => Yii::t('app', 'Address'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -128,6 +130,13 @@ class Profile extends \yii\db\ActiveRecord
      */
     public function getUser() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPosition() {
+        return $this->hasOne(Position::className(), ['id' => 'position_id']);
     }
 
     /**

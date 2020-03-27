@@ -203,4 +203,10 @@ return [
     'Choose user' => 'Выберите пользователя',
     'User' => 'Пользователь',
     'User name' => 'Ф.И.О. пользователя',
+
+    'Setting' => 'Настройка',
+    'Settings' => 'Настройки',
+    'Title' => 'Название',
+    'Add new position' => 'Добавить новую должность',
+    'Show users with this position in the list of teachers' => 'Показывать пользователей с данной должностью в списке преподавателей',
 ];

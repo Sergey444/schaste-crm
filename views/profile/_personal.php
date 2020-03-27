@@ -61,13 +61,15 @@ use yii\jui\DatePicker;
             </div>
 
             <div class="row">
-                <?if ($model->teacher):?>
+                <?/*if ($model->teacher):?>
                     <div class="col-md-4">
                         <?= $form->field($model, 'color')->textInput(['type' => 'color'])->label(Yii::t('app', 'Calendar color')) ?>
                     </div>
-                <?endif?>
+                <?endif*/?>
                 <div class="col-md-4">
-                        <?= $form->field($model, 'teacher')->dropDownList([1 => 'Да'], ['prompt' => Yii::t('app', 'Нет')]) ?>
+                    <?$positions = \yii\helpers\ArrayHelper::map(\app\models\Position::find()->where(['show_teacher' => 1])->all(), 'id', 'name');?>
+                    <?= $form->field($model, 'position_id')->dropDownList($positions, ['prompt' => Yii::t('app', 'Не выбрана')]) ?>
+                    <?//= $form->field($model, 'teacher')->dropDownList([1 => 'Да'], ['prompt' => Yii::t('app', 'Нет')]) ?>
                 </div>
                 <div class="col-md-4" style="margin-top: 25px;">
                     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

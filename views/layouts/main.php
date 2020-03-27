@@ -64,6 +64,7 @@ AppAsset::register($this);
 
             ['label' => '<i class="far fa-address-card"></i> ' . Yii::t('app', 'Profile'), 'url' => ['/profile/index'], 'visible' => !Yii::$app->user->isGuest],
             ['label' => '<i class="fas fa-users-cog"></i> ' . Yii::t('app', 'Personals'), 'url' => ['/profile/users'], 'visible' => Yii::$app->user->can('admin')],
+            ['label' => '<i class="fas fa-cog"></i> ' . Yii::t('app', 'Settings'), 'url' => ['/setting'], 'visible' => Yii::$app->user->can('admin')],
 
             Yii::$app->user->isGuest ? (
                 ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']]

@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Profile');
                     </tr>
                     <tr>
                         <td><?= Yii::t('app', 'Teacher') ?></td>
-                        <td><?= $model->teacher ? 'Да' : 'Нет' ?></td>
+                        <td><?//= $model->teacher ? 'Да' : 'Нет' ?></td>
                     </tr>
                 </tbody>
             </table>

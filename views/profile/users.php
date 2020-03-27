@@ -83,13 +83,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     Yii::$app->formatter->asPhone($data->phone) .'</a>';
                     }
                 ],
-                [
-                    'attribute'=>'teacher',
-                    'format'=>'raw',
-                    'value' => function ($data) {
-                         return $data->teacher ? 'Да' : 'Нет';
-                    }
-                ],
+                // [
+                //     'attribute'=>'teacher',
+                //     'format'=>'raw',
+                //     'value' => function ($data) {
+                //          return $data->teacher ? 'Да' : 'Нет';
+                //     }
+                // ],
                 // ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
                 // ['attribute' => 'updated_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
 

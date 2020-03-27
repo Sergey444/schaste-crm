@@ -23,7 +23,7 @@ class ProfileSearch extends Profile
     public function rules()
     {
         return [
-            [['id', 'user_id', 'date_of_birthday', 'phone', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'user_id', 'date_of_birthday', 'position_id', 'phone', 'created_at', 'updated_at'], 'integer'],
             [['surname', 'name', 'secondname', 'username'], 'safe'],
         ];
     }
@@ -48,32 +48,18 @@ class ProfileSearch extends Profile
     {
         $query = Profile::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' =>  ['attributes' => ['username', 'color', 'teacher', 'name', 'secondname', 'surname', 'date_of_birthday', 'user_id','id','phone','created_at','updated_at']]
+            'sort' =>  ['attributes' => ['username', 'color', 'position_id', 'name', 'secondname', 'surname', 'date_of_birthday', 'user_id','id','phone','created_at','updated_at']]
         ]);
 
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'user_id' => $this->user_id,
-        //     'date_of_birthday' => $this->date_of_birthday,
-        //     'phone' => $this->phone,
-        //     'created_at' => $this->created_at,
-        //     'updated_at' => $this->updated_at,
-        // ]);
-
-        $query->joinWith( ['user'] );
+        $query->joinWith( ['user', 'position'] );
 
         $query->andFilterWhere([
             'or',
@@ -81,14 +67,6 @@ class ProfileSearch extends Profile
             ['like', 'name', $this->name],
             ['like', 'phone', $this->name]
         ]);
-        // ->andFilterWhere(['like', 'name', $this->name])
-        // ->andFilterWhere(['like', 'username', $this->username])
-        // ->andFilterWhere(['like', 'secondname', $this->secondname]);
-            
-        // $query->andFilterWhere(['like', 'surname', $this->name])
-        //     ->andFilterWhere(['like', 'name', $this->name])
-        //     ->andFilterWhere(['like', 'username', $this->username])
-        //     ->andFilterWhere(['like', 'secondname', $this->secondname]);
 
         return $dataProvider;
     }
