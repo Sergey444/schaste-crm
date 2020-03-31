@@ -81,9 +81,7 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-
-        // $this->sendEmail($user) &&
-         $user->save();
+        $this->sendEmail($user) && $user->save();
 
         $auth = Yii::$app->authManager;
         $authorRole = $auth->getRole('author');
@@ -96,7 +94,6 @@ class SignupForm extends Model
         $personal->date_of_birthday = $this->date_of_birthday ? strtotime($this->date_of_birthday) : null;
         $personal->phone = $this->phone ? $this->phone : null;
         $personal->user_id = $user->id;
-        // print_r($this->position_id);
         $personal->position_id = $this->position_id;
         $personal->save();
 

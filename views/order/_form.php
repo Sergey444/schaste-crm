@@ -99,7 +99,7 @@ $order = [
         </div>
 
         <div class="col-md-6">
-            <?$teachers = \yii\helpers\ArrayHelper::map(\app\models\Profile::find()->where(['position_id' => 1])->all(), 'id', 'fullName');?>
+            <?$teachers = \yii\helpers\ArrayHelper::map(\app\models\Profile::find()->joinWith('position')->where(['position.show_teacher' => 1])->all(), 'id', 'fullName');?>
             <?= $form->field($model, 'teacher_id')->dropDownList($teachers, ['prompt' => Yii::t('app', 'Choose teacher ...')]) ?>
         </div>
 

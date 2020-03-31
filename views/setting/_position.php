@@ -12,12 +12,12 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 ">
                 <?= $form->field($model, 'name')->label(Yii::t('app', 'Title')) ?>
             </div>
             <div class="col-md-4">
                 <div class="form-group mg-top-25">
-                    <?= Html::submitButton(Yii::t('app', 'Add new position'), ['class' => 'btn btn-primary d-block']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Add position'), ['class' => 'btn btn-primary d-block']) ?>
                 </div>
             </div>
         </div>

@@ -69,6 +69,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 'name',
                 // 'secondname',
                 [
+                    'label' => Yii::t('app', 'Position'),
+                    'attribute' => 'position.name',
+                ],
+                [
                     'attribute'=>'username',
                     'value' => function ($data) { 
                                 return $data->user->username;

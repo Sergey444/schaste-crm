@@ -25,16 +25,28 @@ $arPositions = ArrayHelper::toArray($positionProvider->getModels(), ['id','name'
 
         <div class="row">
             <div class="col-md-6">
-                <div class="bg-white">
+                <div class="bg-white mg-bottom">
                     <h4>Список должностей</h4>
 
                     <?= GridView::widget([
                         'dataProvider' => $positionProvider,
                         'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
+                            // ['class' => 'yii\grid\SerialColumn'],
                             [
                                 'attribute'=>'name',
                                 'label' => Yii::t('app', 'Title'),
+                            ],
+                            [
+                                'attribute' => 'show_teacher',
+                                'label' => Yii::t('app', 'Show in list'),
+                                'format' => 'raw',
+                                'value' => function ($data) {
+                                    $checked = $data->show_teacher ? 'checked' : '';
+                                    return '<div class="material-switch">
+                                                <input id="'.$data->id.'" name="show-teacher" type="checkbox" '.$checked.'/>
+                                                <label for="'.$data->id.'" class="label-primary"></label>
+                                            </div>';
+                                }
                             ],
                             [
                                 'class' => 'yii\grid\ActionColumn',

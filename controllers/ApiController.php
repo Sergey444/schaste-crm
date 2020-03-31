@@ -168,7 +168,8 @@ class ApiController extends Controller
      */
     public function actionGetTeachers()
     {
-        return Profile::find()->where(['position_id' => 1])->all();
+        // 'profile.id' => $model->teacher_id], 
+        return Profile::find()->joinWith('position')->where(['position.show_teacher' => 1])->all();
     }
 
     /**

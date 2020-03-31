@@ -13,7 +13,7 @@ use \app\models\Profile;
 /* @var $form yii\widgets\ActiveForm */
 
 $programs = ArrayHelper::map(Program::find()->all(), 'id', 'name');
-$teachers = ArrayHelper::map(Profile::find()->where(['position_id' => 1])->all(), 'id', 'fullName');
+$teachers = ArrayHelper::map(Profile::find()->joinWith('position')->where(['or', ['profile.id' => $model->teacher_id], ['position.show_teacher' => 1]])->all(), 'id', 'fullName');
 
 if (empty($teachers)) {
     $errors[] = '- создать <a href="/profile/users">преподавателей</a>.';
