@@ -52,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 .Yii::$app->formatter->asPhone($model->phone).'</a>';
                 },
             ],
+            'email',
             [
                 'attribute' => 'comment',
                 'value' => function ($model) {
@@ -59,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ], 
             ['attribute' => 'birthday', 'format' => ['date', 'php:d.m.Y']],
-            ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
+            // ['attribute' => 'created_at', 'format' => ['date', 'php:d.m.Y H:i:s']],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

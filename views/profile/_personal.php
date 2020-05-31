@@ -1,10 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
 
 use yii\jui\DatePicker;
+
+use app\models\Position;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Personal */
@@ -61,13 +64,14 @@ use yii\jui\DatePicker;
             </div>
 
             <div class="row">
-                <?if ($model->teacher):?>
+                <?if ($model->position->show_teacher):?>
                     <div class="col-md-4">
                         <?= $form->field($model, 'color')->textInput(['type' => 'color'])->label(Yii::t('app', 'Calendar color')) ?>
                     </div>
                 <?endif?>
                 <div class="col-md-4">
-                        <?= $form->field($model, 'teacher')->dropDownList([1 => 'Да'], ['prompt' => Yii::t('app', 'Нет')]) ?>
+                    <?$positions = ArrayHelper::map(Position::find()->all(), 'id', 'name');?>
+                    <?= $form->field($model, 'position_id')->dropDownList($positions, ['prompt' => Yii::t('app', 'Не выбрана')]) ?>
                 </div>
                 <div class="col-md-4" style="margin-top: 25px;">
                     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

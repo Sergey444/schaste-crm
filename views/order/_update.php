@@ -1,10 +1,14 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
+use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
 use yii\jui\DatePicker;
+
+use app\models\Profile;
+use app\models\Program;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Orders */
@@ -88,12 +92,12 @@ $this->registerJsFile('@web/js/order-form.js', ['depends' => [\yii\web\JqueryAss
         </div>
 
         <div class="col-md-3">
-            <?$programs = \yii\helpers\ArrayHelper::map(\app\models\Program::find()->all(), 'id', 'name');?>
+            <?$programs = ArrayHelper::map(Program::find()->all(), 'id', 'name');?>
             <?= $form->field($model, 'program_id')->dropDownList($programs, ['prompt' => Yii::t('app', 'Choose program ...')]) ?>
         </div>
 
         <div class="col-md-6">
-            <?$teachers = \yii\helpers\ArrayHelper::map(\app\models\Profile::find()->where(['teacher' => 1])->all(), 'id', 'fullName');?>
+            <? $teachers = ArrayHelper::map(Profile::find()->joinWith('position')->where(['or', ['profile.id' => $model->teacher_id], ['position.show_teacher' => 1]])->all(), 'id', 'fullName');?>
             <?= $form->field($model, 'teacher_id')->dropDownList($teachers, ['prompt' => Yii::t('app', 'Choose teacher ...')]) ?>
         </div>
     </div>

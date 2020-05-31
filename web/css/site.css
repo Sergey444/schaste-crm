@@ -2,68 +2,52 @@ html,
 body {
     height: 100%;
 }
-
 ul {
     list-style: none;
     padding: 0;
 }
-
 ol {
     padding-left: 15px;
 }
-
 body {
     background-color: #f5f5f5;
     /* background-image: url('../images/newspaper.jpg'); */
     /* background-size: cover; */
     /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Roboto", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;*/
 }
-
-
 table caption {
     padding-top: 0;
 }
-
-
-
 .breadcrumb {
     background-color: #fff;
 }
-
-
 .wrap {
     min-height: 100%;
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
 }
-
 .wrap > .container {
     padding: 70px 15px 20px;
 }
-
 .footer {
     height: 60px;
     background-color: #f5f5f5;
     border-top: 1px solid #ddd;
     padding-top: 20px;
 }
-
 .jumbotron {
     text-align: center;
     background-color: transparent;
 }
-
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;
 }
-
 .not-set {
     color: #c55;
     font-style: italic;
 }
-
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;
@@ -75,47 +59,37 @@ a.asc:after, a.desc:after {
     line-height: 1;
     padding-left: 5px;
 }
-
 a.asc:after {
     content: /*"\e113"*/ "\e151";
 }
-
 a.desc:after {
     content: /*"\e114"*/ "\e152";
 }
-
 .sort-numerical a.asc:after {
     content: "\e153";
 }
-
 .sort-numerical a.desc:after {
     content: "\e154";
 }
-
 .sort-ordinal a.asc:after {
     content: "\e155";
 }
-
 .sort-ordinal a.desc:after {
     content: "\e156";
 }
-
 .grid-view th,
 .grid-view td:last-child {
     white-space: nowrap;
 }
-
 .grid-view .filters input,
 .grid-view .filters select {
     min-width: 50px;
 }
-
 .hint-block {
     display: block;
     margin-top: 5px;
     color: #999;
 }
-
 .error-summary {
     color: #a94442;
     background: #fdf7f7;
@@ -129,37 +103,28 @@ a.desc:after {
     padding: 15px;
     border: none;
 }
-
-
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
     text-decoration: none;
 }
-
 .nav > li > form > button.logout:focus {
     outline: none;
 }
-
 /*-- --*/
-
 .bg-white {
     background-color: #fff;
     border-radius: 4px;
     padding: 10px;
     padding-top: 15px;
 }
-
-
 .d-flex {
     display: flex;
     align-items: flex-start;
 }
-
 .d-block {
     display: block;
     width: 100%;
 }
-
 .d-inline-block {
     display: inline-block!important;
 }
@@ -178,19 +143,13 @@ a.desc:after {
 .mg-right {
     margin-right: 20px;
 }
-
 .form-control {
     line-height: 1.40857143;
 }
-
 .t-right {
     text-align: right;
 }
-
 /*-- --*/
-
-
-
 .av-block {
     display: inline-block;
 }
@@ -228,12 +187,7 @@ a.desc:after {
 }
 
 .edit-photo-block {
-    /* position: absolute; */
     background-color: #fff;
-    /* bottom: 30px; */
-    /* right: 0; */
-    /* text-align: center; */
-    /* padding-top: 2px; */
 }
 
 .edit-photo-block .help-block {
@@ -317,7 +271,6 @@ html .add-photo-input {
 .rs-find-block {
     overflow-y: scroll;
     max-height: 230px;
-    /* display: block; */
     display: flex;
     flex-wrap: wrap;
 }
@@ -383,10 +336,6 @@ html .add-photo-input {
 }
 
 @media (max-width: 767px) {
-    /* .grid-view tr th:not(:nth-child(2)):not(:nth-child(3)):not(:last-child),
-    .grid-view tr td:not(:nth-child(2)):not(:nth-child(3)):not(:last-child) {
-        display: none;
-    } */
     .nav li > form > button.logout {
         display:block;
         text-align: left;
@@ -425,14 +374,10 @@ html .add-photo-input {
     }
 
 }
-
-
-
 /*menu left*/
 .nav > li > a:hover, .nav > li > a:focus {
     background-color: transparent;
 }
-
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus,
 .navbar-inverse .btn-link:hover, .navbar-inverse .btn-link:focus,
 .navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus,
@@ -553,13 +498,11 @@ input[aria-required="true"] + .help-block::before {
     }
 }
 /*/menu left*/
-
 .footer__content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
 .circle {
     width: 8px;
     height: 8px;
@@ -568,15 +511,12 @@ input[aria-required="true"] + .help-block::before {
     border-radius: 50%;
     margin-top: 6px;
 }
-
 .circle--red {
     background-color: red;
 }
-
-
 /*start Order*/
 .order-item .bg-white {
     border: 1px solid #ddd;
 }
-
 /*end Order*/
+

@@ -1,9 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
-
 use yii\widgets\MaskedInput;
+
+use app\models\Position;
+
+
 
 
 /* @var $this yii\web\View */
@@ -60,8 +64,9 @@ use yii\widgets\MaskedInput;
         ?>
         </div>
         <div class="col-md-4">
-                <?= $form->field($model, 'teacher')->dropDownList([1 => 'Да'], ['prompt' => Yii::t('app', 'Нет')]) ?>
-            
+            <? $positions = ArrayHelper::map(Position::find()->where(['show_teacher' => 1])->all(), 'id', 'name');?>
+            <?= $form->field($model, 'position_id')->dropDownList($positions, ['prompt' => Yii::t('app', 'Не выбрана')]) ?>
+            <?//= $form->field($model, 'teacher')->dropDownList([1 => 'Да'], ['prompt' => Yii::t('app', 'Нет')]) ?>
         </div>
     </div>
 
