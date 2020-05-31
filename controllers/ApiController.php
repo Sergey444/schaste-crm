@@ -293,8 +293,6 @@ class ApiController extends Controller
      */
     protected function sendEmail($request)
     {
-        return true;
-        
         $phone = $request['phone'] ? $request['phone'] : 'не указан';
         $email = $request['email'] ? $request['email'] : 'не указан';
         $message = $request['message'] ? $request['message'] : 'не заполнено';
@@ -304,8 +302,8 @@ class ApiController extends Controller
                 'Сообщение: '.$message;
 
         return Yii::$app->mailer->compose()
-                ->setFrom(['info@schaste-club.ru' => 'Детский клуб счастье'])
-                ->setTo('info@schaste-club.ru')
+                ->setFrom(['noreply@schaste-club.ru' => 'Детский клуб счастье'])
+                ->setTo('noreply@schaste-club.ru')
                 ->setSubject('Детский клуб счастье')
                 // ->setTextBody('Текст для body')
                 ->setHtmlBody($html)
