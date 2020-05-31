@@ -178,7 +178,10 @@ $order = [
 
     <div class="row">
         <div class="col-md-4">
-            <?= $form->field($model, 'checkbox_payment')->checkbox(['label' => Yii::t('app', 'Create payment'), 'data-name' => 'payment_create', 'checked' => true, 'value' => true]);?>
+            <?= $form->field($model, 'checkbox_payment')->checkbox(['label' => Yii::t('app', 'Create payment'), 
+                                                                    'data-name' => 'payment_create', 
+                                                                    'checked' => true, 
+                                                                    'value' => true]);?>
         </div>
         <div class="tab-pane fade in active" id="payment_date">
             <div class="col-md-4">

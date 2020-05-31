@@ -13,8 +13,6 @@ use yii\widgets\Pjax;
 $this->title =  Yii::t('app', 'Settings');
 $this->params['breadcrumbs'][] = Yii::t('app', 'Settings');
 
-// $this->registerJsFile('@web/js/personal.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
 $arPositions = ArrayHelper::toArray($positionProvider->getModels(), ['id','name','show_teacher']);
 
 ?>
@@ -24,14 +22,13 @@ $arPositions = ArrayHelper::toArray($positionProvider->getModels(), ['id','name'
     <?php Pjax::begin(); ?>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="bg-white mg-bottom">
                     <h4>Список должностей</h4>
 
                     <?= GridView::widget([
                         'dataProvider' => $positionProvider,
                         'columns' => [
-                            // ['class' => 'yii\grid\SerialColumn'],
                             [
                                 'attribute'=>'name',
                                 'label' => Yii::t('app', 'Title'),
@@ -41,11 +38,20 @@ $arPositions = ArrayHelper::toArray($positionProvider->getModels(), ['id','name'
                                 'label' => Yii::t('app', 'Show in list'),
                                 'format' => 'raw',
                                 'value' => function ($data) {
-                                    $checked = $data->show_teacher ? 'checked' : '';
-                                    return '<div class="material-switch">
-                                                <input id="'.$data->id.'" name="show-teacher" type="checkbox" '.$checked.'/>
-                                                <label for="'.$data->id.'" class="label-primary"></label>
-                                            </div>';
+                                    return $data->show_teacher ? '<span class="glyphicon glyphicon-ok"></span>' : '';
+                                    
+                                }
+                            ],
+                            [
+                                'attribute' => 'programs',
+                                'label' => Yii::t('app', 'Programs'),
+                                'format' => 'raw',
+                                'value' => function ($data) {
+                                    $html = '';
+                                    foreach ($data->programs as $key => $object) {
+                                        $html .= $object->program->name . '<br>';
+                                    }
+                                    return $html;
                                 }
                             ],
                             [
@@ -57,7 +63,7 @@ $arPositions = ArrayHelper::toArray($positionProvider->getModels(), ['id','name'
                                      
                                         return Html::a(
                                             '<span class="glyphicon glyphicon-pencil"></span>', 
-                                            ['update-in', 'id' => $model->id],
+                                            ['update-position', 'id' => $model->id],
                                             [
                                                 'title' => Yii::t('app', 'Update'),
                                                 'data-pjax' => 0
@@ -88,7 +94,7 @@ $arPositions = ArrayHelper::toArray($positionProvider->getModels(), ['id','name'
 
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="bg-white">
                     <?= $this->render('_position', [
                         'model' => $position,

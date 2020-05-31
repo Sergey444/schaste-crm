@@ -62,21 +62,44 @@ class SettingController extends \yii\web\Controller
         ]);
     }
 
+    /**
+     * @return string
+     */
+    public function actionUpdatePosition($id)
+    {
+        $model = $this->findPositionModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->render('update-position', [
+            'model' => $model,
+        ]);
+    }
+
 
     /**
      * Deletes an existing Position model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDeletePosition($id)
     {
-        if ($model = Position::findOne($id)) {
-            $model->delete();
-            return $this->redirect(['index']);
-        }
+        $this->findPositionModel($id)->delete();
 
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * 
+     */
+    private function findPositionModel($id)
+    {
+        if (($model = Position::findOne($id)) !== null) {
+            return $model;
+        }
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 }

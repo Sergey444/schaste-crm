@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\PositionProgram;
+
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -59,5 +61,13 @@ class Position extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPrograms()
+    {
+       return $this->hasMany(PositionProgram::className(), ['position_id' => 'id']);
     }
 }
