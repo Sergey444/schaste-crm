@@ -33,11 +33,13 @@ html caption {
     & th a.asc::after {
         content: "\f15d";
         font-family: "Font Awesome 5 Free";
+        font-weight: 600;
         margin-left: 10px;
     }
     & th a.desc::after {
         content: "\f881";
         font-family: "Font Awesome 5 Free";
+        font-weight: 600;
         margin-left: 10px;
     }
 }
@@ -185,5 +187,11 @@ html .modal-backdrop.show {
 
 a {
     color: $pink-color;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $pink-dark-color;
+    }
 }
 

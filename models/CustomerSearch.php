@@ -12,6 +12,10 @@ use app\models\Customer;
  */
 class CustomerSearch extends Customer
 {
+    /**
+     * @var string
+     */
+    public $search;
 
     /**
      * {@inheritdoc}
@@ -20,8 +24,8 @@ class CustomerSearch extends Customer
     {
         return [
             [['id', 'created_at', 'updated_at'], 'integer'],
-            [['term'], 'trim'],
-            [['child_name', 'parents_name', 'phone', 'email', 'comments', 'birthday', 'term'], 'safe'],
+            [['search'], 'trim'],
+            [['child_name', 'parents_name', 'phone', 'email', 'comment', 'truncateComment', 'birthday', 'search'], 'safe'],
         ];
     }
 
@@ -50,9 +54,10 @@ class CustomerSearch extends Customer
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder'=>[
-                'child_name' => SORT_ASC
-             ]],
+            'sort' => [
+                'attributes' => ['child_name', 'parents_name', 'email', 'phone', 'comment'],
+                'defaultOrder'=>['child_name' => SORT_ASC]
+            ],
         ]);
 
         $this->load($params);
@@ -63,20 +68,13 @@ class CustomerSearch extends Customer
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
-
         $query->andFilterWhere([
             'or',
-            ['like', 'email', $this->term],
-            ['like', 'child_name', $this->term],
-            ['like', 'parents_name', $this->term],
-            ['like', 'phone', str_replace([' ', '(', ')', '+', '-'], '', $this->term)],
-            ['like', 'comment', $this->term]
+            ['like', 'email', $this->search],
+            ['like', 'child_name', $this->search],
+            ['like', 'parents_name', $this->search],
+            ['like', 'phone', str_replace([' ', '(', ')', '+', '-'], '', $this->search)],
+            ['like', 'comment', $this->search]
         ]);
 
         return $dataProvider;
