@@ -5,8 +5,8 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use yii\bootstrap4\Nav;
+use yii\bootstrap4\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -34,7 +34,7 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-expand-lg fixed-top',
         ],
     ]);
     echo Nav::widget([
@@ -83,7 +83,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="" style="padding-top: 70px; ">
+    <div class="" style="">
         <div class="container-fluid rs-content">
             <div class="rs-left-menu">
                 <?

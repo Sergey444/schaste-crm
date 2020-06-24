@@ -1,0 +1,165 @@
+{{ register_asset_bundle('app/assets/AppAsset') }}
+{{ void(this.beginPage()) }}
+
+{{ use('yii/widgets') }}
+
+<!DOCTYPE html>
+<html lang="{{ app.language }}">
+    <head>
+        <meta charset="{{ app.charset }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ html.encode(this.title) }}</title>
+        {{ html.csrfMetaTags | raw }}
+        
+        {{ void(this.head) }}
+    </head>
+    <body>
+
+        {{ void(this.beginBody()) }}
+
+        <div class="wrap">
+            {{ nav_bar_begin({
+                'innerContainerOptions': {'class': 'container-fluid'},
+                'brandLabel': app.name,
+                'brandUrl' : app.homeUrl,
+                'options' : {
+                    'class' : 'rs-navbar navbar-expand-lg fixed-top',
+                }
+            }) }}
+
+            {% set menuItems = [] %}
+
+            {% if app.user.isGuest == false %}
+                {% set menuItems = menuItems|merge([
+
+                    {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Order"), 'url': ['/order/index'], '!visible': app.user.isGues, 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-calendar-alt"></i> '~ lang('app', 'Journal'), 'url': ['/journal/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-child"></i> '~ lang('app', 'Club customers'), 'url': ['/customer/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-book"></i> '~ lang('app', 'Club programs'), 'url': ['/program/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-layer-group"></i> '~ lang('app', 'Groups'), 'url': ['/group/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-comments"></i> '~ lang('app', 'Message from site'), 'url': ['/message-from-site/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], '!visible': app.user.can('admin'), 'options': {'class': 'd-lg-none'}},
+
+                   
+                    {'label' : '<i class="far fa-address-card"></i> Профиль', 'url' : ['profile/index']},
+                    {'label' : '<i class="fas fa-users-cog"></i> Управление пользователями', 'url' : ['/profile/users']},
+                    {'label' : '<i class="fas fa-cog"></i> Настройки', 'url' : ['/setting/index']},
+                    {
+                        'label' : '<i class="fas fa-door-open"></i> (' ~ app.user.identity.username ~ ')',
+                        'url' : ['/site/logout'],
+                        'linkOptions' : {'data-method' : 'post'}
+                    }
+                ]) %}
+
+            {% else %}
+
+                {% set menuItems = menuItems|merge([
+                    {'label' : 'Личный кабинет', 'url' : ['/site/login']},
+                ]) %}
+
+            {% endif %}
+
+            {{ nav_widget({
+                'options': {
+                    'class': 'navbar-nav ml-auto',
+                },
+                'encodeLabels': false,
+                'items': menuItems
+            }) }}
+
+            {{ nav_bar_end() }}
+      
+            {% if app.user.isGuest == false %}
+                <div class="container-fluid">
+                    <div class="d-md-flex">
+
+                        <nav class="nav d-none d-lg-block sidebar mr-4">
+                        {% set menuItems = [
+                            {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Order"), 'url': ['/order/index'], '!visible': app.user.isGues},
+                            {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], '!visible': app.user.isGuest},
+                            {'label': '<i class="fas fa-calendar-alt"></i> '~ lang('app', 'Journal'), 'url': ['/journal/index'], '!visible': app.user.isGuest},
+                            {'label': '<i class="fas fa-child"></i> '~ lang('app', 'Club customers'), 'url': ['/customer/index'], '!visible': app.user.isGuest},
+                            {'label': '<i class="fas fa-book"></i> '~ lang('app', 'Club programs'), 'url': ['/program/index'], '!visible': app.user.isGuest},
+                            {'label': '<i class="fas fa-layer-group"></i> '~ lang('app', 'Groups'), 'url': ['/group/index'], '!visible': app.user.isGuest},
+                            {'label': '<i class="fas fa-comments"></i> '~ lang('app', 'Message from site'), 'url': ['/message-from-site/index'], '!visible': app.user.isGuest},
+                            {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], '!visible': app.user.can('admin')},
+
+                            {
+                                'label': '<i class="fas fa-globe-europe"></i> '~ lang('app', 'Web site'),
+                                'url': 'https://schaste-club.ru',
+                                '!visible': app.user.isGuest,
+                                'options': {'class': 'link-bottom link-bottom--site'},
+                                'linkOptions': {'target': '_blank'}
+                            },{
+                                'label': '<i class="fab fa-wikipedia-w"></i> '~ lang('app', 'Documents'),
+                                'url': 'https://wiki.schaste-club.ru',
+                                '!visible': app.user.isGuest,
+                                'options': {'class': 'link-bottom'},
+                                'linkOptions': {'target': '_blank'}
+                            },
+                        ] %}
+
+                        {{ nav_widget({
+                            'options': {
+                                'class': 'd-block sidebar-sticky bg-white pb-5',
+                            },
+                            'encodeLabels': false,
+                            'items': menuItems
+                        }) }}
+                        </nav>
+
+
+                        <main class="flex-fill ml-sm-auto">
+
+                            {{ breadcrumbs_widget({
+                                'links' : this.params['breadcrumbs'] ? this.params['breadcrumbs'] : [],
+                                'homeLink': {'label': 'Главная', 'url': '/'},
+                                'options': {
+                                    'class': 'bg-white mb-4'
+                                }
+                            }) | raw }}
+
+                            {% if ( app.session.hasFlash('success') ) %}
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    {{ app.session.getFlash('success') }}
+                                </div>
+                            {% endif %}
+
+                            {% if ( app.session.hasFlash('error') ) %}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    {{ app.session.getFlash('error') }}
+                                </div>
+                            {% endif %}
+
+                            {{ content | raw }}
+                        </main>
+
+                    </div>
+                </div>
+        {% else %}
+            <div class="container-fluid">
+                <div class="row flex-xl-nowrap">
+                    <main class="col-md-12  bd-content">
+                        {{ content | raw}}
+                    </main>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+
+        <footer class="navbar navbar-light bg-light mt-4">
+            <div class="container-fluid">
+                <div class="pull-left mt-2 mb-2">{{ app.name | raw }} &copy;{{ 'now'|date('Y') }}</div>
+                <div class="pull-right">Техническая поддержка: <a href="mailto:support@schaste-club.ru">support@schaste-club.ru</a></div>
+            </div>
+        </footer>
+
+        {# <script src="https://kit.fontawesome.com/a4eb6dc731.js" crossorigin="anonymous"></script> #}
+
+        {{ void(this.endBody()) }}
+    </body>
+</html>
+{{ void(this.endPage()) }}

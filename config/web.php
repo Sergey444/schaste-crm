@@ -106,8 +106,31 @@ $config = [
             // 'thousandSeparator' => ',',
             // 'currencyCode' => 'USD'
         ],
+        'view' => [
+            'class' => 'yii\web\View',
+            'renderers' => [
+                'twig' => [
+                    'class' => 'yii\twig\ViewRenderer',
+                    'cachePath' => '@runtime/Twig/cache',
+                    // Array of twig options:
+                    'options' => [
+                        'auto_reload' => true,
+                    ],
+                    'globals' => [
+                        'html' => ['class' => '\yii\helpers\Html'],
+                        'array_helper' => ['class' => 'yii\helpers\ArrayHelper'],
+                        'date_picker' => ['class' => 'yii\jui\DatePicker']
+                    ],
+                    'uses' => ['yii\bootstrap4'],
+                    'functions' => array(
+                        'lang' => 'Yii::t',
+                    ),
+                ],
+            ],
+        ]
     ],
     'params' => $params,
+    'layout' => 'main.twig',
 ];
 
 if (YII_ENV_DEV) {

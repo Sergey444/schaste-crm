@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= GridView::widget([
             'dataProvider' => $dataProviderPaymentIn,
             'tableOptions' => [
-                'class' => 'table table-bordered table-payment-in'
+                'class' => 'table table-sm table-striped table-bordered'
             ],
             'columns' => [
                 // ['class' => 'yii\grid\SerialColumn'],
@@ -129,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= GridView::widget([
             'dataProvider' => $dataProviderPaymentOut,
             'tableOptions' => [
-                'class' => 'table table-bordered table-payment-out'
+                'class' => 'table table-sm table-striped table-bordered'
             ],
             'columns' => [
                 // ['class' => 'yii\grid\SerialColumn'],
