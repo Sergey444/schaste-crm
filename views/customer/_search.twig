@@ -18,7 +18,7 @@
 
     <div class="row">
         <div class="col-8">
-            {{ form.field(model, 'search').textInput({'placeholder': 'Поиск', 'class': 'form-control form-control-sm'}).label(false) | raw }}
+            {{ form.field(model, 'search').textInput({'placeholder': 'Поиск', 'class': 'form-control form-control-sm', 'autocomplete': 'off'}).label(false) | raw }}
         </div>
         <div class="col-4" >
               <div class="form-group">
