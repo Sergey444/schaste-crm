@@ -11,6 +11,8 @@ use app\models\PaymentIn;
 use app\models\Profile;
 
 use yii\validators\Validator;
+use \yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "order".
  *
@@ -246,5 +248,22 @@ class Order extends \yii\db\ActiveRecord
         return '<a href="/order/view/'. $this->id .'">'. $this->name .'</a> '.
             $this->sum .'р '. $this->program->name .' <b>'. 
             Yii::$app->formatter->asDate($this->date_start, 'php:d.m.Y') .'</b> - <b>'. Yii::$app->formatter->asDate($this->date_end, 'php:d.m.Y') .'</b>';
+    }
+
+    /**
+     * Returns teacher list
+     * @return array
+     */
+    public function getTeacherList()
+    {
+        return ArrayHelper::map(Profile::find()->joinWith('position')->where(['position.show_teacher' => 1])->all(), 'id', 'fullName');
+    }
+
+    /**
+     * Returns teacher list
+     */
+    public function getProgramList()
+    {
+        return ArrayHelper::map(Program::find()->all(), 'id', 'name');
     }
 }

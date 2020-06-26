@@ -1,0 +1,99 @@
+{{ use('\\yii\\helpers\\StringHelper') }}
+
+
+<div class="bg-white" style="border: 1px solid #ddd;">
+    <table class="table table-sm">
+        <caption class=""> <span class="">{{ model.name }}</span> </caption>
+        <thead></thead>
+        <tbody>
+            <tr>
+                <td>{{ lang('app', 'Child name')}}</td>
+                <td>
+                    {% if model.customer.id %}
+                        {{ html.a(model.customer.child_name, path('customer/view', {'id': model.customer.id}), {'data-pjax': 0}) | raw }}
+                    {% else %}
+                        <span class="not-set">(не задано)</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+             <tr>
+                <td>{{ lang('app', 'Teacher') }}</td>
+                <td>
+                    {% if model.teacher.id %}
+                        {{ html.a(model.teacher.fullName, path('profile/view', {'id': model.teacher.id}), {'data-pjax': 0}) | raw }}
+                    {% else %}
+                        <span class="not-set">(не задано)</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>{{ lang('app', 'Program') }}</td>
+                <td>
+                    {% if model.program.id %}
+                        {{ html.a(model.program.name, path('program/view', {'id': model.program.id}), {'data-pjax': 0}) | raw }}
+                    {% else %}
+                        <span class="not-set">(не задано)</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>{{ lang('app', 'Count') }}</td>
+                <td>{{model.count}}</td>
+            </tr>
+            <tr>
+                <td>{{ lang('app', 'Sum') }}</td>
+                <td>{{ app.formatter.format(model.sum, ['decimal', 0]) }} р.
+            </tr>
+            <tr>
+                <td>{{ lang('app', 'Payment') }}</td>
+                <td>
+                    {% if model.payment_in.id %}
+                        {{ html.a(model.payment_in.name, path('paimentIn/view', {'id': model.payment_in.id}), {'data-pjax': 0}) | raw }}
+                    {% else %}
+                        <span class="not-set">(не задано)</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>{{ lang('app', 'Date Start') }}</td>
+                <td>{{ app.formatter.asDate(model.date_start, 'php:d.m.Y') }}</td>
+            </tr>
+            <tr>
+                <td>{{ lang('app', 'Date End') }}</td>
+                <td>{{ app.formatter.asDate(model.date_end, 'php:d.m.Y') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between">
+        <div class="text-secondary">
+            <span class="text-right" >{{lang('app', 'Created At')}}: {{ app.formatter.asDate(model.created_at, 'php:d.m.Y') }}</span>
+        </div>
+        <div style="">
+            {{ html.a(
+                '<span class="glyphicon glyphicon-eye-open"></span>',
+                path('view', {'id': model.id}),
+                {'data-pjax': 0}
+            ) | raw }}
+
+            {{ html.a(
+                '<span class="glyphicon glyphicon-pencil"></span>',
+                path('update', {'id': model.id}),
+                {'data-pjax': 0}
+            ) | raw }}
+
+            {{ html.a(
+                '<span class="glyphicon glyphicon-trash"></span>',
+                path('delete', {'id': model.id}),
+                {'data': {
+                    'confirm': 'Вы уверены что хотите удалить запись?',
+                    'method': 'post',
+                    'pjax': 0
+                }}
+            ) | raw }}
+        </div>
+    </div>
+</div>

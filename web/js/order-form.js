@@ -1,47 +1,4 @@
 /**
- * Count sum when change unit price and count inputs
- */
-// (function () {
-//     var unitPriceInput = $('#order-unit_price');
-//     var countInput = $('#order-count');
-//     var saleInput = $('#order-sale');
-//     var sumInput = $('#order-sum');
-
-//     var unitPrice = 0;
-//     var count = 1;
-//     var sale = 0;
-
-//     /**
-//      * Count sum handler
-//      *
-//      * @return {Void}
-//      */
-//     var countSumHandler = function () {
-//         var sum = count * unitPrice - sale;
-//         if (sum > 0) {
-//             return $(sumInput).val(sum);
-//         }
-//         return $(sumInput).val('');
-//     }
-
-//     $(unitPriceInput).on('input', function (evt) {
-//         unitPrice = $(this).val();
-//         countSumHandler();
-//     });
-
-//     $(countInput).on('input', function (evt) {
-//         count = $(this).val();
-//         countSumHandler();
-//     });
-
-//     $(saleInput).on('input', function (evt) {
-//         sale = $(this).val();
-//         countSumHandler()
-//     });
-// }());
-
-
-/**
  * Search customers
  */
 (function () {
