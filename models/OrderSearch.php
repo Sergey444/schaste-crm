@@ -57,10 +57,10 @@ class OrderSearch extends Order
             'query' => $query,
             'sort'=> [
                 'attributes' => ['name', 'customer.child_name', 'payment_in.date_of_payment', 'count', 'unit_price', 'sum', 'status', 'date_start', 'date_end', 'program_id', 'customer_id', 'created_at', 'updated_at'],
-                'defaultOrder' =>   [
-                                        'payment_in.date_of_payment' => SORT_DESC,
-                                        'created_at' => SORT_DESC
-                                    ]
+                'defaultOrder' => [
+                    'payment_in.date_of_payment' => SORT_DESC,
+                    'created_at' => SORT_DESC,
+                ]
             ],
             'pagination' => [
                 'pageSize' => 9,
@@ -74,22 +74,6 @@ class OrderSearch extends Order
             // $query->where('0=1');
             return $dataProvider;
         }
-
-        // grid filtering conditions
-        // $query->andFilterWhere([
-        //     'id' => $this->id,
-        //     'count' => $this->count,
-        //     // 'customer' => $this->customer->child_name,
-        //     'unit_price' => $this->unit_price,
-        //     'sum' => $this->sum,
-        //     'status' => $this->status,
-        //     'date_start' => $this->date_start,
-        //     'date_end' => $this->date_end,
-        //     'program_id' => $this->program_id,
-        //     'customer_id' => $this->customer_id,
-        //     'created_at' => $this->created_at,
-        //     'updated_at' => $this->updated_at,
-        // ]);
 
         $query->andFilterWhere([
             'or',

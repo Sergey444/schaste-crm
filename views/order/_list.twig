@@ -59,11 +59,11 @@
             </tr>
             <tr>
                 <td>{{ lang('app', 'Date Start') }}</td>
-                <td>{{ app.formatter.asDate(model.date_start, 'php:d.m.Y') }}</td>
+                <td>{{ app.formatter.asDate(model.date_start, 'php:d.m.Y') | raw }}</td>
             </tr>
             <tr>
                 <td>{{ lang('app', 'Date End') }}</td>
-                <td>{{ app.formatter.asDate(model.date_end, 'php:d.m.Y') }}</td>
+                <td>{{ app.formatter.asDate(model.date_end, 'php:d.m.Y') | raw }}</td>
             </tr>
         </tbody>
     </table>

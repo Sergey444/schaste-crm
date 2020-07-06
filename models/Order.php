@@ -105,13 +105,13 @@ class Order extends \yii\db\ActiveRecord
             [['customer_new_name', 'parents_new_name', 'customer_phone'], 'required', 'when' => function($model) {
                 return $model->type_customer == 'new';
             }, 'whenClient' => "function (attribute, value) {
-                return $('[data-name=type_customer]:checked').val() == 'new';
+                return $('[data-name=type_of_customer]:checked').val() == 'new';
             }"],
 
             [['customer_name'], 'required', 'when' => function($model) {
                 return $model->type_customer == 'old';
             }, 'whenClient' => "function (attribute, value) {
-                return $('[data-name=type_customer]:checked').val() == 'old';
+                return $('[data-name=type_of_customer]:checked').val() == 'old';
             }"],
 
             [['date_payment', 'type_of_pay'], 'string'],

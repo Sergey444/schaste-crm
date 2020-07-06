@@ -37,12 +37,10 @@
     var drawSelect = function (customers, value) {
         clearId();
         closeSelect();
-        // $('.rs-add-to-order').css('display', 'none');
         $(customers).each(function (index, customer) {
             if (customer.child_name === value) {
                 return $('#order-customer_id').val( customer.id );
             }
-            // $('.rs-add-to-order').css('display', 'block');
             $('#rs-find-block').append('<tr><td onclick="chooseCustomers(this)" class="rs-customer" data-name="customer" data-id="' + customer.id + '">' + customer.child_name + '</td></tr>');
             $('.rs-add-to-order').show();
         });
@@ -74,6 +72,8 @@
     });
 
     $('#order-customer_name').on('input focus', function (evt) {
+        console.log('here');
+        
         var value = $.trim( $(this).val() );
         if (value.length > 1) {
             return getCustomers(value);
@@ -90,8 +90,11 @@
     });
 
 
-    $('[data-name="type_customer"]').on('change', function (evt) {
-        $(this).tab('show');
+    $('[data-name="type_of_customer"]').on('change', function (evt) {
+        var value = $(this).val();
+        $('.rs-order__customer').hide('200');
+        $('#' + value).show('200');
+        // $(this).tab('show');
     });
 
     $('[data-name="payment_create"]').on('change', function (evt) {

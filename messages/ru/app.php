@@ -210,4 +210,6 @@ return [
     'Add position' => 'Добавить должность',
     'Show users with this position in the list of teachers' => 'Показывать пользователей с данной должностью в списке преподавателей',
     'Position' => 'Должность',
+
+    'Update Orders' => 'Редактировать заказ'
 ];
