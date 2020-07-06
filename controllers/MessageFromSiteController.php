@@ -55,7 +55,7 @@ class MessageFromSiteController extends Controller
         $searchModel = new MessageFromSiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('index.twig', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -69,7 +69,7 @@ class MessageFromSiteController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->render('view.twig', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -91,7 +91,7 @@ class MessageFromSiteController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->render('update.twig', [
             'model' => $model,
         ]);
     }

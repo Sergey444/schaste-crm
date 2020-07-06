@@ -1,0 +1,17 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\MessageFromSite */
+#}
+{{ set(this, 'title', lang('app', 'Update Message From Site')) }}
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Message from site'), 'url': '/message-from-site' }, {'label' : this.title }] }) }}
+
+<div class="message-from-site-update">
+
+    <div class="bg-white">
+        <h3>Страница редактирования сообщений</h3><hr />
+        {{ this.render('_form.twig', {
+            'model': model,
+        }) | raw }}
+    </div>
+
+</div>

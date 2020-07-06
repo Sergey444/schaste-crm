@@ -1,0 +1,51 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\MessageFromSite */
+#}
+
+{{ use('yii/widgets/DetailView') }}
+
+{{ set(this, 'title', model.name) }}
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Message from site'), 'url': '/message-from-site' }, {'label' : this.title }] }) }}
+
+<div class="message-from-site-view">
+
+    <div class="bg-white mb-4">
+        <p>
+            {{ html.a('Редактировать', path('update', {'id': model.id}), {
+                class: 'btn btn-outline-primary btn-sm mr-2'
+            }) | raw }}
+            {{ html.a('Удалить', path('delete', {'id': model.id}), {
+                class: 'btn btn-outline-danger btn-sm',
+                data: {
+                    confirm: 'Вы уверены что хотите удалить данную запись?',
+                    method: 'post'
+                }
+            }) | raw }}
+        </p>
+    </div>
+
+    <div class="bg-white">
+
+        {{ detail_view_widget({
+                'model': model,
+                'options': {
+                    'class': 'table table-sm table-bordered' 
+                },
+                'attributes': [
+                    'id',
+                    'title',
+                    'name',
+                    {'attribute': 'phone', 'format': ['phone']},
+                    'email:email',
+                    'message:ntext',
+                    'page',
+                   
+                    {'attribute': 'created_at', 'format': ['date', 'php:d.m.Y H:i:s']},
+                    {'attribute': 'updated_at', 'format': ['date', 'php:d.m.Y H:i:s']},
+                ]
+            }) 
+        }}
+
+    </div>
+</div>
