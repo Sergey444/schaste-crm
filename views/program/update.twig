@@ -1,0 +1,18 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Program */
+#}
+{{ set(this, 'title', lang('app', 'Update Program')) }}
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Programs'), 'url': '/program' }, {'label' : this.title }] }) }}
+
+
+<div class="program-update">
+
+    <div class="bg-white">
+        <h3>Страница редактирования программы</h3><hr />
+        {{ this.render('_form.twig', {
+            'model': model,
+        }) | raw }}
+    </div>
+
+</div>
