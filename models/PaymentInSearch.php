@@ -54,7 +54,7 @@ class PaymentInSearch extends PaymentIn
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> [
-                // 'attributes' => ['date_of_payment'],
+                'attributes' => ['name', 'date_of_payment', 'sum', 'customer.child_name', 'type_of_pay'],
                 'defaultOrder' => [
                     'date_of_payment' => SORT_DESC,
                     'created_at' => SORT_DESC,
@@ -72,18 +72,6 @@ class PaymentInSearch extends PaymentIn
             // $query->where('0=1');
             return $dataProvider;
         }
-
-      
-
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'name' => $this->name,
-            'sum' => $this->sum,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'sum', $this->sum]);
 
         return $dataProvider;
     }
