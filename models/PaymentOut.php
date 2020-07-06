@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
+use \yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "payment_out".
  *
@@ -45,11 +47,18 @@ class PaymentOut extends \yii\db\ActiveRecord
     {
         return [
             [['name','sum'], 'required'],
-            [['sum', 'salary', 'profile_id', 'created_at', 'updated_at'], 'integer'],
+            [['sum','profile_id', 'created_at', 'updated_at'], 'integer'],
             [['comment'], 'string'],
             [['name', 'type_of_pay'], 'string', 'max' => 255],
             [['date_of_payment'], 'string'],
             [['date_of_payment'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_of_payment'],
+
+            [['salary'], 'safe'],
+            [['profile_id'], 'required', 'when' => function($model) {
+                return $model->salary == '1';
+            }, 'whenClient' => "function (attribute, value) {
+                return $('[data-name=salary]:checked').val() == '1';
+            }"],
         ];
     }
 
@@ -78,5 +87,15 @@ class PaymentOut extends \yii\db\ActiveRecord
     public function getProfile() 
     {
         return $this->hasOne(Profile::className(), ['id' => 'profile_id']);
+    }
+
+    
+    /**
+     * Returns user list
+     * @return array
+     */
+    public function getUserList()
+    {
+        return ArrayHelper::map(Profile::find()->all(), 'id', 'fullName');
     }
 }

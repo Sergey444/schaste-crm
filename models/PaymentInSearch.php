@@ -47,7 +47,7 @@ class PaymentInSearch extends PaymentIn
     {
         $arFilter = $this->getTime($params);
         
-        $query = PaymentIn::find()->where( $arFilter ); 
+        $query = PaymentIn::find()->joinWith('customer')->where($arFilter); 
         // add conditions that should always apply here
         $this->total = $query->sum('sum') ?? 0;
 
@@ -55,7 +55,10 @@ class PaymentInSearch extends PaymentIn
             'query' => $query,
             'sort'=> [
                 // 'attributes' => ['date_of_payment'],
-                'defaultOrder' => ['date_of_payment' => SORT_DESC]
+                'defaultOrder' => [
+                    'date_of_payment' => SORT_DESC,
+                    'created_at' => SORT_DESC,
+                ]
             ],
             'pagination' => [
                 'pageSize' => 10,

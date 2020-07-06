@@ -72,8 +72,6 @@
     });
 
     $('#order-customer_name').on('input focus', function (evt) {
-        console.log('here');
-        
         var value = $.trim( $(this).val() );
         if (value.length > 1) {
             return getCustomers(value);

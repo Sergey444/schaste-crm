@@ -5,8 +5,6 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
-use app\models\Order;
-
 /**
  * This is the model class for table "payment_in".
  *
@@ -57,7 +55,7 @@ class PaymentIn extends \yii\db\ActiveRecord
             [['sum', 'order_id', 'customer_id', 'created_at', 'updated_at'], 'integer'],
             [['comment'], 'string'],
             [['name', 'type_of_pay'], 'string', 'max' => 255],
-            [['date_of_payment'], 'string'],
+            [['date_of_payment', 'customer_name'], 'string'],
             [['date_of_payment'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_of_payment'],
         ];
     }
@@ -89,4 +87,11 @@ class PaymentIn extends \yii\db\ActiveRecord
         return $this->hasOne(Order::className(), ['id' => 'order_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCustomer() 
+    {
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+    }
 }
