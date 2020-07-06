@@ -57,7 +57,6 @@ class PaymentInSearch extends PaymentIn
                 'attributes' => ['name', 'date_of_payment', 'sum', 'customer.child_name', 'type_of_pay'],
                 'defaultOrder' => [
                     'date_of_payment' => SORT_DESC,
-                    'created_at' => SORT_DESC,
                 ]
             ],
             'pagination' => [
