@@ -105,6 +105,10 @@ $config = [
             // 'decimalSeparator' => '.',
             // 'thousandSeparator' => ',',
             // 'currencyCode' => 'USD'
+            'defaultTimeZone' => 'Asia/Yekaterinburg',
+            'timeZone' => 'Asia/Yekaterinburg',
+            'locale' => 'ru-Ru',
+            'currencyCode' => 'RUB',
         ],
         'view' => [
             'class' => 'yii\web\View',
