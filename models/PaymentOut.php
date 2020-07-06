@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 use \yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "payment_out".
@@ -97,5 +98,44 @@ class PaymentOut extends \yii\db\ActiveRecord
     public function getUserList()
     {
         return ArrayHelper::map(Profile::find()->all(), 'id', 'fullName');
+    }
+
+    /**
+     * @return string html callback
+     */
+    public function getUpdateCallback()
+    {
+        return function ($url, $model) {
+            return Html::a(
+                '<span class="glyphicon glyphicon-pencil"></span>', 
+                ['update-out', 'id' => $model->id],
+                [
+                    'title' => Yii::t('app', 'Update'),
+                    'data-pjax' => 0
+                ]
+                );
+        };
+    }
+
+    /**
+     * @return string html callback
+     */
+    public function getDeleteCallback()
+    {
+        return function ($url, $model) {
+            return Html::a(
+                '<span class="glyphicon glyphicon-trash"></span>', 
+                ['delete-out', 'id' => $model->id],
+                [
+                    'title' => Yii::t('app', 'Delete'),
+                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'data' => [
+                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                        'method' => 'post',
+                    ],
+                    'data-pjax' => 0
+                ]
+            );
+        };
     }
 }
