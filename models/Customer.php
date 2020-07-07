@@ -23,11 +23,6 @@ class Customer extends \yii\db\ActiveRecord
 {
 
     /**
-     * @var
-     */
-    public $term;
-
-    /**
      * {@inheritdoc}
      */
     public static function tableName()

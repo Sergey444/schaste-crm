@@ -59,7 +59,7 @@ class GroupController extends Controller
         $searchModel = new GroupSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('index.twig', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -74,7 +74,7 @@ class GroupController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->render('view.twig', [
             'model' => Group::find()->where(['group.id' => $id])->joinWith(['customers.customer'])->one()
         ]);
     }
@@ -92,7 +92,7 @@ class GroupController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
+        return $this->render('create.twig', [
             'model' => $model,
         ]);
     }
@@ -112,7 +112,7 @@ class GroupController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->render('update.twig', [
             'model' => $model,
         ]);
     }
@@ -136,7 +136,7 @@ class GroupController extends Controller
     public function actionAddChild($id) 
     {
         $model = new GroupCustomer();
-
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['update', 'id' => $id]);
         }

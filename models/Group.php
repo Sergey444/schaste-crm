@@ -6,6 +6,8 @@ use app\models\Profile;
 use app\models\Program;
 use app\models\GroupCustomer;
 
+use yii\helpers\ArrayHelper;
+
 use yii\behaviors\TimestampBehavior;
 use Yii;
 
@@ -96,7 +98,7 @@ class Group extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTeacher() 
+    public function getProfile() 
     {
         return $this->hasOne(Profile::className(), ['id' => 'teacher_id']);
     }
@@ -115,5 +117,21 @@ class Group extends \yii\db\ActiveRecord
     public function getCustomers()
     {
        return $this->hasMany(GroupCustomer::className(), ['group_id' => 'id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getProgramList()
+    {
+        return ArrayHelper::map(Program::find()->all(), 'id', 'name');
+    }
+
+     /**
+     * @return array
+     */
+    public function getTeacherList()
+    {
+        return ArrayHelper::map(Profile::find()->joinWith('position')->where(['or', ['profile.id' => $model->teacher_id], ['position.show_teacher' => 1]])->all(), 'id', 'fullName');
     }
 }

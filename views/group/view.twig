@@ -1,0 +1,97 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Group */
+#}
+
+{{ use('yii/widgets/DetailView') }}
+
+{{ set(this, 'title', model.name) }}
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Groups'), 'url': '/group' }, {'label' : this.title }] }) }}
+
+<div class="group-view">
+
+    <div class="d-flex">
+        <div class="bg-white av-block mg-right" >
+            <div class="av-preview">
+                <img src="{{ model.profile.photo ? Url.to([model.profile.photo], true) : 'https://via.placeholder.com/200' }}" alt="">
+                <div class="u-controll">
+                    {{ html.a(model.profile.fullName, path('profile/view', {'id': model.profile.id}), {'class': 'u-update-btn'}) | raw }}
+                </div>
+            </div>
+        </div>
+        <div class="bg-white u-info-block">
+            <table class="table table-bordered table-sm">
+                <caption>{{ this.title }}</caption>
+                <tbody>
+                    <tr>
+                        <td>{{ lang('app', 'Program') }}:</td>
+                        <td>{{ model.program.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ lang('app', 'Comment') }}:</td>
+                        <td>{{ model.comment }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ lang('app', 'Created At') }}:</td>
+                        <td>{{ app.formatter.asDate(model.created_at, 'php:d.m.Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ lang('app', 'Updated At') }}:</td>
+                        <td>{{ app.formatter.asDate(model.updated_at, 'php:d.m.Y') }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {{ html.a( lang('app', 'Update group'), path('update', {'id': model.id}), {'class': 'u-update-btn'}) | raw }}
+        </div>
+    </div>
+
+    <div class="mg-top">
+        <div class="bg-white u-reg-block">
+            <table class="table table-bordered table-striped table-sm">
+                <caption>{{ lang('app', 'Student list') }}</caption>
+                <tbody>
+                <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ lang('app', 'Child name') }}</th>
+                            <th></th>
+                        </tr>
+                            
+                    </thead>
+                    <tbody>
+                    {% if model.customers is empty %}
+                        <tr><td colspan="3">{{ lang('app', 'Nothing found') }}</td></tr>
+                    {% else %}
+                        {% for key, customer in model.customers %}
+                            <tr>
+                                <td>{{ key + 1 }}</td>
+                                <td>
+                                    {{ html.a( customer.customer.child_name, path('customer/view', {'id': customer.customer.id})) | raw }}
+                                </td>
+                                <td>
+                                    {{ html.a(
+                                        '<span class="glyphicon glyphicon-trash"></span>', 
+                                        path(
+                                            'group/delete-child', {
+                                                'id': customer.id,
+                                                'group_id': model.id
+                                            }
+                                        ),{
+                                            'class': '',
+                                            'data': {
+                                                'confirm': lang('app', 'Are you sure you want to delete this item?')
+                                            }
+                                        }
+                                    ) | raw}}
+                                </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

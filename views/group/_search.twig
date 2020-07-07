@@ -1,15 +1,15 @@
 {#
 /* @var $this yii\web\View */
-/* @var $model app\models\CustomerSearch */
+/* @var $model app\models\GroupSearch */
 /* @var $form yii\widgets\ActiveForm */
 #}
 
 {{ use('yii/bootstrap4/ActiveForm') }}
 
-<div class="customer-search">
+<div class="group-search">
 
     {% set form = active_form_begin({
-        'action': '/customer',
+        'action': '/group',
         'method': 'get',
         'options': {
             'data-pjax': 1

@@ -123,7 +123,8 @@ $config = [
                     'globals' => [
                         'html' => ['class' => '\yii\helpers\Html'],
                         'array_helper' => ['class' => 'yii\helpers\ArrayHelper'],
-                        'date_picker' => ['class' => 'yii\jui\DatePicker']
+                        'date_picker' => ['class' => 'yii\jui\DatePicker'],
+                        'Url' => ['class' => 'yii\helpers\Url']
                     ],
                     'uses' => ['yii\bootstrap4'],
                     'functions' => array(

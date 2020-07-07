@@ -1,0 +1,69 @@
+{# 
+/* @var $this yii\web\View */
+/* @var $model app\models\Group */
+/* @var $form yii\widgets\ActiveForm */
+#}
+
+{{ use('yii/bootstrap4/ActiveForm') }}
+
+{{ this.registerJsFile('@web/js/order-form.js', {'depends': 'yii\\web\\JqueryAsset'}) }}
+
+{% set programs = model.programList %}
+{% set teachers = model.teacherLIst %}
+
+<div class="group-form">
+
+    {% if teachers is empty or programs is empty %}
+        <div class="alert alert-info">
+            <strong>Информация!<br> Для создания группы необходимо:</strong><br>
+            {% if teachers is empty %}
+                - создать <a href="{{ path(['/profile/users']) }}">преподавателей</a>.
+                <br>
+            {% endif %}
+
+            {% if programs is empty %}
+                - создать <a href="{{ path(['/program']) }}">программы</a>.
+                <br>
+            {% endif %}
+            <div>Либо обратитесь к администратору системы <a href="mailto:info@schaste-club.ru">info@schaste-club.ru</a></div>
+        </div>
+    {% else %}
+
+        {% set form = active_form_begin() %}
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form.field(model, 'name').textInput({'maxlength': true, 'class': 'form-control form-control-sm', 'placeholder': lang('app', 'Enter group name ...')}) | raw }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        {{ form.field(model, 'teacher_id').dropDownList(teachers, {
+                            'prompt': lang('app', 'Choose teacher ...'),
+                            'class': 'custom-select custom-select-sm'
+                        }) | raw }}
+                    </div>
+                    <div class="col-md-5">
+                        {{ form.field(model, 'program_id').dropDownList(programs, {
+                            'prompt': lang('app', 'Choose program ...'),
+                            'class': 'custom-select custom-select-sm'
+                        }) | raw }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                {{ form.field(model, 'comment').textarea({'rows': 5, 'class': 'form-control form-control-sm', 'placeholder': lang('app', 'Your comment') ~' ...'}) | raw }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ html.submitButton(lang('app', 'Save'), {'class': 'btn btn-outline-success btn-sm'}) | raw }}
+        </div>
+
+        {{ active_form_end() }}
+
+    {% endif %}
+
+</div>

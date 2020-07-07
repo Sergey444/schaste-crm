@@ -11,6 +11,12 @@ use app\models\Group;
  */
 class GroupSearch extends Group
 {
+
+    /**
+     * @var string
+     */
+    public $search;
+
     /**
      * {@inheritdoc}
      */
@@ -18,8 +24,8 @@ class GroupSearch extends Group
     {
         return [
             [['id', 'teacher_id', 'program_id','created_at', 'updated_at'], 'integer'],
-            [['term'], 'trim'],
-            [['name', 'comment'], 'safe'],
+            [['search'], 'trim'],
+            [['name', 'comment', 'search'], 'safe'],
         ];
     }
 
@@ -41,7 +47,7 @@ class GroupSearch extends Group
      */
     public function search($params)
     {
-        $query = Group::find()->joinWith( ['teacher', 'program'] );
+        $query = Group::find()->joinWith( ['profile', 'program'] );
 
         // add conditions that should always apply here
 
@@ -58,17 +64,14 @@ class GroupSearch extends Group
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'teacher_id' => $this->teacher_id,
-            'program_id' => $this->program_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'or',
+            ['like', 'group.name', $this->search],
+            ['like', 'program.name', $this->search],
+            ['like', 'profile.surname', $this->search],
+            ['like', 'profile.name', $this->search],
+            ['like', 'group.comment', $this->search]
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'comment', $this->comment]);
 
         return $dataProvider;
     }
