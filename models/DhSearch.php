@@ -12,13 +12,18 @@ use app\models\Dh;
 class DhSearch extends Dh
 {
     /**
+     * @var string
+     */
+    public $search;
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['id', 'port', 'created_at', 'updated_at'], 'integer'],
-            [['term'], 'trim'],
+            [['search'], 'trim'],
             [['name', 'host', 'comment', 'login_ftp', 'password_ftp', 'login_panel', 'password_panel'], 'safe'],
         ];
     }
@@ -70,13 +75,13 @@ class DhSearch extends Dh
 
         $query->andFilterWhere([
             'or',
-            ['like', 'name', $this->term],
-            ['like', 'host', $this->term],
-            ['like', 'login_ftp', $this->term],
-            ['like', 'password_ftp', $this->term],
-            ['like', 'login_panel', $this->term],
-            ['like', 'password_panel', $this->term],
-            ['like', 'comment', $this->term]
+            ['like', 'name', $this->search],
+            ['like', 'host', $this->search],
+            ['like', 'login_ftp', $this->search],
+            ['like', 'password_ftp', $this->search],
+            ['like', 'login_panel', $this->search],
+            ['like', 'password_panel', $this->search],
+            ['like', 'comment', $this->search]
         ]);
 
         return $dataProvider;

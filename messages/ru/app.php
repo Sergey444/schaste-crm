@@ -192,6 +192,7 @@ return [
     'Update record' => 'Редактировать запись',
     'Domens and hostings' => 'Домены и хостинги',
     'Domen name' => 'Доменное имя',
+    'Host' => 'Хостинг',
     'Host name' => 'Имя хоста',
     'Port' => 'Порт',
     'Login FTP' => 'Логин FTP',
