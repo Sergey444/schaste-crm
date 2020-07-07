@@ -74,8 +74,10 @@ class GroupController extends Controller
      */
     public function actionView($id)
     {
+        $model = Group::find()->where(['group.id' => $id])->joinWith(['customers.customer'])->one();
         return $this->render('view.twig', [
-            'model' => Group::find()->where(['group.id' => $id])->joinWith(['customers.customer'])->one()
+            'model' => $model,
+            'file_exists' => file_exists($model->profile->photo),
         ]);
     }
 

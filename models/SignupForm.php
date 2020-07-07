@@ -3,6 +3,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 use app\models\User;
 use app\models\Profile;
@@ -98,6 +99,14 @@ class SignupForm extends Model
         $personal->save();
 
         return $this->id = $personal->id;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPositionList()
+    {
+        return ArrayHelper::map(Position::find()->all(), 'id', 'name');
     }
 
     /**

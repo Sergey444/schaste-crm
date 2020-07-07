@@ -1,0 +1,90 @@
+{# {{ use('yii/bootstrap4/ActiveForm') }} #}
+{# {{ use('yii/widgets/MaskedInput') }} #}
+
+
+<div class="personal-form bg-white mb-4">
+
+    <h3>Данные пользователя</h3>
+    <p>Задайте данные пользователя, чтобы другие могли его узнать</p><hr />
+
+    {% set form = active_form_begin() %}
+
+    <div class="d-flex flex-wrap">
+
+        <div class="flex-fill order-2 order-md-1">
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.field(model, 'surname').textInput({'placeholder': 'Введите фамилию', 'class': 'form-control form-control-sm'}) | raw }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.field(model, 'name').textInput({'placeholder': 'Введите имя', 'class': 'form-control form-control-sm'}) | raw }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.field(model, 'secondname').textInput({'placeholder': 'Введите отчество', 'class': 'form-control form-control-sm'}) | raw }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.field(model, 'date_of_birthday').widget('yii\\widgets\\MaskedInput', {'mask': '99.99.9999'}).textInput({'placeholder': 'Введите дату рождения', 'class': 'form-control form-control-sm'}) | raw }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.field(model, 'phone').widget('yii\\widgets\\MaskedInput', {'mask': '+7 (999) 999-99-99'}).textInput({'placeholder': 'Введите телефон', 'class': 'form-control form-control-sm'}) | raw }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.field(model, 'address').textInput({'placeholder': 'Введите адрес', 'class': 'form-control form-control-sm'}) | raw }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    {# {{ form.field(model, 'position').textInput({'placeholder': 'Введите должность', 'class': 'form-control form-control-sm'}) | raw }} #}
+                    {{ form.field(model, 'position_id').dropDownList(model.positionList, {
+                        'prompt': lang('app', 'Не выбрана'),
+                        'class': 'custom-select custom-select-sm'
+                    }) | raw }}
+                </div>
+                <div class="col-md-4" style="margin-top: 25px;">
+                    <input type="submit" value="Сохранить" class="btn btn-outline-success btn-sm d-block" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="bg-white av-block ml-4 order-1 order-md-2">
+            <div class="av-preview">
+
+                <div id="img-preview">
+                    {% if file_exists %}
+                        <img src="{{'/' ~ model.photo }}" class="img-thumbnail" alt="">
+                    {% else %}
+                        {% include '_svg.square.html' %}
+                    {% endif %}
+                </div>
+                {# <img src="{{ file_exists ? '/' ~ model.photo : 'https://via.placeholder.com/200' }}" id="img-preview" alt=""> #}
+
+                <div class="edit-photo-block">
+                    <div class="rs-pencil">
+                    <span class="glyphicon glyphicon-pencil" onclick="$('#add-photo-input').click()"></span>
+                    {% if (file_exists) %}
+                        {{ html.a('<span class="glyphicon glyphicon-trash"></span>',
+                                path('delete-photo', {'id': model.id}),
+                                {'data': {
+                                    'confirm': 'Вы уверены что хотите удалить фотографию?',
+                                    'method': 'post',
+                                    'pjax': 0
+                                }}
+                            ) | raw }}
+                    {% endif %}
+                    </div>
+                     {{ form.field(model, 'img').fileInput({'class':'add-photo-input', 'id':'add-photo-input'}).label(false) | raw }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {{ active_form_end() }}
+
+</div>

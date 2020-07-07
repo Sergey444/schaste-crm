@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
+use yii\helpers\ArrayHelper;
 use yii\imagine\Image;
 
 use app\models\User;
@@ -105,24 +106,29 @@ class Profile extends \yii\db\ActiveRecord
         $url = $path.'/'.$fileName;
         $thumbUrl = $path.'/thumb-40/'.$fileName;
 
-       
-
         if (FileHelper::createDirectory($path)) {
 
-                file_exists($this->photo) && unlink($this->photo);
-                
+                $this->deletePhoto();
                 $resImage = Image::autorotate($photo->tempName);
             
                 $metadata = $resImage->metadata();
                 $metadata->offsetSet('ifd0.Orientation', 1);
                 $resImage->metadata($metadata);
                 Image::resize($resImage, 200, 200, false, false)->save(Yii::getAlias('@webroot/'.$url));
-                            //Image::thumbnail($resImage, 40, 40)->save(Yii::getAlias('@webroot/'.$thumbUrl ));
                          
                 $this->photo = $url;
                 return true;
         }
         return false;
+    }
+
+    /**
+     * Deletes photo if exists
+     * @return boolean
+     */
+    public function deletePhoto()
+    {
+        return file_exists($this->photo) && unlink($this->photo);
     }
 
     /**
@@ -144,5 +150,20 @@ class Profile extends \yii\db\ActiveRecord
      */
     public function getFullName() {
         return $this->surname . ' ' . $this->name .' '. $this->secondname;
+    }
+
+     /**
+     * @return string - html
+     */
+    public function getHtmlStatus() {
+        return $this->user->status === 10 ? '<span class="status-circle"></span>' : '<span class="status-circle status-circle--red"></span>'; 
+    }
+
+    /**
+     * @return array
+     */
+    public function getPositionList()
+    {
+        return ArrayHelper::map(Position::find()->all(), 'id', 'name');
     }
 }

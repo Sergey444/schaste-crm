@@ -13,13 +13,18 @@
     <div class="d-flex">
         <div class="bg-white av-block mg-right" >
             <div class="av-preview">
-                <img src="{{ model.profile.photo ? Url.to([model.profile.photo], true) : 'https://via.placeholder.com/200' }}" alt="">
+                {% if file_exists %}
+                    <img src="{{'/' ~ model.profile.photo }}" class="img-thumbnail" alt="">
+                {% else %}
+                    {% include '_svg.square.html' %}
+                {% endif %}
+                {# <img src="{{ model.profile.photo ? Url.to([model.profile.photo], true) : 'https://via.placeholder.com/200' }}" alt=""> #}
                 <div class="u-controll">
                     {{ html.a(model.profile.fullName, path('profile/view', {'id': model.profile.id}), {'class': 'u-update-btn'}) | raw }}
                 </div>
             </div>
         </div>
-        <div class="bg-white u-info-block">
+        <div class="bg-white u-info-block w-100">
             <table class="table table-bordered table-sm">
                 <caption>{{ this.title }}</caption>
                 <tbody>

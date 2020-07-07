@@ -1,0 +1,17 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Personal */
+#}
+
+{{ set(this, 'title', lang('app','Update Profile')) }}
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Profile'), 'url': path(['index']) }, {'label' : this.title }] }) }}
+
+{{ this.registerJsFile('@web/js/personal.js', {'depends': 'yii\\web\\JqueryAsset'}) }}
+
+<div class="personal-update">
+
+    {{ this.render('_personal.twig', {model: model, file_exists: file_exists}) | raw}}
+
+    {{ this.render('_user.twig', {user: user, roles: roles}) | raw}}
+
+</div>

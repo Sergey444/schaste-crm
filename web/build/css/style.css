@@ -76,11 +76,11 @@ span.not-set {
     bottom: 30px;
     background-color: #fff;
     text-align: center;
-    color: #007bff;
+    color: #fe17bf;
 }
 
 .rs-pencil::before {
-    color: #007bff;
+    color: #fe17bf;
 }
 
 .rs-pencil span {
@@ -307,6 +307,19 @@ nav.sidebar {
     padding-top: 0.5rem;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.status-circle {
+    width: 8px;
+    height: 8px;
+    display: block;
+    background-color: #5cb85c;
+    border-radius: 50%;
+    margin-top: 6px;
+}
+
+.status-circle--red {
+    background-color: red;
 }
 
 
