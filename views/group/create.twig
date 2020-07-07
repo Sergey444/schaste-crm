@@ -1,0 +1,19 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Group */
+#}
+
+{{ set(this, 'title', lang('app', 'Create Group')) }}
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Groups'), 'url': path(['index']) }, {'label' : this.title }] }) }}
+
+
+<div class="group-create">
+
+    <div class="bg-white">
+        <h3>Страница добавления группы</h3><hr />
+        {{ this.render('_form.twig', {
+            'model': model,
+        }) | raw }}
+    </div>
+
+</div>
