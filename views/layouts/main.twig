@@ -85,20 +85,21 @@
                             {'label': '<i class="fas fa-comments"></i> '~ lang('app', 'Message from site'), 'url': ['/message-from-site/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], '!visible': app.user.can('admin')},
 
-                            {
-                                'label': '<i class="fas fa-globe-europe"></i> '~ lang('app', 'Web site'),
-                                'url': 'https://schaste-club.ru',
-                                '!visible': app.user.isGuest,
-                                'options': {'class': 'link-bottom link-bottom--site'},
-                                'linkOptions': {'target': '_blank'}
-                            },{
-                                'label': '<i class="fab fa-wikipedia-w"></i> '~ lang('app', 'Documents'),
-                                'url': 'https://wiki.schaste-club.ru',
-                                '!visible': app.user.isGuest,
-                                'options': {'class': 'link-bottom'},
-                                'linkOptions': {'target': '_blank'}
-                            },
                         ] %}
+
+                        {# {
+                            'label': '<i class="fas fa-globe-europe"></i> '~ lang('app', 'Web site'),
+                            'url': 'https://schaste-club.ru',
+                            '!visible': app.user.isGuest,
+                            'options': {'class': 'link-bottom link-bottom--site'},
+                            'linkOptions': {'target': '_blank'}
+                        },{
+                            'label': '<i class="fab fa-wikipedia-w"></i> '~ lang('app', 'Documents'),
+                            'url': 'https://wiki.schaste-club.ru',
+                            '!visible': app.user.isGuest,
+                            'options': {'class': 'link-bottom'},
+                            'linkOptions': {'target': '_blank'}
+                        }, #}
 
                         {{ nav_widget({
                             'options': {
@@ -152,8 +153,15 @@
 
         <footer class="navbar navbar-light bg-light mt-4">
             <div class="container-fluid">
-                <div class="pull-left mt-2 mb-2">{{ app.name | raw }} &copy;{{ 'now'|date('Y') }}</div>
-                <div class="pull-right">Техническая поддержка: <a href="mailto:support@schaste-club.ru">support@schaste-club.ru</a></div>
+                <div class="pull-left mt-2 mb-2">
+                    <div>{{ app.name | raw }} &copy;{{ 'now'|date('Y') }}</div>
+                    
+                </div>
+                <div class="pull-right">
+                    <div>Сайт детского центра <a href="#">schaste-club.ru</a></div>
+                    <div>Документы детского центра <a href="#">wiki.schaste-club.ru</a></div>
+                    <div>Техническая поддержка: <a href="mailto:support@schaste-club.ru">support@schaste-club.ru</a></div>
+                </div>
             </div>
         </footer>
 
