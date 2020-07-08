@@ -1,0 +1,13 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Order */
+#}
+{{ set(this, 'title', lang('app', 'Update position')) }}
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Position'), 'url': path(['index']) }, {'label' : this.title }] }) }}
+
+<div class="contacts-update">
+    <div class="bg-white">
+        <h3>Страница редактирования должности</h3><hr />
+        {{ this.render('_position.twig', {model: model}) | raw}}
+    </div>
+</div>

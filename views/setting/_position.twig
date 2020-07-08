@@ -1,0 +1,32 @@
+{# 
+/* @var $this yii\web\View */
+/* @var $model app\models\Position */
+/* @var $form yii\widgets\ActiveForm */
+#}
+
+{{ use('yii/bootstrap4/ActiveForm') }}
+
+<div class="setting-_position">
+
+    {% set form = active_form_begin() %}
+
+        <div class="row">
+            <div class="col-md-8 ">
+                {{ form.field(model, 'name').textInput({'class': 'form-control form-control-sm', 'autocomplete': 'off'}).label(lang('app', 'Title')) | raw }}
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mg-top-25">
+                    {{ html.submitButton(lang('app', 'Save'), {'class': 'btn btn-outline-success btn-sm'}) | raw }}
+                </div>
+            </div>
+        </div>
+
+        <div>
+            {{ form.field(model, 'show_teacher').checkbox({'value': true}).label(lang('app', 'Show users with this position in the list of teachers')) | raw }}
+        </div>
+
+        {{ form.field(model, 'selected_programs').checkboxList(model.programList, {'value': true}) | raw }}
+
+    {{ active_form_end() }}
+
+</div><!-- setting-_position -->

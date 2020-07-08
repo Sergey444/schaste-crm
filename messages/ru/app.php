@@ -212,5 +212,7 @@ return [
     'Show users with this position in the list of teachers' => 'Показывать пользователей с данной должностью в списке преподавателей',
     'Position' => 'Должность',
 
-    'Update Orders' => 'Редактировать заказ'
+    'Update Orders' => 'Редактировать заказ',
+    'Position List' => 'Список должностей',
+    'Show in list' => 'Показывать в списке преподавателей'
 ];
