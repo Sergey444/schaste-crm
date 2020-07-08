@@ -114,7 +114,7 @@ class Position extends \yii\db\ActiveRecord
      */
     public function getPrograms()
     {
-       return $this->hasMany(PositionProgram::className(), ['position_id' => 'id'])->joinWith('program');
+       return $this->hasMany(PositionProgram::className(), ['position_id' => 'id']);
     }
 
     /**
