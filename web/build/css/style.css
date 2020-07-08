@@ -220,6 +220,12 @@ a:hover, a:active, a:focus {
     color: #e92a9d;
 }
 
+.site-signup {
+    max-width: 700px;
+    width: 100%;
+    margin-top: 50px;
+}
+
 .glyphicon {
     font-family: "Font Awesome 5 Free";
     font-weight: 400;
