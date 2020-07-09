@@ -21,4 +21,25 @@
     &-trash::before {
         content: "\f2ed";
     }
+
+    &-resize-full::before {
+        content: "\f424";
+        font-weight: 700;
+        color: #fff;
+    }
+
+    &-resize-small::before {
+        content: "\f422";
+        font-weight: 700;
+        color: #fff;
+    }
+}
+
+.sticker__checkbox {
+
+    &:before {
+        content: "\f00c";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 700;
+    }
 }

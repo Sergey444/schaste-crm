@@ -23,7 +23,7 @@ html caption {
     min-height: 100%;
     height: auto;
     margin: 0 auto -104px;
-    padding: 0 0 80px;
+    padding: 0 0 104px;
 }
 
 .u-update-btn {
@@ -249,6 +249,24 @@ a:hover, a:active, a:focus {
     content: "";
 }
 
+.glyphicon-resize-full::before {
+    content: "";
+    font-weight: 700;
+    color: #fff;
+}
+
+.glyphicon-resize-small::before {
+    content: "";
+    font-weight: 700;
+    color: #fff;
+}
+
+.sticker__checkbox:before {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+}
+
 .navbar-brand {
     color: #9d9d9d;
 }
@@ -326,6 +344,26 @@ nav.sidebar {
 
 .status-circle--red {
     background-color: red;
+}
+
+.pagination a, .pagination span {
+    padding: 6px 12px;
+    margin-left: -1px;
+    color: #fe17bf;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    line-height: 2rem;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    margin-left: 0;
+}
+
+.pagination li.active a, .pagination a:hover {
+    color: #fff;
+    background-color: #fe17bf;
+    border-color: #fe17bf;
 }
 
 
