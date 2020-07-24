@@ -55,6 +55,9 @@ class Customer extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'integer'],
             [['birthday'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birthday'],
             [['child_name', 'parents_name', 'phone'], 'string', 'max' => 255],
+            [['phone'], 'filter', 'filter' => function($value){
+                return preg_replace('/[^\d]+/', '', $value);
+            }]
         ];
     }
 
