@@ -19,7 +19,7 @@
                 {{ form.field(model, 'parents_name').textInput({'placeholder': lang('app', 'Parent name'), 'maxlength': true, 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
             </div>
             <div class="col-md-4">
-                {{ form.field(model, 'phone').widget('yii\\widgets\\MaskedInput', {'mask': '+7 (999) 999-99-99'}).textInput({'placeholder': lang('app', 'Phone'), 'class':'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                {{ form.field(model, 'phone').widget('yii\\widgets\\MaskedInput', {'mask': '+[7|9] (999) 999-99-99'}).textInput({'placeholder': lang('app', 'Phone'), 'class':'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
             </div>
         </div>
 

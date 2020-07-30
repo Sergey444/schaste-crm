@@ -29,7 +29,7 @@
                     {{ form.field(model, 'date_of_birthday').widget('yii\\widgets\\MaskedInput', {'mask': '99.99.9999'}).textInput({'placeholder': 'Введите дату рождения', 'class': 'form-control form-control-sm'}) | raw }}
                 </div>
                 <div class="col-md-4">
-                    {{ form.field(model, 'phone').widget('yii\\widgets\\MaskedInput', {'mask': '+7 (999) 999-99-99'}).textInput({'placeholder': 'Введите телефон', 'class': 'form-control form-control-sm'}) | raw }}
+                    {{ form.field(model, 'phone').widget('yii\\widgets\\MaskedInput', {'mask': '+[7|9] (999) 999-99-99'}).textInput({'placeholder': 'Введите телефон', 'class': 'form-control form-control-sm'}) | raw }}
                 </div>
                 <div class="col-md-4">
                     {{ form.field(model, 'address').textInput({'placeholder': 'Введите адрес', 'class': 'form-control form-control-sm'}) | raw }}

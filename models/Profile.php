@@ -59,7 +59,9 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['phone'], 'safe'],
+            [['phone'], 'filter', 'filter' => function($value){
+                return preg_replace('/[^\d]+/', '', $value);
+            }],
             [['color'], 'default', 'value'=> '#fe17bf'],
             [['user_id', 'position_id', 'created_at', 'updated_at'], 'integer'],
             [['surname', 'name', 'secondname'], 'string', 'max' => 255],
