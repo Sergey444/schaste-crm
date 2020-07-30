@@ -6,6 +6,7 @@ use app\models\PositionProgram;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -37,6 +38,7 @@ class Position extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 

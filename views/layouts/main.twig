@@ -76,7 +76,7 @@
 
                         <nav class="nav d-none d-lg-block sidebar mr-4">
                         {% set menuItems = [
-                            {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Order"), 'url': ['/order/index'], '!visible': app.user.isGues},
+                            {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Orders"), 'url': ['/order/index'], '!visible': app.user.isGues},
                             {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-calendar-alt"></i> '~ lang('app', 'Journal'), 'url': ['/journal/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-child"></i> '~ lang('app', 'Club customers'), 'url': ['/customer/index'], '!visible': app.user.isGuest},
@@ -158,8 +158,11 @@
                     
                 </div>
                 <div class="pull-right">
+                    {% if app.user.isGuest == false %}
+                        <div>Документы детского центра <a href="#">wiki.schaste-club.ru</a></div>
+                    {% else %}
+                    {% endif %}
                     <div>Сайт детского центра <a href="#">schaste-club.ru</a></div>
-                    <div>Документы детского центра <a href="#">wiki.schaste-club.ru</a></div>
                     <div>Техническая поддержка: <a href="mailto:support@schaste-club.ru">support@schaste-club.ru</a></div>
                 </div>
             </div>

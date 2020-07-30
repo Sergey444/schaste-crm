@@ -9,6 +9,7 @@ use app\models\GroupCustomer;
 use yii\helpers\ArrayHelper;
 
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 use Yii;
 
 /**
@@ -45,6 +46,7 @@ class Group extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 
