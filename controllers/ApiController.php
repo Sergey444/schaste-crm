@@ -14,10 +14,6 @@ use yii\filters\AccessControl;
 
 use yii\web\NotFoundHttpException;
 
-
-
-
-
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use app\models\Event;
@@ -39,7 +35,7 @@ class ApiController extends Controller
             'class' => Cors::className(),
             'cors' => [
                 'Origin' => ['https://schaste-club.ru', 'http://schaste-club.ru'],
-                'Access-Control-Allow-Credentials' => true,
+                'Access-Control-Allow-Credentials' => false,
                 'Access-Control-Request-Method' => ['GET', 'POST', 'DELETE', 'PUT'],
                 'Access-Control-Request-Headers'=> ['Content-Type'], //'Origin', 'Accept', 'Authorization'
             ]

@@ -1,0 +1,48 @@
+{# 
+/* @var $this yii\web\View */
+/* @var $model app\models\Order */
+/* @var $form yii\widgets\ActiveForm */
+#}
+
+{{ use('yii/bootstrap4/ActiveForm') }}
+{{ use('yii/widgets/MaskedInput') }}
+
+<div class="customer-form">
+
+    {% set form = active_form_begin() %}
+
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.field(model, 'child_name', {'enableAjaxValidation': true}).textInput({'placeholder': lang('app', 'Child name'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+            </div>
+            <div class="col-md-4">
+                {{ form.field(model, 'parents_name').textInput({'placeholder': lang('app', 'Parent name'), 'maxlength': true, 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+            </div>
+            <div class="col-md-4">
+                {{ form.field(model, 'phone').widget('yii\\widgets\\MaskedInput', {'mask': '+[7|9] (999) 999-99-99'}).textInput({'placeholder': lang('app', 'Phone'), 'class':'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    {{ form.field(model, 'email').textInput({'maxlength': true, 'placeholder': lang('app', 'Email'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                </div>
+                <div>
+                    {% set birthday = app.formatter.asDate(model.birthday, 'php:d.m.Y') %}
+                    {{ form.field(model, 'birthday').widget('yii\\widgets\\MaskedInput', {'mask': '99.99.9999'}).textInput({'placeholder': lang('app', 'Date of birthday'), 'class':'form-control form-control-sm', 'autocomplete': 'off', 'value': birthday}) | raw }}
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                {{ form.field(model, 'comment').textArea({'rows': 5, 'placeholder': lang('app', 'Your comment') ~' ...', 'class': 'form-control form-control-sm'}) | raw }}
+            </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+            {{ html.submitButton(lang('app', 'Save'), {'class': 'btn btn-outline-success btn-sm'}) | raw }}
+        </div>
+
+    {{ active_form_end() }}
+
+</div>

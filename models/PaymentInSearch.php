@@ -47,15 +47,17 @@ class PaymentInSearch extends PaymentIn
     {
         $arFilter = $this->getTime($params);
         
-        $query = PaymentIn::find()->where( $arFilter ); 
+        $query = PaymentIn::find()->joinWith('customer')->where($arFilter); 
         // add conditions that should always apply here
         $this->total = $query->sum('sum') ?? 0;
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> [
-                // 'attributes' => ['date_of_payment'],
-                'defaultOrder' => ['date_of_payment' => SORT_DESC]
+                'attributes' => ['name', 'date_of_payment', 'sum', 'customer.child_name', 'type_of_pay'],
+                'defaultOrder' => [
+                    'date_of_payment' => SORT_DESC,
+                ]
             ],
             'pagination' => [
                 'pageSize' => 10,
@@ -69,18 +71,6 @@ class PaymentInSearch extends PaymentIn
             // $query->where('0=1');
             return $dataProvider;
         }
-
-      
-
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'name' => $this->name,
-            'sum' => $this->sum,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'sum', $this->sum]);
 
         return $dataProvider;
     }

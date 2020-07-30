@@ -18,6 +18,10 @@ use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+use yii\helpers\ArrayHelper;
+
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * ProfileController implements the CRUD actions for Profile model.
@@ -40,7 +44,7 @@ class ProfileController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['update'],
+                        'actions' => ['update-user', 'delete-photo'],
                         'allow' => true,
                         'roles' => ['@'],
                         // 'matchCallback' => function () {
@@ -70,9 +74,13 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = Profile::find()->where(['user_id' => Yii::$app->user->id])->one();
+
+        $role = array_key_first ( Yii::$app->authManager->getRolesByUser($model->user->id) );
         
-        return $this->render('index', [
-            'model' => $model
+        return $this->render('index.twig', [
+            'model' => $model,
+            'file_exists' => file_exists($model->photo),
+            'role' => $role
         ]);
     }
 
@@ -84,15 +92,20 @@ class ProfileController extends Controller
     {
         $model = new SignupForm();
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'User created successfully'));
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Пользователь успешно создан'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         $searchModel = new ProfileSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('users', [
+        return $this->render('users.twig', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -106,8 +119,13 @@ class ProfileController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('index', [
-            'model' => $this->findModel($id),
+        $model = $this->findModel($id);
+        $role = array_key_first ( Yii::$app->authManager->getRolesByUser($model->user->id) );
+        
+        return $this->render('index.twig', [
+            'model' => $model,
+            'file_exists' => file_exists($model->photo),
+            'role' => $role
         ]);
     }
 
@@ -121,11 +139,11 @@ class ProfileController extends Controller
         $model = new SignupForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'User created successfully'));
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Пользователь успешно создан'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
+        return $this->render('create.twig', [
             'model' => $model
         ]);
     }
@@ -138,19 +156,26 @@ class ProfileController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdateUser($id)
+    public function actionUpdate($id)
     {
         $model = $this->findModel($id);
         $user = new UpdateUserForm($model->user_id);
 
         if ($this->update($id, $model, $user)) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'User updated successfully'));
-            return $this->redirect(['update-user', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Пользователь успешно изменён'));
+            return $this->redirect(['update', 'id' => $model->id]);
         };
+
+        // Перенести в модель
+        $model->date_of_birthday = Yii::$app->formatter->asDate($model->date_of_birthday, 'php:d.m.Y');
+        $auth = Yii::$app->authManager;
+        $roles = ArrayHelper::map($auth->getRoles(), 'name', 'description');
         
-        return $this->render('update', [
+        return $this->render('update.twig', [
             'model' => $model,
+            'file_exists' => file_exists($model->photo),
             'user' => $user,
+            'roles' => $roles
         ]);
     }
 
@@ -160,20 +185,26 @@ class ProfileController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate()
+    public function actionUpdateUser()
     {
         $id = Yii::$app->user->id;
         $model = Profile::find()->where(['user_id' => $id])->one();
         $user = new UpdateUserForm($id);
 
         if (Yii::$app->request->post() && $this->update($id, $model, $user)) {
-            Yii::$app->session->setFlash('success', Yii::t('app', 'User updated successfully'));
-            return $this->redirect(['update']);
+            Yii::$app->session->setFlash('success', 'Пользователь успешно изменён');
+            return $this->redirect(['update-user']);
         };
+
+        $model->date_of_birthday = Yii::$app->formatter->asDate($model->date_of_birthday, 'php:d.m.Y');
+        $auth = Yii::$app->authManager;
+        $roles = ArrayHelper::map($auth->getRoles(), 'name', 'description');
         
-        return $this->render('update', [
+        return $this->render('update.twig', [
             'model' => $model,
+            'file_exists' => file_exists($model->photo),
             'user' => $user,
+            'roles' => $roles
         ]);
     }
 
@@ -189,12 +220,10 @@ class ProfileController extends Controller
     {
         if ($model->load(Yii::$app->request->post())) {
             $photo = UploadedFile::getInstance($model, 'img');
-            if ($photo) {
-                $model->upload($photo);
+            if ($photo && !$model->upload($photo)) {
+                Yii::$app->session->setFlash('success', 'Фотография не загружена');
             }
-            if ( $model->save() ) {
-                return true;
-            }
+            return $model->save();
         }
 
         if ($user->load(Yii::$app->request->post()) && $user->update($id)) {
@@ -216,9 +245,28 @@ class ProfileController extends Controller
         if (($user = User::findOne($profile->user_id)) !== null) {
             file_exists( $profile->photo) && unlink( $profile->photo);
             $profile->delete();
-            $user->delete();
+            if ($user->delete()) {
+                Yii::$app->session->setFlash('success', 'Пользователь успешно удалён');
+            }
         }
         return $this->redirect(['users']);
+    }
+
+    /**
+     * @param integer $id
+     */
+    public function actionDeletePhoto($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->deletePhoto()) {
+            Yii::$app->session->setFlash('success', 'Фотография успешно удалена');
+        }
+
+        if (Yii::$app->user->id == $id) {
+            return $this->redirect(['update-user']);
+        }
+
+        return $this->redirect(['update-user', 'id' => $model->id]);
     }
 
     /**

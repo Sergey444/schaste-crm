@@ -1,47 +1,4 @@
 /**
- * Count sum when change unit price and count inputs
- */
-// (function () {
-//     var unitPriceInput = $('#order-unit_price');
-//     var countInput = $('#order-count');
-//     var saleInput = $('#order-sale');
-//     var sumInput = $('#order-sum');
-
-//     var unitPrice = 0;
-//     var count = 1;
-//     var sale = 0;
-
-//     /**
-//      * Count sum handler
-//      *
-//      * @return {Void}
-//      */
-//     var countSumHandler = function () {
-//         var sum = count * unitPrice - sale;
-//         if (sum > 0) {
-//             return $(sumInput).val(sum);
-//         }
-//         return $(sumInput).val('');
-//     }
-
-//     $(unitPriceInput).on('input', function (evt) {
-//         unitPrice = $(this).val();
-//         countSumHandler();
-//     });
-
-//     $(countInput).on('input', function (evt) {
-//         count = $(this).val();
-//         countSumHandler();
-//     });
-
-//     $(saleInput).on('input', function (evt) {
-//         sale = $(this).val();
-//         countSumHandler()
-//     });
-// }());
-
-
-/**
  * Search customers
  */
 (function () {
@@ -80,12 +37,10 @@
     var drawSelect = function (customers, value) {
         clearId();
         closeSelect();
-        // $('.rs-add-to-order').css('display', 'none');
         $(customers).each(function (index, customer) {
             if (customer.child_name === value) {
                 return $('#order-customer_id').val( customer.id );
             }
-            // $('.rs-add-to-order').css('display', 'block');
             $('#rs-find-block').append('<tr><td onclick="chooseCustomers(this)" class="rs-customer" data-name="customer" data-id="' + customer.id + '">' + customer.child_name + '</td></tr>');
             $('.rs-add-to-order').show();
         });
@@ -133,8 +88,11 @@
     });
 
 
-    $('[data-name="type_customer"]').on('change', function (evt) {
-        $(this).tab('show');
+    $('[data-name="type_of_customer"]').on('change', function (evt) {
+        var value = $(this).val();
+        $('.rs-order__customer').hide('200');
+        $('#' + value).show('200');
+        // $(this).tab('show');
     });
 
     $('[data-name="payment_create"]').on('change', function (evt) {

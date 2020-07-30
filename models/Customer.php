@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the model class for table "Customer".
@@ -23,11 +24,6 @@ class Customer extends \yii\db\ActiveRecord
 {
 
     /**
-     * @var
-     */
-    public $term;
-
-    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -42,6 +38,7 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 
@@ -60,6 +57,9 @@ class Customer extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'integer'],
             [['birthday'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'birthday'],
             [['child_name', 'parents_name', 'phone'], 'string', 'max' => 255],
+            [['phone'], 'filter', 'filter' => function($value){
+                return preg_replace('/[^\d]+/', '', $value);
+            }]
         ];
     }
 
@@ -75,6 +75,7 @@ class Customer extends \yii\db\ActiveRecord
             'phone' => Yii::t('app', 'Phone'),
             'email' => Yii::t('app', 'Email'),
             'comment' => Yii::t('app', 'Comment'),
+            'truncateComment' => Yii::t('app', 'Comment'),
             'birthday' => Yii::t('app', 'Date of birthday'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -87,5 +88,14 @@ class Customer extends \yii\db\ActiveRecord
     public function getOrders()
     {
        return $this->hasMany(Order::className(), ['customer_id' => 'id']);
+    }
+
+    /**
+     * @param integer $count default 50
+     * @return string
+     */
+    public function getTruncateComment($count = 50)
+    {
+        return \yii\helpers\StringHelper::truncate($this->comment, $count, '...');
     }
 }

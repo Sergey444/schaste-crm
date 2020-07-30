@@ -73,7 +73,7 @@ class PaymentController extends Controller
             }
         }
 
-        return $this->render('index', [
+        return $this->render('index.twig', [
             'modelPaymentIn' => $modelPaymentIn,
             'modelPaymentOut' => $modelPaymentOut,
             'searchModelPaymentIn' => $searchModelPaymentIn,
@@ -98,7 +98,7 @@ class PaymentController extends Controller
             }
         }
 
-        return $this->render('create-in', [
+        return $this->render('create-in.twig', [
             'model' => $model,
         ]);
     }
@@ -118,7 +118,7 @@ class PaymentController extends Controller
             }
         }
 
-        return $this->render('create-out', [
+        return $this->render('create-out.twig', [
             'model' => $model,
         ]);
     }
@@ -140,7 +140,7 @@ class PaymentController extends Controller
             return $this->redirect(['index']);
         }
 
-        return $this->render('update-in', [
+        return $this->render('update-in.twig', [
             'model' => $model,
         ]);
     }
@@ -163,7 +163,7 @@ class PaymentController extends Controller
             return $this->redirect(['index']);
         }
 
-        return $this->render('update-out', [
+        return $this->render('update-out.twig', [
             'model' => $model,
         ]);
     }
@@ -190,8 +190,8 @@ class PaymentController extends Controller
      */
     public function actionDeleteOut($id)
     {
-            PaymentOut::findOne($id)->delete();
-            return $this->redirect(['index']);
+        PaymentOut::findOne($id)->delete();
+        return $this->redirect(['index']);
     }
 
     

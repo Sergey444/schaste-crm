@@ -1,0 +1,202 @@
+html, body {
+    height: 100%;
+}
+html body {
+    background-color: $body-color;
+    // background: #545d6b url('/images/pattern-light-grey.svg') 0 0 repeat;
+    background-image: url('/images/pattern-light-grey.svg');
+    font-size: .875rem;
+
+}
+main {
+    padding-top: 70px;
+}
+html caption {
+    caption-side: top;
+}
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -104px;
+    padding: 0 0 104px;
+}
+.u-update-btn {
+    text-decoration: underline;
+    color: #777777;
+}
+.bg-white {
+    padding: 0.5rem;
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.24);
+}
+.table {
+    & th a.asc::after {
+        content: "\f15d";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 600;
+        margin-left: 10px;
+    }
+    & th a.desc::after {
+        content: "\f881";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 600;
+        margin-left: 10px;
+    }
+}
+span.not-set {
+    color: #dc3545;
+}
+@include desktop {
+
+    .bd-links.collapse,
+    .bd-links .collapse {
+        display: block!important;
+    } 
+
+    .modal-lg, .modal-xl {
+        max-width: 1000px;
+    }
+}
+
+/** Редактирование изображения профиля */
+.rs-pencil {
+    width: 30px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    background-color: #fff;
+    text-align: center;
+    color: $pink-color;
+}
+.rs-pencil::before {
+    color: $pink-color;
+}
+.rs-pencil span {
+    line-height: normal;
+    width: 100%;
+}
+.edit-photo-block {
+    background-color: #fff;
+}
+.edit-photo-block .help-block {
+    position: absolute;
+    top: 0;
+    background-color: #fff;
+}
+.edit-photo-block .help-block,
+.edit-photo-block .form-group {
+    margin: 0;
+}
+
+html .add-photo-input {
+   display: none;
+}
+
+.av-block {
+    display: inline-block;
+}
+.av-preview {
+    position: relative;
+    min-width: 200px;
+    min-height: 200px;
+
+    & img {
+        height: 200px;
+        width: 200px;
+    }
+}
+
+/* Календарь */
+.ui-widget-header {
+    background: #fff;
+    color: $blue-color;
+    border-color: $blue-color;
+    font-weight: 400;
+}
+.ui-widget-content a {
+    background-color: #fff;
+}
+.ui-widget-header .ui-icon {
+    background-image: none;
+    font-size: 0;
+
+    &::before,
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 8px;
+        height: 2px;
+        background-color: #000;
+        top: 40%;
+        left: 3px;
+    }
+}
+
+.ui-widget-header .ui-icon-circle-triangle-e {
+    &::before {
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        transform: rotate(-45deg);
+        top: 60%;
+    }
+}
+.ui-widget-header .ui-icon-circle-triangle-w {
+    &::before {
+            transform: rotate(-45deg);
+    }
+
+    &::after {
+        transform: rotate(45deg);
+        top: 60%;
+    }
+}
+
+.ui-state-hover, 
+.ui-widget-content .ui-state-hover, 
+.ui-widget-header .ui-state-hover, 
+.ui-state-focus, 
+.ui-widget-content .ui-state-focus, 
+.ui-widget-header .ui-state-focus, 
+.ui-button:hover, 
+.ui-button:focus {
+    background: $blue-color;
+    color: #fff;
+    top: 2px;
+    cursor: pointer;
+    border: none;
+
+    & .ui-icon::before,
+    & .ui-icon::after {
+        background-color: #fff!important;
+    }
+}
+
+.bd-placeholder-img {
+    text-anchor: middle;
+}
+
+html .modal-backdrop.show {
+    opacity: 0.1;
+}
+
+/*Конец стилей с асфальта*/
+
+a {
+    color: $pink-color;
+
+    &:hover,
+    &:active,
+    &:focus {
+        color: $pink-dark-color;
+    }
+}
+
+.site-signup {
+    max-width: 700px;
+    width: 100%;
+    margin-top: 50px;
+}

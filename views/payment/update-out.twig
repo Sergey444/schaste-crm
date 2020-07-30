@@ -1,0 +1,15 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\PaymentOut */
+#}
+
+{{ set(this, 'title', lang('app', 'Update payment out')) }}
+
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Payments'), 'url': '/payment' }, {'label' : this.title }] }) }}
+
+<div class="payment-out-update">
+    <div class="bg-white">
+        <h3>Страница редактирования затраты</h3><hr />
+        {{ this.render('_form-out.twig', {model: model}) | raw}}
+    </div>
+</div>

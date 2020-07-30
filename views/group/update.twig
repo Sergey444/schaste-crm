@@ -1,0 +1,109 @@
+{#
+/* @var $this yii\web\View */
+/* @var model app\models\Group */
+#}
+
+{{ use('yii/widgets/Pjax') }}
+
+{{ set(this, 'title', lang('app', 'Update group') ~ ' ' ~ model.name, {
+    'name': model.name,
+}) }}
+
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Groups'), 'url': '/group' }, {'label' : this.title }] }) }}
+
+<div class="group-update">
+
+    {{ pjax_begin() }}
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="bg-white mg-bottom">
+                <h3>Страница редактирования группы</h3><hr />
+                {{ this.render('_form.twig', {model: model}) | raw}}
+            </div>
+
+            <div class="bg-white mg-bottom">
+
+                {{ html.beginForm(path(
+                    'group/add-child',
+                    {'id': model.id}),
+                    'post',
+                    {'data-pjax': 1}) | raw}}
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="rs-order__customer">
+                                <div class="form-group field-order-customer_name">
+                                {{ html.label(lang('app', 'Child name'), 'customer_name') | raw }}
+                                {{ html.input('text', 'customer_name', '', {
+                                        'id': 'order-customer_name', 
+                                        'class': 'form-control form-control-sm',
+                                        'autocomplete': 'off',
+                                        'placeholder': lang('app', 'Start typing a name...')
+                                    }) 
+                                | raw }}
+
+                                <div class="help-block"></div>
+
+                                {{ html.input('hidden', 'GroupCustomer[customer_id]', '', {
+                                        'id': 'order-customer_id'
+                                }) | raw }}
+
+                                {{ html.input('hidden', 'GroupCustomer[group_id]', model.id, []) | raw }}
+
+                                <table class="table table-hover rs-add-to-order">
+                                    <tbody id="rs-find-block" class="rs-find-block"></tbody>
+                                </table>
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            {{ html.submitButton(lang('app', 'Add to group'), {'class': 'btn btn-primary btn-sm d-block mg-top-25'}) | raw }}
+                        </div>
+                    </div>
+                {{ html.endForm() | raw}}
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="bg-white">
+                <table class="table table-striped table-bordered table-sm">
+                    <caption>{{ lang('app', 'Student list') }}</caption>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ lang('app', 'Child name') }}</th>
+                            <th></th>
+                        </tr>
+                            
+                    </thead>
+                    <tbody>
+                    {% if model.customers %}
+                        {% for key, customer in model.customers %}
+                            <tr>
+                                <td>{{ key + 1 }}</td>
+                                <td>
+                                    {{ html.a( customer.customer.child_name, path('customer/view', {'id': customer.customer.id})) | raw }}
+                                </td>
+                                <td>
+                                    {{ html.a('<span class="glyphicon glyphicon-trash"></span>', 
+                                                path('group/delete-child', {'id': customer.id, 'group_id': model.id}), 
+                                                {'data': {'confirm': lang('app', 'Are you sure you want to delete this item?')}
+                                                }) | raw }}
+                                </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td colspan="3">{{ lang('app', 'Nothing found') }}</td></tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    {{ pjax_end() }}
+
+</div>

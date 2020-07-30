@@ -1,0 +1,219 @@
+{# 
+/* @var $this yii\web\View */
+/* @var $model app\models\Order */
+/* @var $form yii\widgets\ActiveForm */
+#}
+
+{{ use('yii/bootstrap4/ActiveForm') }}
+
+{{ this.registerJsFile('@web/js/order-form.js', {'depends': 'yii\\web\\JqueryAsset'}) }}
+
+<div class="orders-form">
+
+    {% set form = active_form_begin() %}
+
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.field(model, 'name').dropDownList({
+                    'Абонемент': 'Абонемент',
+                    'Разовое занятие': 'Разовое занятие'
+                }, {
+                    'prompt': lang('app', 'Choose type of class'),
+                    'class': 'custom-select custom-select-sm'
+                }) | raw }}
+            </div>
+
+            <div class="col-md-3">
+                 {{ form.field(model, 'program_id').dropDownList(model.programList, {
+                    'prompt': lang('app', 'Choose program ...'),
+                    'class': 'custom-select custom-select-sm'
+                }) | raw }}
+            </div>
+
+            <div class="col-md-3">
+                 {{ form.field(model, 'sum').textInput({'type': 'number', 'placeholder': lang('app', 'Integer ...'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                {{ form.field(model, 'unit_price').textInput({'type': 'number', 'placeholder': lang('app', 'Integer ...'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+            </div>
+
+            <div class="col-md-3">
+                {{ form.field(model, 'count').textInput({'type': 'number', 'min': 1, 'value': 1, 'placeholder': lang('app', 'Integer ...'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+            </div>
+        
+            <div class="col-md-3">
+
+                {{ form.field(model, 'date_start').widget('yii\\jui\\DatePicker', {
+                                                'options':{},
+                                                'clientOptions':{
+                                                    'minDate':'',
+                                                    'maxDate':''
+                                                },
+                                                'language': 'ru',
+                                                'dateFormat':'php:d.m.Y',
+                                            }).widget('yii\\widgets\\MaskedInput', {
+                                                'mask': '99.99.9999'
+                                            }).textInput({
+                                                'class':'form-control form-control-sm',
+                                                'placeholder': 'Выберите дату',
+                                                'value': "now"|date("d.m.Y")
+                                            }) | raw}}
+            </div>
+            <div class="col-md-3">
+                {% set date_end = app.formatter.asDate(model.date_end, 'php:d.m.Y') %}
+                {{ form.field(model, 'date_end').widget('yii\\jui\\DatePicker', {
+                                                'options':{},
+                                                'clientOptions':{
+                                                    'minDate':'',
+                                                    'maxDate':''
+                                                },
+                                                'class':'form-control form-control-sm',
+                                                'language': 'ru',
+                                                'dateFormat':'php:d.m.Y',
+                                            }).widget('yii\\widgets\\MaskedInput', {
+                                                'mask': '99.99.9999'
+                                            }).textInput({
+                                                'class':'form-control form-control-sm',
+                                                'placeholder': lang('app', 'Not necessary ...'),
+                                                'value': date_end
+                                            }) | raw}}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                {{ form.field(model, 'sale').textInput({'type': 'number', 'placeholder': lang('app', 'Integer ...'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+            </div>
+
+            <div class="col-md-3">
+                {{ form.field(model, 'status').dropDownList({
+                    '1': 'Создан заказ',
+                    '2': 'Заказ в работе',
+                    '3': 'Заказ выполнен',
+                    '4': 'Заказ отменён'
+                }, {
+                    'prompt': lang('app', 'Not necessary ...'),
+                    'class': 'custom-select custom-select-sm'
+                }) | raw }}
+            </div>
+
+            <div class="col-md-6">
+                {{ form.field(model, 'teacher_id').dropDownList(model.teacherList, {
+                    'prompt': lang('app', 'Choose teacher ...'),
+                    'class': 'custom-select custom-select-sm'
+                }) | raw }}
+            </div>
+
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    {{form.field(model,'type_customer').radioList(
+                        {
+                            'not': lang('app', 'Don\'t attach customer'), 
+                            'new': lang('app', 'Add new customer'),
+                            'old': lang('app', 'Choose from customer list')
+                        }, 
+                        {
+                            'itemOptions': {
+                                'data-name': 'type_of_customer'
+                            }
+                        }
+                    ).label(false) | raw }}
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="tab-content">
+                    <div class="rs-order__customer" id="not"></div>
+                    <div class="rs-order__customer tab-pane" id="new">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form.field(model, 'customer_new_name').textInput({'placeholder': lang('app', 'Child name'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form.field(model, 'parents_new_name').textInput({'placeholder': lang('app', 'Parent name'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form.field(model, 'customer_phone').widget('yii\\widgets\\MaskedInput', {
+                                                                                    'mask': '+7 (999) 999-99-99'
+                                                                                }).textInput({'class': 'form-control form-control-sm', 'placeholder': lang('app', 'Phone')}).label(lang('app', 'Phone')) | raw}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rs-order__customer tab-pane active" id="old">
+                        {{ form.field(model, 'customer_name', {
+                            'template': '{label}{input}{error}
+                                            <table class="table table-hover rs-add-to-order">
+                                                <tbody id="rs-find-block" class="rs-find-block"></tbody>
+                                            </table>'
+                        }).textInput({'value': model.customer.child_name, 'placeholder': lang('app', 'Start typing a name...'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}).label(lang('app', 'Child name')) | raw }}
+
+                        {{ form.field(model, 'customer_id').hiddenInput().label(false) | raw }}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <hr />
+
+        {% if not model.id %}
+
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.field(model, 'checkbox_payment').checkbox({ 'data-name': 'payment_create', 
+                                                                        'checked': true, 
+                                                                        'value': true}).label(lang('app', 'Create payment')) | raw }}
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-pane active" id="payment_date">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.field(model, 'date_payment').widget('yii\\jui\\DatePicker', {
+                                                            'options':{},
+                                                            'clientOptions':{
+                                                                'minDate':'',
+                                                                'maxDate':''
+                                                            },
+                                                            'class':'form-control form-control-sm',
+                                                            'language': 'ru',
+                                                            'dateFormat':'php:d.m.Y',
+                                                        }).widget('yii\\widgets\\MaskedInput', {
+                                                            'mask': '99.99.9999'
+                                                        }).textInput({
+                                                            'class':'form-control form-control-sm',
+                                                            'placeholder': lang('app', 'Not necessary ...'),
+                                                            'value': "now"|date("d.m.Y")
+                                                        }) | raw}}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.field(model, 'type_of_pay').dropDownList({
+                                    'Наличными': 'Наличными',
+                                    'Безнал на р/счёт': 'Безнал на р/счёт',
+                                    'Перевод на карту': 'Перевод на карту'
+                                }, {
+                                    'prompt': lang('app', 'Not necessary ...'),
+                                    'class': 'custom-select custom-select-sm'
+                                }) | raw }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+        <div class="form-group">
+             {{ html.submitButton(lang('app', 'Save'), {'class': 'btn btn-outline-success btn-sm'}) | raw }}
+        </div>
+
+    {{ active_form_end() }}
+
+</div>

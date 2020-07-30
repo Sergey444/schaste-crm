@@ -1,0 +1,59 @@
+{# 
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\PositionSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */ 
+#}
+
+{{ use('yii/grid/GridView') }}
+{{ use('yii/widgets/Pjax') }}
+
+{{ set(this, 'title', lang('app', 'Settings')) }}
+{{ set(this, 'params', { 'breadcrumbs' : { '' : this.title } }) }}
+
+<div class="setting">
+    <div class="">
+
+    {{ pjax_begin() }}
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="bg-white mg-bottom">
+                    <h4>{{ lang('app', 'Position List') }}</h4>
+
+                     {{ grid_view_widget({
+                            'dataProvider': positionProvider,
+                            'options': {
+                                'class': 'table-responsive'
+                            },
+                            'tableOptions': {
+                                'class': 'table table-sm table-striped table-bordered' 
+                            },
+                            'columns': [
+                                {'class': 'yii\\grid\\SerialColumn'},
+                                'name',
+                                'show_teacher',
+                                {
+                                    'attribute': 'programsHtml', 
+                                    'label': lang('app', 'Programs'),
+                                    'format': 'raw',
+                                },
+                                {
+                                    'class': 'yii\\grid\\ActionColumn',
+                                    'header': '',
+                                    'template': '{update} {delete}'
+                                },
+                            ]
+                        }) 
+                    }}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bg-white">
+                    {{ this.render('_position.twig', {model: position}) | raw}}
+                </div>
+            </div>
+        </div>
+
+    {{ pjax_end() }}
+    </div>
+</div>

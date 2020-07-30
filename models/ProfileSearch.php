@@ -11,7 +11,14 @@ use app\models\Profile;
  */
 class ProfileSearch extends Profile
 {
+    /** 
+     * @var string
+     */
+    public $search;
 
+    /**
+     * {@inheritdoc}
+     */
     public function attributes()
     {
         return array_merge( parent::attributes(), ['username'] );
@@ -24,7 +31,8 @@ class ProfileSearch extends Profile
     {
         return [
             [['id', 'user_id', 'date_of_birthday', 'position_id', 'phone', 'created_at', 'updated_at'], 'integer'],
-            [['surname', 'name', 'secondname', 'username'], 'safe'],
+            [['search'], 'trim'],
+            [['surname', 'name', 'secondname', 'username', 'search'], 'safe'],
         ];
     }
 
@@ -50,7 +58,7 @@ class ProfileSearch extends Profile
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' =>  ['attributes' => ['username', 'color', 'position_id', 'position.name', 'name', 'secondname', 'surname', 'date_of_birthday', 'user_id','id','phone','created_at','updated_at']]
+            'sort' => ['attributes' => ['username', 'color', 'position_id', 'position.name', 'name', 'secondname', 'surname', 'date_of_birthday', 'user_id','id','phone','created_at','updated_at']]
         ]);
 
         $this->load($params);
@@ -63,9 +71,9 @@ class ProfileSearch extends Profile
 
         $query->andFilterWhere([
             'or',
-            ['like', 'surname', $this->name],
-            ['like', 'name', $this->name],
-            ['like', 'phone', $this->name]
+            ['like', 'surname', $this->search],
+            ['like', 'name', $this->search],
+            ['like', 'phone', $this->search]
         ]);
 
         return $dataProvider;

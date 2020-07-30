@@ -192,6 +192,7 @@ return [
     'Update record' => 'Редактировать запись',
     'Domens and hostings' => 'Домены и хостинги',
     'Domen name' => 'Доменное имя',
+    'Host' => 'Хостинг',
     'Host name' => 'Имя хоста',
     'Port' => 'Порт',
     'Login FTP' => 'Логин FTP',
@@ -210,4 +211,8 @@ return [
     'Add position' => 'Добавить должность',
     'Show users with this position in the list of teachers' => 'Показывать пользователей с данной должностью в списке преподавателей',
     'Position' => 'Должность',
+
+    'Update Orders' => 'Редактировать заказ',
+    'Position List' => 'Список должностей',
+    'Show in list' => 'Показывать в списке преподавателей'
 ];

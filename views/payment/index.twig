@@ -1,0 +1,175 @@
+{# 
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\OrderSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */ 
+#}
+
+{{ use('yii/grid/GridView') }}
+{{ use('yii/widgets/Pjax') }}
+{{ use('yii/widgets/Menu') }}
+
+{{ set(this, 'title', lang('app', 'Payments')) }}
+{{ set(this, 'params', { 'breadcrumbs' : { '' : this.title } }) }}
+
+<div class="payment-index">
+
+    <div class="bg-white mg-bottom">
+        <div class="row" style="margin-bottom: 16px;">
+            {{ menu_widget({
+                'options': {'class': 'rs-time-nav col-md-8'},
+                'linkTemplate': '<a class="btn btn-outline-secondary rs-btn__time btn-sm" href={url} ><span>{label}</span></a>',
+                'items': [
+                    {'label': lang('app', 'Current month'), 'url': ['/payment/index'], 'active': app.request.get('time') is empty },
+                    {'label': lang('app', 'Last month'), 'url': {'0': '/payment/index', 'time':'last-month'}},
+                    {'label': lang('app', 'All time'), 'url': {'0':'/payment/index', 'time': 'all-time'}},
+                ],
+                'encodeLabels': false, 
+                'activateParents': true }) | raw}}
+
+            <div class="col-md-4" style="text-align: right;">
+
+                <div style="margin-left: 3px; float: right;">
+                    {{ html.tag('button', lang('app', 'Set payment out'), {
+                                                        'class': 'btn btn-danger btn-sm d-none d-md-inline-block', 
+                                                        'data-toggle': 'modal', 
+                                                        'data-target': '#createPaymentOut'}) | raw }}
+                </div>
+
+                <div  style=" float: right;">
+                    {{ html.tag('button', lang('app', 'Set payment in'), {
+                                                        'class': 'btn btn-success btn-sm visible-md d-none d-md-inline-block', 
+                                                        'data-toggle': 'modal', 
+                                                        'data-target': '#createPaymentIn'}) | raw }}
+                </div>
+
+                {{ html.a( lang('app', 'Set payment in'), ['create-in'], {'class': 'btn btn-success btn-sm mg-bottom d-block d-md-none'}) | raw }}
+                {{ html.a( lang('app', 'Set payment out'), ['create-out'], {'class': 'btn btn-danger btn-sm d-block d-md-none'}) | raw }}
+            </div>
+        </div>
+    </div>
+
+    {{ pjax_begin() }}
+
+    <div class="bg-white mg-bottom">
+        <span class="payment-description">{{ lang('app', 'Income') }}</span>
+
+        {{ grid_view_widget({
+                'dataProvider': dataProviderPaymentIn,
+                'options': {
+                    'class': 'table-responsive'
+                },
+                'tableOptions': {
+                    'class': 'table table-sm table-payment-in table-bordered' 
+                },
+                'columns': [
+                    {'class': 'yii\\grid\\SerialColumn'},
+                    'name',
+                    {'attribute': 'sum', 'format': ['currency']},
+                    'customer.child_name',
+                    'type_of_pay',
+                    {'attribute': 'date_of_payment', 'format': ['date', 'php:d.m.Y']},
+                    {
+                        'class': 'yii\\grid\\ActionColumn',
+                        'header': '',
+                        'template': '{update} {delete}',
+                        'buttons': {
+                            'update': modelPaymentIn.updateCallback,
+                            'delete': modelPaymentIn.deleteCallback
+                        }
+                    },
+                ]
+            }) 
+        }}
+
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4" style="text-align: right;">
+                {{ lang('app', 'Total') ~': '~ app.formatter.format(searchModelPaymentIn.total, ['decimal', 0]) ~ ' р.' }}
+            </div>
+        </div>
+        
+    </div>
+
+    {{ pjax_end() }}
+    
+    {{ pjax_begin() }}
+
+    <div class="bg-white">
+        <span class="payment-description">{{ lang('app', 'Expenses') }}</span>
+
+        {{ grid_view_widget({
+                'dataProvider': dataProviderPaymentOut,
+                'options': {
+                    'class': 'table-responsive'
+                },
+                'tableOptions': {
+                    'class': 'table table-sm table-payment-out table-bordered' 
+                },
+                'columns': [
+                    {'class': 'yii\\grid\\SerialColumn'},
+                    'name',
+                    {'attribute': 'sum', 'format': ['decimal']},
+                    {'attribute': 'profile.surname', 'value': 'profile.fullName'},
+                    'type_of_pay',
+                    {'attribute': 'date_of_payment', 'format': ['date', 'php:d.m.Y']},
+                    'salary',
+                    {
+                        'class': 'yii\\grid\\ActionColumn',
+                        'header': '',
+                        'template': '{update} {delete}',
+                        'buttons': {
+                            'update': modelPaymentOut.updateCallback,
+                            'delete': modelPaymentOut.deleteCallback
+                        }
+                    },
+                ]
+            }) 
+        }}
+
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4" style="text-align: right;">
+                {{ lang('app', 'Total') ~': '~ app.formatter.format(searchModelPaymentOut.total, ['decimal', 0]) ~' р.'}}
+            </div>
+        </div>
+    </div>
+
+    {{ pjax_end() }}
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createPaymentIn" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ lang('app', 'Set payment in') }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                {{ this.render('_form-in.twig', {model: modelPaymentIn}) | raw}}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createPaymentOut" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ lang('app', 'Set payment out') }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                {{ this.render('_form-out.twig', {model: modelPaymentOut}) | raw }}
+            </div>
+        </div>
+
+    </div>
+</div>

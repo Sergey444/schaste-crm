@@ -1,0 +1,17 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Dh */
+#}
+
+{{ set(this, 'title', lang('app', 'Create record')) }}
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Domens and hostings'), 'url': path(['index']) }, {'label' : this.title }] }) }}
+
+<div class="dh-create">
+
+    <div class="bg-white">
+        <h3>Страница добавления записи</h3><hr>
+        {{ this.render('_form.twig', {
+            'model': model,
+        }) | raw }}
+    </div>
+</div>

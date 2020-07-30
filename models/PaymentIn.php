@@ -4,8 +4,9 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 
-use app\models\Order;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "payment_in".
@@ -44,6 +45,7 @@ class PaymentIn extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 
@@ -57,7 +59,7 @@ class PaymentIn extends \yii\db\ActiveRecord
             [['sum', 'order_id', 'customer_id', 'created_at', 'updated_at'], 'integer'],
             [['comment'], 'string'],
             [['name', 'type_of_pay'], 'string', 'max' => 255],
-            [['date_of_payment'], 'string'],
+            [['date_of_payment', 'customer_name'], 'string'],
             [['date_of_payment'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_of_payment'],
         ];
     }
@@ -89,4 +91,50 @@ class PaymentIn extends \yii\db\ActiveRecord
         return $this->hasOne(Order::className(), ['id' => 'order_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCustomer() 
+    {
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+    }
+
+    /**
+     * @return string html callback
+     */
+    public function getUpdateCallback()
+    {
+        return function ($url, $model) {
+            return Html::a(
+                '<span class="glyphicon glyphicon-pencil"></span>', 
+                ['update-in', 'id' => $model->id],
+                [
+                    'title' => Yii::t('app', 'Update'),
+                    'data-pjax' => 0
+                ]
+                );
+        };
+    }
+
+    /**
+     * @return string html callback
+     */
+    public function getDeleteCallback()
+    {
+        return function ($url, $model) {
+            return Html::a(
+                '<span class="glyphicon glyphicon-trash"></span>', 
+                ['delete-in', 'id' => $model->id],
+                [
+                    'title' => Yii::t('app', 'Delete'),
+                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'data' => [
+                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                        'method' => 'post',
+                    ],
+                    'data-pjax' => 0
+                ]
+            );
+        };
+    }
 }

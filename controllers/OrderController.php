@@ -64,7 +64,7 @@ class OrderController extends Controller
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('index.twig', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -79,7 +79,7 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->render('view.twig', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -97,7 +97,7 @@ class OrderController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
+        return $this->render('create.twig', [
             'model' => $model,
         ]);
     }
@@ -117,7 +117,7 @@ class OrderController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->render('update.twig', [
             'model' => $model,
         ]);
     }
@@ -135,20 +135,6 @@ class OrderController extends Controller
 
         return $this->redirect(['index']);
     }
-
-    // /**
-    //  * @return mixed
-    //  */
-    // public function actionGetCustomers()
-    // {
-    //     $customerName = Yii::$app->request->post('customer_name');
-    //     // Поиск клиентов для добавления в заказ ajax
-    //     if (Yii::$app->request->isAjax && isset($customerName)) {
-    //         $result =  htmlspecialchars( $customerName ) == '' ? 'Не найдено' : $customerName;
-    //         $customers = Customer::find()->filterWhere(['like', 'child_name', $result])->limit(50)->all();
-    //         return Json::encode(ArrayHelper::map($customers, 'child_name', 'id')) ;
-    //     }
-    // }
 
     /**
      * Finds the Order model based on its primary key value.

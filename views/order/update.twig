@@ -1,0 +1,20 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Order */
+#}
+{{ set(this, 'title', lang('app', 'Update Orders') ~ ' ' ~ model.name, {
+    'name': model.name,
+}) }}
+
+{{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Orders'), 'url': '/order' }, {'label' : this.title }] }) }}
+
+<div class="orders-update">
+
+    <div class="bg-white">
+    <h3>Страница редактирования заказа</h3><hr />
+        {{ this.render('_form.twig', {
+            'model': model,
+        }) | raw }}
+    </div>
+
+</div>

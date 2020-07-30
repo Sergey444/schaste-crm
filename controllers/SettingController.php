@@ -56,7 +56,7 @@ class SettingController extends \yii\web\Controller
             }
         }
 
-        return $this->render('index', [
+        return $this->render('index.twig', [
             'position' => $position,
             'positionProvider' => $positionProvider
         ]);
@@ -65,7 +65,7 @@ class SettingController extends \yii\web\Controller
     /**
      * @return string
      */
-    public function actionUpdatePosition($id)
+    public function actionUpdate($id)
     {
         $model = $this->findPositionModel($id);
 
@@ -73,7 +73,7 @@ class SettingController extends \yii\web\Controller
             return $this->redirect(['index']);
         }
 
-        return $this->render('update-position', [
+        return $this->render('update-position.twig', [
             'model' => $model,
         ]);
     }
@@ -85,7 +85,7 @@ class SettingController extends \yii\web\Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDeletePosition($id)
+    public function actionDelete($id)
     {
         $this->findPositionModel($id)->delete();
 

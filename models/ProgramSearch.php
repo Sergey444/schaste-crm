@@ -12,12 +12,18 @@ use app\models\Program;
 class ProgramSearch extends Program
 {
     /**
+     * @var string
+     */
+    public $search;
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['id', 'created_at', 'updated_at'], 'integer'],
+            [['search'], 'safe'],
             [['name', 'one_price', 'comment'], 'safe'],
         ];
     }
@@ -56,16 +62,12 @@ class ProgramSearch extends Program
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+                'or',
+                ['like', 'name', $this->search],
+                ['like', 'one_price', $this->search],
+                ['like', 'comment', $this->search]
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'one_price', $this->one_price])
-            ->andFilterWhere(['like', 'comment', $this->comment]);
 
         return $dataProvider;
     }

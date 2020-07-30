@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 
 use app\models\Program;
 use app\models\Customer;
@@ -11,6 +12,8 @@ use app\models\PaymentIn;
 use app\models\Profile;
 
 use yii\validators\Validator;
+use \yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "order".
  *
@@ -82,6 +85,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 
@@ -103,13 +107,13 @@ class Order extends \yii\db\ActiveRecord
             [['customer_new_name', 'parents_new_name', 'customer_phone'], 'required', 'when' => function($model) {
                 return $model->type_customer == 'new';
             }, 'whenClient' => "function (attribute, value) {
-                return $('[data-name=type_customer]:checked').val() == 'new';
+                return $('[data-name=type_of_customer]:checked').val() == 'new';
             }"],
 
             [['customer_name'], 'required', 'when' => function($model) {
                 return $model->type_customer == 'old';
             }, 'whenClient' => "function (attribute, value) {
-                return $('[data-name=type_customer]:checked').val() == 'old';
+                return $('[data-name=type_of_customer]:checked').val() == 'old';
             }"],
 
             [['date_payment', 'type_of_pay'], 'string'],
@@ -246,5 +250,22 @@ class Order extends \yii\db\ActiveRecord
         return '<a href="/order/view/'. $this->id .'">'. $this->name .'</a> '.
             $this->sum .'р '. $this->program->name .' <b>'. 
             Yii::$app->formatter->asDate($this->date_start, 'php:d.m.Y') .'</b> - <b>'. Yii::$app->formatter->asDate($this->date_end, 'php:d.m.Y') .'</b>';
+    }
+
+    /**
+     * Returns teacher list
+     * @return array
+     */
+    public function getTeacherList()
+    {
+        return ArrayHelper::map(Profile::find()->joinWith('position')->where(['position.show_teacher' => 1])->all(), 'id', 'fullName');
+    }
+
+    /**
+     * Returns teacher list
+     */
+    public function getProgramList()
+    {
+        return ArrayHelper::map(Program::find()->all(), 'id', 'name');
     }
 }

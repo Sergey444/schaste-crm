@@ -15,7 +15,7 @@ class MessageFromSiteSearch extends MessageFromSite
     /**
      * @var 
      */
-    public $term;
+    public $search;
 
     /**
      * {@inheritdoc}
@@ -24,7 +24,7 @@ class MessageFromSiteSearch extends MessageFromSite
     {
         return [
             [['id', 'created_at', 'updated_at'], 'integer'],
-            [['term'], 'trim'],
+            [['search'], 'trim'],
             [['title', 'name', 'phone', 'email', 'message', 'page'], 'safe'],
         ];
     }
@@ -72,11 +72,11 @@ class MessageFromSiteSearch extends MessageFromSite
 
         $query->andFilterWhere([
             'or',
-            ['like', 'email', $this->term],
-            ['like', 'name', $this->term],
-            ['like', 'title', $this->term],
-            ['like', 'phone', str_replace([' ', '(', ')', '+', '-'], '', $this->term)],
-            ['like', 'message', $this->term]
+            ['like', 'email', $this->search],
+            ['like', 'name', $this->search],
+            ['like', 'title', $this->search],
+            ['like', 'phone', str_replace([' ', '(', ')', '+', '-'], '', $this->search)],
+            ['like', 'message', $this->search]
         ]);
 
         return $dataProvider;

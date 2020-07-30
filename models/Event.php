@@ -4,11 +4,11 @@ namespace app\models;
 
 use app\models\EventCustomer;
 
-
+use Yii;
 use yii\helpers\Json;
 
 use yii\behaviors\TimestampBehavior;
-use Yii;
+use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the model class for table "Event".
@@ -45,6 +45,7 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 
@@ -55,7 +56,6 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['teacher_id', 'program_id', 'start', 'end', 'all_day', 'created_at', 'updated_at'], 'integer'],
-            // [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
         ];
     }

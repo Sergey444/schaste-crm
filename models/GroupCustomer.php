@@ -27,6 +27,7 @@ class GroupCustomer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['group_id', 'customer_id'], 'required'],
             [['group_id', 'customer_id'], 'integer'],
         ];
     }

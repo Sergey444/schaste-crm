@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the model class for table "dh".
@@ -21,12 +22,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class Dh extends \yii\db\ActiveRecord
 {
-
-     /**
-     * @var
-     */
-    public $term;
-
     /**
      * {@inheritdoc}
      */
@@ -42,6 +37,7 @@ class Dh extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 
@@ -83,5 +79,43 @@ class Dh extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    /**
+     * @return
+     */
+    public function getHostHtml()
+    {
+        return function($model) {
+            $login = $model->login_panel ? $model->login_panel : '<span class="not-set">(не задано)</span>';
+            $passw = $model->password_panel ? $model->password_panel : '<span class="not-set">(не задано)</span>';
+            return '<div><i class="fa fa-user" aria-hidden="true"></i> ' . $login . '</div>
+                    <div><i class="fa fa-unlock" aria-hidden="true"></i> ' . $passw . '</div>';
+        };
+    }
+
+    /**
+     * @return 
+     */
+    public function getSftpHtml()
+    {
+        return function($model) {
+            $login = $model->login_ftp ? $model->login_ftp : '<span class="not-set">(не задано)</span>';
+            $passw = $model->password_ftp ? $model->password_ftp : '<span class="not-set">(не задано)</span>';
+            return '<div><i class="fa fa-user" aria-hidden="true"></i> '. $login . '</div>
+                    <div><i class="fa fa-unlock" aria-hidden="true"></i> '. $passw .'</div>';
+        };
+    }
+
+    /**
+     * @return
+     */
+    public function getAdminPanelHtml()
+    {
+        return function($model) {
+            $login = $model->login_panel ? $model->login_panel : '<span class="not-set">(не задано)</span>';
+            $passw = $model->password_panel ? $model->password_panel : '<span class="not-set">(не задано)</span>';
+            return '<div><i class="fa fa-user" aria-hidden="true"></i> ' . $login . '</div><div><i class="fa fa-unlock" aria-hidden="true"></i> ' . $passw . '</div>';
+        };
     }
 }

@@ -43,7 +43,7 @@ class PositionSearch extends Position
      */
     public function search($params)
     {
-        $query = Position::find();
+        $query = Position::find()->with(['programs', 'programs.program']);
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([

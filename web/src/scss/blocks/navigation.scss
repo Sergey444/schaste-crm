@@ -1,0 +1,67 @@
+.navbar-brand {
+    color: $link-color;
+    &:hover {
+        color: $pink-color;
+    }
+}
+.rs-navbar {
+    border-bottom: 1px solid $pink-color;
+    background-color: #fff;
+    padding: 0.3rem 1rem;
+}
+
+.nav-item {
+
+    & a {
+        color: $link-color;
+        &:hover,
+        &.active {
+            color: $pink-color;
+        }
+
+        &.active {
+            cursor: default;
+        }
+    }
+}
+
+.navbar-toggler {
+    border: 1px solid $pink-color;
+    outline: none;
+
+    &:active,
+    &:focus {
+        outline: none;
+    }
+
+    & .navbar-toggler-icon {
+
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+    
+        height: auto;
+        color: $pink-color;
+        transition: .3s;
+        transform: rotate(-90deg);
+        
+        &::before {
+            content: "\f100";
+        }
+    }
+    
+    &[aria-expanded="false"] .navbar-toggler-icon {
+        transform: rotate(0);
+    }
+    
+}
+nav.sidebar {
+    padding-top: 70px;
+    min-width: 200px;
+}
+.sidebar-sticky {
+    position: sticky;
+    top: 70px;
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

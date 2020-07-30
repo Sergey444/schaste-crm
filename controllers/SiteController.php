@@ -54,6 +54,7 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+                'view' => '@app/views/site/error.twig'
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
@@ -69,7 +70,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index.twig');
     }
 
     /**
@@ -89,7 +90,7 @@ class SiteController extends Controller
         }
 
         $model->password = '';
-        return $this->render('login', [
+        return $this->render('login.twig', [
             'model' => $model,
         ]);
     }
@@ -110,7 +111,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        return $this->render('signup', [
+        return $this->render('signup.twig', [
             'model' => $model,
         ]);
     }
