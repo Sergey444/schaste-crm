@@ -27,7 +27,7 @@ class DhController extends Controller
                     [
                         'actions' => [],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                     ],
                 ]
             ],

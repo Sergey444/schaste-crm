@@ -30,7 +30,7 @@ class PaymentController extends Controller
                     [
                         'actions' => [],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                     ],
                 ]
             ],

@@ -33,17 +33,17 @@
                 {% set menuItems = menuItems|merge([
 
                     {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Order"), 'url': ['/order/index'], '!visible': app.user.isGues, 'options': {'class': 'd-lg-none'}},
-                    {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], 'visible': app.user.can('admin'), 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-calendar-alt"></i> '~ lang('app', 'Journal'), 'url': ['/journal/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-child"></i> '~ lang('app', 'Club customers'), 'url': ['/customer/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-book"></i> '~ lang('app', 'Club programs'), 'url': ['/program/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-layer-group"></i> '~ lang('app', 'Groups'), 'url': ['/group/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-comments"></i> '~ lang('app', 'Message from site'), 'url': ['/message-from-site/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
-                    {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], '!visible': app.user.can('admin'), 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], 'visible': app.user.can('admin'), 'options': {'class': 'd-lg-none'}},
 
                    
                     {'label' : '<i class="far fa-address-card"></i> Профиль', 'url' : ['profile/index']},
-                    {'label' : '<i class="fas fa-users-cog"></i> Управление пользователями', 'url' : ['/profile/users']},
+                    {'label' : '<i class="fas fa-users-cog"></i> Управление пользователями', 'url' : ['/profile/users'], 'visible': app.user.can('admin')},
                     {'label' : '<i class="fas fa-cog"></i> Настройки', 'url' : ['/setting/index']},
                     {
                         'label' : '<i class="fas fa-door-open"></i> (' ~ app.user.identity.username ~ ')',
@@ -76,14 +76,14 @@
 
                         <nav class="nav d-none d-lg-block sidebar mr-4">
                         {% set menuItems = [
-                            {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Orders"), 'url': ['/order/index'], '!visible': app.user.isGues},
-                            {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], '!visible': app.user.isGuest},
+                            {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Order"), 'url': ['/order/index'], '!visible': app.user.isGues},
+                            {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], 'visible': app.user.can('admin')},
                             {'label': '<i class="fas fa-calendar-alt"></i> '~ lang('app', 'Journal'), 'url': ['/journal/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-child"></i> '~ lang('app', 'Club customers'), 'url': ['/customer/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-book"></i> '~ lang('app', 'Club programs'), 'url': ['/program/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-layer-group"></i> '~ lang('app', 'Groups'), 'url': ['/group/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-comments"></i> '~ lang('app', 'Message from site'), 'url': ['/message-from-site/index'], '!visible': app.user.isGuest},
-                            {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], '!visible': app.user.can('admin')},
+                            {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], 'visible': app.user.can('admin')},
 
                         ] %}
 
