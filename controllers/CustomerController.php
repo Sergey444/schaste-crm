@@ -34,10 +34,15 @@ class CustomerController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['view', 'update', 'delete'],
+                        'actions' => ['view', 'update'],
                         'allow' => true,
                         'roles' => ['@'],
-                    ]
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
                 ]
             ],
             'verbs' => [
