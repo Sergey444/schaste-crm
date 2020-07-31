@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 
 use yii\helpers\Html;
 
@@ -44,6 +45,7 @@ class PaymentIn extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 

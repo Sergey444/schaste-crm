@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 
 use Yii;
 
@@ -39,6 +40,7 @@ class Sticker extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 

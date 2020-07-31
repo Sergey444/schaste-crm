@@ -158,8 +158,11 @@
                     
                 </div>
                 <div class="pull-right">
+                    {% if app.user.isGuest == false %}
+                        <div>Документы детского центра <a href="#">wiki.schaste-club.ru</a></div>
+                    {% else %}
+                    {% endif %}
                     <div>Сайт детского центра <a href="#">schaste-club.ru</a></div>
-                    <div>Документы детского центра <a href="#">wiki.schaste-club.ru</a></div>
                     <div>Техническая поддержка: <a href="mailto:support@schaste-club.ru">support@schaste-club.ru</a></div>
                 </div>
             </div>

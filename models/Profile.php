@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 use yii\helpers\FileHelper;
 use yii\helpers\ArrayHelper;
 use yii\imagine\Image;
@@ -49,6 +50,7 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            BlameableBehavior::className()
         ];
     }
 
