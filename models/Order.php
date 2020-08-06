@@ -60,7 +60,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @var string
      */
-    public $checkbox_payment;
+    public $checkbox_payment = true;
     /**
      * @var 
      */
@@ -176,7 +176,6 @@ class Order extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-
             if ($this->type_customer === 'new') {
                 $customer = new Customer();
                 $customer->child_name = $this->customer_new_name;
