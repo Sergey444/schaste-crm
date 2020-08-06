@@ -29,9 +29,14 @@ class MessageFromSiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['index', 'view', 'update', 'delete'],
+                        'actions' => ['index', 'view'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['delete', 'update'],
+                        'allow' => true,
+                        'roles' => ['admin'],
                     ],
                 ],
             ],

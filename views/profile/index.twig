@@ -45,7 +45,7 @@
                     </tr>
                     <tr>
                         <td>{{ lang('app', 'Email') }}:</td>
-                        <td>{{ model.user.email }}</td>
+                        <td>{{ app.formatter.asEmail(model.user.email) | raw }}</td>
                     </tr>
                     <tr>
                         <td>{{ lang('app', 'Address') }}:</td>
