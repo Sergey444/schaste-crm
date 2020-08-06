@@ -44,7 +44,7 @@ class ProfileController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['update-user', 'delete-photo'],
+                        'actions' => ['view', 'update-user', 'delete-photo'],
                         'allow' => true,
                         'roles' => ['@'],
                         // 'matchCallback' => function () {

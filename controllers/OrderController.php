@@ -33,10 +33,16 @@ class OrderController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => [],
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['index', 'view', 'create', 'update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    
                 ]
             ],
             'verbs' => [

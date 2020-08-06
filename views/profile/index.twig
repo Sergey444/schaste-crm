@@ -4,8 +4,11 @@
 #}
 
 {{ use('yii\helpers\ArrayHelper') }}
-
-{{ set(this, 'title', 'Мой профиль') }}
+{% if app.user.id == model.user_id %}
+    {{ set(this, 'title', 'Мой профиль') }}
+{% else %}
+    {{ set(this, 'title', model.fullName) }}
+{% endif %}
 {{ set(this, 'params', { 'breadcrumbs' : { '' : this.title } }) }}
 
 <div class="personal-view">
@@ -24,7 +27,9 @@
                     {% if app.user.id == model.user_id %}
                         <a href="{{ path('/profile/update-user') }}" class="u-update-btn">{{ lang('app', 'Update profile') }}</a>
                     {% else %}
-                         <a href="{{ path('/profile/update', {'id': model.id}) }}" class="u-update-btn">{{ lang('app', 'Update profile') }}</a>
+                        {% if (app.user.can('admin')) %}
+                            <a href="{{ path('/profile/update', {'id': model.id}) }}" class="u-update-btn">{{ lang('app', 'Update profile') }}</a>
+                        {% endif %}
                     {% endif %}
                 </div>
 
