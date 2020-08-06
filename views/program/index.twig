@@ -48,7 +48,7 @@
                 'columns': [
                     {'class': 'yii\\grid\\SerialColumn'},
                     'name',
-                    'one_price',
+                    {'attribute': 'one_price', 'format': ['currency']},
                     'comment:ntext',
                     {'attribute': 'created_at', 'format': ['date', 'php:d.m.Y H:i:s']},
 
