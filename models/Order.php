@@ -96,7 +96,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['status', 'program_id', 'customer_id', 'teacher_id', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'sum'], 'required'],
+            [['name', 'sum', 'program_id'], 'required'],
             [['count', 'unit_price', 'sale','sum'], 'integer', 'min' => 0],
             [['name'], 'string', 'max' => 255],
             [['date_start', 'date_end'], 'string'],
@@ -118,7 +118,7 @@ class Order extends \yii\db\ActiveRecord
 
             [['date_payment', 'type_of_pay'], 'string'],
             [['date_payment'], 'datetime', 'format' => 'php:d.m.Y', 'timestampAttribute' => 'date_payment'],
-            [['date_payment'], 'required', 'when' => function($model) {
+            [['date_payment', 'type_of_pay'], 'required', 'when' => function($model) {
                 return $model->checkbox_payment == '1';
             }, 'whenClient' => "function (attribute, value) {
                 return $('[data-name=payment_create]:checked').val() == '1';
