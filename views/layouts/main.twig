@@ -43,7 +43,7 @@
 
                    
                     {'label' : '<i class="far fa-address-card"></i> Профиль', 'url' : ['profile/index']},
-                    {'label' : '<i class="fas fa-users-cog"></i> Управление пользователями', 'url' : ['/profile/users'], 'visible': app.user.can('admin')},
+                    {'label' : '<i class="fas fa-users-cog"></i> Управление пользователями', 'url' : ['/profile/users'], 'visible': app.user.can('admin') or app.user.can('administering')},
                     {'label' : '<i class="fas fa-cog"></i> Настройки', 'url' : ['/setting/index']},
                     {
                         'label' : '<i class="fas fa-door-open"></i> (' ~ app.user.identity.username ~ ')',
