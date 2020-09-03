@@ -52,17 +52,22 @@
                     {'class': 'yii\\grid\\SerialColumn'},
                     {
                         'label': '#',
+                        'attribute': 'user.status',
                         'format': 'raw',
                         'value': 'htmlStatus' },
                     {'attribute': 'surname', 'value': 'fullName'},
-                    'position.name',
+                    {'attribute': 'position.name', 'label': lang('app', 'Position')},
+                    {'attribute': 'color', 'format': 'raw', 'value': 'htmlColor'},
                     'user.email:email',
                     {'attribute': 'date_of_birthday', 'format': ['date', 'php:d.m.Y']},
                     {'attribute': 'phone', 'format': ['phone']},
                     {
                         'class': 'yii\\grid\\ActionColumn',
                         'header': '',
-                        'template': '{view} {update} {delete}'
+                        'template': '{view} {update} {delete}',
+                        'visibleButtons' : {
+                            'delete': app.user.can('admin'),
+                        }
                     },
                 ]
             }) 

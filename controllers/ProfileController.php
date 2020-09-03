@@ -41,7 +41,13 @@ class ProfileController extends Controller
                     [
                         'actions' => [],
                         'allow' => true,
-                        'roles' => ['admin', 'administering'],
+                        'roles' => ['admin'],
+                    ],
+                    
+                    [
+                        'actions' => ['users', 'view', 'update'],
+                        'allow' => true,
+                        'roles' => ['administering'],
                     ],
                     [
                         'actions' => ['index', 'update-user', 'delete-photo'],

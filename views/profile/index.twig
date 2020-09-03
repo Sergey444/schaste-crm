@@ -27,7 +27,7 @@
                     {% if app.user.id == model.user_id %}
                         <a href="{{ path('/profile/update-user') }}" class="u-update-btn">{{ lang('app', 'Update profile') }}</a>
                     {% else %}
-                        {% if (app.user.can('admin')) %}
+                        {% if (app.user.can('admin') or app.user.can('administering')) %}
                             <a href="{{ path('/profile/update', {'id': model.id}) }}" class="u-update-btn">{{ lang('app', 'Update profile') }}</a>
                         {% endif %}
                     {% endif %}

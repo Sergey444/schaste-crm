@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css2?family=Caveat&display=swap);
-@charset "UTF-8";
 
 html, body {
     height: 100%;
@@ -364,6 +363,12 @@ nav.sidebar {
     color: #fff;
     background-color: #fe17bf;
     border-color: #fe17bf;
+}
+
+.status-square {
+    width: 10px;
+    height: 10px;
+    display: block;
 }
 
 
