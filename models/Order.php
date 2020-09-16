@@ -60,7 +60,7 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @var string
      */
-    public $checkbox_payment = true;
+    public $checkbox_payment;
     /**
      * @var 
      */
