@@ -1,0 +1,54 @@
+{{ set(this, 'title', 'Аналитика') }}
+
+
+{{ this.registerJsFile('https://www.gstatic.com/charts/loader.js') }}
+{{ this.registerJsFile('@web/js/analytic.js', {'depends': 'yii\\web\\JqueryAsset'}) }}
+
+{# {{ this.registerCssFile('@web/sticker/css/main.chunk.css') }} #}
+
+{{ set(this, 'title', lang('app', 'Analytic')) }}
+{{ set(this, 'params', { 'breadcrumbs' : { '' : this.title } }) }}
+
+<div class="analytic">
+
+    <div class="bg-white mb-4">
+        {{ this.render('_search.twig', {
+            date_start: date_start,
+            date_end: date_end
+        }) | raw}}
+    </div>
+
+    <div class="">
+        <div class="row mg-bottom">
+            <div class="col-md-6">
+                <div class="bg-white">
+                    <div id="chart_div" style="height: 300px"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-white">
+                    <div id="chart_area" style="height: 300px"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row mg-bottom">
+            <div class="col-md-6">
+                <div class="bg-white">
+                    <div id="piechart_3d" style="height: 300px"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-white">
+                    <div id="chart_visual" style="height: 300px"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="bg-white">
+                    <div id="chart_pie" style="height: 300px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

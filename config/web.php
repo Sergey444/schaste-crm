@@ -79,6 +79,7 @@ $config = [
                 'dh' => 'dh/index',
                 'group/view/<id:\d+>' => 'group/view',
                 'group/update/<id:\d+>' => 'group/update',
+                'analytic' => 'analytic/index',
 
                 // rest api routing
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],

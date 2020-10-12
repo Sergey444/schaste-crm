@@ -40,7 +40,7 @@
                     {'label': '<i class="fas fa-layer-group"></i> '~ lang('app', 'Groups'), 'url': ['/group/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-comments"></i> '~ lang('app', 'Message from site'), 'url': ['/message-from-site/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], 'visible': app.user.can('admin'), 'options': {'class': 'd-lg-none'}},
-
+                     {'label': '<i class="fas fa-chart-bar"></i> '~ lang('app', 'Analytic'), 'url': ['/analytic/index'], 'visible': app.user.can('admin'), 'options': {'class': 'd-lg-none'}},
                    
                     {'label' : '<i class="far fa-address-card"></i> Профиль', 'url' : ['profile/index']},
                     {'label' : '<i class="fas fa-users-cog"></i> Управление пользователями', 'url' : ['/profile/users'], 'visible': app.user.can('admin')},
@@ -84,6 +84,7 @@
                             {'label': '<i class="fas fa-layer-group"></i> '~ lang('app', 'Groups'), 'url': ['/group/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-comments"></i> '~ lang('app', 'Message from site'), 'url': ['/message-from-site/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-lock"></i> '~ lang('app', 'Passwords from sites'), 'url': ['/dh/index'], 'visible': app.user.can('admin')},
+                            {'label': '<i class="fas fa-chart-bar"></i> '~ lang('app', 'Analytic'), 'url': ['/analytic/index'], 'visible': app.user.can('admin')}
 
                         ] %}
 
