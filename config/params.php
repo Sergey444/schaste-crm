@@ -2,6 +2,6 @@
 
 return [
     'adminEmail' => 'support@schaste-club.ru',
-    'senderEmail' => 'sergei.govendyaev@yandex.ru',
+    'senderEmail' => 'noreply@schaste-club.ru',
     'senderName' => 'schaste-club.ru mailer',
 ];

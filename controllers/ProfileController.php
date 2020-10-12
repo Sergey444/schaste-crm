@@ -43,19 +43,20 @@ class ProfileController extends Controller
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
+                    
                     [
-                        'actions' => ['update-user', 'delete-photo'],
+                        'actions' => ['users', 'view', 'update'],
+                        'allow' => true,
+                        'roles' => ['administering'],
+                    ],
+                    [
+                        'actions' => ['index', 'update-user', 'delete-photo'],
                         'allow' => true,
                         'roles' => ['@'],
                         // 'matchCallback' => function () {
                         //     return $this->findModel(Yii::$app->request->get('id'))->user_id === Yii::$app->user->id;
                         // }
-                    ],
-                    [
-                        'actions' => ['index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
+                    ]
                 ],
             ],
             'verbs' => [

@@ -26,12 +26,12 @@ class ProgramController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'create'],
+                        'actions' => ['index', 'create', 'view'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['view', 'update', 'delete'],
+                        'actions' => [ 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ]

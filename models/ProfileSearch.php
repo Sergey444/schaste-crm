@@ -58,7 +58,15 @@ class ProfileSearch extends Profile
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['attributes' => ['username', 'color', 'position_id', 'position.name', 'name', 'secondname', 'surname', 'date_of_birthday', 'user_id','id','phone','created_at','updated_at']]
+            'sort' => [
+                'attributes' => [
+                    'username', 'color', 'position_id', 'position.name', 'user.status', 'user.email', 'name', 'secondname', 'surname', 'date_of_birthday', 'user_id','id','phone','created_at','updated_at'
+                ],
+                'defaultOrder'=>[
+                    'user.status' => SORT_DESC,
+                    'surname' => SORT_ASC
+                ]
+            ]
         ]);
 
         $this->load($params);

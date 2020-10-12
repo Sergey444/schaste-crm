@@ -9,21 +9,22 @@
 {{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Message from site'), 'url': '/message-from-site' }, {'label' : this.title }] }) }}
 
 <div class="message-from-site-view">
-
-    <div class="bg-white mb-4">
-        <p>
-            {{ html.a('Редактировать', path('update', {'id': model.id}), {
-                class: 'btn btn-outline-primary btn-sm mr-2'
-            }) | raw }}
-            {{ html.a('Удалить', path('delete', {'id': model.id}), {
-                class: 'btn btn-outline-danger btn-sm',
-                data: {
-                    confirm: 'Вы уверены что хотите удалить данную запись?',
-                    method: 'post'
-                }
-            }) | raw }}
-        </p>
-    </div>
+    {% if app.user.can('admin') %}
+        <div class="bg-white mb-4">
+            <p>
+                {{ html.a('Редактировать', path('update', {'id': model.id}), {
+                    class: 'btn btn-outline-primary btn-sm mr-2'
+                }) | raw }}
+                {{ html.a('Удалить', path('delete', {'id': model.id}), {
+                    class: 'btn btn-outline-danger btn-sm',
+                    data: {
+                        confirm: 'Вы уверены что хотите удалить данную запись?',
+                        method: 'post'
+                    }
+                }) | raw }}
+            </p>
+        </div>
+    {% endif %}
 
     <div class="bg-white">
 

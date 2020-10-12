@@ -163,6 +163,13 @@ class Profile extends \yii\db\ActiveRecord
         return $this->user->status === 10 ? '<span class="status-circle"></span>' : '<span class="status-circle status-circle--red"></span>'; 
     }
 
+     /**
+     * @return string - html
+     */
+    public function getHtmlColor() {
+        return $this->color && $this->position->show_teacher && $this->user->status === 10 ? '<span class="status-square" style="background-color: '.$this->color.'"></span>' : ''; 
+    }
+
     /**
      * @return array
      */

@@ -33,10 +33,16 @@ class OrderController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => [],
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['index', 'view', 'create', 'update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    
                 ]
             ],
             'verbs' => [
@@ -58,6 +64,7 @@ class OrderController extends Controller
         $model = new Order();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Заказ успешно создан'));
             return $this->redirect(['index']);
         }
 
@@ -94,6 +101,7 @@ class OrderController extends Controller
         $model = new Order();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Заказ успешно создан'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

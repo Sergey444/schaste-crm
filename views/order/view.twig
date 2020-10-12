@@ -10,13 +10,15 @@
             {{ html.a('Редактировать', path('update', {'id': model.id}), {
                 class: 'btn btn-outline-primary btn-sm mr-2'
             }) | raw }}
-            {{ html.a('Удалить', path('delete', {'id': model.id}), {
-                class: 'btn btn-outline-danger btn-sm',
-                data: {
-                    confirm: 'Вы уверены что хотите удалить данную запись?',
-                    method: 'post'
-                }
-            }) | raw }}
+            {% if app.user.can('admin') %}
+                {{ html.a('Удалить', path('delete', {'id': model.id}), {
+                    class: 'btn btn-outline-danger btn-sm',
+                    data: {
+                        confirm: 'Вы уверены что хотите удалить данную запись?',
+                        method: 'post'
+                    }
+                }) | raw }}
+            {% endif %}
         </p>
     </div>
 
