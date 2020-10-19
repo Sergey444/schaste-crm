@@ -2,6 +2,19 @@
 
 (function () {
 
+    var programs = {
+        'Логопед': '#3366cc',
+        'Мини-сад': '#dc3912',
+        'Подготовка к школе': '#ff9900',
+        'Птенчики': '#109618',
+        'Счастье в ладошках': '#990099',
+        'Умничка': '#0099c6',
+        'Разовое занятие': '#ff9900',
+        'Новогодний утренник': '#dc3912',
+        'Абонемент': '#3366cc'
+    }
+
+
     /**
      * Draws pie chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/piechart
@@ -14,7 +27,7 @@
             data.addRows(response);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night'};
+        var options = {'title':'Количество проданных типов'};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_pie'));
@@ -26,8 +39,9 @@
      * @see https://developers.google.com/chart/interactive/docs/gallery/piechart#making-a-3d-pie-chart
      */
     var drawPieChart3d = function(response) {
+        var response= response.slice()
+            response.unshift(['', '']);
 
-        response.unshift(['Task', 'Hours per Day']);
         var data = google.visualization.arrayToDataTable(
             // ['Task', 'Hours per Day'],
             // ['Work',     11],
@@ -39,7 +53,7 @@
         );
 
         var options = {
-            title: 'My Daily Activities',
+            title: 'Отчёт по программам',
             is3D: true,
         };
 
@@ -50,63 +64,75 @@
     /**
      * Draws basic column chart with multiple series
      * @see https://developers.google.com/chart/interactive/docs/gallery/columnchart#examples
+     * 
+     * @param {array} response
+     * @param {string} nodeId
      */
-    var drawBasic = function() {
+    var drawBasic = function(response, nodeId = 'chart_div') {
+        var response = response.slice()
+            response = response.map(function (item) {
+                item.push(programs[item[0]]);
+                return item;
+            });
+            response.unshift(['', '', {role: 'style'}]);
 
-        var data = new google.visualization.DataTable();
-        data.addColumn('timeofday', 'Time of Day');
-        data.addColumn('number', 'Motivation Level');
-
-        data.addRows([
-            [{v: [8, 0, 0], f: '8 am'}, 1],
-            [{v: [9, 0, 0], f: '9 am'}, 2],
-            [{v: [10, 0, 0], f:'10 am'}, 3],
-            [{v: [11, 0, 0], f: '11 am'}, 4],
-            [{v: [12, 0, 0], f: '12 pm'}, 5],
-            [{v: [13, 0, 0], f: '1 pm'}, 6],
-            [{v: [14, 0, 0], f: '2 pm'}, 7],
-            [{v: [15, 0, 0], f: '3 pm'}, 8],
-            [{v: [16, 0, 0], f: '4 pm'}, 9],
-            [{v: [17, 0, 0], f: '5 pm'}, 10],
-        ]);
+        var data = google.visualization.arrayToDataTable(response);
+        var view = new google.visualization.DataView(data);
 
         var options = {
-            title: 'Motivation Level Throughout the Day',
+            title: 'Сумма стоимости занятий',
             hAxis: {
-            title: 'Time of Day',
-            format: 'h:mm a',
-            viewWindow: {
-                min: [7, 30, 0],
-                max: [17, 30, 0]
-            }
+                title: 'Time of Day',
+                viewWindow: {
+                    min: [7, 30, 0],
+                    max: [17, 30, 0]
+                }
             },
             vAxis: {
-            title: 'Rating (scale of 1-10)'
+                title: 'Сумма стоимости занятий',
+                viewWindow: {
+                    max: 'auto'
+                }
             }
         };
 
         var chart = new google.visualization.ColumnChart(
-            document.getElementById('chart_div'));
+            document.getElementById(nodeId));
 
-        chart.draw(data, options);
+        chart.draw(view, options);
     }
 
     /**
      * Draws area chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/areachart
      */
-    var drawAreaChart = function() {
-        var data = google.visualization.arrayToDataTable([
-            ['Year', 'Sales', 'Expenses'],
-            ['2013',  1000,      400],
-            ['2014',  1170,      460],
-            ['2015',  660,       1120],
-            ['2016',  1030,      540]
-        ]);
+    var drawAreaChart = function(response) {
+
+        var response = response.slice()
+        var obj = {};
+        var result = [['Дата', '']];
+            response.forEach(function (item) {
+                if (!obj[item[0]]) {
+                    obj[item[0]] = 0;
+                }
+                obj[item[0]] += item[2];
+            });
+            for (var key in obj) {
+                result.push([key, obj[key]]);
+            }
+
+        var data = google.visualization.arrayToDataTable(
+            // ['Year', 'Sales', 'Expenses'],
+            // ['2013',  1000,      400],
+            // ['2014',  1170,      460],
+            // ['2015',  660,       1120],
+            // ['2016',  1030,      540]
+            result
+        );
 
         var options = {
-        title: 'Company Performance',
-        hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+        title: 'График оплат',
+        hAxis: {title: 'Время', titleTextStyle: {color: '#333'}},
         vAxis: {minValue: 0}
         };
 
@@ -118,23 +144,80 @@
      * Draws Visualization: Combo Chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/combochart#example
      */
-    var drawVisualization = function() {
+    var drawVisualization = function(response) {
         // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-            ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-            ['2004/05',  165,      938,         522,             998,           450,      614.6],
-            ['2005/06',  135,      1120,        599,             1268,          288,      682],
-            ['2006/07',  157,      1167,        587,             807,           397,      623],
-            ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-            ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-        ]);
+        // var response = response.slice()
+        var obj = {};
+        var topArr = [];
+            response.forEach(function (item) {
+                if (topArr.indexOf( item[1] ) === -1) {
+                    topArr.push(item[1]);
+                }
+                if (!obj[item[0]]) {
+                    obj[item[0]] = {};
+                }
+                obj[item[0]][item[1]] = item[2];
+            });
+
+            topArr = topArr.sort();
+            
+            var result = [];
+            for (var index in obj) {
+                var newArr = [index];
+                topArr.forEach(function (item) {
+                    if (obj[index][item]) {
+                        newArr.push(obj[index][item]);
+                    } else {
+                        newArr.push('');
+                    }
+                });
+                result.push(newArr);
+            }
+            
+            topArr.unshift('Месяц');
+            
+            // var result = [];
+            // for (var index in obj) {
+            //     var newArr = [index];
+            //     for (var key in programs) {
+            //         if (obj[index][key]) {
+            //             newArr.push(obj[index][key]);
+            //         } else {
+            //             newArr.push('');
+            //         }
+            //     }
+            //     result.push(newArr);
+            // }
+            
+        result.unshift(topArr);
+
+        var data = google.visualization.arrayToDataTable(
+            // ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+            result,
+            // ['2004/05',  165,      938,         522,             998,           450,      614.6],
+            // ['2005/06',  135,      1120,        599,             1268,          288,      682],
+            // ['2006/07',  157,      1167,        587,             807,           397,      623],
+            // ['2007/08',  139,      1110,        615,             968,           215,      609.4],
+            // ['2008/09',  136,      691,         629,             1026,          366,      569.6]
+            // response
+        );
 
         var options = {
-        title : 'Monthly Coffee Production by Country',
-        vAxis: {title: 'Cups'},
-        hAxis: {title: 'Month'},
-        seriesType: 'bars',
-        series: {5: {type: 'line'}}
+            title : 'Доходы с занятий по месяцам',
+            vAxis: {
+                // title: 'Cups',
+                // viewWindow: {
+                //     min: 'auto',
+                //     max: 'auto'
+                // },
+                gridlines: {
+                    count: 20,
+                }
+            },
+            hAxis: {title: 'Месяц'},
+            seriesType: 'bars',
+            // series: {5: {type: 'line'}}
+            
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_visual'));
@@ -155,9 +238,16 @@
         $.ajax({
             url: "https://127.0.0.1:5000/api/v1/orders",
             success: function(response){
+                console.log('response', response);
                 google.charts.setOnLoadCallback(function () { 
-                    drawChart(response);
-                    drawPieChart3d(response);
+                    drawChart(response.corders);
+                    drawPieChart3d(response.cprograms);
+
+                    drawBasic(response.programs);
+                    drawBasic(response.orders, 'chart_div_order');
+
+                    drawVisualization(response.payments);
+                    drawAreaChart(response.payments);
                 });
             }
         });
