@@ -73,14 +73,14 @@
         var options = {
             title: 'Сумма стоимости занятий',
             hAxis: {
-                title: 'Time of Day',
+                title: '',
                 viewWindow: {
                     min: [7, 30, 0],
                     max: [17, 30, 0]
                 }
             },
             vAxis: {
-                title: 'Сумма стоимости занятий',
+                title: '',
                 viewWindow: {
                     max: 'auto'
                 }
@@ -115,13 +115,33 @@
         var data = google.visualization.arrayToDataTable(result);
 
         var options = {
-        title: 'График оплат',
-        hAxis: {title: 'Время', titleTextStyle: {color: '#333'}},
-        vAxis: {minValue: 0}
+            title: 'График оплат',
+            hAxis: {title: 'Время', titleTextStyle: {color: '#333'}},
+            vAxis: {minValue: 0}
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('chart_area'));
         chart.draw(data, options);
+    }
+
+    /**
+     * Draws area chart
+     * @see https://developers.google.com/chart/interactive/docs/gallery/areachart
+     */
+    var drawCustomerAreaChart = function(response, chart) {
+        var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Месяц');
+            data.addColumn('number', '');
+            data.addRows(response);
+
+        var options = {
+            title: 'График поступления новых клиентов',
+            hAxis: {title: 'Время', titleTextStyle: {color: '#333'}},
+            vAxis: {minValue: 0}
+        };
+        
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_area_customer'));
+            chart.draw(data, options);
     }
 
     /**
@@ -151,15 +171,20 @@
                 if (obj[index][item]) {
                     newArr.push(obj[index][item]);
                 } else {
-                    newArr.push('');
+                    newArr.push(null);
                 }
             });
             result.push(newArr);
         }
-        topArr.unshift('Месяц');
-        result.unshift(topArr);
 
-        var data = google.visualization.arrayToDataTable(result);
+        var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Месяц');
+
+            topArr.forEach(function (item) {
+                data.addColumn('number', item);
+            });
+
+            data.addRows(result);
 
         var options = {
             title : 'Доходы с занятий по месяцам',
@@ -177,26 +202,72 @@
         chart.draw(data, options);
     }
 
+
+
+    
+    var showOrder = function(action) {
+        var start = +new Date($('[name="date_start"]').val()) / 1000;
+        var finish = +new Date($('[name="date_end"]').val()) / 1000;
+
+        if (action === 'customer') {
+            $.ajax({
+                type: "GET",
+                url: "https://127.0.0.1:5000/api/v1/customers",
+                data: {'start': start, 'finish': finish},
+                success: function(response) {
+                    // console.log(response);
+                    $('#customer-panel').slideDown('slow');
+
+                    var test = drawCustomerAreaChart(response);
+
+                    console.log(test);
+                }
+            });
+        }
+
+        if (action === 'order') {
+            // Set a callback to run when the Google Visualization API is loaded.
+            $.ajax({
+                type: "GET",
+                url: "https://127.0.0.1:5000/api/v1/orders",
+                data: {'start': start, 'finish': finish},
+                success: function(response){
+                    console.log('response', response);
+                    $('#order-panel').slideDown('slow');
+                    // google.charts.setOnLoadCallback(function () { 
+                        drawChart(response.corders);
+                        drawPieChart3d(response.cprograms);
+
+                        drawBasic(response.programs);
+                        drawBasic(response.orders, 'chart_div_order');
+
+                        drawVisualization(response.payments);
+                        drawAreaChart(response.payments);
+                    // });
+                }
+            });
+        }
+
+
+    }
+
+
     document.addEventListener('DOMContentLoaded', function() {
         // Load the Visualization API and the corechart package.
         google.charts.load('current', {'packages':['corechart', 'bar']});
+        google.charts.setOnLoadCallback(function () { 
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        $.ajax({
-            url: "https://127.0.0.1:5000/api/v1/orders",
-            success: function(response){
-                console.log('response', response);
-                google.charts.setOnLoadCallback(function () { 
-                    drawChart(response.corders);
-                    drawPieChart3d(response.cprograms);
+            $('[name="type-order"]').on('change', function (evt) {
+                $('#order-panel').slideUp(100);
+                $('#customer-panel').slideUp(100);
+                showOrder($(this).val());
+            });
 
-                    drawBasic(response.programs);
-                    drawBasic(response.orders, 'chart_div_order');
-
-                    drawVisualization(response.payments);
-                    drawAreaChart(response.payments);
-                });
-            }
+            $('#filter-form').on('submit', function (evt) {
+                evt.preventDefault();
+                var action = $('[name="type-order"]').val();
+                showOrder(action);
+            });
         });
     });
 

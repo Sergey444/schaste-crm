@@ -8,9 +8,9 @@
         <div class="col-md-6 col-lg-8">
             <div class="row">
                 <div class="form-group col-4">
-                    {{ html.dropDownList('type', null, {
-                        'Отчёт по заказам': 'Отчёт по заказам',
-                        'Отчёт по клиентам': 'Отчёт по клиентам'
+                    {{ html.dropDownList('type-order', null, {
+                        'order': 'Отчёт по заказам',
+                        'customer': 'Отчёт по клиентам'
                     }, {
                         'prompt': lang('app', 'Choose type of analytic'),
                         'class': 'custom-select custom-select-sm'
@@ -50,7 +50,7 @@
                             },
                             'language': 'ru',
                             'value': date_start | date('01.01.Y'),
-                            'dateFormat':'php:d.m.Y'}) | raw }}
+                            'dateFormat':'php:Y-m-d'}) | raw }}
                 </div>
                 <div class="col-4 form-group">
                     {{ date_picker.widget({
@@ -64,7 +64,7 @@
                             },
                             'language': 'ru',
                             'value': date_end | date('d.m.Y'),
-                            'dateFormat':'php:d.m.Y'}) | raw }}
+                            'dateFormat':'php:Y-m-d'}) | raw }}
                 </div>
                 <div class="col-4">
                     <div class="form-group">
