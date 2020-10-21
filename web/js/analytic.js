@@ -14,7 +14,6 @@
         'Абонемент': '#3366cc'
     }
 
-
     /**
      * Draws pie chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/piechart
@@ -42,15 +41,7 @@
         var response= response.slice()
             response.unshift(['', '']);
 
-        var data = google.visualization.arrayToDataTable(
-            // ['Task', 'Hours per Day'],
-            // ['Work',     11],
-            // ['Eat',      2],
-            // ['Commute',  2],
-            // ['Watch TV', 2],
-            // ['Sleep',    7]
-            response
-        );
+        var data = google.visualization.arrayToDataTable(response);
 
         var options = {
             title: 'Отчёт по программам',
@@ -121,14 +112,7 @@
                 result.push([key, obj[key]]);
             }
 
-        var data = google.visualization.arrayToDataTable(
-            // ['Year', 'Sales', 'Expenses'],
-            // ['2013',  1000,      400],
-            // ['2014',  1170,      460],
-            // ['2015',  660,       1120],
-            // ['2016',  1030,      540]
-            result
-        );
+        var data = google.visualization.arrayToDataTable(result);
 
         var options = {
         title: 'График оплат',
@@ -146,70 +130,40 @@
      */
     var drawVisualization = function(response) {
         // Some raw data (not necessarily accurate)
-        // var response = response.slice()
         var obj = {};
         var topArr = [];
-            response.forEach(function (item) {
-                if (topArr.indexOf( item[1] ) === -1) {
-                    topArr.push(item[1]);
-                }
-                if (!obj[item[0]]) {
-                    obj[item[0]] = {};
-                }
-                obj[item[0]][item[1]] = item[2];
-            });
-
-            topArr = topArr.sort();
-            
-            var result = [];
-            for (var index in obj) {
-                var newArr = [index];
-                topArr.forEach(function (item) {
-                    if (obj[index][item]) {
-                        newArr.push(obj[index][item]);
-                    } else {
-                        newArr.push('');
-                    }
-                });
-                result.push(newArr);
+        response.forEach(function (item) {
+            if (topArr.indexOf( item[1] ) === -1) {
+                topArr.push(item[1]);
             }
-            
-            topArr.unshift('Месяц');
-            
-            // var result = [];
-            // for (var index in obj) {
-            //     var newArr = [index];
-            //     for (var key in programs) {
-            //         if (obj[index][key]) {
-            //             newArr.push(obj[index][key]);
-            //         } else {
-            //             newArr.push('');
-            //         }
-            //     }
-            //     result.push(newArr);
-            // }
-            
+            if (!obj[item[0]]) {
+                obj[item[0]] = {};
+            }
+            obj[item[0]][item[1]] = item[2];
+        });
+
+        topArr = topArr.sort();
+        
+        var result = [];
+        for (var index in obj) {
+            var newArr = [index];
+            topArr.forEach(function (item) {
+                if (obj[index][item]) {
+                    newArr.push(obj[index][item]);
+                } else {
+                    newArr.push('');
+                }
+            });
+            result.push(newArr);
+        }
+        topArr.unshift('Месяц');
         result.unshift(topArr);
 
-        var data = google.visualization.arrayToDataTable(
-            // ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-            result,
-            // ['2004/05',  165,      938,         522,             998,           450,      614.6],
-            // ['2005/06',  135,      1120,        599,             1268,          288,      682],
-            // ['2006/07',  157,      1167,        587,             807,           397,      623],
-            // ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-            // ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-            // response
-        );
+        var data = google.visualization.arrayToDataTable(result);
 
         var options = {
             title : 'Доходы с занятий по месяцам',
             vAxis: {
-                // title: 'Cups',
-                // viewWindow: {
-                //     min: 'auto',
-                //     max: 'auto'
-                // },
                 gridlines: {
                     count: 20,
                 }
@@ -217,7 +171,6 @@
             hAxis: {title: 'Месяц'},
             seriesType: 'bars',
             // series: {5: {type: 'line'}}
-            
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_visual'));
@@ -229,12 +182,6 @@
         google.charts.load('current', {'packages':['corechart', 'bar']});
 
         // Set a callback to run when the Google Visualization API is loaded.
-        // google.charts.setOnLoadCallback(drawChart);
-        // google.charts.setOnLoadCallback(drawBasic);
-        // google.charts.setOnLoadCallback(drawAreaChart);
-        // google.charts.setOnLoadCallback(drawPieChart3d);
-        // google.charts.setOnLoadCallback(drawVisualization);
-
         $.ajax({
             url: "https://127.0.0.1:5000/api/v1/orders",
             success: function(response){
