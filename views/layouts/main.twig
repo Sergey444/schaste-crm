@@ -33,7 +33,7 @@
                 {% set menuItems = menuItems|merge([
 
                     {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Orders"), 'url': ['/order/index'], '!visible': app.user.isGues, 'options': {'class': 'd-lg-none'}},
-                    {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], 'visible': app.user.can('admin'), 'options': {'class': 'd-lg-none'}},
+                    {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-calendar-alt"></i> '~ lang('app', 'Journal'), 'url': ['/journal/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-child"></i> '~ lang('app', 'Club customers'), 'url': ['/customer/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
                     {'label': '<i class="fas fa-book"></i> '~ lang('app', 'Club programs'), 'url': ['/program/index'], '!visible': app.user.isGuest, 'options': {'class': 'd-lg-none'}},
@@ -77,7 +77,7 @@
                         <nav class="nav d-none d-lg-block sidebar mr-4">
                         {% set menuItems = [
                             {'label': '<i class="fas fa-briefcase"></i> '~ lang("app", "Orders"), 'url': ['/order/index'], '!visible': app.user.isGues},
-                            {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], 'visible': app.user.can('admin')},
+                            {'label': '<i class="fas fa-ruble-sign"></i> '~ lang('app', 'Payments'), 'url': ['/payment/index'], '!visible': app.user.isGuest,},
                             {'label': '<i class="fas fa-calendar-alt"></i> '~ lang('app', 'Journal'), 'url': ['/journal/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-child"></i> '~ lang('app', 'Club customers'), 'url': ['/customer/index'], '!visible': app.user.isGuest},
                             {'label': '<i class="fas fa-book"></i> '~ lang('app', 'Club programs'), 'url': ['/program/index'], '!visible': app.user.isGuest},

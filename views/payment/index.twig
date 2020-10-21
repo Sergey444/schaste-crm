@@ -21,7 +21,7 @@
                 'items': [
                     {'label': lang('app', 'Current month'), 'url': ['/payment/index'], 'active': app.request.get('time') is empty },
                     {'label': lang('app', 'Last month'), 'url': {'0': '/payment/index', 'time':'last-month'}},
-                    {'label': lang('app', 'All time'), 'url': {'0':'/payment/index', 'time': 'all-time'}},
+                    {'label': lang('app', 'All time'), 'url': {'0':'/payment/index', 'time': 'all-time'}, 'visible': app.user.can('admin')},
                 ],
                 'encodeLabels': false, 
                 'activateParents': true }) | raw}}
@@ -75,6 +75,9 @@
                         'buttons': {
                             'update': modelPaymentIn.updateCallback,
                             'delete': modelPaymentIn.deleteCallback
+                        },
+                        'visibleButtons' : {
+                            'delete': app.user.can('admin'),
                         }
                     },
                 ]
@@ -84,7 +87,9 @@
         <div class="row">
             <div class="col-md-8"></div>
             <div class="col-md-4" style="text-align: right;">
-                {{ lang('app', 'Total') ~': '~ app.formatter.format(searchModelPaymentIn.total, ['decimal', 0]) ~ ' р.' }}
+                {% if app.user.can('admin') %}
+                    {{ lang('app', 'Total') ~': '~ app.formatter.format(searchModelPaymentIn.total, ['decimal', 0]) ~ ' р.' }}
+                {% endif %}
             </div>
         </div>
         
@@ -120,6 +125,9 @@
                         'buttons': {
                             'update': modelPaymentOut.updateCallback,
                             'delete': modelPaymentOut.deleteCallback
+                        },
+                        'visibleButtons' : {
+                            'delete': app.user.can('admin'),
                         }
                     },
                 ]
@@ -129,7 +137,9 @@
         <div class="row">
             <div class="col-md-8"></div>
             <div class="col-md-4" style="text-align: right;">
+            {% if app.user.can('admin') %}
                 {{ lang('app', 'Total') ~': '~ app.formatter.format(searchModelPaymentOut.total, ['decimal', 0]) ~' р.'}}
+            {% endif %}
             </div>
         </div>
     </div>

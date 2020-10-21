@@ -28,12 +28,12 @@ class PaymentController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'create-out', 'update-out', 'delete-out'],
+                        'actions' => ['delete-in', 'delete-out'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['create-in', 'update-in', 'delete-in'],
+                        'actions' => ['index', 'create-in', 'update-in',  'create-out', 'update-out'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
