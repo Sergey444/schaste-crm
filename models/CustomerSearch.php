@@ -55,7 +55,7 @@ class CustomerSearch extends Customer
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'attributes' => ['child_name', 'parents_name', 'email', 'phone', 'comment'],
+                'attributes' => ['child_name', 'parents_name', 'email', 'birthday', 'phone', 'comment'],
                 'defaultOrder'=>['child_name' => SORT_ASC]
             ],
         ]);

@@ -37,18 +37,18 @@
      * Draws 3d pie chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/piechart#making-a-3d-pie-chart
      */
-    var drawPieChart3d = function(response) {
+    var drawPieChart3d = function(response, title, nodeId='piechart_3d') {
         var response= response.slice()
             response.unshift(['', '']);
 
         var data = google.visualization.arrayToDataTable(response);
 
         var options = {
-            title: 'Отчёт по программам',
+            title: title,
             is3D: true,
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        var chart = new google.visualization.PieChart(document.getElementById(nodeId));
         chart.draw(data, options);
     }
 
@@ -72,13 +72,6 @@
 
         var options = {
             title: 'Сумма стоимости занятий',
-            hAxis: {
-                title: '',
-                viewWindow: {
-                    min: [7, 30, 0],
-                    max: [17, 30, 0]
-                }
-            },
             vAxis: {
                 title: '',
                 viewWindow: {
@@ -202,12 +195,66 @@
         chart.draw(data, options);
     }
 
+    /**
+     * 
+     * @param {array} items 
+     * @param {string} title 
+     */
+    var createTemplate = function (items, title) {
+        var block = document.querySelector('#analytic-template');
+            block = block.querySelector('.analytic-template-content') || block.content.querySelector('.analytic-template-content');
 
+        var nodeBlock = $(block).clone();
+        $(nodeBlock).find('caption').text(title);
+        
+        items.forEach(function (item) {
+            var str = '<td>'+item[0]+'</td><td>'+item[1]+'</td>';
+            var tbody = $(nodeBlock).find('tbody');
+            var tr = document.createElement("tr");
+            $(tr).append(str)
+            $(tbody).append(tr);
+        });
 
-    
+        return nodeBlock;
+    }
+
+    /**
+     * 
+     * @param {object} response 
+     */
+    var drawTable = function (response) {
+
+        $('#table-content').empty();
+
+        if (response.corders) {
+            var corders = createTemplate(response.corders, 'Отчёт по количеству проданных типов занятий')
+            $('#table-content').append(corders);
+        }
+
+        if (response.corders) {
+            var orders = createTemplate(response.orders, 'Отчёт по сумме проданных типов занятий')
+            $('#table-content').append(orders);
+        }
+
+        if (response.cprograms) {
+            var cprograms = createTemplate(response.cprograms, 'Отчёт по сумме проданных типов занятий')
+            $('#table-content').append(cprograms);
+        }
+
+        if (response.programs) {
+            var programs = createTemplate(response.programs, 'Отчёт по сумме проданных типов занятий')
+            $('#table-content').append(programs);
+        }
+
+    }
+
+    /**
+     * 
+     * @param {string} action 
+     */
     var showOrder = function(action) {
-        var start = +new Date($('[name="date_start"]').val()) / 1000;
-        var finish = +new Date($('[name="date_end"]').val()) / 1000;
+        var start = Date.parse($('[name="date_start"]').val()) / 1000;
+        var finish = Date.parse($('[name="date_end"]').val()) / 1000;
 
         if (action === 'customer') {
             $.ajax({
@@ -218,9 +265,8 @@
                     // console.log(response);
                     $('#customer-panel').slideDown('slow');
 
-                    var test = drawCustomerAreaChart(response);
-
-                    console.log(test);
+                    drawCustomerAreaChart(response.people);
+                    drawPieChart3d(response.bpeople, 'Количество клиентов по возрастам', 'bpeople_chart');
                 }
             });
         }
@@ -232,23 +278,22 @@
                 url: "https://127.0.0.1:5000/api/v1/orders",
                 data: {'start': start, 'finish': finish},
                 success: function(response){
-                    console.log('response', response);
+                    // console.log('response', response);
                     $('#order-panel').slideDown('slow');
-                    // google.charts.setOnLoadCallback(function () { 
-                        drawChart(response.corders);
-                        drawPieChart3d(response.cprograms);
 
-                        drawBasic(response.programs);
-                        drawBasic(response.orders, 'chart_div_order');
+                    drawChart(response.corders);
+                    drawPieChart3d(response.cprograms, 'Количество проданных программ');
 
-                        drawVisualization(response.payments);
-                        drawAreaChart(response.payments);
-                    // });
+                    drawBasic(response.programs);
+                    drawBasic(response.orders, 'chart_div_order');
+
+                    drawVisualization(response.payments);
+                    drawAreaChart(response.payments);
+
+                    drawTable(response);
                 }
             });
         }
-
-
     }
 
 
@@ -261,6 +306,16 @@
                 $('#order-panel').slideUp(100);
                 $('#customer-panel').slideUp(100);
                 showOrder($(this).val());
+            });
+
+            $('[name="type-view"]').on('change', function() {
+                if ($(this).val() === 'table') {
+                    $('#order-panel').hide();
+                    $('#table-content').show();
+                    return;
+                }
+                $('#table-content').hide();
+                $('#order-panel').show();
             });
 
             $('#filter-form').on('submit', function (evt) {
