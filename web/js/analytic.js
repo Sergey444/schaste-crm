@@ -259,7 +259,7 @@
         if (action === 'customer') {
             $.ajax({
                 type: "GET",
-                url: "https://127.0.0.1:5000/api/v1/customers",
+                url: "https://analytic.schaste-club.ru/api/v1/customers",
                 data: {'start': start, 'finish': finish},
                 success: function(response) {
                     // console.log(response);
@@ -275,7 +275,7 @@
             // Set a callback to run when the Google Visualization API is loaded.
             $.ajax({
                 type: "GET",
-                url: "https://127.0.0.1:5000/api/v1/orders",
+                url: "https://analytic.schaste-club.ru/api/v1/orders",
                 data: {'start': start, 'finish': finish},
                 success: function(response){
                     // console.log('response', response);
