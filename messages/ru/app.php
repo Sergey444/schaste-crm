@@ -218,4 +218,7 @@ return [
     'Analytic' => 'Аналитика',
     'Select date' => 'Выберите дату',
     'Select type' => 'Выберите тип',
+    'Graph' => 'График',
+    'Table' => 'Таблица',
+    'Choose type of analytic' => 'Выберите тип отчёта',
 ];

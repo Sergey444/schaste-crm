@@ -5,37 +5,72 @@
 }) | raw }}
 
     <div class="row">
-        <div class="col-md-2 form-group">
-            {{ date_picker.widget({
-                    'name': 'date_start',
-                    'options':{
-                        'class':'form-control form-control-sm',
-                    },
-                    'clientOptions':{
-                        'minDate': '',
-                        'maxDate': ''
-                    },
-                    'language': 'ru',
-                    'value': date_start | date('01.01.Y'),
-                    'dateFormat':'php:d.m.Y'}) | raw }}
+        <div class="col-md-6 col-lg-8">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    {{ html.dropDownList('type-order', null, {
+                        'order': 'Отчёт по заказам',
+                        'customer': 'Отчёт по клиентам'
+                    }, {
+                        'prompt': lang('app', 'Choose type of analytic'),
+                        'class': 'custom-select custom-select-sm'
+                    }) | raw }}
+                </div>
+                <div class="form-group col-md-2">
+                    <div class="custom-control custom-radio">
+                        {{ html.radio('type-view', true, {
+                            'value': 'graph',
+                            'class': 'custom-control-input',
+                            'id': 'type-view-graph'
+                        }) | raw }}
+                        {{ html.label(lang('app', 'Graph'), 'type-view-graph', {'class': 'custom-control-label'}) | raw }}
+                    </div>
+                    <div class="custom-control custom-radio">
+                        {{ html.radio('type-view', false, {
+                            'value': 'table',
+                            'class': 'custom-control-input',
+                            'id': 'type-view-table'
+                        }) | raw }}
+                        {{ html.label(lang('app', 'Table'), 'type-view-table', {'class': 'custom-control-label'}) | raw }}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-2 form-group">
-            {{ date_picker.widget({
-                    'name': 'date_end',
-                    'options':{
-                        'class':'form-control form-control-sm',
-                    },
-                    'clientOptions':{
-                        'minDate': '',
-                        'maxDate': ''
-                    },
-                    'language': 'ru',
-                    'value': date_end | date('d.m.Y'),
-                    'dateFormat':'php:d.m.Y'}) | raw }}
-        </div>
-        <div class="col-md-2">
-            <div class="form-group">
-                <input type="submit" value="Показать" class="btn btn-outline-primary d-block btn-sm w-100" />
+        <div class="col-md-6 col-lg-4">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    {{ date_picker.widget({
+                            'name': 'date_start',
+                            'options':{
+                                'class':'form-control form-control-sm',
+                            },
+                            'clientOptions':{
+                                'minDate': '',
+                                'maxDate': ''
+                            },
+                            'language': 'ru',
+                            'value': date_start | date('01.01.Y'),
+                            'dateFormat':'php:Y-m-d'}) | raw }}
+                </div>
+                <div class="col-md-4 form-group">
+                    {{ date_picker.widget({
+                            'name': 'date_end',
+                            'options':{
+                                'class':'form-control form-control-sm',
+                            },
+                            'clientOptions':{
+                                'minDate': '',
+                                'maxDate': ''
+                            },
+                            'language': 'ru',
+                            'value': date_end | date('d.m.Y'),
+                            'dateFormat':'php:Y-m-d'}) | raw }}
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="submit" value="Показать" class="btn btn-outline-primary d-block btn-sm w-100" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

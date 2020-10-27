@@ -2,6 +2,18 @@
 
 (function () {
 
+    var programs = {
+        'Логопед': '#3366cc',
+        'Мини-сад': '#dc3912',
+        'Подготовка к школе': '#ff9900',
+        'Птенчики': '#109618',
+        'Счастье в ладошках': '#990099',
+        'Умничка': '#0099c6',
+        'Разовое занятие': '#ff9900',
+        'Новогодний утренник': '#dc3912',
+        'Абонемент': '#3366cc'
+    }
+
     /**
      * Draws pie chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/piechart
@@ -14,7 +26,7 @@
             data.addRows(response);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night'};
+        var options = {'title':'Количество проданных типов'};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_pie'));
@@ -25,89 +37,80 @@
      * Draws 3d pie chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/piechart#making-a-3d-pie-chart
      */
-    var drawPieChart3d = function(response) {
+    var drawPieChart3d = function(response, title, nodeId='piechart_3d') {
+        var response= response.slice()
+            response.unshift(['', '']);
 
-        response.unshift(['Task', 'Hours per Day']);
-        var data = google.visualization.arrayToDataTable(
-            // ['Task', 'Hours per Day'],
-            // ['Work',     11],
-            // ['Eat',      2],
-            // ['Commute',  2],
-            // ['Watch TV', 2],
-            // ['Sleep',    7]
-            response
-        );
+        var data = google.visualization.arrayToDataTable(response);
 
         var options = {
-            title: 'My Daily Activities',
+            title: title,
             is3D: true,
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        var chart = new google.visualization.PieChart(document.getElementById(nodeId));
         chart.draw(data, options);
     }
 
     /**
      * Draws basic column chart with multiple series
      * @see https://developers.google.com/chart/interactive/docs/gallery/columnchart#examples
+     * 
+     * @param {array} response
+     * @param {string} nodeId
      */
-    var drawBasic = function() {
+    var drawBasic = function(response, nodeId = 'chart_div') {
+        var response = response.slice()
+            response = response.map(function (item) {
+                item.push(programs[item[0]]);
+                return item;
+            });
+            response.unshift(['', '', {role: 'style'}]);
 
-        var data = new google.visualization.DataTable();
-        data.addColumn('timeofday', 'Time of Day');
-        data.addColumn('number', 'Motivation Level');
-
-        data.addRows([
-            [{v: [8, 0, 0], f: '8 am'}, 1],
-            [{v: [9, 0, 0], f: '9 am'}, 2],
-            [{v: [10, 0, 0], f:'10 am'}, 3],
-            [{v: [11, 0, 0], f: '11 am'}, 4],
-            [{v: [12, 0, 0], f: '12 pm'}, 5],
-            [{v: [13, 0, 0], f: '1 pm'}, 6],
-            [{v: [14, 0, 0], f: '2 pm'}, 7],
-            [{v: [15, 0, 0], f: '3 pm'}, 8],
-            [{v: [16, 0, 0], f: '4 pm'}, 9],
-            [{v: [17, 0, 0], f: '5 pm'}, 10],
-        ]);
+        var data = google.visualization.arrayToDataTable(response);
+        var view = new google.visualization.DataView(data);
 
         var options = {
-            title: 'Motivation Level Throughout the Day',
-            hAxis: {
-            title: 'Time of Day',
-            format: 'h:mm a',
-            viewWindow: {
-                min: [7, 30, 0],
-                max: [17, 30, 0]
-            }
-            },
+            title: 'Сумма стоимости занятий',
             vAxis: {
-            title: 'Rating (scale of 1-10)'
+                title: '',
+                viewWindow: {
+                    max: 'auto'
+                }
             }
         };
 
         var chart = new google.visualization.ColumnChart(
-            document.getElementById('chart_div'));
+            document.getElementById(nodeId));
 
-        chart.draw(data, options);
+        chart.draw(view, options);
     }
 
     /**
      * Draws area chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/areachart
      */
-    var drawAreaChart = function() {
-        var data = google.visualization.arrayToDataTable([
-            ['Year', 'Sales', 'Expenses'],
-            ['2013',  1000,      400],
-            ['2014',  1170,      460],
-            ['2015',  660,       1120],
-            ['2016',  1030,      540]
-        ]);
+    var drawAreaChart = function(response) {
+
+        var response = response.slice()
+        var obj = {};
+        var result = [['Дата', '']];
+            response.forEach(function (item) {
+                if (!obj[item[0]]) {
+                    obj[item[0]] = 0;
+                }
+                obj[item[0]] += item[2];
+            });
+            for (var key in obj) {
+                result.push([key, obj[key]]);
+            }
+
+        var data = google.visualization.arrayToDataTable(result);
 
         var options = {
-        title: 'Company Performance',
-        hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-        vAxis: {minValue: 0}
+            title: 'График оплат',
+            hAxis: {title: 'Время', titleTextStyle: {color: '#333'}},
+            vAxis: {minValue: 0}
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('chart_area'));
@@ -115,51 +118,211 @@
     }
 
     /**
+     * Draws area chart
+     * @see https://developers.google.com/chart/interactive/docs/gallery/areachart
+     */
+    var drawCustomerAreaChart = function(response, chart) {
+        var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Месяц');
+            data.addColumn('number', '');
+            data.addRows(response);
+
+        var options = {
+            title: 'График поступления новых клиентов',
+            hAxis: {title: 'Время', titleTextStyle: {color: '#333'}},
+            vAxis: {minValue: 0}
+        };
+        
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_area_customer'));
+            chart.draw(data, options);
+    }
+
+    /**
      * Draws Visualization: Combo Chart
      * @see https://developers.google.com/chart/interactive/docs/gallery/combochart#example
      */
-    var drawVisualization = function() {
+    var drawVisualization = function(response) {
         // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-            ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-            ['2004/05',  165,      938,         522,             998,           450,      614.6],
-            ['2005/06',  135,      1120,        599,             1268,          288,      682],
-            ['2006/07',  157,      1167,        587,             807,           397,      623],
-            ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-            ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-        ]);
+        var obj = {};
+        var topArr = [];
+        response.forEach(function (item) {
+            if (topArr.indexOf( item[1] ) === -1) {
+                topArr.push(item[1]);
+            }
+            if (!obj[item[0]]) {
+                obj[item[0]] = {};
+            }
+            obj[item[0]][item[1]] = item[2];
+        });
+
+        topArr = topArr.sort();
+        
+        var result = [];
+        for (var index in obj) {
+            var newArr = [index];
+            topArr.forEach(function (item) {
+                if (obj[index][item]) {
+                    newArr.push(obj[index][item]);
+                } else {
+                    newArr.push(null);
+                }
+            });
+            result.push(newArr);
+        }
+
+        var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Месяц');
+
+            topArr.forEach(function (item) {
+                data.addColumn('number', item);
+            });
+
+            data.addRows(result);
 
         var options = {
-        title : 'Monthly Coffee Production by Country',
-        vAxis: {title: 'Cups'},
-        hAxis: {title: 'Month'},
-        seriesType: 'bars',
-        series: {5: {type: 'line'}}
+            title : 'Доходы с занятий по месяцам',
+            vAxis: {
+                gridlines: {
+                    count: 20,
+                }
+            },
+            hAxis: {title: 'Месяц'},
+            seriesType: 'bars',
+            // series: {5: {type: 'line'}}
         };
 
         var chart = new google.visualization.ComboChart(document.getElementById('chart_visual'));
         chart.draw(data, options);
     }
 
+    /**
+     * 
+     * @param {array} items 
+     * @param {string} title 
+     */
+    var createTemplate = function (items, title) {
+        var block = document.querySelector('#analytic-template');
+            block = block.querySelector('.analytic-template-content') || block.content.querySelector('.analytic-template-content');
+
+        var nodeBlock = $(block).clone();
+        $(nodeBlock).find('caption').text(title);
+        
+        items.forEach(function (item) {
+            var str = '<td>'+item[0]+'</td><td>'+item[1]+'</td>';
+            var tbody = $(nodeBlock).find('tbody');
+            var tr = document.createElement("tr");
+            $(tr).append(str)
+            $(tbody).append(tr);
+        });
+
+        return nodeBlock;
+    }
+
+    /**
+     * 
+     * @param {object} response 
+     */
+    var drawTable = function (response) {
+
+        $('#table-content').empty();
+
+        if (response.corders) {
+            var corders = createTemplate(response.corders, 'Отчёт по количеству проданных типов занятий')
+            $('#table-content').append(corders);
+        }
+
+        if (response.corders) {
+            var orders = createTemplate(response.orders, 'Отчёт по сумме проданных типов занятий')
+            $('#table-content').append(orders);
+        }
+
+        if (response.cprograms) {
+            var cprograms = createTemplate(response.cprograms, 'Отчёт по сумме проданных типов занятий')
+            $('#table-content').append(cprograms);
+        }
+
+        if (response.programs) {
+            var programs = createTemplate(response.programs, 'Отчёт по сумме проданных типов занятий')
+            $('#table-content').append(programs);
+        }
+
+    }
+
+    /**
+     * 
+     * @param {string} action 
+     */
+    var showOrder = function(action) {
+        var start = Date.parse($('[name="date_start"]').val()) / 1000;
+        var finish = Date.parse($('[name="date_end"]').val()) / 1000;
+
+        if (action === 'customer') {
+            $.ajax({
+                type: "GET",
+                url: "https://127.0.0.1:5000/api/v1/customers",
+                data: {'start': start, 'finish': finish},
+                success: function(response) {
+                    // console.log(response);
+                    $('#customer-panel').slideDown('slow');
+
+                    drawCustomerAreaChart(response.people);
+                    drawPieChart3d(response.bpeople, 'Количество клиентов по возрастам', 'bpeople_chart');
+                }
+            });
+        }
+
+        if (action === 'order') {
+            // Set a callback to run when the Google Visualization API is loaded.
+            $.ajax({
+                type: "GET",
+                url: "https://127.0.0.1:5000/api/v1/orders",
+                data: {'start': start, 'finish': finish},
+                success: function(response){
+                    // console.log('response', response);
+                    $('#order-panel').slideDown('slow');
+
+                    drawChart(response.corders);
+                    drawPieChart3d(response.cprograms, 'Количество проданных программ');
+
+                    drawBasic(response.programs);
+                    drawBasic(response.orders, 'chart_div_order');
+
+                    drawVisualization(response.payments);
+                    drawAreaChart(response.payments);
+
+                    drawTable(response);
+                }
+            });
+        }
+    }
+
+
     document.addEventListener('DOMContentLoaded', function() {
         // Load the Visualization API and the corechart package.
         google.charts.load('current', {'packages':['corechart', 'bar']});
+        google.charts.setOnLoadCallback(function () { 
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        // google.charts.setOnLoadCallback(drawChart);
-        // google.charts.setOnLoadCallback(drawBasic);
-        // google.charts.setOnLoadCallback(drawAreaChart);
-        // google.charts.setOnLoadCallback(drawPieChart3d);
-        // google.charts.setOnLoadCallback(drawVisualization);
+            $('[name="type-order"]').on('change', function (evt) {
+                $('#order-panel').slideUp(100);
+                $('#customer-panel').slideUp(100);
+                showOrder($(this).val());
+            });
 
-        $.ajax({
-            url: "https://127.0.0.1:5000/api/v1/orders",
-            success: function(response){
-                google.charts.setOnLoadCallback(function () { 
-                    drawChart(response);
-                    drawPieChart3d(response);
-                });
-            }
+            $('[name="type-view"]').on('change', function() {
+                if ($(this).val() === 'table') {
+                    $('#order-panel').hide();
+                    $('#table-content').show();
+                    return;
+                }
+                $('#table-content').hide();
+                $('#order-panel').show();
+            });
+
+            $('#filter-form').on('submit', function (evt) {
+                evt.preventDefault();
+                var action = $('[name="type-order"]').val();
+                showOrder(action);
+            });
         });
     });
 
