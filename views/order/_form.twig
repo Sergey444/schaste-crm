@@ -149,14 +149,19 @@
                     </div>
 
                     <div class="rs-order__customer tab-pane active" id="old">
-                        {{ form.field(model, 'customer_name', {
-                            'template': '{label}{input}{error}
-                                            <table class="table table-hover rs-add-to-order">
-                                                <tbody id="rs-find-block" class="rs-find-block"></tbody>
-                                            </table>'
-                        }).textInput({'value': model.customer.child_name, 'placeholder': lang('app', 'Start typing a name...'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}).label(lang('app', 'Child name')) | raw }}
+                        <div id="rs-order-find-customer">
+                            {{ form.field(model, 'customer_name', {
+                                'enableAjaxValidation': true,
+                                'template': '{label}{input}{error}
+                                                <table class="table table-hover rs-add-to-order">
+                                                    <tbody id="rs-find-block" class="rs-find-block"></tbody>
+                                                </table>'
+                            }).textInput({'value': model.customer.child_name, 'placeholder': lang('app', 'Start typing a name...'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}).label(lang('app', 'Child name')) | raw }}
+                        </div>
 
-                        {{ form.field(model, 'customer_id').hiddenInput().label(false) | raw }}
+                        <div id="rs-order-id-customer">
+                            {{ form.field(model, 'customer_id').hiddenInput().label(false) | raw }}
+                        </div>
                     </div>
                 </div>
             </div>

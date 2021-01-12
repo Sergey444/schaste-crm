@@ -14,6 +14,11 @@ use Yii;
 class GroupCustomer extends \yii\db\ActiveRecord
 {
     /**
+     * @var string
+     */
+    public $customer_name;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -27,9 +32,23 @@ class GroupCustomer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['group_id', 'customer_id'], 'required'],
+            [['group_id', 'customer_name'], 'required'],
+            [['customer_id', 'group_id'], 'unique', 'targetAttribute' => ['customer_id', 'group_id']],
             [['group_id', 'customer_id'], 'integer'],
+            [['customer_name'], 'string'],
+            ['customer_name', 'validateChildren']
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateChildren($attribute, $params) {
+        if ($this->customer) {
+            return true;
+        }
+
+        $this->addError('customer_name', Yii::t('app', 'Child Not Found'));
     }
 
     /**
@@ -41,6 +60,7 @@ class GroupCustomer extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'group_id' => Yii::t('app', 'Group ID'),
             'customer_id' => Yii::t('app', 'Customer ID'),
+            'customer_name' => Yii::t('app', 'Child name'),
         ];
     }
 

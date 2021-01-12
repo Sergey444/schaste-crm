@@ -7,7 +7,7 @@
      *
      */
     var clearId = function () {
-        $('#order-customer_id').val('');
+        $('#rs-order-id-customer .form-control').val('');
     }
 
     /**
@@ -23,8 +23,8 @@
      * @param {Object} context
      */
     window.chooseCustomers = function (context) {
-        $('#order-customer_id').val( $(context).data('id') );
-        $('#order-customer_name').val( $(context).text() );
+        $('#rs-order-id-customer .form-control').val( $(context).data('id') );
+        $('#rs-order-find-customer .form-control').val( $(context).text() );
         closeSelect();
     }
 
@@ -39,7 +39,7 @@
         closeSelect();
         $(customers).each(function (index, customer) {
             if (customer.child_name === value) {
-                return $('#order-customer_id').val( customer.id );
+                return $('#rs-order-id-customer .form-control').val( customer.id );
             }
             $('#rs-find-block').append('<tr><td onclick="chooseCustomers(this)" class="rs-customer" data-name="customer" data-id="' + customer.id + '">' + customer.child_name + '</td></tr>');
             $('.rs-add-to-order').show();
@@ -67,11 +67,11 @@
         });
     }
 
-    $('#order-customer_name').on('keydown', function (evt) {
+    $('#rs-order-find-customer').on('keydown', function (evt) {
         evt.stopPropagation();
     });
 
-    $('#order-customer_name').on('input focus', function (evt) {
+    $('#rs-order-find-customer .form-control').on('input focus', function (evt) {
         var value = $.trim( $(this).val() );
         if (value.length > 1) {
             return getCustomers(value);
@@ -81,7 +81,7 @@
         closeSelect();
     });
 
-    $('#order-customer_name').on('blur', function (evt) {
+    $('#rs-order-find-customer .form-control').on('blur', function (evt) {
         setTimeout( function () {
              closeSelect();
         }, 200);

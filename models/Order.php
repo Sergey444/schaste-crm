@@ -125,7 +125,19 @@ class Order extends \yii\db\ActiveRecord
             }"],
 
             [['type_customer', 'checkbox_payment'], 'safe'],
+            ['customer_name', 'validateChildren']
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateChildren($attribute, $params) {
+        if ($this->customer) {
+            return true;
+        }
+
+        $this->addError('customer_name', Yii::t('app', 'Child Not Found'));
     }
 
     /**
@@ -148,6 +160,7 @@ class Order extends \yii\db\ActiveRecord
             'program_id' => Yii::t('app', 'Program'),
             'teacher_id' => Yii::t('app', 'Teacher'),
             'customer_new_name' => Yii::t('app', 'Name'),
+            'customer_name' => Yii::t('app', 'Child name'),
             'customer_id' => Yii::t('app', 'Customer'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

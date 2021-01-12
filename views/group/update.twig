@@ -24,7 +24,7 @@
 
             <div class="bg-white mg-bottom">
 
-                {{ html.beginForm(path(
+                {# {{ html.beginForm(path(
                     'group/add-child',
                     {'id': model.id}),
                     'post',
@@ -42,6 +42,7 @@
                                         'placeholder': lang('app', 'Start typing a name...')
                                     }) 
                                 | raw }}
+                                <div class="invalid-feedback">Необходимо заполнить «Ф.И.О. ребёнка».</div>
 
                                 <div class="help-block"></div>
 
@@ -62,7 +63,42 @@
                             {{ html.submitButton(lang('app', 'Add to group'), {'class': 'btn btn-primary btn-sm d-block mg-top-25'}) | raw }}
                         </div>
                     </div>
-                {{ html.endForm() | raw}}
+                {{ html.endForm() | raw}} #}
+
+                {% set form = active_form_begin() %}
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="rs-order__customer">
+                                <div class="form-group field-order-customer_name">
+                                
+                                <div id="rs-order-find-customer">
+                                    {{ form.field(modelGroupCustomer, 'customer_name', {
+                                        'enableAjaxValidation': true,
+                                        'template': '{label}{input}{error}
+                                                        <table class="table table-hover rs-add-to-order">
+                                                            <tbody id="rs-find-block" class="rs-find-block"></tbody>
+                                                        </table>'
+                                    }).textInput({'value': modelGroupCustomer.customer.child_name, 'placeholder': lang('app', 'Start typing a name...'), 'class': 'form-control form-control-sm', 'autocomplete': 'off'}).label(lang('app', 'Child name')) | raw }}
+                                </div>
+
+                                <div id="rs-order-id-customer">
+                                    {{ form.field(modelGroupCustomer, 'customer_id').hiddenInput().label(false) | raw }}
+                                </div>
+
+                                {{ form.field(modelGroupCustomer, 'group_id').hiddenInput({'value': model.id}).label(false) | raw }}
+
+                                <table class="table table-hover rs-add-to-order">
+                                    <tbody id="rs-find-block" class="rs-find-block"></tbody>
+                                </table>
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            {{ html.submitButton(lang('app', 'Add to group'), {'class': 'btn btn-primary btn-sm d-block mg-top-25'}) | raw }}
+                        </div>
+                    </div>
+                {{ active_form_end() }}
             </div>
         </div>
 

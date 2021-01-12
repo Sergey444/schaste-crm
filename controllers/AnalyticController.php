@@ -21,7 +21,7 @@ class AnalyticController extends \yii\web\Controller
                     [
                         'actions' => [],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                     ],
                 ]
             ]
