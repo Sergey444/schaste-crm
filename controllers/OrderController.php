@@ -18,6 +18,9 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+
 /**
  * OrderController implements the CRUD actions for Order model.
  */
@@ -62,6 +65,11 @@ class OrderController extends Controller
     public function actionIndex()
     {
         $model = new Order();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'Заказ успешно создан'));

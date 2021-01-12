@@ -11,6 +11,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+
 use yii\helpers\Url;
 
 /**
@@ -114,13 +117,25 @@ class GroupController extends Controller
     public function actionUpdate($id)
     {
         $model = Group::find()->where(['group.id' => $id])->joinWith(['customers.customer'])->one();
+        $modelGroupCustomer = new GroupCustomer();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        if (Yii::$app->request->isAjax && $modelGroupCustomer->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($modelGroupCustomer);
+        }
+
+
+        if ($modelGroupCustomer->load(Yii::$app->request->post()) && $modelGroupCustomer->save()) {
+            return $this->redirect(['update', 'id' => $id]);
+        }
+
         return $this->render('update.twig', [
             'model' => $model,
+            'modelGroupCustomer' => $modelGroupCustomer
         ]);
     }
 
