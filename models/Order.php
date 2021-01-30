@@ -270,7 +270,7 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getTeacherList()
     {
-        return ArrayHelper::map(Profile::find()->joinWith('position')->where(['position.show_teacher' => 1])->all(), 'id', 'fullName');
+        return ArrayHelper::map(Profile::find()->joinWith(['position', 'user'])->where(['position.show_teacher' => 1, 'user.status' => 10])->all(), 'id', 'fullName');
     }
 
     /**
