@@ -25,6 +25,9 @@ use app\models\Profile;
 use app\models\MessageFromSite;
 
 
+use yii\httpclient\Client;
+
+
 class ApiController extends Controller
 {
 
@@ -95,9 +98,38 @@ class ApiController extends Controller
         $model = new MessageFromSite();
         if ($model->load(Yii::$app->request->post(), '') && $model->save()) {
             $this->sendEmail(Yii::$app->request->post());
+            $this->addDealToBitrix24();
             return true;
         }
         return false;
+    }
+
+    /**
+     * Создаёт сделку в bitrix24
+     * 
+     * @return integer|false
+     */
+    private function addDealToBitrix24()
+    {
+        $client = new Client();
+        $response = $client->createRequest()
+            ->setMethod('post')
+            ->setUrl('https://schaste-club.bitrix24.ru/rest/1/rurr8ku0wszega2v/crm.lead.add.json')
+            ->setData([
+                'FIELDS' => [
+                    'TITLE'=> Yii::$app->request->post('title'),
+                    'NAME' => Yii::$app->request->post('name'),
+                    'PHONE' => [
+                        0 => [
+                            'VALUE' => Yii::$app->request->post('phone')
+                        ]
+                    ]
+                ]
+            ])->send();
+
+        if ($response->isOk) {
+            return $response->data['id'];
+        }
     }
 
     /**
