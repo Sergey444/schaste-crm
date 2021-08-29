@@ -34,7 +34,66 @@
                 </div>
             </div>
             <div class="col-md-6 ">
-                {{ form.field(model, 'comment').textArea({'rows': 5, 'placeholder': lang('app', 'Your comment') ~' ...', 'class': 'form-control form-control-sm'}) | raw }}
+                <div>
+                    {{ form.field(model, 'comment').textArea({'rows': 1, 'placeholder': lang('app', 'Your comment') ~' ...', 'class': 'form-control form-control-sm'}) | raw }}
+                </div>
+                 <div>
+                      {{ form.field(model, 'pmpk_recommendation').textInput({'placeholder': lang('app', 'PMPK recomendations'), 'maxlength': true, 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                      {{ form.field(model, 'neurologist_conclusion').textInput({'placeholder': lang('app', 'Neurologist conclusion'), 'maxlength': true, 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                </div>
+            </div>
+             <div class="col-md-6">
+                <div>
+                      {{ form.field(model, 'psychiatrist_conclusion').textInput({'placeholder': lang('app', 'Psychiatrist conclusion'), 'maxlength': true, 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                      {{ form.field(model, 'audiologist_conclusion').textInput({'placeholder': lang('app', 'Audiologist conclusion'), 'maxlength': true, 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                </div>
+            </div>
+             <div class="col-md-6">
+                <div>
+                      {{ form.field(model, 'psychologist_conclusion').textInput({'placeholder': lang('app', 'Psychologist conclusion'), 'maxlength': true, 'class': 'form-control form-control-sm', 'autocomplete': 'off'}) | raw }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    {% set dateInitialExamination = app.formatter.asDate(model.date_initial_examination, 'php:d.m.Y') %}
+                    {{ form.field(model, 'date_initial_examination').widget('yii\\jui\\DatePicker', {
+                                                'options':{},
+                                                'clientOptions':{
+                                                    'minDate':'',
+                                                    'maxDate':''
+                                                },
+                                                'class':'form-control form-control-sm',
+                                                'language': 'ru',
+                                                'dateFormat':'php:d.m.Y',
+                                            }).widget('yii\\widgets\\MaskedInput', {
+                                                'mask': '99.99.9999'
+                                            }).textInput({
+                                                'class':'form-control form-control-sm',
+                                                'placeholder': lang('app', 'Date ...'),
+                                                'value': date_initial_examination
+                                            }) | raw}}
+
+                </div>
+            </div>
+            <div class="col-md-9 ">
+                {{ form.field(model, 'initial_examination').textArea({'rows': 5, 'placeholder': lang('app', 'Initial examination') ~' ...', 'class': 'form-control form-control-sm'}) | raw }}
             </div>
         </div>
 

@@ -222,4 +222,12 @@ return [
     'Graph' => 'График',
     'Table' => 'Таблица',
     'Choose type of analytic' => 'Выберите тип отчёта',
+
+    'Neurologist conclusion' => 'Консультация невролога',
+    'Psychiatrist conclusion' => 'Консультация психиатра',
+    'Audiologist conclusion' => 'Консультация сурдолога',
+    'Psychologist conclusion' => 'Консультация психолога',
+    'PMPK recomendations' => 'Рекомендации ПМПК',
+    'Date of initial examination' => 'Дата первичного логопедического обследования',
+    'Initial examination' => 'Результаты первичного логопедического обследования',
 ];

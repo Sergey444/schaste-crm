@@ -27,7 +27,7 @@
         </p>
     </div>
 
-    <div class="bg-white">
+    <div class="bg-white mb-4">
 
         {{ detail_view_widget({
                 'model': model,
@@ -45,6 +45,28 @@
                     {'attribute': 'birthday', 'format': ['date', 'php:d.m.Y']},
                     {'attribute': 'created_at', 'format': ['date', 'php:d.m.Y H:i:s']},
                     {'attribute': 'updated_at', 'format': ['date', 'php:d.m.Y H:i:s']},
+                ]
+            }) 
+        }}
+
+    </div>
+
+     <div class="bg-white ">
+
+        {{ detail_view_widget({
+                'model': model,
+                'options': {
+                    'class': 'table table-sm table-bordered' 
+                },
+                'attributes': [
+                    'neurologist_conclusion',
+                    'psychiatrist_conclusion',
+                    'audiologist_conclusion',
+                    'psychologist_conclusion',
+                    'pmpk_recommendation',
+                    {'attribute': 'date_initial_examination', 'format': ['date', 'php:d.m.Y']},
+                    'initial_examination:ntext',
+                   
                 ]
             }) 
         }}
