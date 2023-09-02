@@ -1,0 +1,28 @@
+{{ set(this, 'title', '№ ' ~ model.id) }}
+{{ set(this, 'params', { 'breadcrumbs' : [
+    {'label' : customerModel.child_name, 'url': '/customer/view/' ~ model.customer_id},
+    {'label' : lang('app', 'Home work') ~ ' ' ~ this.title }
+] }) }}
+
+<div class="homework-view">
+    <div class="bg-white mb-4">
+        <p>
+            {{ html.a(lang('app', 'Update'), path('update', {'id': model.id}), {
+                class: 'btn btn-outline-primary btn-sm mr-2'
+            }) | raw }}
+            {% if app.user.can('admin') %}
+                {{ html.a(lang('app', 'Delete'), path('delete', {'id': model.id}), {
+                    class: 'btn btn-outline-danger btn-sm',
+                    data: {
+                        confirm: lang('app', 'Are you sure you want to delete this item?'),
+                        method: 'post'
+                    }
+                }) | raw }}
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="bg-white">
+        {{ model.description | raw }}
+    </div>
+</div>

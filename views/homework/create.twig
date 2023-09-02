@@ -1,0 +1,22 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Homework */
+#}
+
+{{ set(this, 'title', lang('app', 'Home work')) }}
+{{ set(this, 'params', { 'breadcrumbs' : [
+    {'label' : customerModel.child_name, 'url': '/customer/view/' ~ model.customer_id},
+    {'label' : this.title }
+] }) }}
+
+<div class="group-create">
+
+    <div class="bg-white">
+        <h3>{{ lang('app', 'Create homework') }}</h3><hr />
+        {{ this.render('_form.twig', {
+            'model': model,
+            'customerId': customerId
+        }) | raw }}
+    </div>
+
+</div>

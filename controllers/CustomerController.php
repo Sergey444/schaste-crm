@@ -6,6 +6,8 @@ use Yii;
 
 use app\models\Customer;
 use app\models\CustomerSearch;
+use app\models\Homework;
+use app\models\HomeworkSearch;
 
 use yii\web\Response;
 use yii\web\Controller;
@@ -91,8 +93,17 @@ class CustomerController extends Controller
      */
     public function actionView($id)
     {
+        $homeworkModel = new Homework();
+
+        if ($homeworkModel->load(Yii::$app->request->post()) && $homeworkModel->save()) {
+            Yii::$app->session->setFlash('success', 'Homework created successfully');
+            return $this->redirect(['view', 'id' => $id]);
+        }
+
         return $this->render('view.twig', [
             'model' => $this->findModel($id),
+            'homeworkList' => $this->findHomeworkList($id),
+            'homeworkModel' => $homeworkModel,
         ]);
     }
 
@@ -187,5 +198,20 @@ class CustomerController extends Controller
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 
-    
+    /**
+     * 
+     */
+    private function findHomeworkList($id)
+    {
+        $model = Homework::find()
+            ->where(['customer_id' => $id])
+            ->orderBy('id')
+            ->all();
+
+        if ($model !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
 }

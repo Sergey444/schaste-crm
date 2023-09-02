@@ -1,0 +1,35 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Homework */
+/* @var $form yii\widgets\ActiveForm */
+#}
+
+{{ use('yii/bootstrap4/ActiveForm') }}
+
+{% set form = active_form_begin() %}
+
+    {{ form.field(model, 'customer_id')
+        .textInput({
+            'value': customerId,
+            'type': 'hidden',
+            'maxlength': true,
+            'class': 'form-control form-control-sm',
+            'placeholder': lang('app', 'Enter group name ...')
+        }).label(false) | raw }}
+
+    {{ form.field(model, 'is_ready').checkbox({ 'data-name': 'is_ready', 
+                                                             'value': true,
+                                                             'checked': model.is_ready ? true : false,
+                                                             'disabled': app.user.can('admin') ? false : true,
+                                                }).label(lang('app', 'Home work is ready')) | raw }}
+
+    {{ form.field(model, 'description').widget('yii2jodit\\JoditWidget', {
+                                                'settings': {
+                                                    'height': 300
+                                                }}) | raw}}
+
+    <div class="form-group">
+        {{ html.submitButton(lang('app', 'Save'), {'class': 'btn btn-outline-success btn-sm'}) | raw }}
+    </div>
+
+{{ active_form_end() }}

@@ -14,6 +14,9 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'jodit' => 'yii2jodit\JoditModule',
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -80,6 +83,8 @@ $config = [
                 'group/view/<id:\d+>' => 'group/view',
                 'group/update/<id:\d+>' => 'group/update',
                 'analytic' => 'analytic/index',
+                'homework/view/<id:\d+>' => 'homework/view',
+                'homework/create/<id:\d+>' => 'homework/create',
 
                 // rest api routing
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
@@ -146,6 +151,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
@@ -153,6 +159,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 }
 

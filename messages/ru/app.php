@@ -230,4 +230,13 @@ return [
     'PMPK recomendations' => 'Рекомендации ПМПК',
     'Date of initial examination' => 'Дата первичного логопедического обследования',
     'Initial examination' => 'Результаты первичного логопедического обследования',
+
+    /** Homework */
+    'Home work' => 'Домашнее задание',
+    'Home work list' => 'Список домашних заданий',
+    'Create homework' => 'Создать домашнее задание',
+    'Update homework' => 'Редактировать домашнее задание',
+    'Home work is ready' => 'Домашнее задание выполнено',
+    'Description' => 'Описание',
+    /* Homework */
 ];
