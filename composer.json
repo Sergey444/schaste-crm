@@ -23,7 +23,9 @@
         "bower-asset/font-awesome": "^5.13",
         "yiisoft/yii2-bootstrap4": "^2.0",
         "yiisoft/yii2-twig": "^2.3",
-        "yiisoft/yii2-httpclient": "*"
+        "yiisoft/yii2-httpclient": "*",
+        "composer-plugin-api": "*",
+        "jodit/yii2-jodit": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -39,6 +41,9 @@
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     },
     "scripts": {

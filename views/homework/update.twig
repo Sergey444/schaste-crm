@@ -1,0 +1,19 @@
+{#
+/* @var $this yii\web\View */
+/* @var $model app\models\Homework */
+#}
+{{ set(this, 'title', lang('app', 'Update homework')) }}
+{{ set(this, 'params', { 'breadcrumbs' : [
+    { 'label' : lang('app', 'Home work') ~ ' № ' ~ model.id, 'url': '/homework/view/' ~ model.id },
+    { 'label' : this.title }] 
+}) }}
+
+<div class="order-update">
+
+    <div class="bg-white">
+        <h3>{{ lang('app', 'Update homework') }}</h3><hr />
+        {{ this.render('_form.twig', {
+            'model': model,
+        }) | raw }}
+    </div>
+</div>

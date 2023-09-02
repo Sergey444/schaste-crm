@@ -25,7 +25,7 @@ services:
     php-fpm:
         build:
             context: docker
-            dockerfile: php-fpm/php-7.1.dockerfile
+            dockerfile: Fpm.Dockerfile
             args:
                 HOST_USER_ID: 1000
                 HOST_GROUP_ID: 1000
@@ -40,7 +40,8 @@ services:
             PHP_IDE_CONFIG: "serverName=Docker"
     docker.local:
         build:
-            context: docker/nginx
+            context: docker
+            dockerfile: Nginx.Dockerfile
             args:
                 HOST_USER_ID: 1000
                 HOST_GROUP_ID: 1000

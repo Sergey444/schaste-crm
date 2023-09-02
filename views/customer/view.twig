@@ -3,74 +3,163 @@
 /* @var $model app\models\Customer */
 #}
 
+{{ use('yii/grid/GridView') }}
+{{ use('yii/widgets/Pjax') }}
 {{ use('yii/widgets/DetailView') }}
 
 {{ set(this, 'title', model.child_name) }}
 {{ set(this, 'params', { 'breadcrumbs' : [{ 'label' : lang('app', 'Contacts'), 'url': '/customer' }, {'label' : this.title }] }) }}
 
-<div class="order-view">
+<div class="customer-view">
 
-    <div class="bg-white mb-4">
-        <p>
-            {{ html.a('Редактировать', path('update', {'id': model.id}), {
-                class: 'btn btn-outline-primary btn-sm mr-2'
-            }) | raw }}
-            {% if app.user.can('admin') %}
-                {{ html.a('Удалить', path('delete', {'id': model.id}), {
-                    class: 'btn btn-outline-danger btn-sm',
-                    data: {
-                        confirm: 'Вы уверены что хотите удалить данную запись?',
-                        method: 'post'
-                    }
-                }) | raw }}
-            {% endif %}
-        </p>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="bg-white mb-4">
+                <p>
+                    {{ html.a(lang('app', 'Update'), path('update', {'id': model.id}), {
+                        class: 'btn btn-outline-primary btn-sm mr-2'
+                    }) | raw }}
+                    {% if app.user.can('admin') %}
+                        {{ html.a(lang('app', 'Delete'), path('delete', {'id': model.id}), {
+                            class: 'btn btn-outline-danger btn-sm',
+                            data: {
+                                confirm: lang('app', 'Are you sure you want to delete this item?'),
+                                method: 'post'
+                            }
+                        }) | raw }}
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="bg-white mb-4">
+
+                {{ detail_view_widget({
+                        'model': model,
+                        'options': {
+                            'class': 'table table-sm table-bordered' 
+                        },
+                        'attributes': [
+                            'id',
+                            'child_name',
+                            'parents_name',
+                            {'attribute': 'phone', 'format': ['phone']},
+                            'email:email',
+                            'comment:ntext',
+                        
+                            {'attribute': 'birthday', 'format': ['date', 'php:d.m.Y']},
+                            {'attribute': 'created_at', 'format': ['date', 'php:d.m.Y H:i:s']},
+                            {'attribute': 'updated_at', 'format': ['date', 'php:d.m.Y H:i:s']},
+                        ]
+                    }) 
+                }}
+
+            </div>
+
+            <div class="bg-white mb-4">
+
+                {{ detail_view_widget({
+                        'model': model,
+                        'options': {
+                            'class': 'table table-sm table-bordered' 
+                        },
+                        'attributes': [
+                            'neurologist_conclusion',
+                            'psychiatrist_conclusion',
+                            'audiologist_conclusion',
+                            'psychologist_conclusion',
+                            'pmpk_recommendation',
+                            {'attribute': 'date_initial_examination', 'format': ['date', 'php:d.m.Y']},
+                            'initial_examination:ntext',
+                        
+                        ]
+                    }) 
+                }}
+
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="bg-white mb-4">
+                <h4>{{ lang('app', 'Home work list') }}</h4>
+                <div class="mb-4">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">{{ lang('app', 'Created At') }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for homework in homeworkList %}
+                                {% set homeworkName = lang('app', 'Home work') ~ ' № ' ~ loop.index %}
+                                 <tr>
+                                    <td scope="row">
+                                        {{ html.a(homeworkName, path('homework/view', {'id': homework.id}), {'class': homework.is_ready ? 'text-success' : 'text-danger'}) | raw }}
+                                    </td>
+                                    <td class="text-muted">{{homework.created_at | date("d.m.Y")}}</td>
+                                    <td>
+                                        {{ html.a(
+                                            '<span class="glyphicon glyphicon-eye-open"></span>',
+                                            path('homework/view', {'id': homework.id}),
+                                            {'data-pjax': 0}
+                                        ) | raw }}
+
+                                        {{ html.a(
+                                            '<span class="glyphicon glyphicon-pencil"></span>',
+                                            path('homework/update', {'id': homework.id}),
+                                            {'data-pjax': 0}
+                                        ) | raw }}
+                                         {% if app.user.can('admin') %}
+                                            {{ html.a(
+                                                '<span class="glyphicon glyphicon-trash"></span>',
+                                                path('homework/delete', {'id': homework.id}),
+                                                {'data': {
+                                                    'confirm': lang('app', 'Are you sure you want to delete this item?'),
+                                                    'method': 'post',
+                                                    'pjax': 0
+                                                }}
+                                            ) | raw }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+               
+                <button 
+                    class="btn btn-outline-success btn-sm d-none d-lg-block"
+                    data-toggle="modal"
+                    data-target="#createHomework">
+                        {{lang('app', 'Create homework')}}
+                </button>
+
+                 {{ html.a(lang('app', 'Create homework'), path('homework/create', {'id': model.id}), {'class': 'btn btn-outline-success btn-sm d-lg-none', 'data-pjax': 0}) | raw }}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createHomework" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{lang('app', 'Create homework')}}</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            {{ this.render('../homework/_form.twig', {
+                model: homeworkModel,
+                customerId: model.id
+            }) | raw}}
+        </div>
     </div>
 
-    <div class="bg-white mb-4">
-
-        {{ detail_view_widget({
-                'model': model,
-                'options': {
-                    'class': 'table table-sm table-bordered' 
-                },
-                'attributes': [
-                    'id',
-                    'child_name',
-                    'parents_name',
-                    {'attribute': 'phone', 'format': ['phone']},
-                    'email:email',
-                    'comment:ntext',
-                   
-                    {'attribute': 'birthday', 'format': ['date', 'php:d.m.Y']},
-                    {'attribute': 'created_at', 'format': ['date', 'php:d.m.Y H:i:s']},
-                    {'attribute': 'updated_at', 'format': ['date', 'php:d.m.Y H:i:s']},
-                ]
-            }) 
-        }}
-
-    </div>
-
-     <div class="bg-white ">
-
-        {{ detail_view_widget({
-                'model': model,
-                'options': {
-                    'class': 'table table-sm table-bordered' 
-                },
-                'attributes': [
-                    'neurologist_conclusion',
-                    'psychiatrist_conclusion',
-                    'audiologist_conclusion',
-                    'psychologist_conclusion',
-                    'pmpk_recommendation',
-                    {'attribute': 'date_initial_examination', 'format': ['date', 'php:d.m.Y']},
-                    'initial_examination:ntext',
-                   
-                ]
-            }) 
-        }}
-
-    </div>
-
+  </div>
 </div>

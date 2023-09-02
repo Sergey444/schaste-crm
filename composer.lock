@@ -4,8 +4,61 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c7a7bc707bb4f80d9a0afec3ba35210",
+    "content-hash": "6379b7da49adf76fef41ba6b96fda538",
     "packages": [
+        {
+            "name": "abeautifulsite/simpleimage",
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/claviska/SimpleImage.git",
+                "reference": "54a99d302355d22ee00d9842a8dbe101a52203d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/claviska/SimpleImage/zipball/54a99d302355d22ee00d9842a8dbe101a52203d8",
+                "reference": "54a99d302355d22ee00d9842a8dbe101a52203d8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "abeautifulsite": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nazar Mokrynskyi",
+                    "email": "nazar@mokrynskyi.com",
+                    "homepage": "http://cleverstyle.org/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Cory LaViska",
+                    "homepage": "http://www.abeautifulsite.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP class that simplifies working with images",
+            "support": {
+                "issues": "https://github.com/claviska/SimpleImage/issues",
+                "source": "https://github.com/claviska/SimpleImage/tree/master"
+            },
+            "time": "2017-01-06T16:38:10+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
@@ -420,6 +473,111 @@
                 "image processing"
             ],
             "time": "2019-12-04T09:55:33+00:00"
+        },
+        {
+            "name": "jodit/application",
+            "version": "2.0.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xdan/jodit-connector-application.git",
+                "reference": "f9e98a6151e69932c06a7501d745af287a66af6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xdan/jodit-connector-application/zipball/f9e98a6151e69932c06a7501d745af287a66af6d",
+                "reference": "f9e98a6151e69932c06a7501d745af287a66af6d",
+                "shasum": ""
+            },
+            "require": {
+                "abeautifulsite/simpleimage": "^2.6",
+                "ext-curl": ">=6.0.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jodit\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chupurnov Valeriy",
+                    "email": "chupurnov@gmail.com"
+                }
+            ],
+            "description": "Jodit FileBrowser and Uploader connector",
+            "support": {
+                "issues": "https://github.com/xdan/jodit-connector-application/issues",
+                "source": "https://github.com/xdan/jodit-connector-application/tree/2.0.22"
+            },
+            "time": "2019-07-03T20:00:35+00:00"
+        },
+        {
+            "name": "jodit/yii2-jodit",
+            "version": "1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jodit/yii2-jodit.git",
+                "reference": "592e8145ecd772c74d465c05246a34f1080364f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jodit/yii2-jodit/zipball/592e8145ecd772c74d465c05246a34f1080364f4",
+                "reference": "592e8145ecd772c74d465c05246a34f1080364f4",
+                "shasum": ""
+            },
+            "require": {
+                "jodit/application": "^2.0.11",
+                "xdan/jodit": "^3.1.0",
+                "yiisoft/yii2": "^2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii2jodit\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chupurnov Valeriy",
+                    "email": "chupurnov@gmail.com"
+                }
+            ],
+            "description": "Jodit - awesome WYSIWYG Editor like widget for Yii2",
+            "keywords": [
+                "editor",
+                "extension",
+                "html",
+                "html editor",
+                "javascript",
+                "jodit",
+                "rich",
+                "rich editor",
+                "rich text editor",
+                "text",
+                "wysiwyg",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/jodit/yii2-jodit/issues",
+                "source": "https://github.com/jodit/yii2-jodit/tree/1.1.8"
+            },
+            "time": "2018-02-26T08:49:48+00:00"
         },
         {
             "name": "npm-asset/bootstrap",
@@ -854,6 +1012,38 @@
             "time": "2020-02-11T15:31:23+00:00"
         },
         {
+            "name": "xdan/jodit",
+            "version": "3.24.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xdan/jodit.git",
+                "reference": "e871a47b32b3a9fd8b3b366da15bf04d06c7abaf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xdan/jodit/zipball/e871a47b32b3a9fd8b3b366da15bf04d06c7abaf",
+                "reference": "e871a47b32b3a9fd8b3b366da15bf04d06c7abaf",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chupurnov Valeriy",
+                    "email": "chupurnov@gmail.com"
+                }
+            ],
+            "description": "Awesome WYSIWYG editor and FileBrowser",
+            "support": {
+                "issues": "https://github.com/xdan/jodit/issues",
+                "source": "https://github.com/xdan/jodit/tree/3.24.9"
+            },
+            "time": "2023-04-25T17:04:09+00:00"
+        },
+        {
             "name": "yiisoft/yii2",
             "version": "2.0.29",
             "source": {
@@ -1087,23 +1277,23 @@
         },
         {
             "name": "yiisoft/yii2-composer",
-            "version": "2.0.8",
+            "version": "2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "5c7ca9836cf80b34db265332a7f2f8438eb469b9"
+                "reference": "94bb3f66e779e2774f8776d6e1bdeab402940510"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/5c7ca9836cf80b34db265332a7f2f8438eb469b9",
-                "reference": "5c7ca9836cf80b34db265332a7f2f8438eb469b9",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/94bb3f66e779e2774f8776d6e1bdeab402940510",
+                "reference": "94bb3f66e779e2774f8776d6e1bdeab402940510",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0"
+                "composer-plugin-api": "^1.0 | ^2.0"
             },
             "require-dev": {
-                "composer/composer": "^1.0",
+                "composer/composer": "^1.0 | ^2.0@dev",
                 "phpunit/phpunit": "<7"
             },
             "type": "composer-plugin",
@@ -1138,7 +1328,28 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2019-07-16T13:22:30+00:00"
+            "support": {
+                "forum": "http://www.yiiframework.com/forum/",
+                "irc": "irc://irc.freenode.net/yii",
+                "issues": "https://github.com/yiisoft/yii2-composer/issues",
+                "source": "https://github.com/yiisoft/yii2-composer",
+                "wiki": "http://www.yiiframework.com/wiki/"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-06-24T00:04:01+00:00"
         },
         {
             "name": "yiisoft/yii2-httpclient",
@@ -4257,8 +4468,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "composer-plugin-api": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.3.0"
 }
